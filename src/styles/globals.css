@@ -1,0 +1,116 @@
+/* 기본 환경 변수 */
+:root {
+  /* px */
+  --max-width: 1920px;
+  --border-radius: 12px;
+  --card-border-radius: 8px;
+  --card-padding: 16px;
+
+  /* h1 ~ h6 */
+  --h1: 124px;
+  --h2: 56px;
+  --h3: 48px;
+  --h4: 40px;
+  --h5: 32px;
+  --h6: 24px;
+
+  /* p ~ caption */
+  --p: 16px;
+  --caption: 8px;
+
+  /* gap */
+  --gap: 12px;
+  --gap-2: 24px;
+
+  /* card */
+  --card-width: 124px;
+  --card-height: 64px;
+
+  /* font */
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  /* color */
+  --primary-color: #fff555;
+  --text-color: #222222;
+
+  --background-color-light: #efefef;
+  --background-color-dark: #e2e2e2;
+  --card-background-color: #ffffff;
+
+  --dim-opacity: 0.25;
+}
+
+/* 다크모드 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #fff500;
+    --text-color: #efefef;
+
+    --background-color-light: #222222;
+    --background-color-dark: #111111;
+    --card-background-color: #333333;
+
+    --dim-opacity: 0.5;
+  }
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  :root {
+    --h1: 72px;
+    --h2: 36px;
+    --h3: 24px;
+    --h4: 20px;
+    --h5: 16px;
+    --h6: 14px;
+
+    --p: 14px;
+    --caption: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --h1: 48px;
+    --h2: 36px;
+    --h3: 24px;
+    --h4: 20px;
+    --h5: 16px;
+    --h6: 14px;
+
+    --p: 12px;
+    --caption: 10px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-size: var(--p);
+  max-width: var(--max-width);
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--background-color-light);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// 다크모드
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}

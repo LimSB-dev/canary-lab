@@ -9,10 +9,13 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = {
   images: {
-    domains: ["*"],
+    domains: ["*","mazassumnida.wtf"],
   },
   env: {},
   reactStrictMode: true,
+  "fontawesome-svg-core": {
+    license: "free",
+  },
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = withPWA(nextConfig);;

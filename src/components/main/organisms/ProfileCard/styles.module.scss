@@ -1,0 +1,10 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(var(--card-width) * 2 + var(--gap) * 1);
+  height: calc(var(--card-height) * 3 + var(--gap) * 2);
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}

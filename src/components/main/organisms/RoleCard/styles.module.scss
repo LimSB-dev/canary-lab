@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--card-padding);
+  width: calc(var(--card-width) * 1 + var(--gap) * 0);
+  height: calc(var(--card-height) * 1 + var(--gap) * 0);
+  color: black;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.role {
+  text-align: center;
+}

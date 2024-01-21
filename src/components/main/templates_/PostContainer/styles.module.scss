@@ -1,0 +1,10 @@
+.post_section {
+  display: flex;
+  gap: var(--gap);
+}
+
+.post_controller {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}

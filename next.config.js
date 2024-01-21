@@ -9,7 +9,10 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = {
   images: {
-    domains: ["*","mazassumnida.wtf"],
+    domains: [
+      "*",
+      "mazassumnida.wtf"
+    ],
   },
   env: {},
   reactStrictMode: true,

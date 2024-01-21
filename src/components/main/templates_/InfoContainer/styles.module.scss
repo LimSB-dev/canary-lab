@@ -1,0 +1,15 @@
+.info_section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.info_main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info_sub {
+  display: flex;
+  justify-content: space-between;
+}

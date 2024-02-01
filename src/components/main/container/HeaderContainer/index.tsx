@@ -1,10 +1,6 @@
 import styles from "./styles.module.scss";
 
-import {
-  FigmaCard,
-  LanguageCard,
-  MusicCard,
-} from "@/components/main/organisms";
+import { FigmaCard, LanguageCard, MusicCard } from "@/components/main/card";
 
 export const HeaderContainer = () => {
   return (

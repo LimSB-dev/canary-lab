@@ -6,7 +6,7 @@ import {
   SearchCard,
   ThemeToggleCard,
   WeatherCard,
-} from "@/components/main/organisms";
+} from "@/components/main/card";
 
 export const SideContainer = () => {
   return (

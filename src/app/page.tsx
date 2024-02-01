@@ -1,4 +1,4 @@
-import { MainCard } from "@/components/main/organisms";
+import { MainCard } from "@/components/main/card";
 import styles from "./page.module.scss";
 
 import {
@@ -6,7 +6,7 @@ import {
   InfoContainer,
   PostContainer,
   SideContainer,
-} from "@/components/main/templates_";
+} from "@/components/main/container";
 
 export default function Home() {
   return (

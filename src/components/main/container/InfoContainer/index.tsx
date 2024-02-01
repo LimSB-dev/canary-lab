@@ -5,7 +5,7 @@ import {
   ProfileCard,
   RateCard,
   RoleCard,
-} from "@/components/main/organisms";
+} from "@/components/main/card";
 
 export const InfoContainer = () => {
   return (

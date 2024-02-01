@@ -3,3 +3,11 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}

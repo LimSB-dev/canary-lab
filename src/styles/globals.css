@@ -30,7 +30,11 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+}
 
+/* 색상 */
+:root,
+html[data-theme="light"] {
   /* color */
   --primary-color: #fff555;
   --text-color: #222222;
@@ -42,18 +46,15 @@
   --dim-opacity: 0.25;
 }
 
-/* 다크모드 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #fff500;
-    --text-color: #efefef;
+html[data-theme="dark"] {
+  --primary-color: #fff500;
+  --text-color: #efefef;
 
-    --background-color-light: #222222;
-    --background-color-dark: #111111;
-    --card-background-color: #333333;
+  --background-color-light: #222222;
+  --background-color-dark: #111111;
+  --card-background-color: #333333;
 
-    --dim-opacity: 0.5;
-  }
+  --dim-opacity: 0.5;
 }
 
 /* 반응형 */
@@ -97,6 +98,7 @@ body {
   font-size: var(--p);
   max-width: var(--max-width);
   overflow-x: hidden;
+  transition: background-color 0.25s ease;
 }
 
 body {
@@ -107,11 +109,4 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-// 다크모드
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

@@ -5,7 +5,7 @@ import {
   PostCard,
   RecentPostsCard,
   ResetCard,
-} from "@/components/main/organisms";
+} from "@/components/main/card";
 
 export const PostContainer = () => {
   return (

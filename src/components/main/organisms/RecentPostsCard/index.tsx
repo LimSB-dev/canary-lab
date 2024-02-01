@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./styles.module.scss";
 
 export const RecentPostsCard = () => {
@@ -8,9 +9,9 @@ export const RecentPostsCard = () => {
         <br />
         Posts
       </h2>
-      <button type="button" className={styles.more}>
+      <Link className={styles.more} href="/posts" passHref>
         more...
-      </button>
+      </Link>
     </article>
   );
 };

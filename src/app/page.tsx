@@ -1,5 +1,5 @@
 import { MainCard } from "@/components/main/organisms";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 
 import {
   HeaderContainer,
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main id="main-page" role="main" className={styles.main}>
       <div className={styles.right}>
-        <div className={styles.right_top_right}>
+        <div className={styles.right_top}>
           <InfoContainer />
           <div className={styles.right_top_left}>
             <HeaderContainer />

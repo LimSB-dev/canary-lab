@@ -93,6 +93,7 @@
 
 html,
 body {
+  display: block;
   font-size: var(--p);
   max-width: var(--max-width);
   overflow-x: hidden;

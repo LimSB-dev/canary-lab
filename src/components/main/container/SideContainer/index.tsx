@@ -1,6 +1,5 @@
 "use client";
 
-import { useMediaQuery } from "react-responsive";
 import styles from "./styles.module.scss";
 
 import {
@@ -13,7 +12,7 @@ import {
   ThemeToggleCard,
   WeatherCard,
 } from "@/components/main/card";
-import { BREAKPOINT } from "@/constant/breakpoint";
+import { useDevice } from "@/hooks/useDevice";
 
 interface IProps {
   device: Device;
@@ -100,31 +99,19 @@ const DesktopSideContainer = () => {
 };
 
 export const SideContainer = ({ device }: IProps) => {
-  const isMobile = useMediaQuery({
-    minWidth: BREAKPOINT.mobile,
-    maxWidth: BREAKPOINT.tablet,
-  });
-  const isTablet = useMediaQuery({
-    minWidth: BREAKPOINT.tablet,
-    maxWidth: BREAKPOINT.laptop,
-  });
-  const isLaptop = useMediaQuery({
-    minWidth: BREAKPOINT.laptop,
-    maxWidth: BREAKPOINT.desktop,
-  });
-  const isDesktop = useMediaQuery({
-    minWidth: BREAKPOINT.desktop,
-  });
+  const deviceType = useDevice();
+
+  if (deviceType !== device) return null;
 
   switch (device) {
     case "mobile":
-      return isMobile && <MobileSideContainer />;
+      return <MobileSideContainer />;
     case "tablet":
-      return isTablet && <TabletSideContainer />;
+      return <TabletSideContainer />;
     case "laptop":
-      return isLaptop && <LaptopSideContainer />;
+      return <LaptopSideContainer />;
     case "desktop":
-      return isDesktop && <DesktopSideContainer />;
+      return <DesktopSideContainer />;
     default:
       return null;
   }

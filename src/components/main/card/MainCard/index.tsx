@@ -3,17 +3,17 @@
 import Image from "next/image";
 
 import styles from "./styles.module.scss";
-import { useMediaQuery } from "react-responsive";
-import { BREAKPOINT } from "@/constant/breakpoint";
+import { useDevice } from "@/hooks/useDevice";
+import { META_DATA } from "@/constant/metadata";
 
 interface IProps {
   device: Device;
 }
 
-const MobileCard = () => {
+const MobileMainCard = () => {
   return (
     <section className={styles.card}>
-      <h1 className={styles.title}>Canary Lab</h1>
+      <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <div id="dim" className={styles.dim} />
       <Image
         src="/assets/images/canary.svg"
@@ -25,20 +25,35 @@ const MobileCard = () => {
   );
 };
 
-const LaptopCard = () => {
+const TabletMainCard = () => {
   return (
     <section className={styles.card}>
-      <h1 className={styles.title}>Canary Lab</h1>
+      <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
+      <div id="dim" className={styles.dim} />
+      <Image
+        src="/assets/images/canary.svg"
+        alt="Canary"
+        fill
+        objectFit="cover"
+      />
+    </section>
+  );
+};
+
+const LaptopMainCard = () => {
+  return (
+    <section className={styles.card}>
+      <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <div id="dim" className={styles.dim} />
       <Image src="/assets/images/canary.svg" alt="Canary" fill />
     </section>
   );
 };
 
-const DesktopCard = () => {
+const DesktopMainCard = () => {
   return (
     <section className={styles.card}>
-      <h1 className={styles.title}>Canary Lab</h1>
+      <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <div id="dim" className={styles.dim} />
       <Image src="/assets/images/canary.svg" alt="Canary" fill />
     </section>
@@ -46,31 +61,19 @@ const DesktopCard = () => {
 };
 
 export const MainCard = ({ device }: IProps) => {
-  const isMobile = useMediaQuery({
-    minWidth: BREAKPOINT.mobile,
-    maxWidth: BREAKPOINT.tablet,
-  });
-  const isTablet = useMediaQuery({
-    minWidth: BREAKPOINT.tablet,
-    maxWidth: BREAKPOINT.laptop,
-  });
-  const isLaptop = useMediaQuery({
-    minWidth: BREAKPOINT.laptop,
-    maxWidth: BREAKPOINT.desktop,
-  });
-  const isDesktop = useMediaQuery({
-    minWidth: BREAKPOINT.desktop,
-  });
+  const deviceType = useDevice();
+
+  if (deviceType !== device) return null;
 
   switch (device) {
     case "mobile":
-      return isMobile && <MobileCard />;
+      return <MobileMainCard />;
     case "tablet":
-      return isTablet && <MobileCard />;
+      return <TabletMainCard />;
     case "laptop":
-      return isLaptop && <LaptopCard />;
+      return <LaptopMainCard />;
     case "desktop":
-      return isDesktop && <DesktopCard />;
+      return <DesktopMainCard />;
     default:
       return null;
   }

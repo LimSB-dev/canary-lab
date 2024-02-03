@@ -1,1 +1,1 @@
-type Device = "mobile" | "tablet" | "laptop" | "desktop";
+type Device = "min" | "mobile" | "tablet" | "laptop" | "desktop" | "max";

@@ -20,6 +20,7 @@ export const SearchCard = () => {
           className={styles.search_input}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          autoComplete="off"
         />
         {search.length > 0 && (
           <FontAwesomeIcon icon={faClose} onClick={() => setSearch("")} />

@@ -8,7 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
 export const GithubCard = () => {
   return (
     <article className={styles.card}>
-      <h4>GitHub</h4>
+      <h6>GitHub</h6>
       <Link
         href="https://github.com/LimSB-dev"
         target="_blank"
@@ -17,11 +17,11 @@ export const GithubCard = () => {
       >
         <FontAwesomeIcon icon={faGithub} size="5x" />
       </Link>
-      <h5>
+      <p>
         Well
         <br />
         Documented
-      </h5>
+      </p>
     </article>
   );
 };

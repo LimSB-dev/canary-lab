@@ -13,8 +13,8 @@
 }
 
 .title {
-  color: #efefef;
-  z-index: 1;
+  color: var(--white);
+  z-index: var(--z-index-img-title);
 }
 
 .image {

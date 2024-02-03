@@ -23,9 +23,9 @@ export const ThemeToggleCard = ({ theme }: { theme: "light" | "dark" }) => {
       onClick={themeToggle}
       disabled={curTheme === theme}
     >
-      <h2 className={theme === "light" ? styles.text_light : styles.text_dark}>
+      <h6 className={theme === "light" ? styles.text_light : styles.text_dark}>
         {theme.toUpperCase()}
-      </h2>
+      </h6>
     </button>
   );
 };

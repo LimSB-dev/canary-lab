@@ -6,14 +6,14 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 export const RecentCard = () => {
   return (
     <article id="recent-posts-card" className={styles.card}>
-      <h2>
+      <h6>
         Recent
         <br />
         Posts
-      </h2>
+      </h6>
       <Link className={styles.link} href="/posts" passHref>
-        <h3>more</h3>
-        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+        <p>more</p>
+        <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
       </Link>
     </article>
   );

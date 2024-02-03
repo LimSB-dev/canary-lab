@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 export const FigmaCard = () => {
   return (
     <article className={styles.card}>
-      <h4>Figma</h4>
+      <h6>Figma</h6>
       <Link
         href="https://www.figma.com/file/2VdpF0IhNz4CTdi7JEaGzH/canary-lab?type=design&node-id=13%3A300&mode=design&t=xrw7uUOSeqeBGx9O-1"
         target="_blank"
@@ -21,7 +21,7 @@ export const FigmaCard = () => {
           height={48}
         />
       </Link>
-      <h5>Design</h5>
+      <p>Design</p>
     </article>
   );
 };

@@ -5,7 +5,7 @@ export const PostCard = ({ type }: { type: "recent" | "popular" }) => {
     <article
       className={type === "recent" ? styles.card_resent : styles.card_popular}
     >
-      <h2>PostCard</h2>
+      <h6>PostCard</h6>
     </article>
   );
 };

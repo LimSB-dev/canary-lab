@@ -20,7 +20,6 @@
 
   /* gap */
   --gap: 12px;
-  --gap-2: 24px;
 
   /* card */
   --card-width: 124px;
@@ -36,12 +35,21 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  /* z-index */
+  --z-index-base: 0;
+  --z-index-dim: 1;
+  --z-index-img-title: 2;
+  --z-index-modal: 3;
+
+  /* stable color */
+  --white: #efefef;
+  --black: #222222;
 }
 
 /* 색상 */
 :root,
 html[data-theme="light"] {
-  /* color */
   --primary-color: #fff555;
   --text-color: #222222;
 
@@ -64,24 +72,38 @@ html[data-theme="dark"] {
 }
 
 /* 반응형 */
-@media (max-width: 768px) {
+@media (max-width: 1212px) {
+  :root {
+    --h1: 96px;
+    --h2: 48px;
+    --h3: 36px;
+    --h4: 28px;
+    --h5: 24px;
+    --h6: 20px;
+
+    --p: 16px;
+    --caption: 12px;
+  }
+}
+
+@media (max-width: 804px) {
   :root {
     --h1: 72px;
     --h2: 36px;
-    --h3: 24px;
-    --h4: 20px;
-    --h5: 16px;
-    --h6: 14px;
+    --h3: 28px;
+    --h4: 24px;
+    --h5: 20px;
+    --h6: 18px;
 
     --p: 14px;
     --caption: 12px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 320px) {
   :root {
     --h1: 48px;
-    --h2: 36px;
+    --h2: 32px;
     --h3: 24px;
     --h4: 20px;
     --h5: 16px;
@@ -112,9 +134,4 @@ body {
 body {
   color: var(--text-color);
   background: var(--background-color-light);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }

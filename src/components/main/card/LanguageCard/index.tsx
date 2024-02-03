@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 export const LanguageCard = () => {
   return (
     <article className={styles.card}>
-      <h2 className={styles.title}>Multilingual Support</h2>
+      <h5 className={styles.title}>Multilingual Support</h5>
       <Image
         src="/assets/images/earth.png"
         alt="Languages"

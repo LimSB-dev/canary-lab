@@ -1,4 +1,13 @@
 .header_section {
   display: flex;
   gap: var(--gap);
+
+  @media (max-width: 1620px) {
+    flex-direction: column;
+  }
+}
+
+.top {
+  display: flex;
+  gap: var(--gap);
 }

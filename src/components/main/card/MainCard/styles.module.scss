@@ -10,6 +10,12 @@
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
   overflow: hidden;
+
+  @media (max-width: 804px) {
+    width: 100vw;
+    height: calc(var(--card-height) * 3 + var(--gap) * 2);
+    border-radius: 0;
+  }
 }
 
 .title {

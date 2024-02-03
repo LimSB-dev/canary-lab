@@ -10,13 +10,10 @@
   border-radius: var(--border-radius);
 }
 
-.more {
+.link {
   display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: var(--gap);
   width: 100%;
-  justify-content: flex-end;
-  cursor: pointer;
-  border: none;
-  background-color: var(--card-background-color);
-  padding: 4px;
-  border-radius: 4px;
 }

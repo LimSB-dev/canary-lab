@@ -26,6 +26,12 @@
   --card-width: 124px;
   --card-height: 64px;
 
+  /* breakpoin */
+  --breakpoint-moblie: 320px;
+  --breakpoint-tablet: 804px;
+  --breakpoint-laptop: 1212px;
+  --breakpoint-desktop: 1620px;
+
   /* font */
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
@@ -95,9 +101,11 @@ html[data-theme="dark"] {
 html,
 body {
   display: block;
+  width: 100%;
+  height: 100%;
   font-size: var(--p);
-  max-width: var(--max-width);
   overflow-x: hidden;
+  overflow-y: overlay;
   transition: background-color 0.25s ease;
 }
 

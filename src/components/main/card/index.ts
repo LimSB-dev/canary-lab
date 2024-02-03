@@ -9,7 +9,7 @@ import { OauthCard } from "@/components/main/card/OauthCard";
 import { PostCard } from "@/components/main/card/PostCard";
 import { ProfileCard } from "@/components/main/card/ProfileCard";
 import { RateCard } from "@/components/main/card/RateCard";
-import { RecentPostsCard } from "@/components/main/card/RecentPostsCard";
+import { RecentCard } from "@/components/main/card/RecentCard";
 import { ResetCard } from "@/components/main/card/ResetCard";
 import { RoleCard } from "@/components/main/card/RoleCard";
 import { ThemeToggleCard } from "@/components/main/card/ThemeToggleCard";
@@ -28,7 +28,7 @@ export {
   PostCard,
   ProfileCard,
   RateCard,
-  RecentPostsCard,
+  RecentCard,
   ResetCard,
   RoleCard,
   ThemeToggleCard,

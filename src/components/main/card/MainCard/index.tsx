@@ -20,6 +20,7 @@ const MobileMainCard = () => {
         alt="Canary"
         fill
         objectFit="cover"
+        priority
       />
     </section>
   );
@@ -35,6 +36,7 @@ const TabletMainCard = () => {
         alt="Canary"
         fill
         objectFit="cover"
+        priority
       />
     </section>
   );
@@ -45,7 +47,7 @@ const LaptopMainCard = () => {
     <section className={styles.card}>
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <div id="dim" className={styles.dim} />
-      <Image src="/assets/images/canary.svg" alt="Canary" fill />
+      <Image src="/assets/images/canary.svg" alt="Canary" fill priority />
     </section>
   );
 };
@@ -55,7 +57,7 @@ const DesktopMainCard = () => {
     <section className={styles.card}>
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <div id="dim" className={styles.dim} />
-      <Image src="/assets/images/canary.svg" alt="Canary" fill />
+      <Image src="/assets/images/canary.svg" alt="Canary" fill priority />
     </section>
   );
 };

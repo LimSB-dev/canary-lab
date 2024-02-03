@@ -14,6 +14,7 @@ export const RateCard = () => {
         target="_blank"
         rel="noopener noreferrer"
         className={styles.link}
+        passHref
       >
         <img src={svgFile} alt="solved.ac" width={"100%"} height={"100%"} />
       </Link>

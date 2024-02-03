@@ -3,22 +3,19 @@
 import { setTheme } from "@/store/modules/theme";
 import styles from "./styles.module.scss";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
+import { useEffect } from "react";
 
 export const ThemeToggleCard = ({ theme }: { theme: "light" | "dark" }) => {
   const dispatch = useAppDispatch();
   const curTheme = useAppSelector((state) => state.theme.theme);
 
   const themeToggle = () => {
-    if (theme === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
-      dispatch(setTheme("light"));
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("theme", "dark");
-      dispatch(setTheme("dark"));
-    }
+    dispatch(setTheme(theme));
   };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", curTheme);
+  }, [curTheme]);
 
   return (
     <button

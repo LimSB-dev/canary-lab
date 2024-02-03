@@ -13,6 +13,7 @@ export const GithubCard = () => {
         href="https://github.com/LimSB-dev"
         target="_blank"
         className={styles.link}
+        passHref
       >
         <FontAwesomeIcon icon={faGithub} size="5x" />
       </Link>

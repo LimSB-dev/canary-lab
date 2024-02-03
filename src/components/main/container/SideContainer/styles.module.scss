@@ -29,3 +29,9 @@
   display: flex;
   gap: var(--gap);
 }
+
+.post_controller {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--gap);
+}

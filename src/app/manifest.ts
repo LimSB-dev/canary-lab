@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { META_DATA } from "@/constants/metadata";
 
 export default function manifest(): MetadataRoute.Manifest {
-  const { APP_ID, APP_NAME, APP_DESCRIPTION, APP_URL } = META_DATA;
+  const { APP_ID, APP_NAME, APP_DESCRIPTION } = META_DATA;
 
   return {
     id: APP_ID,
@@ -23,6 +23,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/favicon.ico",
         type: "image/x-icon",
         sizes: "any",
+        purpose: "any",
       },
     ],
     display_override: [

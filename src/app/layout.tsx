@@ -14,31 +14,12 @@ export const metadata: Metadata = {
     default: META_DATA.APP_DEFAULT_TITLE,
   },
   description: META_DATA.APP_DESCRIPTION,
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: META_DATA.APP_DEFAULT_TITLE,
-  },
-  formatDetection: {
-    telephone: false,
-  },
-  openGraph: {
-    type: "website",
-    siteName: META_DATA.APP_NAME,
-    title: {
-      default: META_DATA.APP_DEFAULT_TITLE,
-      template: META_DATA.APP_TITLE_TEMPLATE,
+  manifest: "/manifest.webmanifest",
+  verification: {
+    google: META_DATA.GOOGLE_SITE_VERIFICATION,
+    other: {
+      naver: META_DATA.NAVER_SITE_VERIFICATION,
     },
-    description: META_DATA.APP_DESCRIPTION,
-  },
-  twitter: {
-    card: "summary",
-    title: {
-      default: META_DATA.APP_DEFAULT_TITLE,
-      template: META_DATA.APP_TITLE_TEMPLATE,
-    },
-    description: META_DATA.APP_DESCRIPTION,
   },
 };
 

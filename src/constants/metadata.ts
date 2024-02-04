@@ -5,6 +5,10 @@ const APP_TITLE_TEMPLATE = "%s | Canary Lab";
 const APP_DESCRIPTION =
   "It is a laboratory and tech blog that experimentally implements several new functions.";
 const APP_URL = "https://canary-lab.vercel.app/";
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";
+const NAVER_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "";
 
 export const META_DATA = {
   APP_ID,
@@ -13,4 +17,6 @@ export const META_DATA = {
   APP_TITLE_TEMPLATE,
   APP_DESCRIPTION,
   APP_URL,
+  GOOGLE_SITE_VERIFICATION,
+  NAVER_SITE_VERIFICATION,
 };

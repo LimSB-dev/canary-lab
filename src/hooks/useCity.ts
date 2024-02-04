@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "./reduxHook";
-import { setCity } from "@/store/modules/weather";
-import convertUnixTime from "@/utils/convertUnixTime";
-import compareTime from "@/utils/compareTime";
+import { setCity } from "@/store/modules/location";
 
+/**
+ * @description find the current city and set it to the redux store
+ * @returns {object} { loading, error }
+ */
 export const useCity = () => {
   const dispatch = useAppDispatch();
   const dt = useAppSelector((state) => state.weather.weatherData?.dt);
@@ -44,16 +46,10 @@ export const useCity = () => {
   };
 
   useEffect(() => {
-    if (dt) {
-      const now = new Date().toTimeString().split(" ")[0];
-      const formattedTime = convertUnixTime(dt);
+    if (!dt) return;
 
-      if (compareTime(now, formattedTime)) {
-        navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
-      } else {
-        setLoading(false);
-      }
-    }
+    navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+    setLoading(false);
   }, [dt]);
 
   return { loading, error };

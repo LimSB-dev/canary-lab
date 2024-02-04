@@ -1,5 +1,5 @@
 /**
- * Convert Unix Time to HH:MM:SS format
+ * @description convert Unix Time to HH:MM:SS format
  * @param {number} unixTime - Unix Time to convert
  */
 const convertUnixTime = (unixTime = 0) => {

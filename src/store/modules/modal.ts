@@ -6,7 +6,7 @@ export interface modalSlice {
   status: "close" | "login";
 }
 
-// 초기 상태 정의
+// define initial state
 const initialState = {
   status: "close",
 };
@@ -24,8 +24,8 @@ const modalSlice = createSlice({
   },
 });
 
-// 액션 생성함수
+// action creators
 export const { openModal, closeModal } = modalSlice.actions;
 export const selectModal = (state: RootState) => state.modal;
-// 리듀서
+// reducer
 export default modalSlice.reducer;

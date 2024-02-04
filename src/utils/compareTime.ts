@@ -1,5 +1,5 @@
 /**
- * Compares two hours in hh:mm:ss format
+ * @description compares two hours in hh:mm:ss format
  * @param {string} time1 - Time to compare
  * @param {string} time2 - Time to compare (default: 00:00:00)
  * @param {number} diff - Difference in milliseconds (default: 3600000)

@@ -1,4 +1,4 @@
-import { BREAKPOINT } from "@/constant/breakpoint";
+import { BREAKPOINT } from "@/constants/breakpoint";
 import { useEffect, useState } from "react";
 
 export const useDevice = () => {

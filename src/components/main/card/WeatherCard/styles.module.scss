@@ -1,11 +1,26 @@
 .card {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  gap: var(--gap);
   padding: var(--card-padding);
   width: calc(var(--card-width) * 2 + var(--gap) * 1);
   height: calc(var(--card-height) * 3 + var(--gap) * 2);
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
   overflow: hidden;
+}
+
+.flex_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.spaceBetween {
+  width: 100%;
+  justify-content: space-between;
 }

@@ -13,8 +13,6 @@ export const WeatherCard = () => {
   const city = useAppSelector((state) => state.weather.city);
   const weatherData = useAppSelector((state) => state.weather.weatherData);
 
-  console.log("🚀 ~ WeatherCard ~ weatherData:", weatherData);
-
   if (cityLoading || weatherLoading) {
     return (
       <article className={styles.card}>

@@ -42,7 +42,10 @@ export const useWeather = () => {
   };
 
   useEffect(() => {
-    if (compareTime(new Date().toTimeString().split(" ")[0], formattedTime)) {
+    if (
+      compareTime(new Date().toTimeString().split(" ")[0], formattedTime) ||
+      !dt
+    ) {
       navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
     } else {
       setLoading(false);

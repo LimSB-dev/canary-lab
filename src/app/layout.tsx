@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import "@/styles/reset.css";
 import { Providers } from "@/store/providers";
 import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@/components/common/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     default: META_DATA.APP_DEFAULT_TITLE,
   },
   description: META_DATA.APP_DESCRIPTION,
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.json",
   verification: {
     google: META_DATA.GOOGLE_SITE_VERIFICATION,
     other: {
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Analytics />
+        <GoogleAnalytics />
         <Providers>{children}</Providers>
       </body>
     </html>

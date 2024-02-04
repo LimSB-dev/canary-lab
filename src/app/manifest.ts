@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { META_DATA } from "@/constants/metadata";
 
 export default function manifest(): MetadataRoute.Manifest {
-  const { APP_ID, APP_NAME, APP_DESCRIPTION } = META_DATA;
+  const { APP_ID, APP_NAME, APP_DESCRIPTION, APP_URL } = META_DATA;
 
   return {
     id: APP_ID,
@@ -11,8 +11,8 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     description: APP_DESCRIPTION,
     orientation: "any",
-    theme_color: "#ffcc12",
-    background_color: "#222222",
+    theme_color: "#fff555",
+    background_color: "#efefef",
     start_url: "/",
     dir: "auto",
     scope: "/",
@@ -22,18 +22,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/favicon.ico",
         type: "image/x-icon",
-        sizes: "16x16",
-      },
-      {
-        src: "/favicon.ico",
-        type: "image/x-icon",
-      },
-    ],
-    shortcuts: [
-      {
-        name: APP_NAME,
-        url: "https://canary-lab.vercel.app/",
-        description: APP_DESCRIPTION,
+        sizes: "any",
       },
     ],
     display_override: [

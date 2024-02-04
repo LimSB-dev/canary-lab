@@ -4,7 +4,7 @@ const APP_DEFAULT_TITLE = "Canary Lab";
 const APP_TITLE_TEMPLATE = "%s | Canary Lab";
 const APP_DESCRIPTION =
   "It is a laboratory and tech blog that experimentally implements several new functions.";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
+const APP_URL = "https://canary-lab.vercel.app/";
 
 export const META_DATA = {
   APP_ID,

@@ -17,26 +17,19 @@ interface ICardProps {
   setIsHover: Dispatch<SetStateAction<boolean>>;
 }
 
-interface IDimProps {
-  setIsHover: Dispatch<SetStateAction<boolean>>;
-}
-
-const Dim = ({ setIsHover }: IDimProps) => {
-  return (
-    <div
-      id="dim"
-      className={styles.dim}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    />
-  );
+const Dim = () => {
+  return <div id="dim" className={styles.dim} />;
 };
 
 const MobileMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
-    <section className={styles.card}>
+    <section
+      className={styles.card}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
-      <Dim setIsHover={setIsHover} />
+      <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
         src="/assets/images/canary.svg"
@@ -50,9 +43,13 @@ const MobileMainCard = ({ isHover, setIsHover }: ICardProps) => {
 
 const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
-    <section className={styles.card}>
+    <section
+      className={styles.card}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
-      <Dim setIsHover={setIsHover} />
+      <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
         src="/assets/images/canary.svg"
@@ -66,9 +63,13 @@ const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
 
 const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
-    <section className={styles.card}>
+    <section
+      className={styles.card}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
-      <Dim setIsHover={setIsHover} />
+      <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
         src="/assets/images/canary.svg"
@@ -82,9 +83,13 @@ const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
 
 const DesktopMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
-    <section className={styles.card}>
+    <section
+      className={styles.card}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
-      <Dim setIsHover={setIsHover} />
+      <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
         src="/assets/images/canary.svg"

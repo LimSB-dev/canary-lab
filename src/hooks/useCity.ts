@@ -54,7 +54,7 @@ export const useCity = () => {
         setLoading(false);
       }
     }
-  }, []);
+  }, [dt]);
 
   return { loading, error };
 };

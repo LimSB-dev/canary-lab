@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 import "@/styles/globals.css";
 
 import { useDevice } from "@/hooks/useDevice";
-import { META_DATA } from "@/constant/metadata";
+import { META_DATA } from "@/constants/metadata";
 import { Dispatch, SetStateAction, useState } from "react";
 
 interface IProps {

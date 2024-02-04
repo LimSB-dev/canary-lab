@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { META_DATA } from "@/constant/metadata";
+import { META_DATA } from "@/constants/metadata";
 
 export default function manifest(): MetadataRoute.Manifest {
   const { APP_ID, APP_NAME, APP_DESCRIPTION } = META_DATA;

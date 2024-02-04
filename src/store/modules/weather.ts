@@ -1,29 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "..";
 
 // state type
 export interface WeatherSlice {
-  curWeather: string;
+  city: string;
+  weatherData: WeatherData | null;
 }
 
 // 초기 상태 정의
 const initialState: WeatherSlice = {
-  curWeather: 'Clear',
+  city: "Seoul",
+  weatherData: null,
 };
 
 const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState,
   reducers: {
-    changeWeatherSuccess(state, action) {
-      const temp = state;
-      temp.curWeather = action.payload;
+    setCity(state, action) {
+      state.city = action.payload;
+    },
+    setWeatherData(state, action) {
+      state.weatherData = action.payload;
     },
   },
 });
 
 // 액션 생성함수
-export const { changeWeatherSuccess } = weatherSlice.actions;
+export const { setCity, setWeatherData } = weatherSlice.actions;
 export const selectWeather = (state: RootState) => state.weather;
 // 리듀서
 export default weatherSlice.reducer;

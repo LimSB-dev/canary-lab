@@ -5,6 +5,10 @@ import { setWeatherData } from "@/store/modules/weather";
 import compareTime from "@/utils/compareTime";
 import convertUnixTime from "@/utils/convertUnixTime";
 
+/**
+ * @description find the current weather and set it to the redux store
+ * @returns {object} { loading, error }
+ */
 export const useWeather = () => {
   const dispatch = useAppDispatch();
   const dt = useAppSelector((state) => state.weather.weatherData?.dt);

@@ -7,7 +7,7 @@ export interface snackbarSlice {
   isActive: boolean;
 }
 
-// 초기 상태 정의
+// define initial state
 const initialState = {
   message: "",
   isActive: false,
@@ -29,9 +29,9 @@ const snackbarSlice = createSlice({
   },
 });
 
-// 액션 생성함수
+// action creators
 export const { openSnackBarSuccess, closeSnackBarSuccess } =
   snackbarSlice.actions;
 export const selectSnackbar = (state: RootState) => state.snackbar;
-// 리듀서
+// reducer
 export default snackbarSlice.reducer;

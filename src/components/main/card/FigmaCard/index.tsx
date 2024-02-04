@@ -7,7 +7,7 @@ export const FigmaCard = () => {
   return (
     <Link
       className={styles.card}
-      href="https://www.figma.com/file/2VdpF0IhNz4CTdi7JEaGzH/canary-lab?type=design&node-id=13%3A300&mode=design&t=xrw7uUOSeqeBGx9O-1"
+      href={process.env.NEXT_PUBLIC_FIGMA_LINK || "/"}
       target="_blank"
       rel="noopener noreferrer"
       passHref

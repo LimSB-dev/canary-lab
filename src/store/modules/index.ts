@@ -6,19 +6,21 @@ import theme from "./theme";
 import modal from "./modal";
 import weather from "./weather";
 import snackbar from "./snackbar";
+import location from "./location";
 
 const rootReducer = combineReducers({
   theme,
   modal,
   weather,
   snackbar,
-  // 여기에 추가하세요
+  location,
+  // Add your reducers here
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whiteList: ["theme", "modal", "weather", "snackbar"],
+  whiteList: ["theme", "modal", "weather", "snackbar", "location"],
 };
 
 const persistReducers = persistReducer(persistConfig, rootReducer);

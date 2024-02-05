@@ -6,6 +6,8 @@ import useCity from "@/hooks/useCity";
 import Image from "next/image";
 import { useAppSelector } from "@/hooks/reduxHook";
 import convertUnixTime from "@/utils/convertUnixTime";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export const WeatherCard = () => {
   const { loading: cityLoading, error: cityError } = useCity();
@@ -57,7 +59,14 @@ export const WeatherCard = () => {
   return (
     <article className={`${styles.card} ${cardBackground}`}>
       <div className={`${styles.flex_row} ${styles.spaceBetween}`}>
-        {cityLoading || !city ? <h6>Finding location...</h6> : <h4>{city}</h4>}
+        {cityLoading || !city ? (
+          <div className={styles.flex_row}>
+            <FontAwesomeIcon icon={faSpinner} spin size="lg" />
+            <h6>Finding location...</h6>
+          </div>
+        ) : (
+          <h4>{city}</h4>
+        )}
         {weatherLoading || (
           <Image
             className={styles.weather_icon}
@@ -68,13 +77,17 @@ export const WeatherCard = () => {
           />
         )}
       </div>
-      {weatherLoading || (
+      {!weatherLoading ? (
         <>
           <h2>{weatherData?.main.temp}°</h2>
           <div className={styles.flex_row}>
             <p>MAX: {weatherData?.main.tempMax.toFixed(1)}°</p>
             <p>MIN: {weatherData?.main.tempMin.toFixed(1)}°</p>
           </div>
+        </>
+      ) : (
+        <>
+          <p>Measuring Temperature...</p>
         </>
       )}
     </article>

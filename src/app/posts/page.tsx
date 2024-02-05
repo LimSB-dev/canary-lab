@@ -1,5 +1,10 @@
 import { DefaultLogo } from "@/components/common/logo";
 import styles from "./page.module.scss";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Posts",
+};
 
 export default function Post() {
   return (

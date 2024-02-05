@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 import useCity from "@/hooks/useCity";
 import Image from "next/image";
 import { useAppSelector } from "@/hooks/reduxHook";
+import convertUnixTime from "@/utils/convertUnixTime";
 
 export const WeatherCard = () => {
   const { loading: cityLoading, error: cityError } = useCity();
@@ -12,6 +13,37 @@ export const WeatherCard = () => {
 
   const city = useAppSelector((state) => state.location.city);
   const weatherData = useAppSelector((state) => state.weather.weatherData);
+  const sunrise = convertUnixTime(weatherData?.sys.sunrise)
+    .split(":")
+    .map(Number);
+  const sunset = convertUnixTime(weatherData?.sys.sunset)
+    .split(":")
+    .map(Number);
+
+  const date = new Date();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+
+  let cardBackground = styles.day;
+  if (
+    (hour === sunrise[0] && minute >= sunrise[1] - 10) ||
+    (hour === sunrise[0] - 1 && minute >= 10)
+  ) {
+    cardBackground = styles.sunrise;
+  } else if (
+    (hour === sunset[0] && minute >= sunset[1] - 10) ||
+    (hour === sunset[0] - 1 && minute >= 10)
+  ) {
+    cardBackground = styles.sunset;
+  } else if (
+    (hour > sunrise[0] && hour < sunset[0]) ||
+    (hour === sunrise[0] && minute >= sunrise[1] + 10) ||
+    (hour === sunset[0] && minute <= sunset[1] - 10)
+  ) {
+    cardBackground = styles.day;
+  } else {
+    cardBackground = styles.night;
+  }
 
   if (cityError || weatherError) {
     return (
@@ -23,11 +55,12 @@ export const WeatherCard = () => {
   }
 
   return (
-    <article className={styles.card}>
+    <article className={`${styles.card} ${cardBackground}`}>
       <div className={`${styles.flex_row} ${styles.spaceBetween}`}>
         {cityLoading || !city ? <h6>Finding location...</h6> : <h4>{city}</h4>}
         {weatherLoading || (
           <Image
+            className={styles.weather_icon}
             src={`https://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`}
             width={50}
             height={50}

@@ -9,6 +9,8 @@ const GOOGLE_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";
 const NAVER_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "";
+const FIGMA_URL =
+  "https://www.figma.com/file/2VdpF0IhNz4CTdi7JEaGzH/canary-lab?type=design&node-id=3-280&mode=design&t=aeKriIe49JtQarGx-0";
 
 export const META_DATA = {
   APP_ID,
@@ -19,4 +21,5 @@ export const META_DATA = {
   APP_URL,
   GOOGLE_SITE_VERIFICATION,
   NAVER_SITE_VERIFICATION,
+  FIGMA_URL,
 };

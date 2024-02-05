@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./styles.module.scss";
+import { META_DATA } from "@/constants/metadata";
 
 export const FigmaCard = () => {
   return (
     <Link
       className={styles.card}
-      href={process.env.NEXT_PUBLIC_FIGMA_LINK || "/"}
+      href={META_DATA.FIGMA_URL}
       target="_blank"
       rel="noopener noreferrer"
       passHref

@@ -1,0 +1,44 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px 0;
+  gap: var(--gap);
+
+  @media (max-width: 804px) {
+    padding: 0;
+  }
+}
+
+.article {
+  display: flex;
+  gap: var(--gap);
+  margin: auto;
+}
+
+.flex_row {
+  display: flex;
+  gap: var(--gap);
+}
+
+.flex_row_reverse {
+  @media (min-width: 804px) {
+    display: flex;
+    gap: var(--gap);
+    flex-direction: row-reverse;
+  }
+}
+
+.flex_column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.flex_column_reverse {
+  @media (max-width: 1212px) {
+    display: flex;
+    gap: var(--gap);
+    flex-direction: column-reverse;
+  }
+}

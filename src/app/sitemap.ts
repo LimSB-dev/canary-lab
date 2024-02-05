@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { META_DATA } from "@/constant/metadata";
+import { META_DATA } from "@/constants/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const { APP_URL } = META_DATA;
@@ -10,6 +10,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
+    },
+    {
+      url: `${APP_URL}/posts`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
   ];
 }

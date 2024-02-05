@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { META_DATA } from "@/constant/metadata";
+import { META_DATA } from "@/constants/metadata";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/reset.css";
+import { Providers } from "@/store/providers";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@/components/common/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,30 +17,11 @@ export const metadata: Metadata = {
   },
   description: META_DATA.APP_DESCRIPTION,
   manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: META_DATA.APP_DEFAULT_TITLE,
-  },
-  formatDetection: {
-    telephone: false,
-  },
-  openGraph: {
-    type: "website",
-    siteName: META_DATA.APP_NAME,
-    title: {
-      default: META_DATA.APP_DEFAULT_TITLE,
-      template: META_DATA.APP_TITLE_TEMPLATE,
+  verification: {
+    google: META_DATA.GOOGLE_SITE_VERIFICATION,
+    other: {
+      naver: META_DATA.NAVER_SITE_VERIFICATION,
     },
-    description: META_DATA.APP_DESCRIPTION,
-  },
-  twitter: {
-    card: "summary",
-    title: {
-      default: META_DATA.APP_DEFAULT_TITLE,
-      template: META_DATA.APP_TITLE_TEMPLATE,
-    },
-    description: META_DATA.APP_DESCRIPTION,
   },
 };
 
@@ -47,7 +32,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Analytics />
+        <SpeedInsights />
+        <GoogleAnalytics />
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

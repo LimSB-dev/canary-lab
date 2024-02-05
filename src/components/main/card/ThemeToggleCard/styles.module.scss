@@ -1,0 +1,35 @@
+.card_light {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--card-padding);
+  width: calc(var(--card-width) * 1 + var(--gap) * 0);
+  height: calc(var(--card-height) * 1 + var(--gap) * 0);
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.card_dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--card-padding);
+  width: calc(var(--card-width) * 1 + var(--gap) * 0);
+  height: calc(var(--card-height) * 1 + var(--gap) * 0);
+  background-color: var(--black);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.text_light {
+  color: var(--black);
+}
+
+.text_dark {
+  color: var(--white);
+}
+
+.default {
+  cursor: default;
+}

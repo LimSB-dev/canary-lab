@@ -1,0 +1,51 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--gap);
+  padding: var(--card-padding);
+  width: calc(var(--card-width) * 2 + var(--gap) * 1);
+  height: calc(var(--card-height) * 3 + var(--gap) * 2);
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.flex_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.spaceBetween {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.weather_icon {
+  filter: drop-shadow(0 0 4px var(--white)) drop-shadow(0 0 8px var(--white))
+    drop-shadow(0 0 12px var(--white)) drop-shadow(0 0 16px var(--white));
+}
+
+.sunrise {
+  background: linear-gradient(to bottom, #02010d, #9b6c07);
+}
+
+.day {
+  background: linear-gradient(to bottom, #8ccbf2, #0b82fa);
+  color: var(--white);
+}
+.sunset {
+  // 일몰을 표현하기 위해 바텀 가운데 태양이 있는것 처럼 스타일
+  background: linear-gradient(to bottom, #ff6600, #ff9900);
+  color: var(--white);
+}
+
+.night {
+  background: linear-gradient(to bottom, #022346, #020820);
+  color: var(--white);
+}

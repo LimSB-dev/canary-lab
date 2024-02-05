@@ -1,0 +1,31 @@
+{
+  "id": "prj_Bom124VUXcgqFxua3FMXaWcPUVAk",
+  "name": "Canary Lab",
+  "short_name": "Canary Lab",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#fff555",
+  "background_color": "#efefef",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "display_override": [
+    "browser",
+    "fullscreen",
+    "minimal-ui",
+    "standalone",
+    "window-controls-overlay"
+  ],
+  "orientation": "any",
+  "description": "It is a laboratory and tech blog that experimentally implements several new functions.",
+  "dir": "auto",
+  "scope": "/",
+  "lang": "ko",
+  "categories": ["education", "entertainment"],
+  "screenshots": []
+}

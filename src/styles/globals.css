@@ -20,19 +20,39 @@
 
   /* gap */
   --gap: 12px;
-  --gap-2: 24px;
 
   /* card */
   --card-width: 124px;
   --card-height: 64px;
+
+  /* breakpoin */
+  --breakpoint-moblie: 320px;
+  --breakpoint-tablet: 804px;
+  --breakpoint-laptop: 1212px;
+  --breakpoint-desktop: 1620px;
 
   /* font */
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
-  /* color */
+  /* z-index */
+  --z-index-base: 0;
+  --z-index-dim: 1;
+  --z-index-img-title: 2;
+  --z-index-modal: 3;
+
+  /* stable color */
+  --white: #efefef;
+  --black: #222222;
+}
+
+/* 색상 */
+:root,
+html[data-theme="light"] {
   --primary-color: #fff555;
+  --primary-color-light: #fff777;
+  --primary-color-dark: #fff333;
   --text-color: #222222;
 
   --background-color-light: #efefef;
@@ -42,39 +62,52 @@
   --dim-opacity: 0.25;
 }
 
-/* 다크모드 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #fff500;
-    --text-color: #efefef;
+html[data-theme="dark"] {
+  --primary-color: #fff500;
+  --primary-color-light: #fff700;
+  --primary-color-dark: #fff300;
+  --text-color: #efefef;
 
-    --background-color-light: #222222;
-    --background-color-dark: #111111;
-    --card-background-color: #333333;
+  --background-color-light: #222222;
+  --background-color-dark: #111111;
+  --card-background-color: #333333;
 
-    --dim-opacity: 0.5;
-  }
+  --dim-opacity: 0.5;
 }
 
 /* 반응형 */
-@media (max-width: 768px) {
+@media (max-width: 1212px) {
+  :root {
+    --h1: 96px;
+    --h2: 48px;
+    --h3: 36px;
+    --h4: 28px;
+    --h5: 24px;
+    --h6: 20px;
+
+    --p: 16px;
+    --caption: 12px;
+  }
+}
+
+@media (max-width: 804px) {
   :root {
     --h1: 72px;
     --h2: 36px;
-    --h3: 24px;
-    --h4: 20px;
-    --h5: 16px;
-    --h6: 14px;
+    --h3: 28px;
+    --h4: 24px;
+    --h5: 20px;
+    --h6: 18px;
 
     --p: 14px;
     --caption: 12px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 320px) {
   :root {
     --h1: 48px;
-    --h2: 36px;
+    --h2: 32px;
     --h3: 24px;
     --h4: 20px;
     --h5: 16px;
@@ -93,24 +126,16 @@
 
 html,
 body {
+  display: block;
+  width: 100%;
+  height: 100%;
   font-size: var(--p);
-  max-width: var(--max-width);
   overflow-x: hidden;
+  overflow-y: overlay;
+  transition: background-color 0.25s ease;
 }
 
 body {
   color: var(--text-color);
   background: var(--background-color-light);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-// 다크모드
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

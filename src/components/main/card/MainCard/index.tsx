@@ -1,21 +1,33 @@
 "use client";
 
 import Image from "next/image";
+import { Dispatch, SetStateAction, useState } from "react";
 
+import { TypeAnimation } from "react-type-animation";
 import styles from "./styles.module.scss";
 import "@/styles/globals.css";
 
 import { useDevice } from "@/hooks/useDevice";
 import { META_DATA } from "@/constants/metadata";
-import { Dispatch, SetStateAction, useState } from "react";
+import { SEQUENCE } from "@/constants/sequence";
 
 interface IProps {
   device: Device;
+}
+
+interface IDescription {
+  isHover: boolean;
 }
 interface ICardProps {
   isHover: boolean;
   setIsHover: Dispatch<SetStateAction<boolean>>;
 }
+
+const Description = ({ isHover }: IDescription) => {
+  if (isHover) {
+    return <TypeAnimation className={styles.description} sequence={SEQUENCE} />;
+  }
+};
 
 const Dim = () => {
   return <div id="dim" className={styles.dim} />;
@@ -29,6 +41,7 @@ const MobileMainCard = ({ isHover, setIsHover }: ICardProps) => {
       onMouseLeave={() => setIsHover(false)}
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
+      <Description isHover={isHover} />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
@@ -49,6 +62,7 @@ const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
       onMouseLeave={() => setIsHover(false)}
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
+      <Description isHover={isHover} />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
@@ -69,6 +83,7 @@ const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
       onMouseLeave={() => setIsHover(false)}
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
+      <Description isHover={isHover} />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
@@ -89,6 +104,7 @@ const DesktopMainCard = ({ isHover, setIsHover }: ICardProps) => {
       onMouseLeave={() => setIsHover(false)}
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
+      <Description isHover={isHover} />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}

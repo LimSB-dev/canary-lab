@@ -11,6 +11,7 @@
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
   overflow: hidden;
+  color: var(--white);
 }
 
 .flex_row {
@@ -37,15 +38,12 @@
 
 .day {
   background: linear-gradient(to bottom, #8ccbf2, #0b82fa);
-  color: var(--white);
 }
+
 .sunset {
-  // 일몰을 표현하기 위해 바텀 가운데 태양이 있는것 처럼 스타일
   background: linear-gradient(to bottom, #ff6600, #ff9900);
-  color: var(--white);
 }
 
 .night {
   background: linear-gradient(to bottom, #022346, #020820);
-  color: var(--white);
 }

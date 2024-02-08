@@ -27,7 +27,9 @@ export const WeatherCard = () => {
   const minute = date.getMinutes();
 
   let cardBackground = styles.day;
-  if (
+  if (!weatherData) {
+    cardBackground = styles.day;
+  } else if (
     (hour === sunrise[0] && minute >= sunrise[1] - 10) ||
     (hour === sunrise[0] - 1 && minute >= 10)
   ) {

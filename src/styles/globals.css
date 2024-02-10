@@ -16,10 +16,15 @@
 
   /* p ~ caption */
   --p: 16px;
-  --caption: 8px;
+  --caption: 12px;
 
   /* gap */
   --gap: 12px;
+
+  /* padding */
+  --padding-lg: 150px;
+  --padding-md: 40px;
+  --padding-sm: 16px;
 
   /* card */
   --card-width: 124px;
@@ -53,6 +58,7 @@ html[data-theme="light"] {
   --primary-color: #fff555;
   --primary-color-light: #fff777;
   --primary-color-dark: #fff333;
+  --secondary-color: #888888;
   --text-color: #222222;
 
   --background-color-light: #efefef;
@@ -66,6 +72,7 @@ html[data-theme="dark"] {
   --primary-color: #fff500;
   --primary-color-light: #fff700;
   --primary-color-dark: #fff300;
+  --secondary-color: #888888;
   --text-color: #efefef;
 
   --background-color-light: #222222;
@@ -86,7 +93,7 @@ html[data-theme="dark"] {
     --h6: 20px;
 
     --p: 16px;
-    --caption: 12px;
+    --caption: 10px;
   }
 }
 
@@ -100,7 +107,7 @@ html[data-theme="dark"] {
     --h6: 18px;
 
     --p: 14px;
-    --caption: 12px;
+    --caption: 10px;
   }
 }
 
@@ -114,7 +121,7 @@ html[data-theme="dark"] {
     --h6: 14px;
 
     --p: 12px;
-    --caption: 10px;
+    --caption: 8px;
   }
 }
 

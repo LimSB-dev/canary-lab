@@ -11,7 +11,7 @@ export const useCity = () => {
   const dt = useAppSelector((state) => state.weather.weatherData?.dt);
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
 
   const fetchCity = async (latitude: number, longitude: number) => {
     try {
@@ -42,7 +42,20 @@ export const useCity = () => {
   };
 
   const onGeoError = (error: GeolocationPositionError) => {
-    console.error("Error getting geolocation:", error);
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        setError("Please allow location access.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        setError("Location information is not available.");
+        break;
+      case error.TIMEOUT:
+        setError("Please try again later.");
+        break;
+      default:
+        setError("Please submit this error.");
+        break;
+    }
   };
 
   useEffect(() => {

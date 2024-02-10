@@ -2,9 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: var(--gap);
   padding: var(--card-padding);
   width: calc(var(--card-width) * 2 + var(--gap) * 1);
   height: calc(var(--card-height) * 3 + var(--gap) * 2);
@@ -12,6 +11,13 @@
   border-radius: var(--border-radius);
   overflow: hidden;
   color: var(--white);
+}
+
+.error_message {
+  width: 100%;
+  color: var(--white);
+  // 줄바꿈
+  white-space: pre-wrap;
 }
 
 .flex_row {
@@ -22,14 +28,27 @@
   gap: var(--gap);
 }
 
+.flex_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .spaceBetween {
   width: 100%;
   justify-content: space-between;
+  align-items: center;
+}
+
+.font_awesome_icon {
+  font-size: var(--h5);
+  color: var(--white);
 }
 
 .weather_icon {
-  filter: drop-shadow(0 0 4px var(--black)) drop-shadow(0 0 8px var(--white))
-    drop-shadow(0 0 12px var(--white)) drop-shadow(0 0 16px var(--white));
+  filter: drop-shadow(0 0 4px var(--white)) drop-shadow(0 0 8px var(--black))
+    drop-shadow(0 0 16px var(--black)) invert(1);
 }
 
 .sunrise {

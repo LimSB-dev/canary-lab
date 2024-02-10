@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useAppSelector } from "@/hooks/reduxHook";
 import convertUnixTime from "@/utils/convertUnixTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faLocationArrow, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export const WeatherCard = () => {
   const { loading: cityLoading, error: cityError } = useCity();
@@ -52,8 +52,7 @@ export const WeatherCard = () => {
   if (cityError || weatherError) {
     return (
       <article className={styles.card}>
-        <h5>{weatherError}</h5>
-        <h5>{cityError}</h5>
+        <p className={styles.cityError}>{cityError || weatherError}</p>
       </article>
     );
   }
@@ -64,19 +63,28 @@ export const WeatherCard = () => {
         {cityLoading || !city ? (
           <div className={styles.flex_row}>
             <FontAwesomeIcon icon={faSpinner} spin size="lg" />
-            <h6>Finding location...</h6>
+            <h6>Finding location</h6>
           </div>
         ) : (
-          <h4>{city}</h4>
+          <div className={styles.flex_row}>
+            <h4>{city}</h4>
+            <FontAwesomeIcon
+              className={styles.font_awesome_icon}
+              icon={faLocationArrow}
+            />
+          </div>
         )}
         {weatherLoading || (
-          <Image
-            className={styles.weather_icon}
-            src={`https://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`}
-            width={50}
-            height={50}
-            alt={weatherData?.weather[0].description ?? ""}
-          />
+          <div className={styles.flex_column}>
+            <Image
+              className={styles.weather_icon}
+              src={`https://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`}
+              width={50}
+              height={50}
+              alt={weatherData?.weather[0].description ?? ""}
+            />
+            <caption>{weatherData?.weather[0].main.toUpperCase()}</caption>
+          </div>
         )}
       </div>
       {!weatherLoading ? (
@@ -88,9 +96,7 @@ export const WeatherCard = () => {
           </div>
         </>
       ) : (
-        <>
-          <p>Measuring Temperature...</p>
-        </>
+        <p>Measuring Temperature</p>
       )}
     </article>
   );

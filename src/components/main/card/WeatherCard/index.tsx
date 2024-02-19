@@ -4,17 +4,26 @@ import useWeather from "@/hooks/useWeather";
 import styles from "./styles.module.scss";
 import useCity from "@/hooks/useCity";
 import Image from "next/image";
-import { useAppSelector } from "@/hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import convertUnixTime from "@/utils/convertUnixTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationArrow, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationArrow,
+  faSpinner,
+  faThermometer,
+} from "@fortawesome/free-solid-svg-icons";
+import { setDataReceivingTime } from "@/store/modules/weather";
 
 export const WeatherCard = () => {
   const { loading: cityLoading, error: cityError } = useCity();
   const { loading: weatherLoading, error: weatherError } = useWeather();
+  console.log("🚀 ~ WeatherCard ~ weatherLoading:", weatherLoading);
+
+  const dispatch = useAppDispatch();
 
   const city = useAppSelector((state) => state.location.city);
   const weatherData = useAppSelector((state) => state.weather.weatherData);
+
   const sunrise = convertUnixTime(weatherData?.sys.sunrise)
     .split(":")
     .map(Number);
@@ -60,7 +69,7 @@ export const WeatherCard = () => {
   return (
     <article className={`${styles.card} ${cardBackground}`}>
       <div className={`${styles.flex_row} ${styles.spaceBetween}`}>
-        {cityLoading || !city ? (
+        {(weatherLoading && cityLoading) || !city ? (
           <div className={styles.flex_row}>
             <FontAwesomeIcon icon={faSpinner} spin size="lg" />
             <h6>Finding location</h6>
@@ -69,7 +78,7 @@ export const WeatherCard = () => {
           <div className={styles.flex_row}>
             <h4>{city}</h4>
             <FontAwesomeIcon
-              className={styles.font_awesome_icon}
+              className={styles.location_icon}
               icon={faLocationArrow}
             />
           </div>
@@ -83,20 +92,30 @@ export const WeatherCard = () => {
               height={50}
               alt={weatherData?.weather[0].description ?? ""}
             />
-            <caption>{weatherData?.weather[0].main.toUpperCase()}</caption>
+            <p>{weatherData?.weather[0].main.toUpperCase()}</p>
           </div>
         )}
       </div>
       {!weatherLoading ? (
         <>
-          <h2>{weatherData?.main.temp}°</h2>
+          <h2>{weatherData?.main.temp.toFixed(1)}°</h2>
           <div className={styles.flex_row}>
             <p>MAX: {weatherData?.main.tempMax.toFixed(1)}°</p>
             <p>MIN: {weatherData?.main.tempMin.toFixed(1)}°</p>
+            <FontAwesomeIcon
+              className={styles.thermometer_icon}
+              onClick={() => {
+                dispatch(setDataReceivingTime());
+              }}
+              icon={faThermometer}
+            />
           </div>
         </>
       ) : (
-        <p>Measuring Temperature</p>
+        <>
+          <FontAwesomeIcon icon={faSpinner} spin size="2xl" />
+          <p>Measuring Temperature</p>
+        </>
       )}
     </article>
   );

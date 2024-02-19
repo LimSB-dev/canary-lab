@@ -9,7 +9,7 @@ import "@/styles/globals.css";
 
 import { useDevice } from "@/hooks/useDevice";
 import { META_DATA } from "@/constants/metadata";
-import { SEQUENCE } from "@/constants/sequence";
+import { MAIN_CARD_SEQUENCE } from "@/constants/sequence/sequence";
 
 interface IProps {
   device: Device;
@@ -25,7 +25,12 @@ interface ICardProps {
 
 const Description = ({ isHover }: IDescription) => {
   if (isHover) {
-    return <TypeAnimation className={styles.description} sequence={SEQUENCE} />;
+    return (
+      <TypeAnimation
+        className={styles.description}
+        sequence={MAIN_CARD_SEQUENCE}
+      />
+    );
   }
 };
 

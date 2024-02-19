@@ -2,9 +2,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: var(--gap);
   padding: var(--card-padding);
   width: calc(var(--card-width) * 2 + var(--gap) * 1);
   height: calc(var(--card-height) * 3 + var(--gap) * 2);
@@ -12,6 +11,12 @@
   border-radius: var(--border-radius);
   overflow: hidden;
   color: var(--white);
+}
+
+.error_message {
+  width: 100%;
+  color: var(--white);
+  white-space: pre-wrap;
 }
 
 .flex_row {
@@ -22,14 +27,32 @@
   gap: var(--gap);
 }
 
+.flex_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .spaceBetween {
   width: 100%;
+  height: 72px;
   justify-content: space-between;
+  align-items: center;
+}
+
+.location_icon {
+  font-size: var(--h5);
+  color: var(--white);
+}
+
+.thermometer_icon {
+  cursor: pointer;
 }
 
 .weather_icon {
   filter: drop-shadow(0 0 4px var(--black)) drop-shadow(0 0 8px var(--white))
-    drop-shadow(0 0 12px var(--white)) drop-shadow(0 0 16px var(--white));
+    drop-shadow(0 0 16px var(--white)) drop-shadow(0 0 32px var(--white));
 }
 
 .sunrise {
@@ -46,4 +69,12 @@
 
 .night {
   background: linear-gradient(to bottom, #022346, #020820);
+}
+
+.measuring_loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

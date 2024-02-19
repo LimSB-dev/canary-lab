@@ -18,11 +18,16 @@ const weatherSlice = createSlice({
     setWeatherData(state, action) {
       state.weatherData = action.payload;
     },
+    setDataReceivingTime(state) {
+      if (!state?.weatherData?.dt) return;
+
+      state.weatherData.dt = 0;
+    },
   },
 });
 
 // action creators
-export const { setWeatherData } = weatherSlice.actions;
+export const { setWeatherData, setDataReceivingTime } = weatherSlice.actions;
 export const selectWeather = (state: RootState) => state.weather;
 // reducer
 export default weatherSlice.reducer;

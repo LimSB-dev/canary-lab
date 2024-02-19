@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 40px 0;
+  padding-top: var(--padding-md);
+  padding-bottom: var(--padding-sm);
   gap: var(--gap);
 
   @media (max-width: 804px) {
-    padding: 0;
+    padding-top: 0;
   }
 }
 

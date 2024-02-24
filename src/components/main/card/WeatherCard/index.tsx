@@ -17,7 +17,6 @@ import { setDataReceivingTime } from "@/store/modules/weather";
 export const WeatherCard = () => {
   const { loading: cityLoading, error: cityError } = useCity();
   const { loading: weatherLoading, error: weatherError } = useWeather();
-  console.log("🚀 ~ WeatherCard ~ weatherLoading:", weatherLoading);
 
   const dispatch = useAppDispatch();
 

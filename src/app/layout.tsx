@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: META_DATA.APP_TITLE_TEMPLATE,
     default: META_DATA.APP_DEFAULT_TITLE,
   },
-  description: META_DATA.APP_DESCRIPTION,
+  description: META_DATA.APP_DESCRIPTION.MAIN,
   manifest: "/manifest.json",
   verification: {
     google: META_DATA.GOOGLE_SITE_VERIFICATION,

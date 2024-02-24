@@ -2,8 +2,12 @@ const APP_ID = process.env.NEXT_PUBLIC_VERCEL_PROJECT_ID;
 const APP_NAME = "Canary Lab";
 const APP_DEFAULT_TITLE = "Canary Lab";
 const APP_TITLE_TEMPLATE = "%s | Canary Lab";
-const APP_DESCRIPTION =
-  "It is a laboratory and tech blog that experimentally implements several new functions.";
+const APP_DESCRIPTION = {
+  MAIN: "Tech blog that experimentally implements several new functions.",
+  POSTS: "Check out interesting IT posts",
+  LOGIN: "Login to Canary Lab",
+  CREATE: "Create a new post",
+};
 const APP_URL = "https://canary-lab.vercel.app/";
 const GOOGLE_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";

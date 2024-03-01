@@ -6,16 +6,21 @@ import styles from "./styles.module.scss";
 import Link from "next/link";
 import { PostData } from "@/types/post";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { use, useState } from "react";
 import { OutputData } from "@editorjs/editorjs";
-import { createPost } from "@/lib/actions";
+import { State, createPost } from "@/lib/actions";
 
 const Editor = dynamic(() => import("../../common/editor/Editor"), {
   ssr: false,
 });
 
 const CreatePostForm = () => {
-  const [initialState, setInitialState] = useState<PostData>({
+  const initialState = {
+    message: null,
+    error: {},
+  };
+
+  const [post, setPost] = useState<PostData>({
     id: "",
     status: "draft",
     title: "",
@@ -24,26 +29,25 @@ const CreatePostForm = () => {
     updatedAt: "",
     likes: 0,
     views: 0,
-    data: {
-      time: 0,
-      blocks: [],
-      version: "2.29.0",
-    },
+    blocks: [],
     comments: [],
     tags: [],
   });
 
   const setData = (data: OutputData) => {
-    setInitialState({ ...initialState, data: data });
+    setPost({ ...post, blocks: data.blocks });
   };
 
-  const [state, dispatch] = useFormState(createPost, initialState);
+  const [state, dispatch] = useFormState<State, FormData>(
+    createPost,
+    initialState
+  );
 
   return (
     <form className={styles.form} action={dispatch}>
       <label htmlFor="title">
         제목
-        <input id="title" type="text" placeholder="Title" />
+        <input id="title" name="title" type="text" placeholder="Title" />
       </label>
       <ul>
         <li>
@@ -67,13 +71,13 @@ const CreatePostForm = () => {
       </ul>
       <div className={styles.editor_container}>
         <Editor
-          data={initialState.data}
+          blocks={post.blocks}
           onChange={setData}
           holder="editorjs-container"
         />
       </div>
-      {state.errors?.status &&
-        state.errors.status.map((error: string) => (
+      {state.errors?.title &&
+        state.errors.title.map((error: string) => (
           <p className="mt-2 text-sm text-red-500" key={error}>
             {error}
           </p>

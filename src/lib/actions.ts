@@ -30,12 +30,17 @@ const CreatePost = FormSchema.omit({
   id: true,
 });
 
-export async function createPost(formData: FormData) {
+export type State = {
+  errors?: {
+    title?: string[];
+    tags?: string[];
+  };
+  message?: string | null;
+};
+
+export async function createPost(prevState: State, formData: FormData) {
   const validatedFields = CreatePost.safeParse({
-    status: formData.get("status"),
     title: formData.get("title"),
-    blocks: formData.get("blocks"),
-    tags: formData.getAll("tags"),
   });
 
   if (!validatedFields.success) {
@@ -53,7 +58,7 @@ export async function createPost(formData: FormData) {
   try {
     await sql`
       INSERT INTO post (id, title, data, tags, created_at, updated_at, deleted_at, status, likes, views)
-      VALUES (${id}, ${title}, ${blocks}, ${tags}, ${date}, ${date}, NULL, ${status}, 0, 0)
+      VALUES (${id}, ${title}, ${blocks[0].data.text}, ${tags[0]}, ${date}, ${date}, NULL, ${status}, 0, 0)
     `;
   } catch (error) {
     return {
@@ -61,8 +66,8 @@ export async function createPost(formData: FormData) {
     };
   }
 
-  revalidatePath("/dashboard/invoices");
-  redirect("/dashboard/invoices");
+  revalidatePath("/posts");
+  redirect("/posts");
 }
 
 export async function deleteInvoice(id: string) {

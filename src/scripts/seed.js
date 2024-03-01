@@ -101,7 +101,7 @@ async function seedPosts(client) {
 
 async function main() {
   const client = await db.connect();
-
+  console.log("Connected to the database");
   await seedUsers(client);
   await seedPosts(client);
 

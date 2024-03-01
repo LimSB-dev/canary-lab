@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 150px;
+  gap: var(--gap);
+  min-width: 100vw;
+  max-width: var(--max-width);
+  min-height: 100vh;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.right_top_right {
+  display: flex;
+  gap: var(--gap);
+}
+
+.right_top_left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}

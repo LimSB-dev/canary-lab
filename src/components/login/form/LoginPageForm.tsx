@@ -9,7 +9,10 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 const LoginPageForm = () => {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const [errorMessage, dispatch] = useFormState<string | undefined, FormData>(
+    authenticate,
+    undefined
+  );
 
   return (
     <form className={styles.form} action={dispatch}>

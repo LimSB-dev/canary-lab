@@ -15,3 +15,16 @@ export async function fetchPosts() {
     throw new Error("Failed to fetch posts data.");
   }
 }
+
+export async function fetchPostById(id: string) {
+  noStore();
+
+  try {
+    const post = await sql<PostData>`SELECT * FROM posts WHERE id=${id}`;
+
+    return post.rows[0];
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch post data.");
+  }
+}

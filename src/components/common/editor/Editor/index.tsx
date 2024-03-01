@@ -1,16 +1,16 @@
 import { useEffect, useRef } from "react";
-import EditorJS, { OutputData } from "@editorjs/editorjs";
+import EditorJS, { OutputData, OutputBlockData } from "@editorjs/editorjs";
 import styles from "./styles.module.scss";
 
 import { EDITOR_TOOLS } from "@/constants/editor/editorTools";
 
 export interface IEditorProps {
-  data: OutputData;
+  blocks: OutputBlockData[];
   onChange: (data: OutputData) => void;
   holder: string;
 }
 
-const Editor = ({ data, onChange, holder }: IEditorProps) => {
+const Editor = ({ blocks, onChange, holder }: IEditorProps) => {
   const ref = useRef<EditorJS | null>();
 
   useEffect(() => {
@@ -19,7 +19,11 @@ const Editor = ({ data, onChange, holder }: IEditorProps) => {
       const editor = new EditorJS({
         holder: holder,
         tools: EDITOR_TOOLS,
-        data,
+        data: {
+          time: new Date().getTime(),
+          blocks,
+          version: "2.29.0",
+        },
         async onChange(api, event) {
           await api.saver
             .save()

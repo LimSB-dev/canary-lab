@@ -1,7 +1,15 @@
 .card {
+  display: flex;
+  justify-content: center;
   width: calc(var(--card-width) * 3 + var(--gap) * 2);
   height: calc(var(--card-height) * 3 + var(--gap) * 2);
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
   overflow: hidden;
+}
+
+.img {
+  transform: translateX(6px);
+  height: 100%;
+  object-fit: cover;
 }

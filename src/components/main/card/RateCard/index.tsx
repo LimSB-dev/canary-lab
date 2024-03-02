@@ -15,7 +15,7 @@ export const RateCard = () => {
       className={styles.card}
       passHref
     >
-      <img src={svgFile} alt="solved.ac" width={"100%"} height={"100%"} />
+      <img className={styles.img} src={svgFile} alt="solved.ac" />
     </Link>
   );
 };

@@ -50,11 +50,12 @@ export const useWeather = () => {
       compareTime(new Date().toTimeString().split(" ")[0], formattedTime) ||
       !dt
     ) {
+      setLoading(true);
       navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [dt]);
 
   return { loading, error };
 };

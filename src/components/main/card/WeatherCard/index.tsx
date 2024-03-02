@@ -4,17 +4,25 @@ import useWeather from "@/hooks/useWeather";
 import styles from "./styles.module.scss";
 import useCity from "@/hooks/useCity";
 import Image from "next/image";
-import { useAppSelector } from "@/hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import convertUnixTime from "@/utils/convertUnixTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationArrow,
+  faSpinner,
+  faThermometer,
+} from "@fortawesome/free-solid-svg-icons";
+import { setDataReceivingTime } from "@/store/modules/weather";
 
 export const WeatherCard = () => {
   const { loading: cityLoading, error: cityError } = useCity();
   const { loading: weatherLoading, error: weatherError } = useWeather();
 
+  const dispatch = useAppDispatch();
+
   const city = useAppSelector((state) => state.location.city);
   const weatherData = useAppSelector((state) => state.weather.weatherData);
+
   const sunrise = convertUnixTime(weatherData?.sys.sunrise)
     .split(":")
     .map(Number);
@@ -27,7 +35,9 @@ export const WeatherCard = () => {
   const minute = date.getMinutes();
 
   let cardBackground = styles.day;
-  if (
+  if (!weatherData) {
+    cardBackground = styles.day;
+  } else if (
     (hour === sunrise[0] && minute >= sunrise[1] - 10) ||
     (hour === sunrise[0] - 1 && minute >= 10)
   ) {
@@ -50,8 +60,7 @@ export const WeatherCard = () => {
   if (cityError || weatherError) {
     return (
       <article className={styles.card}>
-        <h5>{weatherError}</h5>
-        <h5>{cityError}</h5>
+        <p className={styles.cityError}>{cityError || weatherError}</p>
       </article>
     );
   }
@@ -59,35 +68,52 @@ export const WeatherCard = () => {
   return (
     <article className={`${styles.card} ${cardBackground}`}>
       <div className={`${styles.flex_row} ${styles.spaceBetween}`}>
-        {cityLoading || !city ? (
+        {(weatherLoading && cityLoading) || !city ? (
           <div className={styles.flex_row}>
             <FontAwesomeIcon icon={faSpinner} spin size="lg" />
-            <h6>Finding location...</h6>
+            <h6>Finding location</h6>
           </div>
         ) : (
-          <h4>{city}</h4>
+          <div className={styles.flex_row}>
+            <h4>{city}</h4>
+            <FontAwesomeIcon
+              className={styles.location_icon}
+              icon={faLocationArrow}
+            />
+          </div>
         )}
         {weatherLoading || (
-          <Image
-            className={styles.weather_icon}
-            src={`https://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`}
-            width={50}
-            height={50}
-            alt={weatherData?.weather[0].description ?? ""}
-          />
+          <div className={styles.flex_column}>
+            <Image
+              className={styles.weather_icon}
+              src={`https://openweathermap.org/img/wn/${weatherData?.weather[0].icon}@2x.png`}
+              width={50}
+              height={50}
+              alt={weatherData?.weather[0].description ?? ""}
+            />
+            <p>{weatherData?.weather[0].main.toUpperCase()}</p>
+          </div>
         )}
       </div>
       {!weatherLoading ? (
         <>
-          <h2>{weatherData?.main.temp}°</h2>
+          <h2>{weatherData?.main.temp.toFixed(1)}°</h2>
           <div className={styles.flex_row}>
             <p>MAX: {weatherData?.main.tempMax.toFixed(1)}°</p>
             <p>MIN: {weatherData?.main.tempMin.toFixed(1)}°</p>
+            <FontAwesomeIcon
+              className={styles.thermometer_icon}
+              onClick={() => {
+                dispatch(setDataReceivingTime());
+              }}
+              icon={faThermometer}
+            />
           </div>
         </>
       ) : (
         <>
-          <p>Measuring Temperature...</p>
+          <FontAwesomeIcon icon={faSpinner} spin size="2xl" />
+          <p>Measuring Temperature</p>
         </>
       )}
     </article>

@@ -7,6 +7,7 @@ import { Providers } from "@/store/providers";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
+import { MainFooter } from "@/components/common/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
     template: META_DATA.APP_TITLE_TEMPLATE,
     default: META_DATA.APP_DEFAULT_TITLE,
   },
-  description: META_DATA.APP_DESCRIPTION,
+  description: META_DATA.APP_DESCRIPTION.MAIN,
   manifest: "/manifest.json",
   verification: {
     google: META_DATA.GOOGLE_SITE_VERIFICATION,
@@ -37,6 +38,7 @@ export default function RootLayout({
         <SpeedInsights />
         <GoogleAnalytics />
         <Providers>{children}</Providers>
+        <MainFooter />
       </body>
     </html>
   );

@@ -5,54 +5,60 @@ import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
-import { signIn } from "@/lib/auth";
+import { signIn } from "../../auth";
+
 const FormSchema = z.object({
   id: z.string(),
-  customerId: z.string({
-    invalid_type_error: "Please select a customer.",
+  status: z.enum(["draft", "published"]),
+  title: z.string({
+    invalid_type_error: "Please type a title.",
   }),
-  amount: z.coerce
-    .number()
-    .gt(0, { message: "Please enter an amount greater than $0." }),
-  status: z.enum(["pending", "paid"], {
-    invalid_type_error: "Please select an invoice status.",
+  blocks: z.array(
+    z.object({
+      type: z.string(),
+      data: z.object({
+        text: z.string(),
+      }),
+    })
+  ),
+  tags: z.array(z.string(), {
+    invalid_type_error: "Please select at least one tag.",
   }),
-  date: z.string(),
 });
 
-const CreateInvoice = FormSchema.omit({ id: true, date: true });
+const CreatePost = FormSchema.omit({
+  id: true,
+});
 
 export type State = {
   errors?: {
-    customerId?: string[];
-    amount?: string[];
-    status?: string[];
+    title?: string[];
+    tags?: string[];
   };
   message?: string | null;
 };
 
-export async function createInvoice(prevState: State, formData: FormData) {
-  const validatedFields = CreateInvoice.safeParse({
-    customerId: formData.get("customerId"),
-    amount: formData.get("amount"),
-    status: formData.get("status"),
+export async function createPost(prevState: State, formData: FormData) {
+  const validatedFields = CreatePost.safeParse({
+    title: formData.get("title"),
   });
 
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Create Invoice.",
+      message: "Missing Fields. Failed to Create Post.",
     };
   }
 
-  const { customerId, amount, status } = validatedFields.data;
-  const amountInCents = amount * 100;
+  const { v4: uuidv4 } = require("uuid");
+  const id = uuidv4();
+  const { status, title, blocks, tags } = validatedFields.data;
   const date = new Date().toISOString().split("T")[0];
 
   try {
     await sql`
-      INSERT INTO invoices (customer_id, amount, status, date)
-      VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
+      INSERT INTO post (id, title, data, tags, created_at, updated_at, deleted_at, status, likes, views)
+      VALUES (${id}, ${title}, ${blocks[0].data.text}, ${tags[0]}, ${date}, ${date}, NULL, ${status}, 0, 0)
     `;
   } catch (error) {
     return {
@@ -60,55 +66,17 @@ export async function createInvoice(prevState: State, formData: FormData) {
     };
   }
 
-  revalidatePath("/dashboard/invoices");
-  redirect("/dashboard/invoices");
-}
-
-const UpdateInvoice = FormSchema.omit({ id: true, date: true });
-
-export async function updateInvoice(
-  id: string,
-  prevState: State,
-  formData: FormData
-) {
-  const validatedFields = UpdateInvoice.safeParse({
-    customerId: formData.get("customerId"),
-    amount: formData.get("amount"),
-    status: formData.get("status"),
-  });
-
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Update Invoice.",
-    };
-  }
-
-  const { customerId, amount, status } = validatedFields.data;
-  const amountInCents = amount * 100;
-
-  try {
-    await sql`
-      UPDATE invoices
-      SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
-      WHERE id = ${id}
-    `;
-  } catch (error) {
-    return { message: "Database Error: Failed to Update Invoice." };
-  }
-
-  revalidatePath("/dashboard/invoices");
-  redirect("/dashboard/invoices");
+  revalidatePath("/posts");
+  redirect("/posts");
 }
 
 export async function deleteInvoice(id: string) {
-  console.log("deleteInvoice", id);
   try {
-    await sql`DELETE FROM invoices WHERE id = ${id}`;
+    await sql`DELETE FROM posts WHERE id = ${id}`;
     revalidatePath("/dashboard/invoices");
-    return { message: "Deleted Invoice." };
+    return { message: "Deleted post." };
   } catch (error) {
-    return { message: "Database Error: Failed to Delete Invoice." };
+    return { message: "Database Error: Failed to Delete post." };
   }
 }
 

@@ -1,5 +1,13 @@
-import React from "react";
+import styles from "./styles.module.scss";
 
-export const MainFooter = () => {
-  return <div>footer</div>;
+const MainFooter = () => {
+  return (
+    <footer className={styles.footer}>
+      <article className={styles.article}>
+        <p>Copyright © 2024 All rights reserved</p>
+      </article>
+    </footer>
+  );
 };
+
+export default MainFooter;

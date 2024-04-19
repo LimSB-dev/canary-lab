@@ -1,20 +1,17 @@
-import { PostData } from "@/types/post";
-
-const users: UserData[] = [
+const users = [
   {
     id: "410544b2-4001-4271-9855-fec4b6a6442a",
     name: "User",
     email: "admin@canary-lab.vercel.app",
     password: "@admin1",
-    role: "admin",
   },
 ];
 
-const posts: PostData[] = [
+const posts = [
   {
-    id: "1",
-    status: "published",
+    id: "58dc9e0b-712f-4377-85e9-fec4b6a6442a",
     title: "First Post",
+    status: "published",
     createdAt: "2021-06-03T00:00:00.000Z",
     updatedAt: "2021-06-03T00:00:00.000Z",
     deletedAt: "",
@@ -35,8 +32,6 @@ const posts: PostData[] = [
         },
       },
     ],
-    comments: [],
-    tags: [],
   },
 ];
 

@@ -1,12 +1,12 @@
 const { db } = require("@vercel/postgres");
-const { posts, users } = require("../app/lib/placeholder-data.ts");
+const { posts, users } = require("../src/lib/placeholder-data.js");
 const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     // Create the "users" table if it doesn't exist
-    const createTable = await client.sql`
+    await client.sql`
       CREATE TABLE IF NOT EXISTS users (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -21,18 +21,20 @@ async function seedUsers(client) {
     const insertedUsers = await Promise.all(
       users.map(async (user) => {
         const hashedPassword = await bcrypt.hash(user.password, 10);
-        return client.sql`
-        INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
-        ON CONFLICT (id) DO NOTHING;
-      `;
+        return client.query(
+          `
+          INSERT INTO users (id, name, email, password)
+          VALUES ($1, $2, $3, $4)
+          ON CONFLICT (id) DO NOTHING;
+        `,
+          [user.id, user.name, user.email, hashedPassword]
+        );
       })
     );
 
     console.log(`Seeded ${insertedUsers.length} users`);
 
     return {
-      createTable,
       users: insertedUsers,
     };
   } catch (error) {
@@ -43,29 +45,29 @@ async function seedUsers(client) {
 
 async function seedPosts(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+    await client.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
     // Create the "posts" table if it doesn't exist
-    const createTable = await client.sql`
-    CREATE TABLE IF NOT EXISTS posts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255),
-    status VARCHAR(50),
-    created_at DATE,
-    updated_at DATE,
-    deleted_at DATE,
-    likes INT,
-    views INT
-    blocks TEXT,
-    tags VARCHAR(255),
-  );
-`;
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS posts (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        title VARCHAR(255),
+        status VARCHAR(50),
+        created_at TIMESTAMP,
+        updated_at TIMESTAMP,
+        deleted_at TIMESTAMP,
+        likes INT,
+        views INT,
+        blocks JSONB,
+        tags VARCHAR(255)
+      );
+    `);
 
     console.log(`Created "posts" table`);
 
     // Insert data into the "posts" table
     const insertedPosts = await Promise.all(
-      posts.map((post) => {
+      posts.map(async (post) => {
         const {
           id,
           title,
@@ -76,21 +78,32 @@ async function seedPosts(client) {
           likes,
           views,
           blocks,
-          tags,
         } = post;
 
-        client.sql`
-        INSERT INTO posts (id, title, status, created_at, updated_at, deleted_at, likes, views, blocks, tags)
-        VALUES (${id}, ${title}, ${status}, ${created_at}, ${updated_at}, ${deleted_at}, ${likes}, ${views}, ${blocks}, ${tags})
-        ON CONFLICT (id) DO NOTHING;
-      `;
+        return client.query(
+          `
+          INSERT INTO posts (id, title, status, created_at, updated_at, deleted_at, likes, views, blocks)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+          ON CONFLICT (id) DO NOTHING;
+        `,
+          [
+            id,
+            title,
+            status,
+            created_at,
+            updated_at,
+            deleted_at,
+            likes,
+            views,
+            JSON.stringify(blocks),
+          ]
+        );
       })
     );
 
     console.log(`Seeded ${insertedPosts.length} posts`);
 
     return {
-      createTable,
       posts: insertedPosts,
     };
   } catch (error) {
@@ -109,8 +122,8 @@ async function main() {
 }
 
 main()
-  .then((res) => {
-    console.log("res", res);
+  .then(() => {
+    console.log("Seed completed successfully");
   })
   .catch((err) => {
     console.error(

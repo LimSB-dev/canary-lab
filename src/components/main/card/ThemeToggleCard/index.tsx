@@ -31,7 +31,9 @@ export const ThemeToggleCard = ({ theme }: { theme: "light" | "dark" }) => {
   return (
     <button
       className={`${theme === "light" ? styles.card_light : styles.card_dark} ${
-        curTheme === theme ? styles.default : ""
+        curTheme === theme
+          ? `card-shadow ${styles.default}`
+          : "button-card-shadow"
       }`}
       onClick={themeToggle}
       disabled={curTheme === theme}

@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./page.module.scss";
+import styles from "./not-found.module.scss";
 import { DefaultTerminal } from "@/components/common/terminal";
 import { NOT_FOUND_SEQUENCE } from "@/constants/sequence/sequence";
 

@@ -1,6 +1,7 @@
 import { ArrowCard } from "@/components/main/card/ArrowCard";
 import { FigmaCard } from "@/components/main/card/FigmaCard";
 import { GithubCard } from "@/components/main/card/GithubCard";
+import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 import { LanguageCard } from "@/components/main/card/LanguageCard";
 import { MainCard } from "@/components/main/card/MainCard";
 import { MusicCard } from "@/components/main/card/MusicCard";
@@ -12,14 +13,15 @@ import { RateCard } from "@/components/main/card/RateCard";
 import { RecentCard } from "@/components/main/card/RecentCard";
 import { ResetCard } from "@/components/main/card/ResetCard";
 import { RoleCard } from "@/components/main/card/RoleCard";
+import { SearchCard } from "@/components/main/card/SearchCard";
 import { ThemeToggleCard } from "@/components/main/card/ThemeToggleCard";
 import { WeatherCard } from "@/components/main/card/WeatherCard";
-import { SearchCard } from "@/components/main/card/SearchCard";
 
 export {
   ArrowCard,
   FigmaCard,
   GithubCard,
+  ImageCardShadow,
   LanguageCard,
   MainCard,
   MusicCard,
@@ -31,7 +33,7 @@ export {
   RecentCard,
   ResetCard,
   RoleCard,
+  SearchCard,
   ThemeToggleCard,
   WeatherCard,
-  SearchCard,
 };

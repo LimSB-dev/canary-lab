@@ -5,7 +5,7 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 export const ArrowCard = () => {
   return (
-    <article id="arrow-card" className={styles.card}>
+    <article id="arrow-card" className={`button-card-shadow ${styles.card}`}>
       <div id="arrow-left" role="button" className={styles.arrow}>
         <FontAwesomeIcon icon={faAngleLeft} size="xl" />
       </div>

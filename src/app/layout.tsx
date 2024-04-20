@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
 import { MainFooter } from "@/components/common/footer";
+import { FloatingScrollToTop } from "@/components/common/topButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,8 +38,11 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics />
-        <Providers>{children}</Providers>
-        <MainFooter />
+        <Providers>
+          {children}
+          <FloatingScrollToTop />
+          <MainFooter />
+        </Providers>
       </body>
     </html>
   );

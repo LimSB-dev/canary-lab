@@ -2,6 +2,7 @@
 import Link from "next/link";
 
 import styles from "./styles.module.scss";
+import { ImageCardShadow } from "..";
 
 export const RateCard = () => {
   const svgFile =
@@ -15,6 +16,7 @@ export const RateCard = () => {
       className={styles.card}
       passHref
     >
+      <ImageCardShadow />
       <img className={styles.img} src={svgFile} alt="solved.ac" />
     </Link>
   );

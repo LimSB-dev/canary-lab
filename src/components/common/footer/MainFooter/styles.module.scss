@@ -4,6 +4,7 @@
   align-items: center;
   width: 1620px;
   margin: auto;
+  padding-bottom: var(--padding-sm);
 
   @media (max-width: 1620px) {
     width: 1212px;

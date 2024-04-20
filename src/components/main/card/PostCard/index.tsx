@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 export const PostCard = ({ type }: { type: "recent" | "popular" }) => {
   return (
     <article
-      className={`card-shadow ${
+      className={`button-card-shadow ${
         type === "recent" ? styles.card_resent : styles.card_popular
       }`}
     >

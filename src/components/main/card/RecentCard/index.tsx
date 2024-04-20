@@ -5,7 +5,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 export const RecentCard = () => {
   return (
-    <article id="recent-posts-card" className={styles.card}>
+    <article id="recent-posts-card" className={`card-shadow ${styles.card}`}>
       <h6>
         Recent
         <br />

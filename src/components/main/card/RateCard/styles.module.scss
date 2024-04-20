@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   display: flex;
   justify-content: center;
   width: calc(var(--card-width) * 3 + var(--gap) * 2);

@@ -63,7 +63,10 @@ html[data-theme="light"] {
 
   --background-color-light: #efefef;
   --background-color-dark: #e2e2e2;
+
   --card-background-color: #ffffff;
+  --card-shadow-color-up: #ffffff44;
+  --card-shadow-color-down: #00000044;
 
   --dim-opacity: 0.25;
 }
@@ -75,9 +78,12 @@ html[data-theme="dark"] {
   --secondary-color: #888888;
   --text-color: #efefef;
 
-  --background-color-light: #222222;
-  --background-color-dark: #111111;
+  --background-color-light: #111111;
+  --background-color-dark: #010101;
+
   --card-background-color: #333333;
+  --card-shadow-color-up: #ffffff44;
+  --card-shadow-color-down: #00000044;
 
   --dim-opacity: 0.5;
 }
@@ -131,18 +137,35 @@ html[data-theme="dark"] {
   margin: 0;
 }
 
+html {
+  overflow: auto;
+}
+
 html,
 body {
   display: block;
   width: 100%;
   height: 100%;
   font-size: var(--p);
-  overflow-x: hidden;
-  overflow-y: overlay;
-  transition: background-color 0.25s ease;
+  transition: all 0.4s ease-in-out;
 }
 
 body {
   color: var(--text-color);
   background: var(--background-color-light);
+}
+
+/* 입체적인 카드 느낌 */
+.card-shadow {
+  box-shadow: inset 0 1px 2px var(--card-shadow-color-up),
+    inset 0 -1px 2px var(--card-shadow-color-down),
+    0 1px 2px var(--card-shadow-color-down);
+}
+
+.image-card-shadow {
+  border-radius: var(--card-border-radius);
+  box-shadow: 0 10px 20px var(--card-shadow-color-up),
+    inset 0 -1px 2px var(--card-shadow-color-down),
+    0 1px 2px var(--card-shadow-color-down);
+  opacity: 0.9;
 }

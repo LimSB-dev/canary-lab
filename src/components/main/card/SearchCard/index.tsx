@@ -10,7 +10,7 @@ export const SearchCard = () => {
   const [search, setSearch] = useState("");
 
   return (
-    <article className={styles.card}>
+    <article className={`card-shadow ${styles.card}`}>
       <div className={styles.search}>
         <input
           type="text"

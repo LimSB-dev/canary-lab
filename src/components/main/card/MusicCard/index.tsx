@@ -1,8 +1,10 @@
+import { ImageCardShadow } from "..";
 import styles from "./styles.module.scss";
 
 export const MusicCard = () => {
   return (
     <article className={styles.card}>
+      <ImageCardShadow />
       <iframe
         width="100%"
         height="100%"

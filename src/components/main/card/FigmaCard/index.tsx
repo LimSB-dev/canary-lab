@@ -7,7 +7,7 @@ import { META_DATA } from "@/constants/metadata";
 export const FigmaCard = () => {
   return (
     <Link
-      className={styles.card}
+      className={`card-shadow ${styles.card}`}
       href={META_DATA.FIGMA_URL}
       target="_blank"
       rel="noopener noreferrer"

@@ -8,7 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
 export const GithubCard = () => {
   return (
     <Link
-      className={styles.card}
+      className={`card-shadow ${styles.card}`}
       href="https://github.com/LimSB-dev"
       target="_blank"
       passHref

@@ -1,15 +1,8 @@
 .footer {
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  align-items: flex-start;
-  padding-bottom: 16px;
-}
-
-.article {
-  display: flex;
+  align-items: center;
   width: 1620px;
-  gap: var(--gap);
   margin: auto;
 
   @media (max-width: 1620px) {
@@ -26,8 +19,20 @@
   }
 }
 
+.article {
+  display: flex;
+  gap: var(--gap);
+  margin: auto;
+}
+
 .flex_row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.theme_section {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
 }

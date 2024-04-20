@@ -1,0 +1,29 @@
+.active {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  background-color: var(--background-color-light);
+  color: var(--text-color);
+  cursor: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.4s ease-in-out;
+}
+
+.inactive {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  background-color: var(--background-color-light);
+  color: var(--secondary-color);
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    background-color: var(--background-color-dark);
+    color: var(--text-color);
+  }
+}

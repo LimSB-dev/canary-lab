@@ -27,17 +27,9 @@
   color: var(--secondary-color);
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.4s;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  box-shadow: inset 0 1px 10px var(--black);
-  opacity: 0.8;
-
-  &:hover {
-    background-color: var(--background-color-dark);
-    box-shadow: inset 0 0 8px var(--background-color-dark);
-  }
 }

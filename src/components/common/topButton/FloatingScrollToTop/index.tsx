@@ -39,7 +39,7 @@ const FloatingScrollToTop = () => {
     <div className={styles.floating_scroll_to_top_container}>
       <button
         type="button"
-        className={styles.floating_scroll_to_top}
+        className={`button-card-shadow ${styles.floating_scroll_to_top}`}
         onClick={scrollToTop}
       >
         <FontAwesomeIcon icon={faChevronUp} />

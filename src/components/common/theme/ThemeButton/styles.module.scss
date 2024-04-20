@@ -23,7 +23,7 @@
   transition: all 0.4s ease-in-out;
 
   &:hover {
-    background-color: var(--background-color-dark);
+    background-color: var(--card-background-color);
     color: var(--text-color);
   }
 }

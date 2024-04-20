@@ -40,8 +40,8 @@ export default function RootLayout({
         <GoogleAnalytics />
         <Providers>
           {children}
-          <MainFooter />
           <FloatingScrollToTop />
+          <MainFooter />
         </Providers>
       </body>
     </html>

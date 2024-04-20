@@ -8,7 +8,7 @@ export const ResetCard = () => {
     <button
       id="reset-card"
       type="button"
-      className={`card-shadow ${styles.card}`}
+      className={`button-card-shadow ${styles.card}`}
     >
       <FontAwesomeIcon icon={faArrowsRotate} size="lg" />
     </button>

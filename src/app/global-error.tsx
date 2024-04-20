@@ -1,7 +1,7 @@
 "use client";
 
 import { DefaultTerminal } from "@/components/common/terminal";
-import styles from "./page.module.scss";
+import styles from "./not-found.module.scss";
 import { ERROR_SEQUENCE } from "@/constants/sequence/sequence";
 
 export default function Error({

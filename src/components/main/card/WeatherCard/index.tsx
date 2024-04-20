@@ -66,7 +66,7 @@ export const WeatherCard = () => {
   }
 
   return (
-    <article className={`${styles.card} ${cardBackground}`}>
+    <article className={`card-shadow ${styles.card} ${cardBackground}`}>
       <div className={`${styles.flex_row} ${styles.spaceBetween}`}>
         {(weatherLoading && cityLoading) || !city ? (
           <div className={styles.flex_row}>

@@ -1,3 +1,3 @@
 export const SkeletonCard = () => {
-  return <div>index</div>;
+  return <div className={`card-shadow`}>index</div>;
 };

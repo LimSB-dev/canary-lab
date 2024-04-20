@@ -10,6 +10,7 @@ import "@/styles/globals.css";
 import { useDevice } from "@/hooks/useDevice";
 import { META_DATA } from "@/constants/metadata";
 import { MAIN_CARD_SEQUENCE } from "@/constants/sequence/sequence";
+import { ImageCardShadow } from "..";
 
 interface IProps {
   device: Device;
@@ -68,6 +69,7 @@ const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <Description isHover={isHover} />
+      <ImageCardShadow />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
@@ -89,6 +91,7 @@ const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <Description isHover={isHover} />
+      <ImageCardShadow />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}
@@ -110,6 +113,7 @@ const DesktopMainCard = ({ isHover, setIsHover }: ICardProps) => {
     >
       <h1 className={styles.title}>{META_DATA.APP_NAME}</h1>
       <Description isHover={isHover} />
+      <ImageCardShadow />
       <Dim />
       <Image
         className={`${styles.image} ${isHover ? styles.zoom : ""}`}

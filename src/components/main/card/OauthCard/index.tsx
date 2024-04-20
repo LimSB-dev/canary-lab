@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 export const OauthCard = () => {
   return (
     <Link
-      className={styles.card}
+      className={`card-shadow ${styles.card}`}
       href="/login"
       rel="noopener noreferrer"
       passHref

@@ -63,8 +63,7 @@ html[data-theme="light"] {
   --secondary-color: #888888;
   --text-color: #222222;
 
-  --background-color-light: #efefef;
-  --background-color-dark: #e2e2e2;
+  --background-color: #fefefe;
 
   --card-background-color: #ffffff;
   --card-shadow-color-up: #ffffff44;
@@ -80,8 +79,7 @@ html[data-theme="dark"] {
   --secondary-color: #888888;
   --text-color: #efefef;
 
-  --background-color-light: #111111;
-  --background-color-dark: #010101;
+  --background-color: #111111;
 
   --card-background-color: #333333;
   --card-shadow-color-up: #ffffff44;
@@ -159,7 +157,7 @@ body {
 
 body {
   color: var(--text-color);
-  background: var(--background-color-light);
+  background: var(--background-color);
 }
 
 /* 입체적인 카드 느낌 */

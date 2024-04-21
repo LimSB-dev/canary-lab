@@ -9,7 +9,6 @@ import {
   RecentCard,
   ResetCard,
   SearchCard,
-  ThemeToggleCard,
   WeatherCard,
 } from "@/components/main/card";
 import { useDevice } from "@/hooks/useDevice";
@@ -22,13 +21,7 @@ const MobileSideContainer = () => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
@@ -40,13 +33,7 @@ const TabletSideContainer = () => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
@@ -64,13 +51,7 @@ const LaptopSideContainer = () => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
@@ -83,13 +64,7 @@ const DesktopSideContainer = () => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />

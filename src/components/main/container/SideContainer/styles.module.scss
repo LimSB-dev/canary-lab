@@ -9,27 +9,6 @@
   gap: var(--gap);
 }
 
-.side_header_right {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-.theme {
-  display: flex;
-  gap: var(--gap);
-}
-
-.side_main {
-  display: flex;
-  gap: var(--gap);
-}
-
-.side_footer {
-  display: flex;
-  gap: var(--gap);
-}
-
 .post_controller {
   display: flex;
   align-items: flex-end;

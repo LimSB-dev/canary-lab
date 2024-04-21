@@ -4,9 +4,8 @@ import { useFormState } from "react-dom";
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { IPost } from "@/types/post";
 import dynamic from "next/dynamic";
-import { use, useState } from "react";
+import { useState } from "react";
 import { OutputData } from "@editorjs/editorjs";
 import { State, createPost } from "@/lib/actions";
 

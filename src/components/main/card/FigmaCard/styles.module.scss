@@ -12,6 +12,7 @@
 }
 
 .link {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,4 +20,5 @@
   height: 80px;
   background-color: black;
   border-radius: 50%;
+  overflow: hidden;
 }

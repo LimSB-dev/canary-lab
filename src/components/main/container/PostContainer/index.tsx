@@ -4,8 +4,9 @@ import styles from "./styles.module.scss";
 
 import {
   ArrowCard,
-  PostCard,
+  PopularPostCard,
   RecentCard,
+  RecentPostCard,
   ResetCard,
 } from "@/components/main/card";
 import { useDevice } from "@/hooks/useDevice";
@@ -17,7 +18,7 @@ interface IProps {
 const MobilePostContainer = () => {
   return (
     <div className={styles.post_controller}>
-      <PostCard type={"popular"} />
+      <PopularPostCard />
       <section className={styles.post_section}>
         <div className={styles.post_controller}>
           <RecentCard />
@@ -25,7 +26,7 @@ const MobilePostContainer = () => {
           <ArrowCard />
         </div>
         {Array.from({ length: 1 }).map((_, index) => (
-          <PostCard key={index} type={"recent"} />
+          <RecentPostCard key={index} />
         ))}
       </section>
     </div>
@@ -36,7 +37,7 @@ const TabletPostContainer = () => {
   return (
     <section className={styles.post_section}>
       {Array.from({ length: 3 }).map((_, index) => (
-        <PostCard key={index} type={"recent"} />
+        <RecentPostCard key={index} />
       ))}
     </section>
   );
@@ -51,7 +52,7 @@ const LaptopPostContainer = () => {
         <ArrowCard />
       </div>
       {Array.from({ length: 4 }).map((_, index) => (
-        <PostCard key={index} type={"recent"} />
+        <RecentPostCard key={index} />
       ))}
     </section>
   );
@@ -66,7 +67,7 @@ const DesktopPostContainer = () => {
         <ArrowCard />
       </div>
       {Array.from({ length: 4 }).map((_, index) => (
-        <PostCard key={index} type={"recent"} />
+        <RecentPostCard key={index} />
       ))}
     </section>
   );

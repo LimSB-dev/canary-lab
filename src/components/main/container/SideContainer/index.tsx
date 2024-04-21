@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 import {
   ArrowCard,
   OauthCard,
-  PostCard,
+  PopularPostCard,
   RecentCard,
   ResetCard,
   SearchCard,
@@ -50,7 +50,7 @@ const TabletSideContainer = () => {
         <OauthCard />
       </div>
       <WeatherCard />
-      <PostCard type={"popular"} />
+      <PopularPostCard />
       <div className={styles.post_controller}>
         <RecentCard />
         <ResetCard />
@@ -74,7 +74,7 @@ const LaptopSideContainer = () => {
         <OauthCard />
       </div>
       <WeatherCard />
-      <PostCard type={"popular"} />
+      <PopularPostCard />
     </section>
   );
 };
@@ -93,7 +93,7 @@ const DesktopSideContainer = () => {
         <OauthCard />
       </div>
       <WeatherCard />
-      <PostCard type={"popular"} />
+      <PopularPostCard />
     </section>
   );
 };

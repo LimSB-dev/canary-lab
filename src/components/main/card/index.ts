@@ -7,7 +7,10 @@ import { MainCard } from "@/components/main/card/MainCard";
 import { MusicCard } from "@/components/main/card/MusicCard";
 import { NameCard } from "@/components/main/card/NameCard";
 import { OauthCard } from "@/components/main/card/OauthCard";
-import { PostCard } from "@/components/main/card/PostCard";
+import {
+  PopularPostCard,
+  RecentPostCard,
+} from "@/components/main/card/PostCard";
 import { ProfileCard } from "@/components/main/card/ProfileCard";
 import { RateCard } from "@/components/main/card/RateCard";
 import { RecentCard } from "@/components/main/card/RecentCard";
@@ -27,7 +30,8 @@ export {
   MusicCard,
   NameCard,
   OauthCard,
-  PostCard,
+  PopularPostCard,
+  RecentPostCard,
   ProfileCard,
   RateCard,
   RecentCard,

@@ -1,7 +1,7 @@
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 // import { PreviewRenderer } from "@/components/common/editor";
-// import { fetchPostById } from "@/lib/data";
+// import { fetchPostById } from "@/app/api/data";
 
 export const metadata: Metadata = {
   title: "Posts Detail",

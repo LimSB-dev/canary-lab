@@ -1,14 +1,14 @@
-import { fetchPosts } from "@/lib/data";
+import { fetchPosts } from "@/app/api/posts";
 import React from "react";
 
 export const PostsList = async () => {
-  // const posts = await fetchPosts();
+  const posts = await fetchPosts();
 
   return (
     <ul>
-      {/* {posts.map((post) => (
+      {posts.map((post) => (
         <li key={post.id}>{post.title}</li>
-      ))} */}
+      ))}
     </ul>
   );
 };

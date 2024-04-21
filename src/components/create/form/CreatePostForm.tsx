@@ -4,7 +4,7 @@ import { useFormState } from "react-dom";
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { PostData } from "@/types/post";
+import { IPost } from "@/types/post";
 import dynamic from "next/dynamic";
 import { use, useState } from "react";
 import { OutputData } from "@editorjs/editorjs";
@@ -20,7 +20,7 @@ const CreatePostForm = () => {
     error: {},
   };
 
-  const [post, setPost] = useState<PostData>({
+  const [post, setPost] = useState<IPost>({
     id: "",
     status: "draft",
     title: "",

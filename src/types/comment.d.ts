@@ -1,4 +1,4 @@
-interface Comment {
+interface IComment {
   id: string;
   postId: string;
   createdAt: string;

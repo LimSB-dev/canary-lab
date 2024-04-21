@@ -3,7 +3,7 @@ import { RootState } from "..";
 
 // state type
 export interface WeatherSlice {
-  weatherData: WeatherData | null;
+  weatherData: IWeatherData | null;
 }
 
 // define initial state

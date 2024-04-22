@@ -1,5 +1,4 @@
-import { fetchPosts } from "@/app/api/posts";
-import React from "react";
+import { fetchPosts } from "@/lib/fetch/posts";
 
 export const PostsList = async () => {
   const posts = await fetchPosts();

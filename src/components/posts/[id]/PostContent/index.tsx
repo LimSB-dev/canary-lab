@@ -1,18 +1,17 @@
-import { OutputData } from "@editorjs/editorjs";
 import isString from "lodash/isString";
 import styles from "./styles.module.scss";
-
-const editorJsHtml = require("editorjs-html");
-const EditorJsToHtml = editorJsHtml();
+import { OutputData } from "@editorjs/editorjs";
 
 interface IProps {
   post: OutputData;
 }
+const editorJsHtml = require("editorjs-html");
+const EditorJsToHtml = editorJsHtml();
 
-export default function PreviewRenderer({ post }: IProps) {
+const PostContent = ({ post }: IProps) => {
   const html = EditorJsToHtml.parse(post);
   return (
-    <div key={post.time} className={`card-shadow ${styles.editor}`}>
+    <div key={post.time} className={`card-shadow ${styles.content}`}>
       {html.map((item: any, index: number) => {
         if (isString(item)) {
           return <div dangerouslySetInnerHTML={{ __html: item }} key={index} />;
@@ -21,4 +20,6 @@ export default function PreviewRenderer({ post }: IProps) {
       })}
     </div>
   );
-}
+};
+
+export default PostContent;

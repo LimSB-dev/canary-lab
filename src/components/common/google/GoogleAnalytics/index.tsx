@@ -3,7 +3,7 @@
 import Script from "next/script";
 import * as gtag from "@/utils/gtag";
 
-export const GoogleAnalytics = () => {
+const GoogleAnalytics = () => {
   return (
     <>
       <Script
@@ -27,3 +27,5 @@ export const GoogleAnalytics = () => {
     </>
   );
 };
+
+export default GoogleAnalytics;

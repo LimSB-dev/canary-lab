@@ -1,0 +1,52 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 20px;
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
+
+  & > * {
+    font-size: var(--h6);
+  }
+
+  h1 {
+    font-size: var(--h2);
+    color: var(--text-color);
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: var(--h3);
+    color: var(--text-color);
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: var(--h4);
+    color: var(--text-color);
+    font-weight: 700;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 28px;
+  }
+
+  p {
+    font-size: var(--h6);
+    color: var(--text-color);
+  }
+
+  code {
+    font-size: var(--h6);
+    background-color: var(--background-color);
+    padding: 8px 16px;
+    border-radius: calc(var(--border-radius) / 2);
+  }
+}

@@ -1,75 +1,64 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  gap: calc(var(--gap) * 2);
+  width: 800px;
+  height: 100%;
+  gap: var(--gap);
   margin: auto;
-  background: var(--card-background-color);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid var(--primary-color);
-  padding: 20px;
+}
 
-  & > label {
+.title_input {
+  // input style 제거
+  border: none;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.editor_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > * {
     color: var(--text-color);
     font-weight: 700;
   }
+
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
 }
 
-.flex_column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-.flex_row {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--gap);
-}
-
-.input_container {
+.card {
   display: flex;
   width: 100%;
-  border-radius: 5px;
-  justify-content: space-between;
+  padding: 20px;
+  border-radius: var(--border-radius);
   gap: var(--gap);
-  border: 1px solid var(--color-primary);
-  background: var(--background-color);
+  background: var(--card-background-color);
+}
+
+.button_container {
+  display: flex;
+  gap: var(--gap);
+}
+
+.tag {
+  align-items: center;
   padding: 8px;
+  border-radius: var(--border-radius);
+  background: var(--card-background-color);
 
-  input {
-    width: 100%;
-    border: none;
-    background: none;
-    color: var(--color-primary);
-
-    &:focus {
-      outline: none;
-    }
+  & > label {
+    display: flex;
+    gap: var(--gap);
   }
 }
 
-.password {
-  input::-ms-reveal,
-  input::-ms-clear {
-    display: none;
-  }
-}
-
-.login_button {
-  background: none;
-  color: var(--text-color);
-  padding: 10px;
-  border: 2px solid var(--primary-color);
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 700;
-
-  &:hover {
-    color: var(--black);
-    background: var(--primary-color-dark);
-  }
+.tag_container {
+  display: flex;
+  gap: var(--gap);
 }

@@ -1,3 +1,3 @@
-import { GoogleAnalytics } from "./GoogleAnalytics";
+import GoogleAnalytics from "./GoogleAnalytics";
 
 export { GoogleAnalytics };

@@ -1,12 +1,11 @@
-import { useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import EditorJS, { OutputData, OutputBlockData } from "@editorjs/editorjs";
-import styles from "./styles.module.scss";
 
 import { EDITOR_TOOLS } from "@/constants/editor/editorTools";
 
 export interface IEditorProps {
   blocks: OutputBlockData[];
-  onChange: (data: OutputData) => void;
+  onChange: Dispatch<SetStateAction<OutputData>>;
   holder: string;
 }
 
@@ -34,11 +33,12 @@ const Editor = ({ blocks, onChange, holder }: IEditorProps) => {
               console.error("Saving failed: ", error);
             });
         },
+        autofocus: true,
+        placeholder: "내용을 입력해주세요.",
       });
       ref.current = editor;
     }
 
-    //add a return function handle cleanup
     return () => {
       if (ref.current && ref.current.destroy) {
         ref.current.destroy();
@@ -46,7 +46,7 @@ const Editor = ({ blocks, onChange, holder }: IEditorProps) => {
     };
   }, []);
 
-  return <div id={holder} className={`prose max-w-full`} />;
+  return <div id={holder} />;
 };
 
 export default Editor;

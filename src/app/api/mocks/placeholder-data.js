@@ -1,3 +1,5 @@
+const { type } = require("os");
+
 const users = [
   {
     id: "410544b2-4001-4271-9855-fec4b6a6442a",
@@ -129,6 +131,65 @@ const posts = [
         type: "paragraph",
         data: {
           text: "This is the fifth post.",
+        },
+      },
+    ],
+  },
+  {
+    id: "58dc9e0b-712f-4377-85e9-fec4b6a6442f",
+    title: "Popular Post",
+    status: "published",
+    createdAt: "2024-04-27T00:00:00.000Z",
+    updatedAt: "2024-04-27T00:00:00.000Z",
+    deletedAt: "",
+    likes: 1000,
+    views: 2000,
+    blocks: [
+      {
+        type: "header",
+        data: {
+          text: "Level 1 Header",
+          level: 1,
+        },
+      },
+      {
+        type: "header",
+        data: {
+          text: "Level 2 Header",
+          level: 2,
+        },
+      },
+      {
+        type: "header",
+        data: {
+          text: "Level 3 Header",
+          level: 3,
+        },
+      },
+      {
+        type: "paragraph",
+        data: {
+          text: "This is the popular post.",
+        },
+      },
+      {
+        type: "list",
+        data: {
+          style: "ordered",
+          items: ["First item", "Second item", "Third item"],
+        },
+      },
+      {
+        type: "list",
+        data: {
+          style: "unordered",
+          items: ["First item", "Second item", "Third item"],
+        },
+      },
+      {
+        type: "code",
+        data: {
+          code: "console.log('Hello, world!')",
         },
       },
     ],

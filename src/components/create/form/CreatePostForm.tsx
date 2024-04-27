@@ -5,36 +5,20 @@ import { useFormState } from "react-dom";
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { OutputData } from "@editorjs/editorjs";
 import { State, createPost } from "@/lib/actions";
+import { Editor } from "@/components/common/editor";
 
-const Editor = dynamic(() => import("../../common/editor/Editor"), {
-  ssr: false,
-});
+interface IProps {
+  post: OutputData;
+  setPost: Dispatch<SetStateAction<OutputData>>;
+}
 
-const CreatePostForm = () => {
+const CreatePostForm = ({ post, setPost }: IProps) => {
   const initialState = {
     message: null,
     error: {},
-  };
-
-  const [post, setPost] = useState<IPost>({
-    id: "",
-    status: "draft",
-    title: "",
-    createdAt: "",
-    deletedAt: "",
-    updatedAt: "",
-    likes: 0,
-    views: 0,
-    blocks: [],
-    comments: [],
-    tags: [],
-  });
-
-  const setData = (data: OutputData) => {
-    setPost({ ...post, blocks: data.blocks });
   };
 
   const [state, dispatch] = useFormState<State, FormData>(
@@ -44,34 +28,39 @@ const CreatePostForm = () => {
 
   return (
     <form className={styles.form} action={dispatch}>
-      <label htmlFor="title">
-        제목
-        <input id="title" name="title" type="text" placeholder="Title" />
+      <label className={`card-shadow ${styles.card}`} htmlFor="title">
+        <input
+          id="title"
+          className={styles.title_input}
+          name="title"
+          type="text"
+          placeholder="제목을 입력해주세요."
+        />
       </label>
-      <ul>
-        <li>
+      <ul className={styles.tag_container}>
+        <li className={`card-shadow ${styles.tag}`}>
           <label htmlFor="frontend">
             <input id="frontend" type="checkbox" />
             frontend
           </label>
         </li>
-        <li>
+        <li className={`card-shadow ${styles.tag}`}>
           <label htmlFor="backend">
             <input id="backend" type="checkbox" />
             backend
           </label>
         </li>
-        <li>
+        <li className={`card-shadow ${styles.tag}`}>
           <label htmlFor="design">
             <input id="design" type="checkbox" />
             design
           </label>
         </li>
       </ul>
-      <div className={styles.editor_container}>
+      <div className={`card-shadow ${styles.card} ${styles.editor_container}`}>
         <Editor
           blocks={post.blocks}
-          onChange={setData}
+          onChange={setPost}
           holder="editorjs-container"
         />
       </div>
@@ -81,10 +70,16 @@ const CreatePostForm = () => {
             {error}
           </p>
         ))}
-      <div>
-        <Link href="/posts">Cancel</Link>
-        <button type="button">Save as Draft</button>
-        <button type="submit">Create Post</button>
+      <div className={styles.button_container}>
+        <Link className={`card-shadow ${styles.card}`} href="/posts">
+          Cancel
+        </Link>
+        <button type="button" className={`card-shadow ${styles.card}`}>
+          Save as Draft
+        </button>
+        <button type="submit" className={`card-shadow ${styles.card}`}>
+          Create Post
+        </button>
       </div>
     </form>
   );

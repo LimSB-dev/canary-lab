@@ -1,5 +1,5 @@
 import CheckList from "@editorjs/checklist";
-import Code from "@editorjs/code";
+import Code from "@calumk/editorjs-codeflask";
 import Delimiter from "@editorjs/delimiter";
 import Embed from "@editorjs/embed";
 import Image from "@editorjs/image";
@@ -18,14 +18,13 @@ import Marker from "@editorjs/marker";
 import Attaches from "@editorjs/attaches";
 import Underline from "@editorjs/underline";
 import Alert from "editorjs-alert";
-import editorjsCodeflask from "@calumk/editorjs-codeflask";
 
 export const EDITOR_TOOLS = {
   header: {
     class: Header,
     config: {
       placeholder: "헤더를 넣으삼",
-      levels: [1, 2, 3, 4, 5, 6],
+      levels: [1, 2, 3],
       defaultLevel: 3,
     },
     shortcut: "CMD+SHIFT+H",
@@ -190,8 +189,5 @@ export const EDITOR_TOOLS = {
       defaultType: "primary",
       messagePlaceholder: "Enter something",
     },
-  },
-  code2: {
-    class: editorjsCodeflask,
   },
 };

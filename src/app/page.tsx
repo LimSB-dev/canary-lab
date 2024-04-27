@@ -11,7 +11,7 @@ import { fetchPopularPosts, fetchRecentPosts } from "@/lib/fetch/posts";
 
 export default async function Home() {
   const popularPosts = await fetchPopularPosts();
-  const recentPosts = await fetchRecentPosts();
+  const recentPosts = await fetchRecentPosts(5, 0);
 
   return (
     <main id="main-page" role="main" className={styles.main}>

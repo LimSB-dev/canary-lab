@@ -1,12 +1,12 @@
 "use client";
 
-import CreatePostForm from "@/components/create/form/CreatePostForm";
-import styles from "./page.module.scss";
-import { PreviewRenderer } from "@/components/common/editor";
 import { useState } from "react";
+import styles from "./page.module.scss";
 import { OutputData } from "@editorjs/editorjs";
+import CreatePostForm from "@/components/create/form/CreatePostForm";
+import { PreviewRenderer } from "@/components/common/editor";
 
-export default function Create() {
+export default function CreatePage() {
   const [post, setPost] = useState<OutputData>({
     time: 0,
     blocks: [],
@@ -15,8 +15,8 @@ export default function Create() {
 
   return (
     <main className={styles.main}>
-      <CreatePostForm post={post} setPost={setPost} />
-      <PreviewRenderer post={post} />
+      {/* <CreatePostForm post={post} setPost={setPost} /> */}
+      {/* <PreviewRenderer post={post} /> */}
     </main>
   );
 }

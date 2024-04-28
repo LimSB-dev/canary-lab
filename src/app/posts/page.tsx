@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: META_DATA.APP_DESCRIPTION.POSTS,
 };
 
-export default function Posts() {
+export default function PostsPage() {
   return (
     <main id="main-page" role="main" className={styles.main}>
       <PostsList />

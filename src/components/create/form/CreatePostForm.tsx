@@ -8,12 +8,15 @@ import dynamic from "next/dynamic";
 import { Dispatch, SetStateAction, useState } from "react";
 import { OutputData } from "@editorjs/editorjs";
 import { State, createPost } from "@/lib/actions";
-import { Editor } from "@/components/common/editor";
 
 interface IProps {
   post: OutputData;
   setPost: Dispatch<SetStateAction<OutputData>>;
 }
+
+const Editor = dynamic(() => import("@/components/common/editor/Editor"), {
+  ssr: false,
+});
 
 const CreatePostForm = ({ post, setPost }: IProps) => {
   const initialState = {

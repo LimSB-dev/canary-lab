@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Posts Detail",
 };
 
-export default async function PostDetail({
+export default async function PostDetailPage({
   params,
 }: {
   params: { id: string };

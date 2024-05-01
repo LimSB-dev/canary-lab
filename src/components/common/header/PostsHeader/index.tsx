@@ -5,8 +5,10 @@ import { DefaultLogo } from "@/components/common/logo";
 const PostsHeader = () => {
   return (
     <header className={styles.header}>
-      <DefaultLogo />
-      <Link href="/create">Create</Link>
+      <section className={styles.content}>
+        <DefaultLogo size="small" />
+        <Link href="/create">Create</Link>
+      </section>
     </header>
   );
 };

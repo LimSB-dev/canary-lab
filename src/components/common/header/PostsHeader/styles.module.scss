@@ -5,11 +5,13 @@
   align-items: center;
 }
 
-.article {
+.content {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 1620px;
-  gap: var(--gap);
-  margin: auto;
+  margin: 0 auto;
+  padding: 16px 0;
 
   @media (max-width: 1620px) {
     width: 1212px;
@@ -20,13 +22,6 @@
   }
 
   @media (max-width: 804px) {
-    width: 100%;
-    padding: 0 var(--padding-md) var(--padding-sm) var(--padding-md);
+    width: 396px;
   }
-}
-
-.flex_row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }

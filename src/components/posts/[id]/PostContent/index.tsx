@@ -1,23 +1,21 @@
-import isString from "lodash/isString";
+"use client";
+
 import styles from "./styles.module.scss";
-import { OutputData } from "@editorjs/editorjs";
+import dynamic from "next/dynamic";
 
 interface IProps {
-  post: OutputData;
+  post: IPost;
 }
-const editorJsHtml = require("editorjs-html");
-const EditorJsToHtml = editorJsHtml();
+
+const MarkdownPreview = dynamic(
+  () => import("@uiw/react-markdown-preview").then((mod) => mod.default),
+  { ssr: false }
+);
 
 const PostContent = ({ post }: IProps) => {
-  const html = EditorJsToHtml.parse(post);
   return (
-    <div key={post.time} className={`card-shadow ${styles.content}`}>
-      {html.map((item: any, index: number) => {
-        if (isString(item)) {
-          return <div dangerouslySetInnerHTML={{ __html: item }} key={index} />;
-        }
-        return item;
-      })}
+    <div key={post.id} className={`${styles.content}`}>
+      <MarkdownPreview source={post.content} />
     </div>
   );
 };

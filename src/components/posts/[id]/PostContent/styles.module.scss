@@ -2,11 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap);
-  padding: 20px;
-  background-color: var(--card-background-color);
-  border-radius: var(--border-radius);
 
   & > * {
+    background-color: var(--background-color) !important;
     font-size: var(--h6);
   }
 

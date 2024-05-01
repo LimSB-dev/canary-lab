@@ -1,5 +1,8 @@
+"use server";
+
 import { sql } from "@vercel/postgres";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function fetchPosts() {
   noStore();
@@ -28,7 +31,7 @@ export async function fetchPostsById(id: string) {
     return post.rows[0];
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch post data.");
+    throw new Error("Failed to fetch post data by id.");
   }
 }
 
@@ -47,7 +50,7 @@ export async function fetchPopularPosts() {
     return request.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch posts data.");
+    throw new Error("Failed to fetch popular posts data.");
   }
 }
 
@@ -68,6 +71,50 @@ export async function fetchRecentPosts(size: number, offset: number) {
     return request.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch posts data.");
+    throw new Error("Failed to fetch recent posts data.");
   }
+}
+
+/**
+ * 게시물을 생성합니다.
+ * @param title 게시물 제목
+ * @param markdownValue 게시물 내용
+ */
+export async function postPost({
+  title,
+  markdownValue,
+}: {
+  title: string;
+  markdownValue: string;
+}) {
+  noStore();
+
+  const { v4: uuidv4 } = require("uuid");
+  const id = uuidv4();
+  const date = new Date().toISOString().split("T")[0];
+
+  // posts 테이블이 존재하지 않을 경우 생성합니다.
+  await sql`
+      CREATE TABLE IF NOT EXISTS posts (
+        id UUID PRIMARY KEY,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        tags TEXT[] DEFAULT '{}',
+        created_at DATE NOT NULL,
+        updated_at DATE NOT NULL,
+        deleted_at DATE,
+        status TEXT NOT NULL,
+        likes INT DEFAULT 0,
+        views INT DEFAULT 0
+      )
+    `;
+
+  // 게시물을 생성합니다.
+  await sql`
+      INSERT INTO posts (id, title, content, created_at, updated_at, status)
+      VALUES (${id}, ${title}, ${markdownValue}, ${date}, ${date}, 'published')
+    `;
+
+  revalidatePath(`/posts/${id}`);
+  redirect(`/posts/${id}`);
 }

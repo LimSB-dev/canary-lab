@@ -1,3 +1,4 @@
+import { CreateHeader } from "@/components/common/header";
 import { META_DATA } from "@/constants/metadata";
 import { Metadata } from "next";
 
@@ -11,5 +12,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main>{children}</main>;
+  return (
+    <>
+      <CreateHeader />
+      {children}
+    </>
+  );
 }

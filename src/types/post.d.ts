@@ -13,7 +13,7 @@ interface IPost {
   updatedAt: string;
   likes: number;
   views: number;
-  blocks: any[];
-  comments: IComment[];
-  tags: ITag[];
+  content: string;
+  comments: IComment.id[];
+  tags: ITag.id[];
 }

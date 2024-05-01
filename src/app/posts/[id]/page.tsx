@@ -1,20 +1,23 @@
+import { fetchPostsById } from "@/lib/fetch/posts";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
-// import { PreviewRenderer } from "@/components/common/editor";
-// import { fetchPostById } from "@/lib/data";
+import PostContent from "@/components/posts/[id]/PostContent";
 
 export const metadata: Metadata = {
   title: "Posts Detail",
 };
 
-export default function PostDetail({ params }: { params: { id: string } }) {
+export default async function PostDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const post = await fetchPostsById(params.id);
   return (
     <main id="main-page" role="main" className={styles.main}>
-      <h1>id: {params.id}</h1>
-      <h2>Preview</h2>
-      <div className="border rounded-md">
-        {/* <div className="p-16">{data && <PreviewRenderer data={data} />}</div> */}
-      </div>
+      <h2>{post.title}</h2>
+      <PostContent post={post} />
+      <div className="border rounded-md"></div>
     </main>
   );
 }

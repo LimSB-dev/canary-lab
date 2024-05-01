@@ -1,3 +1,3 @@
-import { DefaultLogo } from "@/components/common/logo/DefaultLogo";
+import DefaultLogo from "@/components/common/logo/DefaultLogo";
 
 export { DefaultLogo };

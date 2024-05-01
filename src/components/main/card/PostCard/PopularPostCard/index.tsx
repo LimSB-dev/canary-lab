@@ -1,20 +1,23 @@
 "use client";
 
-import { title } from "process";
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 interface IProps {
   popularPosts: IPost[];
 }
 
 const PopularPostCard = ({ popularPosts }: IProps) => {
-  const post = popularPosts ? popularPosts[0] : { title: "No Post" };
-  console.log("🚀 ~ PopularPostCard ~ post:", post);
+  const post = popularPosts ? popularPosts[0] : { id: null, title: "No Post" };
 
   return (
-    <article className={`button-card-shadow ${styles.card_popular}`}>
+    <Link
+      className={`button-card-shadow ${styles.card_popular}`}
+      href={post.id ? `/posts/${post.id}` : "/create"}
+      passHref
+    >
       <h6>{post.title}</h6>
-    </article>
+    </Link>
   );
 };
 

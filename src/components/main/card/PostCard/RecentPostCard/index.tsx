@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./styles.module.scss";
 
 interface IProps {
@@ -6,9 +7,13 @@ interface IProps {
 
 const RecentPostCard = ({ post }: IProps) => {
   return (
-    <article className={`button-card-shadow ${styles.card_resent}`}>
+    <Link
+      className={`button-card-shadow ${styles.card_resent}`}
+      href={`/posts/${post.id}`}
+      passHref
+    >
       <h6>{post.title}</h6>
-    </article>
+    </Link>
   );
 };
 

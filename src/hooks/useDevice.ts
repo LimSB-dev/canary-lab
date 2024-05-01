@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
  * @returns {string} "max" | "desktop" | "laptop" | "tablet" | "mobile" | "min"
  */
 export const useDevice = () => {
-  const [device, setDevice] = useState("desktop");
+  const [device, setDevice] = useState<Device>("desktop");
 
   useEffect(() => {
     const handleResize = () => {

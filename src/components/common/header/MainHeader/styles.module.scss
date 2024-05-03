@@ -2,4 +2,10 @@
   display: flex;
   width: 100%;
   height: 56px;
+  will-change: height;
+  transition: height 0.2s ease-in-out;
+
+  @media (max-width: 804px) {
+    height: 0px;
+  }
 }

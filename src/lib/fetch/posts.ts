@@ -4,11 +4,16 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+/**
+ * 게시물 데이터
+ * status가 published인 게시물만 가져옵니다.
+ */
 export async function fetchPosts() {
   noStore();
 
   try {
-    const posts = await sql<IPost>`SELECT * FROM posts`;
+    const posts =
+      await sql<IPost>`SELECT * FROM posts WHERE status = 'published'`;
 
     return posts.rows;
   } catch (error) {
@@ -38,6 +43,7 @@ export async function fetchPostsById(id: string) {
 /**
  * 인기 게시물을 가져옵니다.
  * 인기 게시물은 조회수가 높은 순서로 정렬하여 가져옵니다.
+ * status가 published인 게시물만 가져옵니다.
  * @returns 인기 게시물 데이터
  */
 export async function fetchPopularPosts() {
@@ -45,7 +51,7 @@ export async function fetchPopularPosts() {
 
   try {
     const request =
-      await sql<IPost>`SELECT * FROM posts ORDER BY views DESC LIMIT 5`;
+      await sql<IPost>`SELECT * FROM posts WHERE status = 'published' ORDER BY views DESC LIMIT 5`;
 
     return request.rows;
   } catch (error) {
@@ -57,6 +63,7 @@ export async function fetchPopularPosts() {
 /**
  * 캐러셀에 표시할 최근 게시물을 가져옵니다.
  * 캐러셀에 표시할 게시글의 수는 size로 지정합니다.
+ * status가 published인 게시물만 가져옵니다.
  * @param size 캐러셀에 표시할 게시글의 수
  * @param offset 캐러셀에 표시할 게시글의 시작 위치
  * @returns
@@ -66,7 +73,7 @@ export async function fetchRecentPosts(size: number, offset: number) {
 
   try {
     const request =
-      await sql<IPost>`SELECT * FROM posts ORDER BY id DESC LIMIT ${size} OFFSET ${offset}`;
+      await sql<IPost>`SELECT * FROM posts WHERE status = 'published' ORDER BY created_at DESC LIMIT ${size} OFFSET ${offset}`;
 
     return request.rows;
   } catch (error) {
@@ -117,4 +124,54 @@ export async function postPost({
 
   revalidatePath(`/posts/${id}`);
   redirect(`/posts/${id}`);
+}
+
+/**
+ * 게시물을 수정합니다.
+ * @param id 게시물 ID
+ * @param title 게시물 제목
+ * @param markdownValue 게시물 내용
+ */
+export async function putPost({
+  id,
+  title,
+  markdownValue,
+}: {
+  id: string;
+  title: string;
+  markdownValue: string;
+}) {
+  noStore();
+
+  const date = new Date().toISOString().split("T")[0];
+
+  // 게시물을 수정합니다.
+  await sql`
+      UPDATE posts
+      SET title = ${title}, content = ${markdownValue}, updated_at = ${date}
+      WHERE id = ${id}
+    `;
+
+  revalidatePath(`/posts/${id}`);
+  redirect(`/posts/${id}`);
+}
+
+/**
+ * 게시물을 삭제 상태로 변경합니다.
+ * @param id 게시물 ID
+ */
+export async function deletePost(id: string) {
+  noStore();
+
+  const date = new Date().toISOString().split("T")[0];
+
+  // 게시물을 삭제 상태로 변경합니다.
+  await sql`
+      UPDATE posts
+      SET deleted_at = ${date}, status = 'deleted'
+      WHERE id = ${id}
+    `;
+
+  revalidatePath(`/posts/${id}`);
+  redirect("/posts");
 }

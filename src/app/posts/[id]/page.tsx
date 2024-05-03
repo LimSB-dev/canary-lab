@@ -15,9 +15,8 @@ export default async function PostDetailPage({
   const post = await fetchPostsById(params.id);
   return (
     <main id="main-page" role="main" className={styles.main}>
-      <h2>{post.title}</h2>
+      <h1 className={styles.title}>{post.title}</h1>
       <PostContent post={post} />
-      <div className="border rounded-md"></div>
     </main>
   );
 }

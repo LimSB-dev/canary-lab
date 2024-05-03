@@ -1,16 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "..";
+import { set } from "lodash";
 
 // state type
 export interface postSlice {
   title: string;
   markdownValue: string;
+  status: "read" | "edit";
 }
 
 // define initial state
 const initialState: postSlice = {
   title: "",
   markdownValue: "글을 작성해주세요.",
+  status: "read",
 };
 
 const postSlice = createSlice({
@@ -28,11 +31,14 @@ const postSlice = createSlice({
     setMarkdownValue(state, action) {
       state.markdownValue = action.payload;
     },
+    setStatus(state, action) {
+      state.status = action.payload;
+    },
   },
 });
 
 // action creators
-export const { setTitle, setMarkdownValue } = postSlice.actions;
+export const { setTitle, setMarkdownValue, setStatus } = postSlice.actions;
 export const selectPost = (state: RootState) => state.post;
 // reducer
 export default postSlice.reducer;

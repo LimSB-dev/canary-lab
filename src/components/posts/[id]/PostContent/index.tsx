@@ -15,7 +15,13 @@ const MarkdownPreview = dynamic(
 const PostContent = ({ post }: IProps) => {
   return (
     <div key={post.id} className={`${styles.content}`}>
-      <MarkdownPreview source={post.content} />
+      <MarkdownPreview
+        source={post.content}
+        style={{
+          color: "inherit",
+          background: "transparent",
+        }}
+      />
     </div>
   );
 };

@@ -5,30 +5,24 @@ import styles from "./styles.module.scss";
 import {
   ArrowCard,
   OauthCard,
-  PostCard,
+  PopularPostCard,
   RecentCard,
   ResetCard,
   SearchCard,
-  ThemeToggleCard,
   WeatherCard,
 } from "@/components/main/card";
 import { useDevice } from "@/hooks/useDevice";
 
 interface IProps {
   device: Device;
+  popularPosts: IPost[];
 }
 
 const MobileSideContainer = () => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
@@ -36,21 +30,15 @@ const MobileSideContainer = () => {
   );
 };
 
-const TabletSideContainer = () => {
+const TabletSideContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
-      <PostCard type={"popular"} />
+      <PopularPostCard popularPosts={popularPosts} />
       <div className={styles.post_controller}>
         <RecentCard />
         <ResetCard />
@@ -60,45 +48,33 @@ const TabletSideContainer = () => {
   );
 };
 
-const LaptopSideContainer = () => {
+const LaptopSideContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
-      <PostCard type={"popular"} />
+      <PopularPostCard popularPosts={popularPosts} />
     </section>
   );
 };
 
-const DesktopSideContainer = () => {
+const DesktopSideContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
   return (
     <section className={styles.side_section}>
       <div className={styles.side_header}>
-        <div className={styles.side_header_right}>
-          <div className={styles.theme}>
-            <ThemeToggleCard theme={"light"} />
-            <ThemeToggleCard theme={"dark"} />
-          </div>
-          <SearchCard />
-        </div>
+        <SearchCard />
         <OauthCard />
       </div>
       <WeatherCard />
-      <PostCard type={"popular"} />
+      <PopularPostCard popularPosts={popularPosts} />
     </section>
   );
 };
 
-export const SideContainer = ({ device }: IProps) => {
+export const SideContainer = ({ device, popularPosts }: IProps) => {
   const deviceType = useDevice();
 
   if (deviceType !== device) return null;
@@ -107,11 +83,11 @@ export const SideContainer = ({ device }: IProps) => {
     case "mobile":
       return <MobileSideContainer />;
     case "tablet":
-      return <TabletSideContainer />;
+      return <TabletSideContainer popularPosts={popularPosts} />;
     case "laptop":
-      return <LaptopSideContainer />;
+      return <LaptopSideContainer popularPosts={popularPosts} />;
     case "desktop":
-      return <DesktopSideContainer />;
+      return <DesktopSideContainer popularPosts={popularPosts} />;
     default:
       return null;
   }

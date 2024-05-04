@@ -1,5 +1,5 @@
 const { db } = require("@vercel/postgres");
-const { posts, users } = require("../src/lib/placeholder-data.js");
+const { posts, users } = require("../src/app/api/mocks/placeholder-data");
 const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
@@ -50,17 +50,19 @@ async function seedPosts(client) {
     // Create the "posts" table if it doesn't exist
     await client.query(`
       CREATE TABLE IF NOT EXISTS posts (
-        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-        title VARCHAR(255),
-        status VARCHAR(50),
-        created_at TIMESTAMP,
-        updated_at TIMESTAMP,
-        deleted_at TIMESTAMP,
-        likes INT,
-        views INT,
-        blocks JSONB,
-        tags VARCHAR(255)
-      );
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        index SERIAL,
+        title TEXT NOT NULL,
+        content TEXT NOT NULL,
+        tags TEXT[] DEFAULT '{}',
+        comments UUID[] DEFAULT '{}',
+        created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+        updated_at DATE NOT NULL DEFAULT CURRENT_DATE,
+        deleted_at DATE DEFAULT NULL,
+        status TEXT NOT NULL DEFAULT 'published',
+        likes INT DEFAULT 0,
+        views INT DEFAULT 0
+      )
     `);
 
     console.log(`Created "posts" table`);
@@ -68,35 +70,16 @@ async function seedPosts(client) {
     // Insert data into the "posts" table
     const insertedPosts = await Promise.all(
       posts.map(async (post) => {
-        const {
-          id,
-          title,
-          status,
-          created_at,
-          updated_at,
-          deleted_at,
-          likes,
-          views,
-          blocks,
-        } = post;
+        const { title, content, tags, createdAt, updatedAt, likes, views } =
+          post;
 
         return client.query(
           `
-          INSERT INTO posts (id, title, status, created_at, updated_at, deleted_at, likes, views, blocks)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-          ON CONFLICT (id) DO NOTHING;
+          INSERT INTO posts (title, content, tags, created_at, updated_at, likes, views)
+          VALUES ($1, $2, $3, $4, $5, $6, $7)
+          ON CONFLICT DO NOTHING;
         `,
-          [
-            id,
-            title,
-            status,
-            created_at,
-            updated_at,
-            deleted_at,
-            likes,
-            views,
-            JSON.stringify(blocks),
-          ]
+          [title, content, tags, createdAt, updatedAt, likes, views]
         );
       })
     );

@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
+import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 
 export const GithubCard = () => {
   return (
@@ -15,7 +16,8 @@ export const GithubCard = () => {
     >
       <h6>GitHub</h6>
       <div className={styles.link}>
-        <FontAwesomeIcon icon={faGithub} size="5x" />
+        <ImageCardShadow figure="circle" />
+        <FontAwesomeIcon icon={faGithub} size="6x" />
       </div>
       <p>
         Well

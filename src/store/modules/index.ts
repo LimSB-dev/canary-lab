@@ -7,6 +7,7 @@ import modal from "./modal";
 import weather from "./weather";
 import snackbar from "./snackbar";
 import location from "./location";
+import post from "./post";
 
 const rootReducer = combineReducers({
   theme,
@@ -14,13 +15,14 @@ const rootReducer = combineReducers({
   weather,
   snackbar,
   location,
+  post,
   // Add your reducers here
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whiteList: ["theme", "modal", "weather", "snackbar", "location"],
+  whiteList: ["theme", "modal", "weather", "snackbar", "location", "post"],
 };
 
 const persistReducers = persistReducer(persistConfig, rootReducer);

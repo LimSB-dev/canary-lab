@@ -1,20 +1,20 @@
-interface WeatherData {
-  coord: Coord;
-  weather: Weather[];
+interface IWeatherData {
+  coord: ICoord;
+  weather: IWeather[];
   base: string;
-  main: Main;
+  main: IMain;
   visibility: number;
-  wind: Wind;
-  clouds: Clouds;
+  wind: IWind;
+  clouds: IClouds;
   dt: number;
-  sys: Sys;
+  sys: ISys;
   timezone: number;
   id: number;
   name: string;
   cod: number;
 }
 
-interface Sys {
+interface ISys {
   type: number;
   id: number;
   country: string;
@@ -22,16 +22,16 @@ interface Sys {
   sunset: number;
 }
 
-interface Clouds {
+interface IClouds {
   all: number;
 }
 
-interface Wind {
+interface IWind {
   speed: number;
   deg: number;
 }
 
-interface Main {
+interface IMain {
   temp: number;
   feelsLike: number;
   tempMin: number;
@@ -40,14 +40,14 @@ interface Main {
   humidity: number;
 }
 
-interface Weather {
+interface IWeather {
   id: number;
   main: string;
   description: string;
   icon: string;
 }
 
-interface Coord {
+interface ICoord {
   lon: number;
   lat: number;
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./styles.module.scss";
+import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 
 export const OauthCard = () => {
   return (
@@ -13,6 +14,7 @@ export const OauthCard = () => {
     >
       <h6>Oauth</h6>
       <div className={styles.link}>
+        <ImageCardShadow figure="circle" />
         <Image
           src="/assets/tech/nextjs.svg"
           alt="Next.js"

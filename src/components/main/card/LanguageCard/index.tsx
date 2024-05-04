@@ -6,7 +6,7 @@ export const LanguageCard = () => {
   return (
     <article className={styles.card}>
       <h5 className={styles.title}>Multilingual Support</h5>
-      <ImageCardShadow />
+      <ImageCardShadow canClick={false} />
       <Image
         src="/assets/images/earth.png"
         alt="Languages"

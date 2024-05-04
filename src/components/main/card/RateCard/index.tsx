@@ -13,7 +13,7 @@ export const RateCard = () => {
       href="https://solved.ac/clim03087"
       target="_blank"
       rel="noopener noreferrer"
-      className={styles.card}
+      className={`button-card-shadow ${styles.card}`}
       passHref
     >
       <ImageCardShadow />

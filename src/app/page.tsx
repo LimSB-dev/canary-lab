@@ -1,3 +1,4 @@
+import { MainHeader } from "@/components/common/header";
 import styles from "./page.module.scss";
 
 import { MainCard } from "@/components/main/card";
@@ -7,40 +8,63 @@ import {
   PostContainer,
   SideContainer,
 } from "@/components/main/container";
+import { fetchPopularPosts, fetchRecentPosts } from "@/lib/fetch/posts";
 
-export default function Home() {
+export default async function Home() {
+  const popularPosts = await fetchPopularPosts();
+  const recentPosts = await fetchRecentPosts(5, 0);
+
   return (
-    <main id="main-page" role="main" className={styles.main}>
-      <MainCard device="mobile" />
-      <article className={styles.article}>
-        <div className={styles.flex_column}>
-          <SideContainer device="mobile" />
-          <div className={styles.flex_row}>
-            <div className={styles.flex_column}>
-              <MainCard device="tablet" />
-              <div className={styles.flex_row}>
-                <SideContainer device="tablet" />
-                <div
-                  className={`${styles.flex_column_reverse} ${styles.flex_row}`}
-                >
-                  <InfoContainer />
-                  <div className={styles.flex_column}>
-                    <HeaderContainer />
-                    <MainCard device="desktop" />
+    <>
+      <MainHeader />
+      <main id="main-page" role="main" className={styles.main}>
+        <MainCard device="mobile" />
+        <article className={styles.article}>
+          <div className={styles.flex_column}>
+            <SideContainer device="mobile" popularPosts={popularPosts} />
+            <div className={styles.flex_row}>
+              <div className={styles.flex_column}>
+                <MainCard device="tablet" />
+                <div className={styles.flex_row}>
+                  <SideContainer device="tablet" popularPosts={popularPosts} />
+                  <div
+                    className={`${styles.flex_column_reverse} ${styles.flex_row}`}
+                  >
+                    <InfoContainer />
+                    <div className={styles.flex_column}>
+                      <HeaderContainer />
+                      <MainCard device="desktop" />
+                    </div>
                   </div>
                 </div>
+                <MainCard device="laptop" />
               </div>
-              <MainCard device="laptop" />
+              <SideContainer device="laptop" popularPosts={popularPosts} />
             </div>
-            <SideContainer device="laptop" />
+            <PostContainer
+              device="mobile"
+              popularPosts={popularPosts}
+              recentPosts={recentPosts}
+            />
+            <PostContainer
+              device="tablet"
+              popularPosts={popularPosts}
+              recentPosts={recentPosts}
+            />
+            <PostContainer
+              device="laptop"
+              popularPosts={popularPosts}
+              recentPosts={recentPosts}
+            />
+            <PostContainer
+              device="desktop"
+              popularPosts={popularPosts}
+              recentPosts={recentPosts}
+            />
           </div>
-          <PostContainer device="mobile" />
-          <PostContainer device="tablet" />
-          <PostContainer device="laptop" />
-          <PostContainer device="desktop" />
-        </div>
-        <SideContainer device="desktop" />
-      </article>
-    </main>
+          <SideContainer device="desktop" popularPosts={popularPosts} />
+        </article>
+      </main>
+    </>
   );
 }

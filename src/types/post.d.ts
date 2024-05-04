@@ -1,21 +1,14 @@
-import { OutputBlockData } from "@editorjs/editorjs";
-
-interface Tag {
+interface IPost {
   id: string;
-  name: string;
-  color: string;
-}
-
-interface PostData {
-  id: string;
-  status: "deleted" | "draft" | "published";
+  index: number;
   title: string;
+  content: string;
+  tags: ITag.id[];
+  comments: IComment.id[];
   createdAt: string;
-  deletedAt: string;
   updatedAt: string;
+  deletedAt: string;
+  status: "deleted" | "draft" | "published";
   likes: number;
   views: number;
-  blocks: OutputBlockData[];
-  comments: Comment[];
-  tags: Tag[];
 }

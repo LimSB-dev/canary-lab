@@ -8,7 +8,8 @@ import { useAppDispatch } from "@/hooks/reduxHook";
 import { deletePost } from "@/lib/fetch/posts";
 
 const PostsHeader = () => {
-  const isPosts = usePathname().endsWith("posts");
+  const isPosts = usePathname().endsWith("/posts");
+  const isEdit = usePathname().endsWith("/edit");
   const index = usePathname().split("/")[2];
 
   return (
@@ -18,7 +19,7 @@ const PostsHeader = () => {
         {isPosts && <Link href="/create">Create</Link>}
         {!isPosts && <Link href="/posts">Posts</Link>}
       </nav>
-      {!isPosts && (
+      {!isPosts && !isEdit && (
         <div className={styles.button_container}>
           <Link
             href={`/posts/${index}/edit`}
@@ -34,6 +35,14 @@ const PostsHeader = () => {
             delete
           </button>
         </div>
+      )}
+      {isEdit && (
+        <Link
+          href={`/posts/${index}`}
+          className={`button-card-shadow ${styles.edit_button}`}
+        >
+          cancel
+        </Link>
       )}
     </header>
   );

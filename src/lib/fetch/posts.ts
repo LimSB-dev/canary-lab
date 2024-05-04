@@ -130,32 +130,33 @@ export async function postPost({
 
 /**
  * 게시물을 수정합니다.
- * @param id 게시물 ID
+ * @param index 게시물 index
  * @param title 게시물 제목
  * @param markdownValue 게시물 내용
  */
 export async function putPost({
-  id,
+  index,
   title,
   markdownValue,
 }: {
-  id: string;
+  index: string;
   title: string;
   markdownValue: string;
 }) {
   noStore();
 
-  const date = new Date().toISOString().split("T")[0];
-
   // 게시물을 수정합니다.
-  await sql`
-      UPDATE posts
-      SET title = ${title}, content = ${markdownValue}, updated_at = ${date}
-      WHERE id = ${id}
-    `;
+  await sql.query(
+    `
+    UPDATE posts
+    SET title = $1, content = $2, updated_at = CURRENT_DATE
+    WHERE index = $3
+    `,
+    [title, markdownValue, index]
+  );
 
-  revalidatePath(`/posts/${id}`);
-  redirect(`/posts/${id}`);
+  revalidatePath(`/posts/${index}`);
+  redirect(`/posts/${index}`);
 }
 
 /**

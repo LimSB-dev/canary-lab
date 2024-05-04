@@ -1,19 +1,14 @@
-interface ITag {
-  id: string;
-  name: string;
-  color: string;
-}
-
 interface IPost {
   id: string;
-  status: "deleted" | "draft" | "published";
+  index: number;
   title: string;
+  content: string;
+  tags: ITag.id[];
+  comments: IComment.id[];
   createdAt: string;
-  deletedAt: string;
   updatedAt: string;
+  deletedAt: string;
+  status: "deleted" | "draft" | "published";
   likes: number;
   views: number;
-  content: string;
-  comments: IComment.id[];
-  tags: ITag.id[];
 }

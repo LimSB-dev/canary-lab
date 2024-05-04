@@ -1,10 +1,20 @@
 .main {
   display: flex;
-  padding: 48px 150px;
   gap: var(--gap);
-  min-width: 100vw;
-  max-width: var(--max-width);
-  min-height: 100vh;
+  width: 1620px;
+  margin: 0 auto;
+
+  @media (max-width: 1620px) {
+    width: 1212px;
+  }
+
+  @media (max-width: 1212px) {
+    width: 804px;
+  }
+
+  @media (max-width: 804px) {
+    width: 396px;
+  }
 }
 
 .right {

@@ -24,16 +24,14 @@ export default function CreatePage() {
   return (
     <main className={styles.main} data-color-mode={theme}>
       <div className={styles.title}>
-        <label htmlFor="title">
-          <input
-            className={styles.title_input}
-            type="text"
-            id="title"
-            placeholder="제목을 입력하세요."
-            onChange={(e) => dispatch(setTitle(e.target.value))}
-            value={title}
-          />
-        </label>
+        <input
+          className={styles.title_input}
+          type="text"
+          id="title"
+          placeholder="제목을 입력하세요."
+          onChange={(e) => dispatch(setTitle(e.target.value))}
+          value={title}
+        />
 
         <button
           type="button"

@@ -4,5 +4,5 @@ interface IComment {
   createdAt: string;
   updatedAt: string;
   deletedAt: string;
-  data: string;
+  content: string;
 }

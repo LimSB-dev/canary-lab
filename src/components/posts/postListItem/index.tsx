@@ -5,16 +5,14 @@ interface IProps {
   post: IPost;
 }
 
-const RecentPostCard = ({ post }: IProps) => {
+export const PostListItem = async ({ post }: IProps) => {
   return (
     <Link
-      className={`button-card-shadow ${styles.card_resent}`}
       href={`/posts/${post.index}`}
+      className={styles.post_list_item}
       passHref
     >
-      <h6>{post.title}</h6>
+      <li>{post.title}</li>
     </Link>
   );
 };
-
-export default RecentPostCard;

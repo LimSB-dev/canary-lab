@@ -9,7 +9,7 @@ import { deletePost } from "@/lib/fetch/posts";
 
 const PostsHeader = () => {
   const isPosts = usePathname().endsWith("posts");
-  const id = usePathname().split("/")[2];
+  const index = usePathname().split("/")[2];
 
   return (
     <header className={styles.header}>
@@ -21,7 +21,7 @@ const PostsHeader = () => {
       {!isPosts && (
         <div className={styles.button_container}>
           <Link
-            href={`/posts/${id}/edit`}
+            href={`/posts/${index}/edit`}
             className={`button-card-shadow ${styles.edit_button}`}
           >
             edit
@@ -29,7 +29,7 @@ const PostsHeader = () => {
           <button
             type="button"
             className={`button-card-shadow ${styles.delete_button}`}
-            onClick={() => deletePost(id)}
+            onClick={() => deletePost(index)}
           >
             delete
           </button>

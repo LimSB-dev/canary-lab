@@ -9,7 +9,7 @@ export const PostsList = async () => {
     <ul className={styles.post_list}>
       {posts.map((post) => (
         <li key={post.id}>
-          <Link href={`/posts/${post.id}`} passHref>
+          <Link href={`/posts/${post.index}`} passHref>
             {post.title}
           </Link>
         </li>

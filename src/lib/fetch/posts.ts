@@ -23,20 +23,20 @@ export async function fetchPosts() {
 }
 
 /**
- * 게시물의 ID를 이용하여 게시물을 가져옵니다.
- * @param id 게시물의 ID
+ * 게시물의 index를 이용하여 게시물을 가져옵니다.
+ * @param index 게시물의 index
  * @returns 게시물 데이터
  */
-export async function fetchPostsById(id: string) {
+export async function fetchPostsByIndex(index: string) {
   noStore();
 
   try {
-    const post = await sql<IPost>`SELECT * FROM posts WHERE id = ${id}`;
+    const post = await sql<IPost>`SELECT * FROM posts WHERE index = ${index}`;
 
     return post.rows[0];
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch post data by id.");
+    throw new Error("Failed to fetch post data by index.");
   }
 }
 
@@ -96,34 +96,36 @@ export async function postPost({
 }) {
   noStore();
 
-  const { v4: uuidv4 } = require("uuid");
-  const id = uuidv4();
-  const date = new Date().toISOString().split("T")[0];
-
-  // posts 테이블이 존재하지 않을 경우 생성합니다.
   await sql`
       CREATE TABLE IF NOT EXISTS posts (
-        id UUID PRIMARY KEY,
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        index SERIAL,
         title TEXT NOT NULL,
         content TEXT NOT NULL,
         tags TEXT[] DEFAULT '{}',
-        created_at DATE NOT NULL,
-        updated_at DATE NOT NULL,
-        deleted_at DATE,
-        status TEXT NOT NULL,
+        comments UUID[] DEFAULT '{}',
+        created_at DATE NOT NULL DEFAULT CURRENT_DATE,
+        updated_at DATE NOT NULL DEFAULT CURRENT_DATE,
+        deleted_at DATE DEFAULT NULL,
+        status TEXT NOT NULL DEFAULT 'published',
         likes INT DEFAULT 0,
         views INT DEFAULT 0
       )
     `;
 
-  // 게시물을 생성합니다.
-  await sql`
-      INSERT INTO posts (id, title, content, created_at, updated_at, status)
-      VALUES (${id}, ${title}, ${markdownValue}, ${date}, ${date}, 'published')
-    `;
+  await sql.query(
+    `
+      INSERT INTO posts (title, content)
+      VALUES ($1, $2)
+    `,
+    [title, markdownValue]
+  );
 
-  revalidatePath(`/posts/${id}`);
-  redirect(`/posts/${id}`);
+  const request =
+    await sql<IPost>`SELECT index FROM posts ORDER BY index DESC LIMIT 1`;
+
+  revalidatePath(`/posts/${request.rows[0].index}`);
+  redirect(`/posts/${request.rows[0].index}`);
 }
 
 /**
@@ -160,18 +162,21 @@ export async function putPost({
  * 게시물을 삭제 상태로 변경합니다.
  * @param id 게시물 ID
  */
-export async function deletePost(id: string) {
+export async function deletePost(index: string) {
   noStore();
 
   const date = new Date().toISOString().split("T")[0];
 
   // 게시물을 삭제 상태로 변경합니다.
-  await sql`
+  await sql.query(
+    `
       UPDATE posts
-      SET deleted_at = ${date}, status = 'deleted'
-      WHERE id = ${id}
-    `;
+      SET status = 'deleted', deleted_at = $1
+      WHERE index = $2
+    `,
+    [date, index]
+  );
 
-  revalidatePath(`/posts/${id}`);
+  revalidatePath(`/posts/${index}`);
   redirect("/posts");
 }

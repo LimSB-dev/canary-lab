@@ -9,7 +9,7 @@ const RecentPostCard = ({ post }: IProps) => {
   return (
     <Link
       className={`button-card-shadow ${styles.card_resent}`}
-      href={`/posts/${post.id}`}
+      href={`/posts/${post.index}`}
       passHref
     >
       <h6>{post.title}</h6>

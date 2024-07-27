@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function PostsPage() {
   return (
-    <main id="main-page" role="main" className={styles.main}>
+    <section id="main-page" role="main" className={styles.main}>
       <PostsList />
-    </main>
+    </section>
   );
 }

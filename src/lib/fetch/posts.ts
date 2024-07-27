@@ -145,7 +145,6 @@ export async function putPost({
 }) {
   noStore();
 
-  // 게시물을 수정합니다.
   await sql.query(
     `
     UPDATE posts
@@ -168,7 +167,6 @@ export async function deletePost(index: string) {
 
   const date = new Date().toISOString().split("T")[0];
 
-  // 게시물을 삭제 상태로 변경합니다.
   await sql.query(
     `
       UPDATE posts

@@ -53,7 +53,7 @@ export default function CreatePage() {
         previewWidth={["laptop", "desktop"].includes(device) ? "50%" : "100%"}
         toolbars={TOOLBARS}
         toolbarsMode={TOOLBARS_MODE}
-        height={"calc(100vh - 210px)"}
+        height={"calc(100vh - 240px)"}
         previewProps={{
           className: styles.preview,
           style: { height: "100%" },

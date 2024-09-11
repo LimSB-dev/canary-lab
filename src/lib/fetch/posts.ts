@@ -179,3 +179,28 @@ export async function deletePost(index: string) {
   revalidatePath(`/posts/${index}`);
   redirect("/posts");
 }
+
+/**
+ * 게시물의 조회수를 증가시킵니다.
+ * @param index 게시물의 index
+ */
+export async function incrementPostViews(index: string) {
+  noStore();
+
+  try {
+    await sql.query(
+      `
+      UPDATE posts
+      SET views = views + 1
+      WHERE index = $1
+      `,
+      [index]
+    );
+
+    // Optionally, revalidate the path if you want to refresh the page after incrementing views
+    revalidatePath(`/posts/${index}`);
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to increment post views.");
+  }
+}

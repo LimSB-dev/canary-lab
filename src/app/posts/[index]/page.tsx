@@ -1,4 +1,4 @@
-import { fetchPostsByIndex } from "@/lib/fetch/posts";
+import { fetchPostsByIndex, incrementPostViews } from "@/lib/fetch/posts";
 import styles from "./page.module.scss";
 import type { Metadata } from "next";
 import PostContent from "@/components/posts/[id]/PostContent";
@@ -12,6 +12,7 @@ export default async function PostDetailPage({
 }: {
   params: { index: string };
 }) {
+  await incrementPostViews(params.index);
   const post = await fetchPostsByIndex(params.index);
   return (
     <main id="main-page" role="main" className={styles.main}>

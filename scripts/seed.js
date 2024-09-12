@@ -1,6 +1,5 @@
 const { db } = require("@vercel/postgres");
 const { posts, users } = require("../src/app/api/mocks/placeholder-data");
-const bcrypt = require("bcrypt");
 
 async function seedUsers(client) {
   try {
@@ -11,7 +10,10 @@ async function seedUsers(client) {
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
+        image TEXT DEFAULT NULL,
+        provider TEXT DEFAULT 'github',
+        last_login DATE DEFAULT NULL,
+        login_count INT DEFAULT 0
       );
     `;
 
@@ -20,14 +22,13 @@ async function seedUsers(client) {
     // Insert data into the "users" table
     const insertedUsers = await Promise.all(
       users.map(async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
         return client.query(
           `
-          INSERT INTO users (id, name, email, password)
-          VALUES ($1, $2, $3, $4)
+          INSERT INTO users (id, name, email)
+          VALUES ($1, $2, $3)
           ON CONFLICT (id) DO NOTHING;
         `,
-          [user.id, user.name, user.email, hashedPassword]
+          [user.id, user.name, user.email]
         );
       })
     );

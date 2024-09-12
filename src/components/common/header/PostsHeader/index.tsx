@@ -16,7 +16,7 @@ const PostsHeader = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <DefaultLogo size="small" />
-        {isPosts && <Link href="/create">Create</Link>}
+        {isPosts && <Link href="/posts/create">Create</Link>}
         {!isPosts && <Link href="/posts">Posts</Link>}
       </nav>
       {!isPosts && !isEdit && (

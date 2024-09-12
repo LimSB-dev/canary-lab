@@ -1,42 +1,51 @@
 import NextAuth from "next-auth";
+import Apple from "next-auth/providers/apple";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+import Naver from "next-auth/providers/naver";
+import Kakao from "next-auth/providers/kakao";
 import { authConfig } from "./auth.config";
-import Credentials from "next-auth/providers/credentials";
-import { z } from "zod";
 import { sql } from "@vercel/postgres";
-import bcrypt from "bcrypt";
 
-async function getUser(email: string): Promise<IUser | undefined> {
-  try {
-    const user = await sql<IUser>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
-  } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
-  }
-}
-export const { auth, signIn, signOut } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
   ...authConfig,
-  providers: [
-    Credentials({
-      async authorize(credentials) {
-        const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials);
+  providers: [GitHub, Apple, Google, Naver, Kakao],
+  callbacks: {
+    async signIn({ user }) {
+      try {
+        console.log(user);
+        return true;
+      } catch (error) {
+        console.error("Error handling signIn:", error);
+        return false; // 에러가 발생해도 세션을 반환합니다.
+      }
+    },
+    async session({ session }) {
+      try {
+        const userEmail = session.user.email;
+        const userName = session.user.name || "Unknown";
+        const userImage = session.user.image || null;
 
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
+        // 사용자 세션이 있을 때, 데이터베이스에서 사용자 정보를 업데이트합니다.
+        await sql`
+          INSERT INTO users (email, name, image, last_login, login_count)
+          VALUES (${userEmail}, ${userName}, ${userImage}, CURRENT_TIMESTAMP, 1)
+          ON CONFLICT (email) 
+          DO UPDATE SET 
+            last_login = CURRENT_TIMESTAMP, 
+            login_count = users.login_count + 1
+        `;
 
-          if (!user) return null;
-
-          const passwordsMatch = await bcrypt.compare(password, user.password);
-
-          if (passwordsMatch) return user;
-        }
-
-        console.log("Invalid credentials");
-        return null;
-      },
-    }),
-  ],
+        return session; // 세션 객체를 반환합니다.
+      } catch (error) {
+        console.error("Error updating session data:", error);
+        return session; // 에러가 발생해도 세션을 반환합니다.
+      }
+    },
+  },
 });

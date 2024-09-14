@@ -12,6 +12,7 @@ import { useDevice } from "@/hooks/useDevice";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import { fetchPostsByIndex, putPost } from "@/lib/fetch/posts";
+import AuthorizationComponents from "@/components/common/authorizationComponents";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -34,6 +35,7 @@ export default function PostEditPage() {
 
   return (
     <main className={styles.main} data-color-mode={theme}>
+      <AuthorizationComponents />
       <div className={styles.title}>
         <input
           className={styles.title_input}

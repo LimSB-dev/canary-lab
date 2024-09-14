@@ -6,21 +6,26 @@ import { User } from "next-auth";
 import Image from "next/image";
 import { useAppDispatch } from "@/hooks/reduxHook";
 import { signIn } from "@/store/modules/user";
+import { fetchUser } from "@/lib/fetch/users";
 
 const UserProfile = ({ user }: { user: User }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    try {
-      if (user?.email) {
-        dispatch(signIn(user));
+    const fetchData = async () => {
+      try {
+        if (user?.email) {
+          const userData = await fetchUser(user.email);
+          dispatch(signIn(userData));
+          router.push("/");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
-    } finally {
-      if (user?.email) {
-        router.push("/");
-      }
-    }
+    };
+
+    fetchData();
   }, [user, router, dispatch]);
 
   return (

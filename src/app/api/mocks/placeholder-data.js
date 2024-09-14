@@ -1,12 +1,4 @@
-const { type } = require("os");
-
-const users = [
-  {
-    id: "410544b2-4001-4271-9855-fec4b6a6442a",
-    name: "Admin",
-    email: "admin@canary-lab.vercel.app",
-  },
-];
+const users = [];
 
 const posts = [
   {
@@ -14,7 +6,7 @@ const posts = [
     content: "this is the first post",
     createdAt: "2020-06-03T00:00:00.000Z",
     updatedAt: "2020-06-03T00:00:00.000Z",
-    likes: 5,
+    likes: [],
     views: 10,
   },
   {
@@ -22,7 +14,7 @@ const posts = [
     content: "this is the second post",
     createdAt: "2021-06-03T00:00:00.000Z",
     updatedAt: "2021-06-03T00:00:00.000Z",
-    likes: 10,
+    likes: [],
     views: 20,
   },
   {
@@ -30,7 +22,7 @@ const posts = [
     content: "this is the fourth post",
     updatedAt: "2022-06-03T00:00:00.000Z",
     createdAt: "2022-06-03T00:00:00.000Z",
-    likes: 20,
+    likes: [],
     views: 40,
   },
   {
@@ -38,7 +30,7 @@ const posts = [
     content: "this is the fifth post",
     createdAt: "2023-06-03T00:00:00.000Z",
     updatedAt: "2023-06-03T00:00:00.000Z",
-    likes: 25,
+    likes: [],
     views: 50,
   },
   {
@@ -46,7 +38,7 @@ const posts = [
     content: "this is the popular post",
     updatedAt: "2024-04-27T00:00:00.000Z",
     createdAt: "2024-04-27T00:00:00.000Z",
-    likes: 1000,
+    likes: [],
     views: 2000,
   },
 ];

@@ -4,10 +4,12 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import { DefaultLogo } from "@/components/common/logo";
 import { usePathname } from "next/navigation";
-import { useAppDispatch } from "@/hooks/reduxHook";
 import { deletePost } from "@/lib/fetch/posts";
+import { useAppSelector } from "@/hooks/reduxHook";
 
 const PostsHeader = () => {
+  const user = useAppSelector((state) => state.user);
+  const isAdmin = user.userType === "admin";
   const isPosts = usePathname().endsWith("/posts");
   const isEdit = usePathname().endsWith("/edit");
   const index = usePathname().split("/")[2];
@@ -16,10 +18,10 @@ const PostsHeader = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <DefaultLogo size="small" />
-        {isPosts && <Link href="/posts/create">Create</Link>}
+        {isPosts && isAdmin && <Link href="/posts/create">Create</Link>}
         {!isPosts && <Link href="/posts">Posts</Link>}
       </nav>
-      {!isPosts && !isEdit && (
+      {!isPosts && !isEdit && isAdmin && (
         <div className={styles.button_container}>
           <Link
             href={`/posts/${index}/edit`}
@@ -36,7 +38,7 @@ const PostsHeader = () => {
           </button>
         </div>
       )}
-      {isEdit && (
+      {isEdit && isAdmin && (
         <Link
           href={`/posts/${index}`}
           className={`button-card-shadow ${styles.edit_button}`}

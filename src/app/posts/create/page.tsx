@@ -9,6 +9,7 @@ import { isEmpty } from "lodash";
 import { upload } from "@vercel/blob/client";
 import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import { postPost } from "@/lib/fetch/posts";
+import AuthorizationComponents from "@/components/common/authorizationComponents";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -23,6 +24,7 @@ export default function CreatePage() {
 
   return (
     <main className={styles.main} data-color-mode={theme}>
+      <AuthorizationComponents />
       <div className={styles.title}>
         <input
           className={styles.title_input}

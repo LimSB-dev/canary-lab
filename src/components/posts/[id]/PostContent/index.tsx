@@ -14,7 +14,7 @@ const MarkdownPreview = dynamic(
 
 const PostContent = ({ post }: IProps) => {
   return (
-    <div key={post.id} className={`${styles.content}`}>
+    <div key={post.id} className={styles.content}>
       <MarkdownPreview
         className={styles.markdown}
         source={post.content}

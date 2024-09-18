@@ -7,7 +7,7 @@ import { TOOLBARS, TOOLBARS_MODE } from "@/constants/editor/toolbars";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { isEmpty } from "lodash";
 import { upload } from "@vercel/blob/client";
-import { setMarkdownValue, setTitle } from "@/store/modules/post";
+import { setMarkdownValue, setResetPost, setTitle } from "@/store/modules/post";
 import { postPost } from "@/lib/fetch/posts";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
 
@@ -34,19 +34,6 @@ export default function CreatePage() {
           onChange={(e) => dispatch(setTitle(e.target.value))}
           value={title}
         />
-
-        <button
-          type="button"
-          className={`card-shadow ${styles.submit_button}`}
-          onClick={async () => {
-            postPost({ title, markdownValue }).then(() => {
-              dispatch(setTitle(""));
-              dispatch(setMarkdownValue(""));
-            });
-          }}
-        >
-          작성
-        </button>
       </div>
       <MarkdownEditor
         className={styles.editor}

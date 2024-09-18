@@ -45,19 +45,6 @@ export default function PostEditPage() {
           onChange={(e) => dispatch(setTitle(e.target.value))}
           value={title}
         />
-
-        <button
-          type="button"
-          className={`card-shadow ${styles.submit_button}`}
-          onClick={async () => {
-            putPost({ index, title, markdownValue }).then(() => {
-              dispatch(setTitle(""));
-              dispatch(setMarkdownValue(""));
-            });
-          }}
-        >
-          수정
-        </button>
       </div>
       <MarkdownEditor
         className={styles.editor}

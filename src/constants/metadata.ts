@@ -8,7 +8,7 @@ const APP_DESCRIPTION = {
   LOGIN: "Login to Canary Lab",
   CREATE: "Create a new post",
 };
-const APP_URL = "https://canary-lab.vercel.app/";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "";
 const GOOGLE_SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";
 const NAVER_SITE_VERIFICATION =

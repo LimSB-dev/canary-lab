@@ -7,13 +7,14 @@ import { redirect } from "next/navigation";
 /**
  * 게시물 데이터
  * status가 published인 게시물만 가져옵니다.
+ * created_at 칼럼을 기준으로 내림차순 정렬하여 최신 게시물부터 가져옵니다.
  */
 export async function fetchPosts() {
   noStore();
 
   try {
     const posts =
-      await sql<IPost>`SELECT * FROM posts WHERE status = 'published'`;
+      await sql<IPost>`SELECT * FROM posts WHERE status = 'published' ORDER BY created_at DESC`; // 내림차순 정렬
 
     return posts.rows;
   } catch (error) {
@@ -104,8 +105,8 @@ export async function postPost({
         content TEXT NOT NULL,
         tags TEXT[] DEFAULT '{}',
         comments UUID[] DEFAULT '{}',
-        created_at DATE NOT NULL DEFAULT CURRENT_DATE,
-        updated_at DATE NOT NULL DEFAULT CURRENT_DATE,
+        created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
         deleted_at DATE DEFAULT NULL,
         status TEXT NOT NULL DEFAULT 'published',
         likes INT DEFAULT 0,
@@ -148,7 +149,7 @@ export async function putPost({
   await sql.query(
     `
     UPDATE posts
-    SET title = $1, content = $2, updated_at = CURRENT_DATE
+    SET title = $1, content = $2, updated_at = CURRENT_TIMESTAMP
     WHERE index = $3
     `,
     [title, markdownValue, index]

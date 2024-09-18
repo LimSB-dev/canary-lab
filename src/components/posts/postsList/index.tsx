@@ -1,7 +1,6 @@
 import { fetchPosts } from "@/lib/fetch/posts";
-import Link from "next/link";
 import styles from "./styles.module.scss";
-import { PostListItem } from "../postListItem";
+import { PostListItem, SkeletonPostListItem } from "../postListItem";
 
 export const PostsList = async () => {
   const posts = await fetchPosts();
@@ -11,6 +10,18 @@ export const PostsList = async () => {
       {posts.map((post) => (
         <PostListItem key={post.id} post={post} />
       ))}
+    </ul>
+  );
+};
+
+export const SkeletonPostsList = () => {
+  return (
+    <ul className={styles.post_list}>
+      {Array(10)
+        .fill(0)
+        .map((index) => (
+          <SkeletonPostListItem key={index} />
+        ))}
     </ul>
   );
 };

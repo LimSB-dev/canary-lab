@@ -16,3 +16,11 @@ export const PostListItem = async ({ post }: IProps) => {
     </Link>
   );
 };
+
+export const SkeletonPostListItem = () => {
+  return (
+    <div className={`button-card-shadow ${styles.post_list_item}`}>
+      <li>Loading...</li>
+    </div>
+  );
+};

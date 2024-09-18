@@ -12,7 +12,7 @@ const AuthorizationComponents = () => {
       redirect("/");
     }
   });
-  return <></>;
+  return null;
 };
 
 export default AuthorizationComponents;

@@ -4,7 +4,6 @@
   width: 1620px;
   margin: auto;
   gap: var(--gap);
-  padding-top: 72px;
 
   @media (max-width: 1620px) {
     width: 1212px;
@@ -50,5 +49,38 @@
 }
 
 .editor {
-  width: 100%;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @media (max-width: 500px) {
+      margin-left: 20px;
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  img {
+    border-radius: 8px;
+  }
+
+  lyric > pre > code > span:nth-child(4n + 1) {
+    color: var(--warning-color);
+  }
+
+  lyric > pre > code > span:nth-child(4n + 2) {
+    color: var(--error-color);
+  }
+
+  lyric > pre > code > span:nth-child(4n + 3) {
+    color: inherit;
+  }
 }

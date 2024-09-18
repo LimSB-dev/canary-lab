@@ -4,9 +4,11 @@ import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import { usePathname } from "next/navigation";
 
 const FloatingScrollToTop = () => {
   const [isShow, setIsShow] = useState(false);
+  const path = usePathname();
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -30,6 +32,10 @@ const FloatingScrollToTop = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
 
   if (!isShow) {
     return null;

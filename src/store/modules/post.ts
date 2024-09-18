@@ -34,11 +34,16 @@ const postSlice = createSlice({
     setStatus(state, action) {
       state.status = action.payload;
     },
+    setResetPost(state) {
+      state.title = "";
+      state.markdownValue = "글을 작성해주세요.";
+    },
   },
 });
 
 // action creators
-export const { setTitle, setMarkdownValue, setStatus } = postSlice.actions;
+export const { setTitle, setMarkdownValue, setStatus, setResetPost } =
+  postSlice.actions;
 export const selectPost = (state: RootState) => state.post;
 // reducer
 export default postSlice.reducer;

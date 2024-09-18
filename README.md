@@ -2,6 +2,7 @@
 
 Welcome to Canary Lab, a technology blog built with Next.js!
 
+[New Production](canary-lab.blog)<br />
 [Production](https://canary-lab.vercel.app/)
 
 [Staging](https://canary-lab-stag.vercel.app?_vercel_share=b2ewZl18sU3OGBzM5If1hMgprJ5ZtuXZ)

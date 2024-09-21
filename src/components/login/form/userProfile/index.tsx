@@ -1,5 +1,6 @@
 "use client";
 
+import { TypeAnimation } from "react-type-animation";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User } from "next-auth";
@@ -11,6 +12,13 @@ import { fetchUser } from "@/lib/fetch/users";
 const UserProfile = ({ user }: { user: User }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const welcomeText = `${user.name}님 환영합니다.`;
+  const WELCOME_SEQUENCE = [];
+
+  for (let i = 1; i <= welcomeText.length; i++) {
+    WELCOME_SEQUENCE.push(welcomeText.slice(0, i));
+    WELCOME_SEQUENCE.push(100);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +26,10 @@ const UserProfile = ({ user }: { user: User }) => {
         if (user?.email) {
           const userData = await fetchUser(user.email);
           dispatch(signIn(userData));
-          router.push("/");
+
+          setTimeout(() => {
+            router.push("/");
+          }, welcomeText.length * 100);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -26,14 +37,23 @@ const UserProfile = ({ user }: { user: User }) => {
     };
 
     fetchData();
-  }, [user, router, dispatch]);
+  }, [user, router, welcomeText, dispatch]);
 
   return (
     <>
-      <p>{user.name}</p>
+      <TypeAnimation sequence={WELCOME_SEQUENCE} />
 
       {user.image && user.name && (
-        <Image src={user.image} alt={user.name} width={100} height={100} />
+        <Image
+          src={user.image}
+          alt={user.name}
+          width={240}
+          height={240}
+          style={{
+            borderRadius: "2px",
+          }}
+          priority
+        />
       )}
     </>
   );

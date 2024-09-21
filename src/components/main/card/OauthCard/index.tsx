@@ -12,11 +12,17 @@ export const OauthCard = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
 
+  const handleSignOut = () => {
+    if (confirm("정말 로그아웃 하시겠습니까?")) {
+      dispatch(signOut());
+    }
+  };
+
   return user.name && user.email && user.image ? (
     <form
       className={`button-card-shadow ${styles.card}`}
-      action={() => {
-        dispatch(signOut());
+      onClick={() => {
+        handleSignOut();
       }}
     >
       <h6>{user.name}</h6>
@@ -25,9 +31,7 @@ export const OauthCard = () => {
 
         <Image src={user.image} alt={user.name} width={80} height={80} />
       </div>
-      <button className={styles.sign_out_button} type="submit">
-        Sign Out
-      </button>
+      <button className={styles.sign_out_button}>Sign Out</button>
     </form>
   ) : (
     <Link className={`button-card-shadow ${styles.card}`} href={"login"}>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PostsPage() {
   return (
-    <section id="main-page" role="main" className={styles.main}>
+    <section id="main-page" role="main" className={styles.section}>
       <Suspense fallback={<SkeletonPostsList />}>
         <PostsList />
       </Suspense>

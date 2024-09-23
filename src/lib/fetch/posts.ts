@@ -205,3 +205,25 @@ export async function incrementPostViews(index: string) {
     throw new Error("Failed to increment post views.");
   }
 }
+
+/**
+ * 게시물의 title과 content를 돌며 search와 유사한 내용이 있는 게시물을 가져옵니다.
+ * @param search 게시물의 title과 content에서 찾아볼 search
+ * @returns 게시물 데이터
+ */
+export async function fetchSearch(search: string) {
+  noStore();
+
+  try {
+    const posts = await sql<IPost>`
+      SELECT * FROM posts 
+      WHERE title ILIKE '%' || ${search} || '%' 
+      OR content ILIKE '%' || ${search} || '%'
+    `;
+
+    return posts.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch post data by index.");
+  }
+}

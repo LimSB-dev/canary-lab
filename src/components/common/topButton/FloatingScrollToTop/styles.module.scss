@@ -2,20 +2,18 @@
   position: fixed;
   display: flex;
   justify-content: flex-end;
-  width: 100%;
-  right: 12px;
+  right: 480px;
   bottom: 64px;
 
   @media (max-width: 1620px) {
-    width: 1212px;
+    right: 160px;
   }
 
   @media (max-width: 1212px) {
-    width: 804px;
+    right: 40px;
   }
 
   @media (max-width: 804px) {
-    width: 100%;
     right: 12px;
   }
 }

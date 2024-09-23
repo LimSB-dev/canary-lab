@@ -1,4 +1,5 @@
 import { auth, signIn, signOut } from "../../../../auth";
+import OauthLoginButton from "@/components/login/oauthLoginButton/OauthLoginButton";
 
 import styles from "./styles.module.scss";
 import UserProfile from "./userProfile";
@@ -8,26 +9,19 @@ const LoginPageForm = async () => {
   let user = session?.user;
 
   return user ? (
-    <form
-      action={async () => {
-        "use server";
-        await signOut();
-      }}
-    >
+    <div className={styles.user_profile_container}>
       <UserProfile user={user} />
-      <button className={styles.login_button} type="submit">
-        Sign Out
-      </button>
-    </form>
+    </div>
   ) : (
     <form
+      className={styles.form}
       action={async () => {
         "use server";
         await signIn("github");
       }}
     >
-      <button className={styles.login_button} type="submit">
-        Github
+      <button className={styles.button} type="submit">
+        <OauthLoginButton provider="github" theme="light" type="default" />
       </button>
     </form>
   );

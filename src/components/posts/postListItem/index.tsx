@@ -7,13 +7,11 @@ interface IProps {
 
 export const PostListItem = async ({ post }: IProps) => {
   return (
-    <Link
-      href={`/posts/${post.index}`}
-      className={`button-card-shadow ${styles.post_list_item}`}
-      passHref
-    >
-      <li>{post.title}</li>
-    </Link>
+    <li className={`button-card-shadow ${styles.post_list_item}`}>
+      <Link href={`/posts/${post.index}`} passHref>
+        {post.title}
+      </Link>
+    </li>
   );
 };
 

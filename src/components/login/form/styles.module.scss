@@ -1,6 +1,19 @@
+.user_profile_container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  justify-content: center;
+  align-items: center;
+
+  height: calc(100vh - 200px);
+}
+
 .form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 400px;
   gap: calc(var(--gap) * 2);
   margin: auto;
@@ -8,68 +21,10 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: var(--border-radius);
-  border: 1px solid var(--primary-color);
   padding: 20px;
-
-  & > label {
-    color: var(--text-color);
-    font-weight: 700;
-  }
 }
 
-.flex_column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-.flex_row {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--gap);
-}
-
-.input_container {
-  display: flex;
-  width: 100%;
-  border-radius: var(--border-radius);
-  justify-content: space-between;
-  gap: var(--gap);
-  border: 1px solid var(--color-primary);
-  background: var(--background-color);
-  padding: 8px;
-
-  input {
-    width: 100%;
-    border: none;
-    background: none;
-    color: var(--color-primary);
-
-    &:focus {
-      outline: none;
-    }
-  }
-}
-
-.password {
-  input::-ms-reveal,
-  input::-ms-clear {
-    display: none;
-  }
-}
-
-.login_button {
-  background: none;
-  color: var(--text-color);
-  padding: 10px;
-  border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius);
+.button {
+  all: unset;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  font-weight: 700;
-
-  &:hover {
-    color: var(--black);
-    background: var(--primary-color-dark);
-  }
 }

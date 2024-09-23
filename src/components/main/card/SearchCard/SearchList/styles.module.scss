@@ -1,0 +1,35 @@
+.search_list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.search_list::-webkit-scrollbar {
+  display: none;
+}
+
+.search_list {
+  scrollbar-width: none;
+}
+
+.search_list_item {
+  display: flex;
+  justify-content: center;
+  min-height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search_list_item:hover {
+  background-color: var(--card-shadow-color-down);
+}
+
+.search_list_link {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 8px 8px;
+}

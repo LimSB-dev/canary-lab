@@ -5,10 +5,10 @@ interface IPost {
   content: string;
   tags: ITag.id[];
   comments: IComment.id[];
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date;
   status: "deleted" | "draft" | "published";
-  likes: number;
+  likes: IUser.id[];
   views: number;
 }

@@ -49,14 +49,14 @@
 }
 
 .editor {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @media (max-width: 500px) {
-      margin-left: 20px;
+  @media (max-width: 500px) {
+    h1 > a,
+    h2 > a,
+    h3 > a,
+    h4 > a,
+    h5 > a,
+    h6 > a {
+      margin-left: 0 !important;
     }
   }
 
@@ -82,5 +82,16 @@
 
   lyric > pre > code > span:nth-child(4n + 3) {
     color: inherit;
+  }
+
+  pre {
+    code {
+      padding: 16px !important;
+      color: #ffffff;
+    }
+  }
+
+  code {
+    padding: 0.2rem 0.4rem !important;
   }
 }

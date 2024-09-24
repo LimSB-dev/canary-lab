@@ -1,36 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { SearchList } from "./SearchList";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { SearchList, SkeletonSearchList } from "./SearchList";
 import { fetchSearch } from "@/lib/fetch/posts";
 
 export const SearchCard = () => {
   const [search, setSearch] = useState("");
   const [searchResponse, setSearchResponse] = useState<IPost[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState(search);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
-    }, 300); // 300ms 후에 debouncedSearch 값을 업데이트
+    }, 300);
 
-    // cleanup: 타이머 초기화
     return () => clearTimeout(timer);
   }, [search]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchResponse = await fetchSearch(debouncedSearch);
+      const searchResponse = await fetchSearch(debouncedSearch.trim());
       setSearchResponse(searchResponse);
     };
 
     if (debouncedSearch) {
       fetchData();
     }
+
+    setIsLoading(false);
   }, [debouncedSearch]);
 
   return (
@@ -43,16 +45,26 @@ export const SearchCard = () => {
           placeholder="Search"
           className={styles.search_input}
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setIsLoading(true);
+            setSearch(e.target.value);
+          }}
           autoComplete="off"
         />
         {search.length > 0 && (
-          <FontAwesomeIcon icon={faClose} onClick={() => setSearch("")} />
+          <FontAwesomeIcon
+            icon={faClose}
+            cursor={"pointer"}
+            onClick={() => setSearch("")}
+          />
         )}
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
       </div>
 
-      <SearchList searchResponse={searchResponse} />
+      {isLoading ? (
+        <SkeletonSearchList />
+      ) : (
+        <SearchList search={search} searchResponse={searchResponse} />
+      )}
     </article>
   );
 };

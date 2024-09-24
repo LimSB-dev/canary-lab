@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { SearchList } from "./SearchList";
 import { fetchSearch } from "@/lib/fetch/posts";
 
@@ -16,15 +16,14 @@ export const SearchCard = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
-    }, 300); // 300ms 후에 debouncedSearch 값을 업데이트
+    }, 300);
 
-    // cleanup: 타이머 초기화
     return () => clearTimeout(timer);
   }, [search]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchResponse = await fetchSearch(debouncedSearch);
+      const searchResponse = await fetchSearch(debouncedSearch.trim());
       setSearchResponse(searchResponse);
     };
 
@@ -47,9 +46,12 @@ export const SearchCard = () => {
           autoComplete="off"
         />
         {search.length > 0 && (
-          <FontAwesomeIcon icon={faClose} onClick={() => setSearch("")} />
+          <FontAwesomeIcon
+            icon={faClose}
+            cursor={"pointer"}
+            onClick={() => setSearch("")}
+          />
         )}
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
       </div>
 
       <SearchList searchResponse={searchResponse} />

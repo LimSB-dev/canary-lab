@@ -3,20 +3,22 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import camelcaseKeys from "camelcase-keys";
 
 /**
  * 게시물 데이터
  * status가 published인 게시물만 가져옵니다.
  * created_at 칼럼을 기준으로 내림차순 정렬하여 최신 게시물부터 가져옵니다.
  */
-export async function fetchPosts() {
+export async function fetchPosts(): Promise<IPost[]> {
   noStore();
 
   try {
-    const posts =
-      await sql<IPost>`SELECT * FROM posts WHERE status = 'published' ORDER BY created_at DESC`; // 내림차순 정렬
+    const { rows } =
+      await sql`SELECT * FROM posts WHERE status = 'published' ORDER BY created_at DESC`; // 내림차순 정렬
 
-    return posts.rows;
+    const post = camelcaseKeys(rows, { deep: true }) as IPost[];
+    return post;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch posts data.");
@@ -28,13 +30,13 @@ export async function fetchPosts() {
  * @param index 게시물의 index
  * @returns 게시물 데이터
  */
-export async function fetchPostsByIndex(index: string) {
+export async function fetchPostsByIndex(index: string): Promise<IPost> {
   noStore();
 
   try {
-    const post = await sql<IPost>`SELECT * FROM posts WHERE index = ${index}`;
+    const { rows } = await sql`SELECT * FROM posts WHERE index = ${index}`;
 
-    return post.rows[0];
+    return camelcaseKeys(rows[0], { deep: true }) as IPost;
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch post data by index.");
@@ -47,14 +49,14 @@ export async function fetchPostsByIndex(index: string) {
  * status가 published인 게시물만 가져옵니다.
  * @returns 인기 게시물 데이터
  */
-export async function fetchPopularPosts() {
+export async function fetchPopularPosts(): Promise<IPost[]> {
   noStore();
 
   try {
-    const request =
-      await sql<IPost>`SELECT * FROM posts WHERE status = 'published' ORDER BY views DESC LIMIT 5`;
+    const { rows } =
+      await sql`SELECT * FROM posts WHERE status = 'published' ORDER BY views DESC LIMIT 5`;
 
-    return request.rows;
+    return camelcaseKeys(rows, { deep: true }) as IPost[];
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch popular posts data.");
@@ -69,14 +71,17 @@ export async function fetchPopularPosts() {
  * @param offset 캐러셀에 표시할 게시글의 시작 위치
  * @returns
  */
-export async function fetchRecentPosts(size: number, offset: number) {
+export async function fetchRecentPosts(
+  size: number,
+  offset: number
+): Promise<IPost[]> {
   noStore();
 
   try {
-    const request =
-      await sql<IPost>`SELECT * FROM posts WHERE status = 'published' ORDER BY created_at DESC LIMIT ${size} OFFSET ${offset}`;
+    const { rows } =
+      await sql`SELECT * FROM posts WHERE status = 'published' ORDER BY created_at DESC LIMIT ${size} OFFSET ${offset}`;
 
-    return request.rows;
+    return camelcaseKeys(rows, { deep: true }) as IPost[];
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch recent posts data.");

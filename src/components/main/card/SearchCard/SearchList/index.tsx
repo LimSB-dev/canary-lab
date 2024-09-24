@@ -9,6 +9,7 @@ export const SearchList = ({ searchResponse }: { searchResponse: IPost[] }) => {
           <Link
             href={`posts/${post.index}`}
             className={styles.search_list_link}
+            passHref
           >
             {post.title}
           </Link>

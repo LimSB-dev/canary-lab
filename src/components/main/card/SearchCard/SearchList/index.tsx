@@ -13,24 +13,25 @@ export const SearchList = ({
 }) => {
   return (
     <ul className={styles.search_list}>
-      {isEmpty(searchResponse) && search ? (
-        <li className={styles.loading}>
-          <p>{search}에 대한 </p>
-          <p>검색 결과가 없습니다.</p>
-        </li>
-      ) : (
-        searchResponse.map((post) => (
-          <li key={post.id} className={styles.search_list_item}>
-            <Link
-              href={`posts/${post.index}`}
-              className={styles.search_list_link}
-              passHref
-            >
-              {post.title}
-            </Link>
+      {search &&
+        (isEmpty(searchResponse) ? (
+          <li className={styles.loading}>
+            <p>{search}에 대한 </p>
+            <p>검색 결과가 없습니다.</p>
           </li>
-        ))
-      )}
+        ) : (
+          searchResponse.map((post) => (
+            <li key={post.id} className={styles.search_list_item}>
+              <Link
+                href={`posts/${post.index}`}
+                className={styles.search_list_link}
+                passHref
+              >
+                {post.title}
+              </Link>
+            </li>
+          ))
+        ))}
     </ul>
   );
 };

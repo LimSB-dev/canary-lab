@@ -9,6 +9,7 @@ import snackbar from "./snackbar";
 import location from "./location";
 import post from "./post";
 import user from "./user";
+import tag from "./tag";
 
 const rootReducer = combineReducers({
   theme,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   location,
   post,
   user,
+  tag,
   // Add your reducers here
 });
 
@@ -32,6 +34,7 @@ const persistConfig = {
     "location",
     "post",
     "user",
+    "tag",
   ],
 };
 

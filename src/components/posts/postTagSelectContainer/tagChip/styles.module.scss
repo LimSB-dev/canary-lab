@@ -1,0 +1,21 @@
+.header_chip {
+  border-radius: 40px;
+  background: var(--card-background-color);
+  padding: 4px 8px;
+  box-shadow: inset 0 1px 2px var(--card-shadow-color-up),
+    inset 0 -1px 2px var(--card-shadow-color-down);
+  transition: all 0.4s ease-in-out;
+}
+
+.header_chip:hover {
+  transform: translateY(1px);
+  box-shadow: inset 0 -1px 2px var(--card-shadow-color-up),
+    inset 0 1px 2px var(--card-shadow-color-down);
+}
+
+.card_chip {
+  border-radius: 40px;
+  padding: 2px 4px;
+  font-size: var(--caption);
+  font-weight: 700;
+}

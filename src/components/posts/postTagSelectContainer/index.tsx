@@ -10,7 +10,7 @@ export const PostTagSelectContainer = async () => {
       <h1>POSTS</h1>
       <ul className={styles.tag_container}>
         {tags.map((tag) => {
-          return <TagChip key={tag.id} tag={tag} />;
+          return <TagChip key={tag.id} tag={tag} type={"header"} />;
         })}
       </ul>
     </div>

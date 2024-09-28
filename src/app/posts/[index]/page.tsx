@@ -1,17 +1,28 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import { fetchPostsByIndex, incrementPostViews } from "@/lib/fetch/posts";
 import styles from "./page.module.scss";
-import type { Metadata } from "next";
 import PostContent from "@/components/posts/[id]/PostContent";
 
-export const metadata: Metadata = {
-  title: "Posts Detail",
+type Props = {
+  params: { index: string };
 };
 
-export default async function PostDetailPage({
-  params,
-}: {
-  params: { index: string };
-}) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const post = await fetchPostsByIndex(params.index);
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: post.title,
+    openGraph: {
+      images: ["/some-specific-page-image.jpg", ...previousImages],
+    },
+  };
+}
+
+export default async function PostDetailPage({ params }: Props) {
   await incrementPostViews(params.index);
   const post = await fetchPostsByIndex(params.index);
   return (

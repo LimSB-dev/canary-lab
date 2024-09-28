@@ -9,19 +9,32 @@ import {
   faHeart as regularHeart,
 } from "@fortawesome/free-regular-svg-icons";
 import { useAppSelector } from "@/hooks/reduxHook";
+import { intersection, isEmpty } from "lodash";
+import { TagChip } from "../postTagSelectContainer/tagChip";
 
 interface IProps {
   post: IPost;
+  tags: ITag[];
 }
 
-export const PostListItem = ({ post }: IProps) => {
+export const PostListItem = ({ post, tags }: IProps) => {
   const user = useAppSelector((state) => state.user);
+  const tag = useAppSelector((state) => state.tag);
   const formattedDate = post.createdAt.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
     timeZone: "Asia/Seoul",
   });
+
+  const postTags = tags.filter((tag) => post.tags?.includes(tag.id));
+
+  if (
+    !isEmpty(tag.selectedTagIds) &&
+    isEmpty(intersection(post.tags, tag.selectedTagIds))
+  ) {
+    return <></>;
+  }
 
   return (
     <li className={`button-card-shadow ${styles.post_list_item}`}>
@@ -32,10 +45,6 @@ export const PostListItem = ({ post }: IProps) => {
       >
         <div className={styles.item_header}>
           <p>{post.title}</p>
-        </div>
-        <div className={styles.item_footer}>
-          {/* TODO: <p>tag</p> */}
-          <caption>{formattedDate}</caption>
           <div className={styles.icon_container}>
             <FontAwesomeIcon
               icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
@@ -44,6 +53,14 @@ export const PostListItem = ({ post }: IProps) => {
             <FontAwesomeIcon icon={faEye} />
             {post.views}
           </div>
+        </div>
+        <div className={styles.item_footer}>
+          <ul>
+            {postTags.map((tag) => {
+              return <TagChip key={tag.id} tag={tag} type={"card"} />;
+            })}
+          </ul>
+          <caption>{formattedDate}</caption>
         </div>
       </Link>
     </li>

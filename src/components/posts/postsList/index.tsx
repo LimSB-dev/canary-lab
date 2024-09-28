@@ -1,14 +1,16 @@
 import { fetchPosts } from "@/lib/fetch/posts";
 import styles from "./styles.module.scss";
 import { PostListItem, SkeletonPostListItem } from "../postListItem";
+import { fetchTags } from "@/lib/fetch/tags";
 
 export const PostsList = async () => {
   const posts = await fetchPosts();
+  const tags = await fetchTags();
 
   return (
     <ul className={styles.post_list}>
       {posts.map((post) => (
-        <PostListItem key={post.id} post={post} />
+        <PostListItem key={post.id} post={post} tags={tags} />
       ))}
     </ul>
   );

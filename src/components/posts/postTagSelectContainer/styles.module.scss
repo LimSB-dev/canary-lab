@@ -1,0 +1,18 @@
+.post_list_header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.tag_container {
+  display: flex;
+  gap: 16px;
+}
+
+.chip {
+  border-radius: 40px;
+  background: #000000;
+  padding: 4px 8px;
+}

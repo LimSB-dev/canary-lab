@@ -1,5 +1,6 @@
 .section {
   display: flex;
+  flex-direction: column;
   gap: var(--gap);
   width: 1620px;
   margin: 0 auto;

@@ -1,38 +1,37 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "types": [
-      "node",
-      "react",
-      "react-dom",
-      "jest",
-      "@testing-library/jest-dom"
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noUnusedParameters": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
+    "jsx": "preserve",
     "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "types": [
+      "node",
+      "react",
+      "react-dom",
+      "jest"
+    ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
@@ -40,23 +39,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src",
     "src/constants/editor/editorTools.js"
   ],
-  "paths": {
-    "app/*": ["app/*"],
-    "pages/*": ["pages/*"],
-    "containers/*": ["containers/*"],
-    "components/*": ["components/*"],
-    "sections/*": ["sections/*"],
-    "constants/*": ["constants/*"],
-    "models/*": ["models/*"],
-    "remotes/*": ["remotes/*"],
-    "styles/*": ["styles/*"],
-    "utils/*": ["utils/*"],
-    "hooks/*": ["hooks/*"],
-    "stores/*": ["stores/*"]
-  },
-  "exclude": ["node_modules"],
-  "extensions": [".js", ".jsx", ".ts", ".tsx"]
+  "exclude": [
+    "node_modules"
+  ]
 }

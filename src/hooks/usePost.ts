@@ -5,8 +5,8 @@ import {
   postPost,
   putPost,
   deletePost,
-} from "app/api/posts";
-import { QUERY } from "constants/queryKey";
+} from "@/app/api/posts";
+import { QUERY } from "@/constants/queryKey";
 
 /**
  * 모든 게시물 데이터

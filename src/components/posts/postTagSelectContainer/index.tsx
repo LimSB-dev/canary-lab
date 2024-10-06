@@ -1,9 +1,9 @@
-import { fetchTags } from "@/lib/fetch/tags";
 import styles from "./styles.module.scss";
 import { TagChip } from "./tagChip";
+import { getTags } from "@/app/api/tags";
 
 export const PostTagSelectContainer = async () => {
-  const tags = await fetchTags();
+  const tags = await getTags();
 
   return (
     <div id="tag-container" className={styles.post_list_header}>

@@ -11,8 +11,8 @@ import { TOOLBARS, TOOLBARS_MODE } from "@/constants/editor/toolbars";
 import { useDevice } from "@/hooks/useDevice";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setMarkdownValue, setTitle } from "@/store/modules/post";
-import { fetchPostsByIndex, putPost } from "@/lib/fetch/posts";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
+import { getPost } from "@/app/api/posts";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -22,12 +22,12 @@ const MarkdownEditor = dynamic(
 export default function PostEditPage() {
   const dispatch = useAppDispatch();
   const device = useDevice();
-  const index = usePathname().split("/")[2];
+  const index = Number(usePathname().split("/")[2]);
   const theme = useAppSelector((state) => state.theme.theme);
   const { title, markdownValue } = useAppSelector((state) => state.post);
 
   useEffect(() => {
-    fetchPostsByIndex(index).then((data) => {
+    getPost(index).then((data) => {
       dispatch(setTitle(data.title));
       dispatch(setMarkdownValue(data.content));
     });

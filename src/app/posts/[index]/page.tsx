@@ -1,17 +1,17 @@
 import type { Metadata, ResolvingMetadata } from "next";
-import { fetchPostsByIndex, incrementPostViews } from "@/lib/fetch/posts";
 import styles from "./page.module.scss";
 import PostContent from "@/components/posts/[id]/PostContent";
+import { getPost, incrementPostViews } from "@/app/api/posts";
 
 type Props = {
-  params: { index: string };
+  params: { index: number };
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = await fetchPostsByIndex(params.index);
+  const post = await getPost(params.index);
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
@@ -24,7 +24,7 @@ export async function generateMetadata(
 
 export default async function PostDetailPage({ params }: Props) {
   await incrementPostViews(params.index);
-  const post = await fetchPostsByIndex(params.index);
+  const post = await getPost(params.index);
   return (
     <main id="main-page" role="main" className={styles.main}>
       <h1 className={styles.title}>{post.title}</h1>

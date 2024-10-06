@@ -4,9 +4,9 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import { DefaultLogo } from "@/components/common/logo";
 import { usePathname } from "next/navigation";
-import { deletePost, postPost, putPost } from "@/lib/fetch/posts";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setResetPost } from "@/store/modules/post";
+import { deletePost, postPost, putPost } from "@/app/api/posts";
 
 const PostsHeader = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ const PostsHeader = () => {
   const isPosts = usePathname().endsWith("/posts");
   const isCreate = usePathname().endsWith("/create");
   const isEdit = usePathname().endsWith("/edit");
-  const index = usePathname().split("/")[2];
+  const index = Number(usePathname().split("/")[2]);
   const { title, markdownValue } = useAppSelector((state) => state.post);
 
   return (

@@ -7,7 +7,7 @@ import { unstable_noStore as noStore, revalidatePath } from "next/cache";
  * 게시물의 조회수를 증가시킵니다.
  * @param index 게시물의 index
  */
-export async function incrementPostViews(index: string) {
+export async function incrementPostViews(index: number) {
   noStore();
 
   try {

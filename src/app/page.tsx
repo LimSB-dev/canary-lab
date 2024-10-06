@@ -8,11 +8,11 @@ import {
   PostContainer,
   SideContainer,
 } from "@/components/main/container";
-import { fetchPopularPosts, fetchRecentPosts } from "@/lib/fetch/posts";
+import { getPopularPosts, getRecentPosts } from "@/app/api/posts";
 
 export default async function Home() {
-  const popularPosts = await fetchPopularPosts();
-  const recentPosts = await fetchRecentPosts(5, 0);
+  const popularPosts = await getPopularPosts();
+  const recentPosts = await getRecentPosts(5, 0);
 
   return (
     <>

@@ -7,8 +7,7 @@ import { TOOLBARS, TOOLBARS_MODE } from "@/constants/editor/toolbars";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { isEmpty } from "lodash";
 import { upload } from "@vercel/blob/client";
-import { setMarkdownValue, setResetPost, setTitle } from "@/store/modules/post";
-import { postPost } from "@/lib/fetch/posts";
+import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
 
 const MarkdownEditor = dynamic(

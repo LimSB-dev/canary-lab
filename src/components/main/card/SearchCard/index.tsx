@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { SearchList, SkeletonSearchList } from "./SearchList";
-import { fetchSearch } from "@/lib/fetch/posts";
+import { getSearchedPost } from "@/app/api/posts";
 
 export const SearchCard = () => {
   const [search, setSearch] = useState("");
@@ -24,7 +24,7 @@ export const SearchCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const searchResponse = await fetchSearch(debouncedSearch.trim());
+      const searchResponse = await getSearchedPost(debouncedSearch.trim());
       setSearchResponse(searchResponse);
     };
 

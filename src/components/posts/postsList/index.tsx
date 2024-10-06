@@ -1,11 +1,12 @@
 import styles from "./styles.module.scss";
 import { PostListItem, SkeletonPostListItem } from "../postListItem";
-import { fetchTags } from "@/lib/fetch/tags";
+
 import { getPosts } from "@/app/api/posts";
+import { getTags } from "@/app/api/tags";
 
 export const PostsList = async () => {
   const posts = await getPosts();
-  const tags = await fetchTags();
+  const tags = await getTags();
 
   return (
     <ul className={styles.post_list}>

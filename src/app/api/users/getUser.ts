@@ -8,7 +8,7 @@ import { unstable_noStore as noStore } from "next/cache";
  * 유저 데이터
  * 특정 email의 유저 데이터만 가져옵니다.
  */
-export async function fetchUser(email: string): Promise<IUser> {
+export async function getUser(email: string): Promise<IUser> {
   noStore();
 
   try {

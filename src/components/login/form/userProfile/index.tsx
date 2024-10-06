@@ -7,7 +7,7 @@ import { User } from "next-auth";
 import Image from "next/image";
 import { useAppDispatch } from "@/hooks/reduxHook";
 import { signIn } from "@/store/modules/user";
-import { fetchUser } from "@/lib/fetch/users";
+import { getUser } from "@/app/api/users";
 
 const UserProfile = ({ user }: { user: User }) => {
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ const UserProfile = ({ user }: { user: User }) => {
     const fetchData = async () => {
       try {
         if (user?.email) {
-          const userData = await fetchUser(user.email);
+          const userData = await getUser(user.email);
           dispatch(signIn(userData));
 
           setTimeout(() => {

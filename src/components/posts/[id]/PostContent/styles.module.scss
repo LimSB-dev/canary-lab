@@ -1,8 +1,13 @@
 .content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
   width: 100%;
+  min-height: calc(100vh - 290px);
+
+  div {
+    padding: 40px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+  }
 }
 
 .markdown {
@@ -10,11 +15,23 @@
     h1 > a,
     h2 > a,
     h3 > a,
-    h4 > a,
-    h5 > a,
-    h6 > a {
+    h4 > a {
       margin-left: 0 !important;
     }
+  }
+
+  h1 {
+    font-size: var(--h5) !important;
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: var(--h6) !important;
+  }
+
+  * {
+    border: none !important;
   }
 
   ul {
@@ -29,18 +46,11 @@
     border-radius: 8px;
   }
 
-  lyric > pre > code > span:nth-child(4n + 1) {
-    color: var(--warning-color);
+  hr {
+    height: 1px !important;
   }
 
-  lyric > pre > code > span:nth-child(4n + 2) {
-    color: var(--error-color);
-  }
-
-  lyric > pre > code > span:nth-child(4n + 3) {
-    color: inherit;
-  }
-
+  // 코드
   pre {
     code {
       padding: 16px !important;
@@ -48,7 +58,28 @@
     }
   }
 
-  code {
-    padding: 0.2rem 0.4rem !important;
+  // 가사
+  lyric > pre {
+    code {
+      padding: 16px !important;
+      color: #ffffff;
+
+      // 일본어
+      span:nth-child(4n + 1) {
+        color: var(--warning-color);
+      }
+
+      // 발음
+      span:nth-child(4n + 2) {
+        font-size: var(--caption);
+        color: var(--error-color);
+      }
+
+      // 뜻
+      span:nth-child(4n + 3) {
+        font-size: var(-h4);
+        color: inherit;
+      }
+    }
   }
 }

@@ -63,6 +63,7 @@ html[data-theme="light"] {
   --primary-color-light: #fff777;
   --primary-color-dark: #fff333;
   --secondary-color: #888888;
+  --info-color: #007bff;
   --error-color: #ef4545;
   --warning-color: #ffaa00;
   --text-color: #222222;
@@ -83,6 +84,7 @@ html[data-theme="dark"] {
   --primary-color-light: #fff700;
   --primary-color-dark: #fff300;
   --secondary-color: #888888;
+  --info-color: #007bff;
   --error-color: #ee4444;
   --warning-color: #ffaa00;
   --text-color: #efefef;

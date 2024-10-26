@@ -1,0 +1,32 @@
+.post_navigation {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  .nav_link {
+    display: flex;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--info-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.prev {
+      margin-right: auto;
+    }
+
+    &.next {
+      margin-left: auto;
+    }
+  }
+
+  .disabled_nav_link {
+    display: flex;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--secondary-color);
+  }
+}

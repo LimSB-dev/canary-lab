@@ -10,7 +10,15 @@ export async function POST(request: Request): Promise<NextResponse> {
       request,
       onBeforeGenerateToken: async (pathname) => {
         return {
-          allowedContentTypes: ["image/jpeg", "image/png", "image/gif"],
+          allowedContentTypes: [
+            "image/jpeg",
+            "image/png",
+            "image/gif",
+            "application/pdf", // PDF
+            "text/plain", // Plain text
+            "image/webp", // WebP images
+            "application/json", // JSON
+          ],
           tokenPayload: JSON.stringify({}),
         };
       },
@@ -18,6 +26,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.log("blob upload completed", blob, tokenPayload);
 
         try {
+          // Blob 업로드 완료 후 처리 로직 추가
         } catch (error) {
           throw new Error("Could not update user");
         }
@@ -28,7 +37,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },
-      { status: 400 } // The webhook will retry 5 times waiting for a 200
+      { status: 400 }
     );
   }
 }

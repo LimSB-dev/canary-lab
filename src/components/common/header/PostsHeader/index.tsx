@@ -11,81 +11,75 @@ import { deletePost, postPost, putPost } from "@/app/api/posts";
 const PostsHeader = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  const isAdmin = user.userType === "admin";
-  const isPosts = usePathname().endsWith("/posts");
-  const isCreate = usePathname().endsWith("/create");
-  const isEdit = usePathname().endsWith("/edit");
-  const index = Number(usePathname().split("/")[2]);
   const { title, markdownValue } = useAppSelector((state) => state.post);
+
+  const pathname = usePathname();
+  const isAdmin = user.userType === "admin";
+  const isPosts = pathname.endsWith("/posts");
+  const isCreate = pathname.endsWith("/create");
+  const isEdit = pathname.endsWith("/edit");
+  const index = Number(pathname.split("/")[2]);
+
+  const handleSave = async () => {
+    if (isEdit) await putPost({ index, title, markdownValue });
+    if (isCreate) await postPost({ title, markdownValue });
+    dispatch(setResetPost());
+  };
+
+  const handleDelete = async () => {
+    await deletePost(index);
+    dispatch(setResetPost());
+  };
 
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        <DefaultLogo size="small" />
-        {isPosts && isAdmin && <Link href="/posts/create">Create</Link>}
-        {!isPosts && <Link href="/posts">Posts</Link>}
+        <DefaultLogo size="small" withText />
+        {isPosts && isAdmin && <Link href="/posts/create">CREATE</Link>}
+        {!isPosts && <Link href="/posts">POST</Link>}
       </nav>
-      {isAdmin && !isPosts && !isEdit && !isCreate && (
+
+      {isAdmin && (
         <div className={styles.button_container}>
-          <Link
-            href={`/posts/${index}/edit`}
-            className={`button-card-shadow ${styles.edit_button}`}
-          >
-            edit
-          </Link>
-          <button
-            type="button"
-            className={`button-card-shadow ${styles.delete_button}`}
-            onClick={() => deletePost(index)}
-          >
-            delete
-          </button>
-        </div>
-      )}
-      {isAdmin && isEdit && (
-        <div className={styles.button_container}>
-          <button
-            type="button"
-            className={`card-shadow ${styles.submit_button}`}
-            onClick={async () => {
-              await putPost({ index, title, markdownValue });
-              dispatch(setResetPost());
-            }}
-          >
-            save
-          </button>
-          <Link
-            href={`/posts/${index}`}
-            className={`button-card-shadow ${styles.edit_button}`}
-            onClick={() => {
-              dispatch(setResetPost());
-            }}
-          >
-            cancel
-          </Link>
-        </div>
-      )}
-      {isAdmin && isCreate && (
-        <div className={styles.button_container}>
-          <button
-            type="button"
-            className={`card-shadow ${styles.submit_button}`}
-            onClick={async () => {
-              await postPost({ title, markdownValue });
-              dispatch(setResetPost());
-            }}
-          >
-            save
-          </button>
-          <Link
-            href={`/posts`}
-            className={`button-card-shadow ${styles.edit_button}`}
-            onClick={() => {
-              dispatch(setResetPost());
-            }}
-          >
-            cancel
-          </Link>
+          {isPosts ? null : (
+            <>
+              {!isEdit && !isCreate && (
+                <>
+                  <Link
+                    href={`/posts/${index}/edit`}
+                    className={`button-card-shadow ${styles.edit_button}`}
+                  >
+                    edit
+                  </Link>
+                  <button
+                    type="button"
+                    className={`button-card-shadow ${styles.delete_button}`}
+                    onClick={handleDelete}
+                  >
+                    delete
+                  </button>
+                </>
+              )}
+              {(isEdit || isCreate) && (
+                <>
+                  <button
+                    type="button"
+                    className={`card-shadow ${styles.submit_button}`}
+                    onClick={handleSave}
+                  >
+                    save
+                  </button>
+                  <Link
+                    href={isEdit ? `/posts/${index}` : "/posts"}
+                    className={`button-card-shadow ${styles.edit_button}`}
+                    onClick={() => dispatch(setResetPost())}
+                  >
+                    cancel
+                  </Link>
+                </>
+              )}
+            </>
+          )}
         </div>
       )}
     </header>

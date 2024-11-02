@@ -10,7 +10,7 @@
   }
 }
 
-.markdown {
+.editor {
   @media (max-width: 500px) {
     h1 > a,
     h2 > a,
@@ -20,11 +20,10 @@
     }
   }
 
-  h1 {
+  h2 {
     font-size: var(--h5) !important;
   }
 
-  h2,
   h3,
   h4 {
     font-size: var(--h6) !important;

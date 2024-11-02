@@ -16,12 +16,15 @@ interface IProps {
 
 const RecentPostCard = ({ post }: IProps) => {
   const user = useAppSelector((state) => state.user);
-  const formattedDate = post.createdAt.toLocaleDateString("ko-KR", {
+  const date = new Date(post.createdAt);
+
+  const formattedDate = date.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
-    timeZone: "Asia/Seoul",
+    timeZone: "UTC",
   });
+
   return (
     <Link
       className={`button-card-shadow ${styles.card_resent}`}

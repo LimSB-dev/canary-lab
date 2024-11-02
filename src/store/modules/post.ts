@@ -7,6 +7,7 @@ export interface postSlice {
   title: string;
   markdownValue: string;
   status: "read" | "edit";
+  offset: number;
 }
 
 // define initial state
@@ -14,6 +15,7 @@ const initialState: postSlice = {
   title: "",
   markdownValue: "글을 작성해주세요.",
   status: "read",
+  offset: 0,
 };
 
 const postSlice = createSlice({
@@ -38,12 +40,24 @@ const postSlice = createSlice({
       state.title = "";
       state.markdownValue = "글을 작성해주세요.";
     },
+    setOffset(state, action) {
+      state.offset = state.offset + action.payload;
+    },
+    setResetFlag(state) {
+      state.offset = 0;
+    },
   },
 });
 
 // action creators
-export const { setTitle, setMarkdownValue, setStatus, setResetPost } =
-  postSlice.actions;
+export const {
+  setTitle,
+  setMarkdownValue,
+  setStatus,
+  setResetPost,
+  setOffset,
+  setResetFlag,
+} = postSlice.actions;
 export const selectPost = (state: RootState) => state.post;
 // reducer
 export default postSlice.reducer;

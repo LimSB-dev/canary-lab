@@ -8,11 +8,10 @@ import {
   PostContainer,
   SideContainer,
 } from "@/components/main/container";
-import { getPopularPosts, getRecentPosts } from "@/app/api/posts";
+import { getPopularPosts } from "@/app/api/posts";
 
 export default async function Home() {
   const popularPosts = await getPopularPosts();
-  const recentPosts = await getRecentPosts(5, 0);
 
   return (
     <>
@@ -41,26 +40,7 @@ export default async function Home() {
               </div>
               <SideContainer device="laptop" popularPosts={popularPosts} />
             </div>
-            <PostContainer
-              device="mobile"
-              popularPosts={popularPosts}
-              recentPosts={recentPosts}
-            />
-            <PostContainer
-              device="tablet"
-              popularPosts={popularPosts}
-              recentPosts={recentPosts}
-            />
-            <PostContainer
-              device="laptop"
-              popularPosts={popularPosts}
-              recentPosts={recentPosts}
-            />
-            <PostContainer
-              device="desktop"
-              popularPosts={popularPosts}
-              recentPosts={recentPosts}
-            />
+            <PostContainer popularPosts={popularPosts} />
           </div>
           <SideContainer device="desktop" popularPosts={popularPosts} />
         </article>

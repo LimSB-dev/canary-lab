@@ -1,14 +1,15 @@
 .post_list_header {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  padding: 80px 0px;
+  gap: var(--gap-lg);
   justify-content: center;
   align-items: center;
 }
 
 .tag_container {
   display: flex;
-  gap: 16px;
+  gap: var(--gap);
 }
 
 .chip {

@@ -7,7 +7,7 @@ const CreateHeader = () => {
     <header className={styles.header}>
       <section className={styles.content}>
         <DefaultLogo size="small" />
-        <Link href="/posts">Posts</Link>
+        <Link href="/posts">POST</Link>
       </section>
     </header>
   );

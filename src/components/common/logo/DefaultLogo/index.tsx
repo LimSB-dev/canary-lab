@@ -4,9 +4,10 @@ import styles from "./styles.module.scss";
 
 interface IProps {
   size?: "small" | "medium" | "large";
+  withText?: boolean;
 }
 
-const DefaultLogo = ({ size = "medium" }: IProps) => {
+const DefaultLogo = ({ size = "medium", withText }: IProps) => {
   const logoSize = {
     small: { width: 24, height: 24 },
     medium: { width: 48, height: 48 },
@@ -21,6 +22,7 @@ const DefaultLogo = ({ size = "medium" }: IProps) => {
         width={logoSize[size].width}
         height={logoSize[size].height}
       />
+      {withText && <p>HOME</p>}
     </Link>
   );
 };

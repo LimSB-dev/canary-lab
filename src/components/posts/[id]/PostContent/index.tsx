@@ -16,7 +16,7 @@ const PostContent = ({ post }: IProps) => {
   return (
     <div key={post.id} className={styles.content}>
       <MarkdownPreview
-        className={styles.markdown}
+        className={styles.editor}
         source={post.content}
         style={{
           color: "inherit",

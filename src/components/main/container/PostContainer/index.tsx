@@ -9,12 +9,12 @@ import {
   RecentPostCard,
   ResetCard,
 } from "@/components/main/card";
+import { useAppSelector } from "@/hooks/reduxHook";
 import { useDevice } from "@/hooks/useDevice";
+import { useEffect, useState } from "react";
 
 interface IProps {
-  device: Device;
   popularPosts: IPost[];
-  recentPosts: IPost[];
 }
 
 const MobilePostContainer = ({
@@ -81,16 +81,57 @@ const DesktopPostContainer = ({ recentPosts }: { recentPosts: IPost[] }) => {
   );
 };
 
-export const PostContainer = ({
-  device,
-  popularPosts,
-  recentPosts,
-}: IProps) => {
+export const PostContainer = ({ popularPosts }: IProps) => {
+  const offset = useAppSelector((state) => state.post.offset) ?? 0;
   const deviceType = useDevice();
+  const [recentPosts, setRecentPosts] = useState<IPost[]>([]);
+  const size = (() => {
+    switch (deviceType) {
+      case "min":
+      case "mobile":
+        return 1;
+      case "tablet":
+        return 3;
+      case "laptop":
+      case "desktop":
+        return 4;
+      case "max":
+      default:
+        return 5;
+    }
+  })();
 
-  if (deviceType !== device) return null;
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
 
-  switch (device) {
+    async function fetchPosts() {
+      try {
+        const response = await fetch(
+          `/api/posts/recent?size=${size}&offset=${offset}`,
+          { signal }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch posts");
+        }
+
+        const posts = await response.json();
+        setRecentPosts(posts);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log("Request aborted:", error.message);
+        } else {
+          console.error("Fetch error:", error);
+        }
+      }
+    }
+    fetchPosts();
+
+    return () => controller.abort();
+  }, [size, offset]);
+
+  switch (deviceType) {
     case "mobile":
       return (
         <MobilePostContainer

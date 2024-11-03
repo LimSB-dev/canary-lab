@@ -127,3 +127,9 @@
     animation: submit-glow 4s infinite linear;
   }
 }
+
+.loading {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}

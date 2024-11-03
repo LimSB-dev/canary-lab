@@ -14,6 +14,7 @@ export const ResetCard = () => {
 
   return (
     <button
+      aria-label="reset"
       id="reset-card"
       type="button"
       className={`button-card-shadow ${styles.card}`}

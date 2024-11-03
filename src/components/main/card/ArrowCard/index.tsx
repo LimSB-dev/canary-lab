@@ -20,6 +20,7 @@ export const ArrowCard = () => {
   return (
     <article id="arrow-card" className={`button-card-shadow ${styles.card}`}>
       <button
+        aria-label="left-arrow"
         id="arrow-left"
         type="button"
         className={styles.arrow}
@@ -28,6 +29,7 @@ export const ArrowCard = () => {
         <FontAwesomeIcon icon={faAngleLeft} size="xl" />
       </button>
       <button
+        aria-label="right-arrow"
         id="arrow-right"
         type="button"
         className={styles.arrow}

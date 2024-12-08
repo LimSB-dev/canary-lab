@@ -23,7 +23,13 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 4px;
-
+  gap: 8px;
   font-size: var(--caption);
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 24px;
+  }
 }

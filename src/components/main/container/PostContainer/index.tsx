@@ -8,11 +8,11 @@ import {
   RecentCard,
   RecentPostCard,
   ResetCard,
+  SkeletonPostCard,
 } from "@/components/main/card";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useDevice } from "@/hooks/useDevice";
 import { useEffect, useState } from "react";
-import { SkeletonPostCard } from "../../card/PostCard";
 
 interface IProps {
   popularPosts: IPost[];

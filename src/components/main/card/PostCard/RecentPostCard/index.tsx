@@ -33,15 +33,18 @@ const RecentPostCard = ({ post }: IProps) => {
     >
       <h6>{post.title}</h6>
       <div className={styles.item_footer}>
-        {/* TODO: <p>tag</p> */}
         <caption>{formattedDate}</caption>
         <div className={styles.icon_container}>
-          <FontAwesomeIcon
-            icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
-          />
-          {post.likes.length}
-          <FontAwesomeIcon icon={faEye} />
-          {post.views}
+          <div>
+            <FontAwesomeIcon
+              icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
+            />
+            {post.likes.length}
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faEye} />
+            {post.views}
+          </div>
         </div>
       </div>
     </Link>

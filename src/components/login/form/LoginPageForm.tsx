@@ -2,7 +2,7 @@ import { auth, signIn, signOut } from "../../../../auth";
 import OauthLoginButton from "@/components/login/oauthLoginButton/OauthLoginButton";
 import UserProfile from "@/components/login/form/userProfile";
 
-import styles from "@/styles.module.scss";
+import styles from "./styles.module.scss";
 
 const LoginPageForm = async () => {
   let session = await auth();

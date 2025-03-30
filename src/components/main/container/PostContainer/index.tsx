@@ -24,14 +24,21 @@ const RecentPostSection = ({
   size: number;
   isLoading: boolean;
 }) => {
-  if (isLoading) {
-    return Array(size)
-      .fill(0)
-      .map((_, index) => <SkeletonPostCard key={index} />);
-  }
-
   if (isEmpty(recentPosts)) {
     return <div>최근 게시글이 없습니다.</div>;
+  }
+
+  if (isLoading) {
+    const shiftedPosts = [...recentPosts.slice(1), recentPosts[0]];
+
+    return shiftedPosts
+      .slice(0, size - 1)
+      .map((post, index) => (
+        <RecentPostCard key={post.id || index} post={post} />
+      ))
+      .concat(
+        <SkeletonPostCard key="skeleton" /> // 스켈레톤 카드 추가
+      );
   }
 
   return recentPosts

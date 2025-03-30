@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+import { isEmpty } from "lodash";
 import styles from "./styles.module.scss";
 
 import {
@@ -8,21 +10,45 @@ import {
   RecentCard,
   RecentPostCard,
   ResetCard,
+  SkeletonPostCard,
 } from "@/components/main/card";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useDevice } from "@/hooks/useDevice";
-import { useEffect, useState } from "react";
 
-interface IProps {
-  popularPosts: IPost[];
-}
+const RecentPostSection = ({
+  recentPosts,
+  size,
+  isLoading,
+}: {
+  recentPosts: IPost[];
+  size: number;
+  isLoading: boolean;
+}) => {
+  if (isEmpty(recentPosts)) {
+    return <div>최근 게시글이 없습니다.</div>;
+  }
+
+  if (isLoading) {
+    return Array.from({ length: size }, (_, index) => (
+      <SkeletonPostCard key={index} />
+    ));
+  }
+
+  return recentPosts
+    .slice(0, size)
+    .map((post) => <RecentPostCard key={post.id} post={post} />);
+};
 
 const MobilePostContainer = ({
   popularPosts,
   recentPosts,
+  size,
+  isLoading,
 }: {
   popularPosts: IPost[];
   recentPosts: IPost[];
+  size: number;
+  isLoading: boolean;
 }) => {
   return (
     <div className={styles.post_controller}>
@@ -33,25 +59,45 @@ const MobilePostContainer = ({
           <ResetCard />
           <ArrowCard />
         </div>
-        {recentPosts.slice(0, 1).map((post) => (
-          <RecentPostCard key={post.id} post={post} />
-        ))}
+        <RecentPostSection
+          recentPosts={recentPosts}
+          size={size}
+          isLoading={isLoading}
+        />
       </section>
     </div>
   );
 };
 
-const TabletPostContainer = ({ recentPosts }: { recentPosts: IPost[] }) => {
+const TabletPostContainer = ({
+  recentPosts,
+  size,
+  isLoading,
+}: {
+  recentPosts: IPost[];
+  size: number;
+  isLoading: boolean;
+}) => {
   return (
     <section className={styles.post_section}>
-      {recentPosts.slice(0, 3).map((post) => (
-        <RecentPostCard key={post.id} post={post} />
-      ))}
+      <RecentPostSection
+        recentPosts={recentPosts}
+        size={size}
+        isLoading={isLoading}
+      />
     </section>
   );
 };
 
-const LaptopPostContainer = ({ recentPosts }: { recentPosts: IPost[] }) => {
+const LaptopPostContainer = ({
+  recentPosts,
+  size,
+  isLoading,
+}: {
+  recentPosts: IPost[];
+  size: number;
+  isLoading: boolean;
+}) => {
   return (
     <section className={styles.post_section}>
       <div className={styles.post_controller}>
@@ -59,14 +105,24 @@ const LaptopPostContainer = ({ recentPosts }: { recentPosts: IPost[] }) => {
         <ResetCard />
         <ArrowCard />
       </div>
-      {recentPosts.slice(0, 4).map((post) => (
-        <RecentPostCard key={post.id} post={post} />
-      ))}
+      <RecentPostSection
+        recentPosts={recentPosts}
+        size={size}
+        isLoading={isLoading}
+      />
     </section>
   );
 };
 
-const DesktopPostContainer = ({ recentPosts }: { recentPosts: IPost[] }) => {
+const DesktopPostContainer = ({
+  recentPosts,
+  size,
+  isLoading,
+}: {
+  recentPosts: IPost[];
+  size: number;
+  isLoading: boolean;
+}) => {
   return (
     <section className={styles.post_section}>
       <div className={styles.post_controller}>
@@ -74,18 +130,21 @@ const DesktopPostContainer = ({ recentPosts }: { recentPosts: IPost[] }) => {
         <ResetCard />
         <ArrowCard />
       </div>
-      {recentPosts.slice(0, 4).map((post) => (
-        <RecentPostCard key={post.id} post={post} />
-      ))}
+      <RecentPostSection
+        recentPosts={recentPosts}
+        size={size}
+        isLoading={isLoading}
+      />
     </section>
   );
 };
 
-export const PostContainer = ({ popularPosts }: IProps) => {
+export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
   const offset = useAppSelector((state) => state.post.offset) ?? 0;
   const deviceType = useDevice();
   const [recentPosts, setRecentPosts] = useState<IPost[]>([]);
-  const size = (() => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const size = useMemo(() => {
     switch (deviceType) {
       case "min":
       case "mobile":
@@ -99,7 +158,7 @@ export const PostContainer = ({ popularPosts }: IProps) => {
       default:
         return 5;
     }
-  })();
+  }, [deviceType]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -107,6 +166,8 @@ export const PostContainer = ({ popularPosts }: IProps) => {
 
     async function fetchPosts() {
       try {
+        setIsLoading(true);
+
         const response = await fetch(
           `/api/posts/recent?size=${size}&offset=${offset}`,
           { signal }
@@ -118,6 +179,8 @@ export const PostContainer = ({ popularPosts }: IProps) => {
 
         const posts = await response.json();
         setRecentPosts(posts);
+
+        setIsLoading(false);
       } catch (error) {
         if (error instanceof Error) {
           console.log("Request aborted:", error.message);
@@ -137,14 +200,34 @@ export const PostContainer = ({ popularPosts }: IProps) => {
         <MobilePostContainer
           popularPosts={popularPosts}
           recentPosts={recentPosts}
+          size={size}
+          isLoading={isLoading}
         />
       );
     case "tablet":
-      return <TabletPostContainer recentPosts={recentPosts} />;
+      return (
+        <TabletPostContainer
+          recentPosts={recentPosts}
+          size={size}
+          isLoading={isLoading}
+        />
+      );
     case "laptop":
-      return <LaptopPostContainer recentPosts={recentPosts} />;
+      return (
+        <LaptopPostContainer
+          recentPosts={recentPosts}
+          size={size}
+          isLoading={isLoading}
+        />
+      );
     case "desktop":
-      return <DesktopPostContainer recentPosts={recentPosts} />;
+      return (
+        <DesktopPostContainer
+          recentPosts={recentPosts}
+          size={size}
+          isLoading={isLoading}
+        />
+      );
     default:
       return null;
   }

@@ -10,6 +10,7 @@ import { OauthCard } from "@/components/main/card/OauthCard";
 import {
   PopularPostCard,
   RecentPostCard,
+  SkeletonPostCard,
 } from "@/components/main/card/PostCard";
 import { ProfileCard } from "@/components/main/card/ProfileCard";
 import { RateCard } from "@/components/main/card/RateCard";
@@ -31,6 +32,7 @@ export {
   OauthCard,
   PopularPostCard,
   RecentPostCard,
+  SkeletonPostCard,
   ProfileCard,
   RateCard,
   RecentCard,

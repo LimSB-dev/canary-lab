@@ -9,6 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
 import { MainFooter } from "@/components/common/footer";
 import { FloatingScrollToTop } from "@/components/common/topButton";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,9 +36,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* AdSense Script */}
+        <Script
+          id="adsense-script"
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5392145622568260"
+          crossOrigin="anonymous"
+        />
+
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics />
+
         <Providers>
           {children}
           <FloatingScrollToTop />

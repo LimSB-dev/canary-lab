@@ -2,7 +2,16 @@
   width: 100%;
   margin-top: 48px;
   padding: 24px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  html[data-theme="dark"] & {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-top-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 .comments_title {

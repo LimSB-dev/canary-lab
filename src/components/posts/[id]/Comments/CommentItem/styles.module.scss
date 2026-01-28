@@ -2,14 +2,20 @@
   width: 100%;
   padding: 16px;
   margin-bottom: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  // 다크 테마 - 호버 스타일을 기본으로 적용
+  html[data-theme="dark"] & {
     background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  // 라이트 테마 - 호버 스타일을 기본으로 적용
+  html[data-theme="light"] &,
+  :root & {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.18);
   }
 }
 
@@ -75,12 +81,21 @@
 .action_button {
   padding: 4px 8px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   color: var(--secondary-color);
   font-size: var(--caption);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
 
   &:hover {
     color: var(--text-color);
@@ -123,10 +138,19 @@
     }
 
     pre {
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.05);
       padding: 12px;
       border-radius: 6px;
       overflow-x: auto;
+
+      html[data-theme="dark"] & {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      html[data-theme="light"] &,
+      :root & {
+        background: rgba(0, 0, 0, 0.05);
+      }
     }
 
     a {
@@ -149,7 +173,7 @@
   width: 100%;
   min-height: 100px;
   padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   background: var(--background-color);
   color: var(--text-color);
@@ -157,6 +181,15 @@
   font-family: inherit;
   resize: vertical;
   transition: border-color 0.2s ease-in-out;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
 
   &:focus {
     outline: none;
@@ -179,11 +212,20 @@
 .cancel_button,
 .save_button {
   padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   font-size: var(--caption);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
 }
 
 .cancel_button {
@@ -192,7 +234,13 @@
 
   &:hover:not(:disabled) {
     color: var(--text-color);
-    border-color: rgba(255, 255, 255, 0.2);
+    html[data-theme="dark"] & {
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    html[data-theme="light"] &,
+    :root & {
+      border-color: rgba(0, 0, 0, 0.25);
+    }
   }
 }
 

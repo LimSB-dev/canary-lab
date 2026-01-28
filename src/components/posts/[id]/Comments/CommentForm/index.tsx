@@ -82,17 +82,6 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
             disabled={isSubmitting}
           />
           <div className={styles.comment_form_footer}>
-            <div className={styles.markdown_hint}>
-              <a
-                href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.markdown_link}
-              >
-                Markdown
-              </a>
-              을 사용할 수 있습니다
-            </div>
             <button
               type="submit"
               className={styles.submit_button}

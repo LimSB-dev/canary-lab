@@ -7,6 +7,7 @@ import { getSearchedPost } from "./getSearchedPost";
 import { incrementPostViews } from "./incrementPostViews";
 import { postPost } from "./postPost";
 import { putPost } from "./putPost";
+import { togglePostLike } from "./togglePostLike";
 
 export {
   deletePost,
@@ -18,4 +19,5 @@ export {
   incrementPostViews,
   postPost,
   putPost,
+  togglePostLike,
 };

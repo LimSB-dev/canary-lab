@@ -4,6 +4,7 @@ import PostContent from "@/components/posts/[id]/PostContent";
 import { getPost, incrementPostViews, getPrevNextPost } from "@/app/api/posts";
 import PostNavigation from "@/components/posts/[id]/PostNavigation";
 import { Comments } from "@/components/posts/[id]/Comments";
+import { PostLikeButton } from "@/components/posts/[id]/PostLikeButton";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -57,6 +58,9 @@ export default async function PostDetailPage({ params }: Props) {
       <main id="main-page" role="main" className={styles.main}>
         <h1 className={styles.title}>{post.title}</h1>
         <PostContent post={post} />
+        <div className={styles.post_actions}>
+          <PostLikeButton post={post} />
+        </div>
         <PostNavigation previousPost={previousPost} nextPost={nextPost} />
         <Comments postIndex={postIndex} />
       </main>

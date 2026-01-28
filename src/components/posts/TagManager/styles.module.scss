@@ -1,0 +1,200 @@
+.tag_manager {
+  margin-bottom: var(--gap-lg);
+  padding: 24px;
+  background: var(--card-background-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    font-size: var(--h5);
+    font-weight: 600;
+    color: var(--text-color);
+  }
+}
+
+.create_button {
+  padding: 6px 12px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 4px;
+  font-size: var(--caption);
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
+  margin-bottom: 8px;
+
+  html[data-theme="dark"] & {
+    background: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.input {
+  flex: 1;
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: var(--p);
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
+.color_input {
+  width: 50px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  cursor: pointer;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.form_actions {
+  display: flex;
+  gap: 6px;
+}
+
+.save_button,
+.cancel_button {
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  font-size: var(--caption);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.save_button {
+  background: var(--primary-color);
+  color: var(--text-color);
+  border-color: var(--primary-color);
+  font-weight: 500;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.cancel_button {
+  background: transparent;
+  color: var(--secondary-color);
+
+  &:hover {
+    color: var(--text-color);
+  }
+}
+
+.tags_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tag_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  html[data-theme="dark"] & {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.edit_button,
+.delete_button {
+  padding: 4px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background: transparent;
+  font-size: var(--caption);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.edit_button {
+  color: var(--secondary-color);
+
+  &:hover {
+    color: var(--text-color);
+    border-color: var(--primary-color);
+  }
+}
+
+.delete_button {
+  color: var(--error-color);
+  border-color: var(--error-color);
+
+  &:hover {
+    background: rgba(238, 68, 68, 0.1);
+  }
+}
+
+.loading {
+  padding: 24px;
+  text-align: center;
+  color: var(--secondary-color);
+}

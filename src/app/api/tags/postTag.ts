@@ -1,7 +1,7 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 
 /**
@@ -42,6 +42,8 @@ export async function postTag({
     if (!rows[0]) {
       throw new Error("태그 생성에 실패했습니다.");
     }
+
+    revalidatePath("/posts");
 
     return rows[0];
   } catch (error) {

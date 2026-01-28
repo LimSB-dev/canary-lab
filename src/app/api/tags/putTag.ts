@@ -1,7 +1,7 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 
 /**
@@ -53,6 +53,8 @@ export async function putTag({
       SET name = ${name.trim()}, color = ${color.trim()}
       WHERE id = ${id}
     `;
+
+    revalidatePath("/posts");
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(

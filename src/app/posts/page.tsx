@@ -1,7 +1,7 @@
 import { META_DATA } from "@/constants/metadata";
 import styles from "./page.module.scss";
 import { Metadata } from "next";
-import { PostsList, SkeletonPostsList } from "@/components/posts/postsList";
+import PostsList, { SkeletonPostsList } from "@/components/posts/postsList";
 import { Suspense } from "react";
 import {
   PostTagSelectContainer,
@@ -20,6 +20,7 @@ export default function PostsPage() {
         <PostTagSelectContainer />
       </Suspense>
       <Suspense fallback={<SkeletonPostsList />}>
+        {/* @ts-ignore - Next.js async Server Component */}
         <PostsList />
       </Suspense>
     </section>

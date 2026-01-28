@@ -4,7 +4,7 @@ import { PostListItem, SkeletonPostListItem } from "@/components/posts/postListI
 import { getPosts } from "@/app/api/posts";
 import { getTags } from "@/app/api/tags";
 
-export const PostsList = async () => {
+export default async function PostsList() {
   const posts = await getPosts();
   const tags = await getTags();
 
@@ -19,7 +19,7 @@ export const PostsList = async () => {
       )}
     </ul>
   );
-};
+}
 
 export const SkeletonPostsList = () => {
   return (

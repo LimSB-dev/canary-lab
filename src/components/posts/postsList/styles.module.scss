@@ -19,3 +19,16 @@
     grid-template-columns: 1fr;
   }
 }
+
+.empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--secondary-color);
+}
+
+.loading_more {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--secondary-color);
+  font-size: var(--caption);
+}

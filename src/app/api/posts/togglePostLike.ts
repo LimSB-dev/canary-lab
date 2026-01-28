@@ -75,11 +75,20 @@ export async function togglePostLike(postIndex: number): Promise<boolean> {
     }
 
     // 데이터베이스 업데이트 (likes 컬럼은 uuid[] 타입)
-    await sql`
-      UPDATE posts 
-      SET likes = ${newLikes}
-      WHERE id = ${postId}
-    `;
+    if (newLikes.length === 0) {
+      await sql`
+        UPDATE posts
+        SET likes = '{}'::uuid[]
+        WHERE id = ${postId}
+      `;
+    } else {
+      const likesCsv = newLikes.join(",");
+      await sql`
+        UPDATE posts
+        SET likes = string_to_array(${likesCsv}, ',')::uuid[]
+        WHERE id = ${postId}
+      `;
+    }
 
     revalidatePath(`/posts/${postIndex}`);
     revalidatePath("/posts");

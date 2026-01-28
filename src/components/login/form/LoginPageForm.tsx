@@ -15,10 +15,13 @@ const LoginPageForm = async () => {
   ) : (
     <form
       className={styles.form}
-      action={async () => {
-        "use server";
-        await signIn("github");
-      }}
+      // React 타입(구버전) 환경에서 server action 타입에러 회피
+      action={
+        (async () => {
+          "use server";
+          await signIn("github");
+        }) as any
+      }
     >
       <button className={styles.button} type="submit">
         <OauthLoginButton provider="github" theme="light" type="default" />

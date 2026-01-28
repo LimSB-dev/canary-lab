@@ -45,21 +45,23 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
       return;
     }
 
-    startTransition(async () => {
-      try {
-        const newIsLiked = await togglePostLike(post.index);
-        setIsLiked(newIsLiked);
-        const newCount = newIsLiked ? likeCount + 1 : likeCount - 1;
-        setLikeCount(newCount);
-        onLikeToggle?.(newIsLiked, newCount);
-      } catch (error) {
-        console.error("Failed to toggle like:", error);
-        alert(
-          error instanceof Error
-            ? error.message
-            : "좋아요 처리 중 오류가 발생했습니다."
-        );
-      }
+    startTransition(() => {
+      void (async () => {
+        try {
+          const newIsLiked = await togglePostLike(post.index);
+          setIsLiked(newIsLiked);
+          const newCount = newIsLiked ? likeCount + 1 : likeCount - 1;
+          setLikeCount(newCount);
+          onLikeToggle?.(newIsLiked, newCount);
+        } catch (error) {
+          console.error("Failed to toggle like:", error);
+          alert(
+            error instanceof Error
+              ? error.message
+              : "좋아요 처리 중 오류가 발생했습니다."
+          );
+        }
+      })();
     });
   };
 

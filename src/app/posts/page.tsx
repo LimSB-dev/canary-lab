@@ -19,10 +19,7 @@ export default function PostsPage() {
       <Suspense fallback={<SkeletonPostTagSelectContainer />}>
         <PostTagSelectContainer />
       </Suspense>
-      <Suspense fallback={<SkeletonPostsList />}>
-        {/* @ts-ignore - Next.js async Server Component */}
-        <PostsList />
-      </Suspense>
+      <PostsList />
     </section>
   );
 }

@@ -1,0 +1,62 @@
+.like_button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease-in-out;
+
+  &:hover:not(:disabled) {
+    opacity: 0.7;
+  }
+
+  &:active:not(:disabled) {
+    opacity: 0.5;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.heart_icon {
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.2s ease-in-out;
+}
+
+.liked {
+  color: var(--error-color);
+  
+  .like_button:active & {
+    animation: heartBeat 0.3s ease-in-out;
+  }
+}
+
+.not_liked {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.like_count {
+  color: var(--text-color);
+  font-size: var(--p);
+  font-weight: 400;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

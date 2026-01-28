@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { intersection, isEmpty } from "lodash";
-import { TagChip } from "../postTagSelectContainer/tagChip";
+import { TagChip } from "@/components/posts/postTagSelectContainer/tagChip";
 
 interface IProps {
   post: IPost;
@@ -20,12 +20,15 @@ interface IProps {
 export const PostListItem = ({ post, tags }: IProps) => {
   const user = useAppSelector((state) => state.user);
   const tag = useAppSelector((state) => state.tag);
-  const formattedDate = post.createdAt.toLocaleDateString("ko-KR", {
+  const formattedDate = new Date(post.createdAt as any).toLocaleDateString(
+    "ko-KR",
+    {
     year: "numeric",
     month: "long",
     day: "numeric",
     timeZone: "Asia/Seoul",
-  });
+    }
+  );
 
   const postTags = tags.filter((tag) => post.tags?.includes(tag.id));
 
@@ -47,9 +50,13 @@ export const PostListItem = ({ post, tags }: IProps) => {
           <p>{post.title}</p>
           <div className={styles.icon_container}>
             <FontAwesomeIcon
-              icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
+              icon={
+                Array.isArray(post.likes) && user.id && post.likes.includes(user.id)
+                  ? solidHeart
+                  : regularHeart
+              }
             />
-            {post.likes.length}
+            {Array.isArray(post.likes) ? post.likes.length : 0}
             <FontAwesomeIcon icon={faEye} />
             {post.views}
           </div>

@@ -30,4 +30,14 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .item_footer {
+    ul {
+      display: flex;
+      gap: var(--gap);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
 }

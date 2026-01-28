@@ -75,7 +75,7 @@ const PostsHeader = () => {
               </button>
               <Link
                 href={isEdit ? `/posts/${index}` : "/posts"}
-                className={`button-card-shadow ${styles.edit_button} ${
+                className={`${styles.cancel_button} ${
                   loading && styles.loading
                 }`}
                 onClick={() => handleButton("cancel")}

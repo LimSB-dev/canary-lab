@@ -1,0 +1,152 @@
+.comment_form {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.comment_form_header {
+  display: flex;
+  gap: 12px;
+}
+
+.user_avatar {
+  flex-shrink: 0;
+}
+
+.avatar_image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar_placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--canary-yellow) 0%, var(--canary-gold) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.comment_input_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comment_textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: var(--p);
+  font-family: inherit;
+  resize: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+  }
+
+  &::placeholder {
+    color: var(--secondary-color);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.comment_form_footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.markdown_hint {
+  font-size: var(--caption);
+  color: var(--secondary-color);
+}
+
+.markdown_link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submit_button {
+  padding: 8px 16px;
+  background: var(--card-background-color);
+  color: var(--text-color);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  font-size: var(--p);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: inset 0 1px 2px var(--card-shadow-color-up),
+    inset 0 -1px 2px var(--card-shadow-color-down);
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  &:hover:not(:disabled) {
+    html[data-theme="dark"] & {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    html[data-theme="light"] &,
+    :root & {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.25);
+    }
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 2px var(--card-shadow-color-down),
+      inset 0 -1px 2px var(--card-shadow-color-up);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.login_prompt {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--secondary-color);
+}

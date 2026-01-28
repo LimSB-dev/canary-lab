@@ -128,6 +128,27 @@
   }
 }
 
+.cancel_button {
+  padding: 2px 6px;
+  border: none;
+  background: transparent;
+  color: var(--secondary-color);
+  font-size: var(--caption);
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
 .loading {
   cursor: not-allowed;
   opacity: 0.5;

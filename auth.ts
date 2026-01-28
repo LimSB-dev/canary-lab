@@ -18,15 +18,21 @@ export const {
   callbacks: {
     async signIn({ user }) {
       try {
-        console.log(user);
+        // 사용자 로그인 처리
         return true;
       } catch (error) {
         console.error("Error handling signIn:", error);
-        return false; // 에러가 발생해도 세션을 반환합니다.
+        return false;
       }
     },
     async session({ session }) {
       try {
+        // 이메일이 없으면 세션을 반환하지 않음
+        if (!session?.user?.email) {
+          console.error("Session callback - No email in session:", session);
+          return session;
+        }
+
         const userEmail = session.user.email;
         const userName = session.user.name || "Unknown";
         const userImage = session.user.image || null;

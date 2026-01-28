@@ -3,35 +3,70 @@ import styles from "./page.module.scss";
 import PostContent from "@/components/posts/[id]/PostContent";
 import { getPost, incrementPostViews, getPrevNextPost } from "@/app/api/posts";
 import PostNavigation from "@/components/posts/[id]/PostNavigation";
+import { Comments } from "@/components/posts/[id]/Comments";
+import { PostLikeButton } from "@/components/posts/[id]/PostLikeButton";
+import { notFound } from "next/navigation";
 
 type Props = {
-  params: { index: number };
+  params: Promise<{ index: string }>;
 };
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = await getPost(params.index);
-  const previousImages = (await parent).openGraph?.images || [];
+  const { index } = await params;
+  const postIndex = Number(index);
 
-  return {
-    title: post.title,
-    openGraph: {
-      images: ["/some-specific-page-image.jpg", ...previousImages],
-    },
-  };
+  if (isNaN(postIndex)) {
+    return {
+      title: "게시물을 찾을 수 없습니다",
+    };
+  }
+
+  try {
+    const post = await getPost(postIndex);
+    const previousImages = (await parent).openGraph?.images || [];
+
+    return {
+      title: post.title,
+      openGraph: {
+        images: ["/some-specific-page-image.jpg", ...previousImages],
+      },
+    };
+  } catch {
+    return {
+      title: "게시물을 찾을 수 없습니다",
+    };
+  }
 }
 
 export default async function PostDetailPage({ params }: Props) {
-  await incrementPostViews(params.index);
-  const post = await getPost(params.index);
-  const { previousPost, nextPost } = await getPrevNextPost(params.index);
-  return (
-    <main id="main-page" role="main" className={styles.main}>
-      <h1 className={styles.title}>{post.title}</h1>
-      <PostContent post={post} />
-      <PostNavigation previousPost={previousPost} nextPost={nextPost} />
-    </main>
-  );
+  const { index } = await params;
+  const postIndex = Number(index);
+
+  if (isNaN(postIndex)) {
+    notFound();
+  }
+
+  try {
+    await incrementPostViews(postIndex);
+    const post = await getPost(postIndex);
+    const { previousPost, nextPost } = await getPrevNextPost(postIndex);
+
+    return (
+      <main id="main-page" role="main" className={styles.main}>
+        <h1 className={styles.title}>{post.title}</h1>
+        <PostContent post={post} />
+        <div className={styles.post_actions}>
+          <PostLikeButton post={post} />
+        </div>
+        <PostNavigation previousPost={previousPost} nextPost={nextPost} />
+        <Comments postIndex={postIndex} />
+      </main>
+    );
+  } catch (error) {
+    console.error("Failed to load post:", error);
+    notFound();
+  }
 }

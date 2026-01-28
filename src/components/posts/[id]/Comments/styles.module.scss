@@ -1,0 +1,38 @@
+.comments_section {
+  margin-top: 48px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comments_title {
+  font-size: var(--h4);
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-color);
+}
+
+.comments_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.loading,
+.error,
+.empty_state {
+  padding: 24px;
+  text-align: center;
+  color: var(--secondary-color);
+  background: var(--card-background-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.empty_state {
+  color: var(--secondary-color);
+  font-style: italic;
+}

@@ -25,11 +25,12 @@ const UserProfile = ({ user }: { user: User }) => {
       try {
         if (user?.email) {
           const userData = await getUser(user.email);
-          dispatch(signIn(userData));
-
-          setTimeout(() => {
-            router.push("/");
-          }, welcomeText.length * 100);
+          if (userData) {
+            dispatch(signIn(userData));
+            setTimeout(() => {
+              router.push("/");
+            }, welcomeText.length * 100);
+          }
         }
       } catch (error) {
         console.error("Error fetching user data:", error);

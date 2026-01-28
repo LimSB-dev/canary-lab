@@ -3,6 +3,7 @@ import styles from "./page.module.scss";
 import PostContent from "@/components/posts/[id]/PostContent";
 import { getPost, incrementPostViews, getPrevNextPost } from "@/app/api/posts";
 import PostNavigation from "@/components/posts/[id]/PostNavigation";
+import { Comments } from "@/components/posts/[id]/Comments";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -57,6 +58,7 @@ export default async function PostDetailPage({ params }: Props) {
         <h1 className={styles.title}>{post.title}</h1>
         <PostContent post={post} />
         <PostNavigation previousPost={previousPost} nextPost={nextPost} />
+        <Comments postIndex={postIndex} />
       </main>
     );
   } catch (error) {

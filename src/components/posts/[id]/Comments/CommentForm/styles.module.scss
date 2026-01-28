@@ -1,0 +1,131 @@
+.comment_form {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--card-background-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment_form_header {
+  display: flex;
+  gap: 12px;
+}
+
+.user_avatar {
+  flex-shrink: 0;
+}
+
+.avatar_image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar_placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--canary-yellow) 0%, var(--canary-gold) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.comment_input_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comment_textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: var(--p);
+  font-family: inherit;
+  resize: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+  }
+
+  &::placeholder {
+    color: var(--secondary-color);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.comment_form_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.markdown_hint {
+  font-size: var(--caption);
+  color: var(--secondary-color);
+}
+
+.markdown_link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submit_button {
+  padding: 8px 16px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 6px;
+  font-size: var(--p);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--card-shadow-soft);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 
+      var(--card-shadow-soft),
+      0 0 10px rgba(255, 215, 0, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.login_prompt {
+  padding: 24px;
+  text-align: center;
+  background: var(--card-background-color);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--secondary-color);
+}

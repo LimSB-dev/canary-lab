@@ -27,6 +27,12 @@ export const {
     },
     async session({ session }) {
       try {
+        // 이메일이 없으면 세션을 반환하지 않음
+        if (!session?.user?.email) {
+          console.error("Session callback - No email in session:", session);
+          return session;
+        }
+
         const userEmail = session.user.email;
         const userName = session.user.name || "Unknown";
         const userImage = session.user.image || null;

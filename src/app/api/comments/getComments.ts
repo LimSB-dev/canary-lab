@@ -8,9 +8,15 @@ import { ensureCommentsTable } from "@/utils/ensureCommentsTable";
 /**
  * 특정 게시글의 댓글 목록을 가져옵니다.
  * @param postIndex 게시글의 index
+ * @param limit 가져올 댓글 개수 (기본값: 20)
+ * @param offset 건너뛸 댓글 개수 (기본값: 0)
  * @returns 댓글 목록
  */
-export async function getComments(postIndex: number): Promise<IComment[]> {
+export async function getComments(
+  postIndex: number,
+  limit: number = 5,
+  offset: number = 0
+): Promise<IComment[]> {
   noStore();
 
   try {
@@ -28,7 +34,7 @@ export async function getComments(postIndex: number): Promise<IComment[]> {
 
     const postId = postRows[0].id;
 
-    // 댓글을 가져오면서 사용자 정보도 함께 조인
+    // 댓글을 가져오면서 사용자 정보도 함께 조인 (최신순 정렬)
     const { rows } = await sql`
       SELECT 
         c.id,
@@ -46,7 +52,9 @@ export async function getComments(postIndex: number): Promise<IComment[]> {
       INNER JOIN posts p ON c.post_id = p.id
       LEFT JOIN users u ON c.user_id = u.id
       WHERE c.post_id = ${postId} AND c.deleted_at IS NULL
-      ORDER BY c.created_at ASC
+      ORDER BY c.created_at DESC
+      LIMIT ${limit}
+      OFFSET ${offset}
     `;
 
     return camelcaseKeys(rows, { deep: true }) as IComment[];

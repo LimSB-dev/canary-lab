@@ -2,10 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-import { upload } from "@vercel/blob/client";
 import { useEffect } from "react";
 import styles from "./page.module.scss";
-import { isEmpty } from "lodash";
 
 import { TOOLBARS, TOOLBARS_MODE } from "@/constants/editor/toolbars";
 import { useDevice } from "@/hooks/useDevice";
@@ -13,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
 import { getPost } from "@/app/api/posts";
+import { useImageUpload } from "@/hooks/useImageUpload";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -22,15 +21,26 @@ const MarkdownEditor = dynamic(
 export default function PostEditPage() {
   const dispatch = useAppDispatch();
   const device = useDevice();
-  const index = Number(usePathname().split("/")[2]);
+  const pathname = usePathname();
+  const index = Number(pathname.split("/")[2]);
   const theme = useAppSelector((state) => state.theme.theme);
   const { title, markdownValue } = useAppSelector((state) => state.post);
+  const { handleImageDrop } = useImageUpload();
 
   useEffect(() => {
-    getPost(index).then((data) => {
-      dispatch(setTitle(data.title));
-      dispatch(setMarkdownValue(data.content));
-    });
+    if (!index || isNaN(index)) {
+      console.error("Invalid post index");
+      return;
+    }
+
+    getPost(index)
+      .then((data) => {
+        dispatch(setTitle(data.title));
+        dispatch(setMarkdownValue(data.content));
+      })
+      .catch((error) => {
+        console.error("Failed to load post:", error);
+      });
   }, [dispatch, index]);
 
   return (
@@ -58,42 +68,7 @@ export default function PostEditPage() {
           className: styles.preview,
           style: { height: "100%" },
         }}
-        onDrop={(e) => {
-          e.preventDefault();
-          const limitSize = 10 * 1024 * 1024;
-          const files = Array.from(e.dataTransfer.files);
-          const overSizeFiles = files
-            .filter((file) => file.size > limitSize)
-            .map((file) => file.name);
-
-          if (!isEmpty(overSizeFiles)) {
-            alert(
-              `10MB 이하의 파일만 업로드 가능합니다.\n${overSizeFiles.join(
-                ", "
-              )}`
-            );
-            return;
-          }
-
-          files.forEach(async (file) => {
-            const newBlob = await upload(file.name, file, {
-              access: "public",
-              handleUploadUrl: "/api/image/upload",
-            }).then((res) => {
-              console.log(res);
-              return res;
-            });
-
-            // image url을 markdown에 추가
-            dispatch(
-              setMarkdownValue(
-                `${markdownValue}
-![${file.name}](${newBlob.url})
-`
-              )
-            );
-          });
-        }}
+        onDrop={handleImageDrop}
       />
     </main>
   );

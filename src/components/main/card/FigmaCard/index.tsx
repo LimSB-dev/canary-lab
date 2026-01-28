@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import styles from "./styles.module.scss";
 import { META_DATA } from "@/constants/metadata";
-import { ImageCardShadow } from "../ImageCardShadow";
+import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 
 export const FigmaCard = () => {
   return (

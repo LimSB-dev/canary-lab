@@ -11,18 +11,15 @@ export async function incrementPostViews(index: number) {
   noStore();
 
   try {
-    await sql.query(
-      `
+    await sql`
       UPDATE posts
       SET views = views + 1
-      WHERE index = $1
-      `,
-      [index]
-    );
+      WHERE index = ${index} AND status = 'published'
+    `;
 
     revalidatePath(`/posts/${index}`);
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to increment post views.");
+    // 조회수 증가 실패는 치명적이지 않으므로 에러를 던지지 않음
   }
 }

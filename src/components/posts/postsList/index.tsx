@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { PostListItem, SkeletonPostListItem } from "../postListItem";
+import { PostListItem, SkeletonPostListItem } from "@/components/posts/postListItem";
 
 import { getPosts } from "@/app/api/posts";
 import { getTags } from "@/app/api/tags";

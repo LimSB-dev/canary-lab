@@ -18,11 +18,11 @@ export const {
   callbacks: {
     async signIn({ user }) {
       try {
-        console.log(user);
+        // 사용자 로그인 처리
         return true;
       } catch (error) {
         console.error("Error handling signIn:", error);
-        return false; // 에러가 발생해도 세션을 반환합니다.
+        return false;
       }
     },
     async session({ session }) {

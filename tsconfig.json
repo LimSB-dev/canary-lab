@@ -20,7 +20,8 @@
     ],
     "types": ["node", "react", "react-dom", "jest"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/auth": ["./auth"]
     }
   },
   "include": [

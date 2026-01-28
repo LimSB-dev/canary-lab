@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { intersection, isEmpty } from "lodash";
-import { TagChip } from "../postTagSelectContainer/tagChip";
+import { TagChip } from "@/components/posts/postTagSelectContainer/tagChip";
 
 interface IProps {
   post: IPost;

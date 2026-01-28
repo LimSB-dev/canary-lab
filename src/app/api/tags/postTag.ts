@@ -2,6 +2,7 @@
 
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
+import { auth } from "@/auth";
 
 /**
  * 태그를 생성합니다.
@@ -17,21 +18,38 @@ export async function postTag({
 }) {
   noStore();
 
-  await sql`
-      CREATE TABLE IF NOT EXISTS tags (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        index SERIAL,
-        order SERIAL,
-        name TEXT NOT NULL,
-        color TEXT NOT NULL,
-      )
+  // 인증 체크
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error("Unauthorized: 로그인이 필요합니다.");
+  }
+
+  // 입력 검증
+  if (!name || !name.trim()) {
+    throw new Error("태그 이름을 입력해주세요.");
+  }
+  if (!color || !color.trim()) {
+    throw new Error("태그 색상을 입력해주세요.");
+  }
+
+  try {
+    const { rows } = await sql`
+      INSERT INTO tags (name, color)
+      VALUES (${name.trim()}, ${color.trim()})
+      RETURNING *
     `;
 
-  await sql.query(
-    `
-      INSERT INTO tags (name, color)
-      VALUES ($1, $2)
-    `,
-    [name, color]
-  );
+    if (!rows[0]) {
+      throw new Error("태그 생성에 실패했습니다.");
+    }
+
+    return rows[0];
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "태그 생성 중 오류가 발생했습니다."
+    );
+  }
 }

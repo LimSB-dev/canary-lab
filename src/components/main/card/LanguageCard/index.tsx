@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { ImageCardShadow } from "../ImageCardShadow";
+import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 
 export const LanguageCard = () => {
   return (

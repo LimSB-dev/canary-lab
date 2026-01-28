@@ -23,12 +23,12 @@ export async function POST(request: Request): Promise<NextResponse> {
         };
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {
-        console.log("blob upload completed", blob, tokenPayload);
-
         try {
           // Blob 업로드 완료 후 처리 로직 추가
+          // 필요시 여기에 추가 로직 구현
         } catch (error) {
-          throw new Error("Could not update user");
+          console.error("Error in onUploadCompleted:", error);
+          // 에러가 발생해도 업로드는 완료되었으므로 계속 진행
         }
       },
     });

@@ -24,14 +24,14 @@ const RecentPostSection = ({
   size: number;
   isLoading: boolean;
 }) => {
-  if (isEmpty(recentPosts)) {
-    return <div>최근 게시글이 없습니다.</div>;
-  }
-
   if (isLoading) {
     return Array.from({ length: size }, (_, index) => (
       <SkeletonPostCard key={index} />
     ));
+  }
+
+  if (isEmpty(recentPosts)) {
+    return <div>최근 게시글이 없습니다.</div>;
   }
 
   return recentPosts

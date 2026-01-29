@@ -28,6 +28,9 @@
   --padding-sm: 16px;
   --padding-xs: 8px;
 
+  /* layout */
+  --footer-height: 120px;
+
   /* card */
   --card-width: 124px;
   --card-height: 64px;

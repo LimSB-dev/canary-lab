@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./styles.module.scss";
 import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
-import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { signOut } from "@/store/modules/user";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -14,31 +14,36 @@ export const OauthCard = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
 
-  const handleSignOut = () => {
+  const handleSignOut = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (confirm(t("login.confirmSignOut"))) {
       dispatch(signOut());
     }
   };
 
-  return user.name && user.email && user.image ? (
-    <form
-      className={`button-card-shadow ${styles.card}`}
-      onClick={() => {
-        handleSignOut();
-      }}
-    >
-      <h6>{user.name}</h6>
+  const isLoggedIn = user.name && user.email && user.image;
+
+  return isLoggedIn ? (
+    <div className={`button-card-shadow ${styles.card}`}>
+      <Link href="/mypage" className={styles.action_link}>
+        {t("main.oauthCard.myPage")}
+      </Link>
       <div className={styles.link}>
         <ImageCardShadow figure="circle" />
-
         <Image src={user.image} alt={user.name} width={80} height={80} />
       </div>
-      <button className={styles.sign_out_button}>{t("common.signOut")}</button>
-    </form>
+      <button
+        type="button"
+        className={styles.sign_out_button}
+        onClick={handleSignOut}
+      >
+        {t("common.signOut")}
+      </button>
+    </div>
   ) : (
-    <Link className={`button-card-shadow ${styles.card}`} href={"login"}>
+    <Link className={`button-card-shadow ${styles.card}`} href="/login">
       <h6>{t("main.oauthCard.oauth")}</h6>
-      <button className={styles.link} type="submit">
+      <div className={styles.link}>
         <ImageCardShadow figure="circle" />
         <Image
           src="/assets/tech/nextjs.svg"
@@ -46,7 +51,7 @@ export const OauthCard = () => {
           width={80}
           height={80}
         />
-      </button>
+      </div>
       <p>{t("common.login")}</p>
     </Link>
   );

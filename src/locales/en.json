@@ -34,7 +34,8 @@
     "oauthCard": {
       "login": "Login",
       "oauth": "OAuth",
-      "nextJsAlt": "Next.js"
+      "nextJsAlt": "Next.js",
+      "myPage": "My Page"
     },
     "figmaCard": {
       "design": "Design"

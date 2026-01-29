@@ -23,6 +23,16 @@
   overflow: hidden;
 }
 
+.action_link {
+  font-size: var(--p);
+  color: var(--link-color, inherit);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .sign_out_button {
   all: unset;
   background: none;
@@ -31,7 +41,7 @@
   margin: 0;
   font: inherit;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   color: inherit;
-  font-size: 1rem;
+  font-size: var(--caption);
 }

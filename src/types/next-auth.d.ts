@@ -8,6 +8,8 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      /** normal | admin (DB users.user_type) */
+      userType?: "normal" | "admin";
       /** 연동된 OAuth 제공자 목록 (예: github, google) */
       providers?: string[];
       /** 현재 로그인에 사용한 제공자 */

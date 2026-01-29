@@ -8,6 +8,7 @@ import { authConfig } from "./auth.config";
 import { sql } from "@vercel/postgres";
 import { ensureAccountsTable } from "./src/utils/ensureAccountsTable";
 import { mergeUserIntoUser } from "./src/utils/mergeUserIntoUser";
+import { ensureUsersUserTypeColumn } from "./src/utils/ensureUsersUserTypeColumn";
 import { cookies } from "next/headers";
 
 /** 세션 만료: 30일 (Auth.js 기본값, 사용성·보안 균형) */
@@ -189,12 +190,17 @@ export const {
             login_count = users.login_count + 1
         `;
 
+        await ensureUsersUserTypeColumn();
         const { rows: userRows } = await sql`
-          SELECT id, image FROM users WHERE email = ${userEmail}
+          SELECT id, image, user_type FROM users WHERE email = ${userEmail}
         `;
         const userId = userRows?.[0]?.id;
         if (userRows?.[0]?.image != null) {
           session.user.image = userRows[0].image;
+        }
+        const userType = userRows?.[0]?.user_type;
+        if (userType === "admin" || userType === "normal") {
+          session.user.userType = userType;
         }
         if (userId) {
           session.user.id = userId;

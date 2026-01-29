@@ -27,7 +27,7 @@ export function SessionToRedux({ session }: SessionToReduxProps) {
         name: u.name ?? null,
         email: u.email ?? null,
         image: u.image ?? null,
-        userType: "normal",
+        userType: u.userType ?? "normal",
         providers: u.providers ?? [],
         currentProvider: u.currentProvider ?? null,
       })

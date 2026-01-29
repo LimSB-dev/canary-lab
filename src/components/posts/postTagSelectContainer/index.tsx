@@ -12,6 +12,7 @@ export const PostTagSelectContainer = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useAppSelector((state) => state.user);
+  console.log(user);
   const isAdmin = user.userType === "admin";
 
   const { data: tags = [], isPending: isLoading, refetch: refetchTags } = useTags();

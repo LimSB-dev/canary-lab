@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useRef, useEffect } from "react";
+import { queryKeys } from "@/constants/queryKey";
 
 async function fetchRecentPosts(size: number, offset: number): Promise<IPost[]> {
   const response = await fetch(
@@ -27,7 +28,7 @@ export function useRecentPosts(size: number, offset: number) {
     isFetching,
     isPlaceholderData,
   } = useQuery({
-    queryKey: ["recentPosts", size, offset],
+    queryKey: queryKeys.posts.recent(size, offset),
     queryFn: () => fetchRecentPosts(size, offset),
     placeholderData: (prev) => prev,
   });

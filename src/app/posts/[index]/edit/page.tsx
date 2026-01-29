@@ -10,7 +10,7 @@ import { useDevice } from "@/hooks/useDevice";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
-import { getPost } from "@/app/api/posts";
+import { usePost } from "@/hooks/usePost";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -29,21 +29,13 @@ export default function PostEditPage() {
   const { title, markdownValue } = useAppSelector((state) => state.post);
   const { handleImageDrop } = useImageUpload();
 
-  useEffect(() => {
-    if (!index || isNaN(index)) {
-      console.error("Invalid post index");
-      return;
-    }
+  const { data: post } = usePost(index);
 
-    getPost(index)
-      .then((data) => {
-        dispatch(setTitle(data.title));
-        dispatch(setMarkdownValue(data.content));
-      })
-      .catch((error) => {
-        console.error("Failed to load post:", error);
-      });
-  }, [dispatch, index]);
+  useEffect(() => {
+    if (!post) return;
+    dispatch(setTitle(post.title));
+    dispatch(setMarkdownValue(post.content));
+  }, [post, dispatch]);
 
   return (
     <main className={styles.main} data-color-mode={theme}>

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAppSelector } from "@/hooks/reduxHook";
-import { getTags, postTag, putTag, deleteTag } from "@/app/api/tags";
 import styles from "./styles.module.scss";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useTags, useTagMutations } from "@/hooks/useTags";
 
 interface TagManagerModalProps {
   isOpen: boolean;
@@ -19,30 +19,18 @@ export const TagManagerModal = ({
 }: TagManagerModalProps) => {
   const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
-  const [tags, setTags] = useState<ITag[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [formData, setFormData] = useState({ name: "", color: "#000000" });
 
   const isAdmin = user.userType === "admin";
+  const { data: tags = [], isPending: isLoading } = useTags({
+    enabled: isOpen && isAdmin,
+  });
+  const { createTag, updateTag, removeTag } = useTagMutations();
 
-  useEffect(() => {
-    if (isOpen && isAdmin) {
-      loadTags();
-    }
-  }, [isOpen, isAdmin]);
-
-  const loadTags = async () => {
-    try {
-      setIsLoading(true);
-      const fetchedTags = await getTags();
-      setTags(fetchedTags);
-    } catch (error) {
-      console.error("Failed to load tags:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSuccess = () => {
+    onTagsUpdated?.();
   };
 
   const handleCreate = async () => {
@@ -50,18 +38,17 @@ export const TagManagerModal = ({
       alert(t("posts.enterTagName"));
       return;
     }
-
     try {
-      await postTag({ name: formData.name.trim(), color: formData.color });
-      await loadTags();
+      await createTag.mutateAsync({
+        name: formData.name.trim(),
+        color: formData.color,
+      });
       setFormData({ name: "", color: "#000000" });
       setIsCreating(false);
-      onTagsUpdated?.();
+      onSuccess();
     } catch (error) {
       alert(
-        error instanceof Error
-          ? error.message
-          : t("posts.errorCreateTag")
+        error instanceof Error ? error.message : t("posts.errorCreateTag")
       );
     }
   };
@@ -71,40 +58,30 @@ export const TagManagerModal = ({
       alert(t("posts.enterTagName"));
       return;
     }
-
     try {
-      await putTag({
+      await updateTag.mutateAsync({
         id,
         name: formData.name.trim(),
         color: formData.color,
       });
-      await loadTags();
       setFormData({ name: "", color: "#000000" });
       setIsEditing(null);
-      onTagsUpdated?.();
+      onSuccess();
     } catch (error) {
       alert(
-        error instanceof Error
-          ? error.message
-          : t("posts.errorEditTag")
+        error instanceof Error ? error.message : t("posts.errorEditTag")
       );
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm(t("posts.confirmDeleteTag"))) {
-      return;
-    }
-
+    if (!confirm(t("posts.confirmDeleteTag"))) return;
     try {
-      await deleteTag(id);
-      await loadTags();
-      onTagsUpdated?.();
+      await removeTag.mutateAsync(id);
+      onSuccess();
     } catch (error) {
       alert(
-        error instanceof Error
-          ? error.message
-          : t("posts.errorDeleteTag")
+        error instanceof Error ? error.message : t("posts.errorDeleteTag")
       );
     }
   };

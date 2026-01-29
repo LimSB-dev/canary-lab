@@ -1,30 +1,25 @@
-import { Method } from "axios";
-import { isUndefined } from "lodash";
+/**
+ * TanStack Query 키 관리
+ * - 쿼리 키는 배열로 통일 (useQuery/useInfiniteQuery queryKey)
+ * - 파라미터가 있는 키는 팩토리 함수로 export
+ */
 
-type QueryType = "posts" | "tags" | "profile";
+export const queryKeys = {
+  tags: ["tags"] as const,
 
-const createQuery = (
-  method: Method,
-  type: QueryType,
-  idOrIndex?: string | number
-) => ({
-  key: isUndefined(idOrIndex)
-    ? [`${method}_${type}`, idOrIndex]
-    : [`${method}_${type}`],
-  url: isUndefined(idOrIndex) ? `${type}/${idOrIndex}` : type,
-});
+  posts: {
+    all: ["posts"] as const,
+    list: (tagIdsKey: string) => ["posts", "list", tagIdsKey] as const,
+    detail: (postIndex: number) => ["post", postIndex] as const,
+    recent: (size: number, offset: number) =>
+      ["recentPosts", size, offset] as const,
+  },
 
-export const QUERY = {
-  // posts
-  GET_POSTS: createQuery("get", "posts"),
-  GET_POST: (index: number) => createQuery("get", "posts", index),
-  POST_POST: () => createQuery("post", "posts"),
-  PUT_POST: (index: number) => createQuery("put", "posts", index),
-  DELETE_POST: (index: number) => createQuery("delete", "posts", index),
+  comments: (postIndex: number) => ["comments", postIndex] as const,
 
-  // tags
-  GET_TAGS: createQuery("get", "tags"),
-  POST_TAG: () => createQuery("post", "tags"),
-  PUT_TAG: (id: string) => createQuery("put", "tags", id),
-  DELETE_TAG: (id: string) => createQuery("delete", "tags", id),
-};
+  weather: (lat: number, lon: number) =>
+    ["weather", lat, lon] as const,
+
+  city: (lat: number, lon: number) =>
+    ["city", lat, lon] as const,
+} as const;

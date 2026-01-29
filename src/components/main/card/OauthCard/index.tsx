@@ -22,50 +22,37 @@ export const OauthCard = () => {
   };
 
   const isLoggedIn = user.name && user.email;
-  const providerLabel = user.currentProvider
-    ? t(`main.providers.${user.currentProvider}`)
-    : null;
-  const linkedLabels =
-    user.providers?.length > 0
-      ? user.providers.map((p) => t(`main.providers.${p}`)).join(", ")
-      : null;
 
   return isLoggedIn ? (
-    <div className={`button-card-shadow ${styles.card}`}>
-      <Link href="/mypage" className={styles.card_heading}>
-        {t("main.oauthCard.myPage")}
+    <div className={styles.card_container}>
+      <Link href="/mypage" className={`button-card-shadow ${styles.card_oauth}`}>
+        <p>
+          {t("main.oauthCard.myPage")}
+        </p>
+        <div className={styles.link}>
+          <ImageCardShadow figure="circle" />
+          {user.image ? (
+            <Image src={user.image} alt={user.name ?? t("common.user")} width={80} height={80} />
+          ) : (
+            <span className={styles.avatar_fallback}>
+              {(user.name || user.email || "U")[0].toUpperCase()}
+            </span>
+          )}
+        </div>
       </Link>
-      <div className={styles.link}>
-        <ImageCardShadow figure="circle" />
-        {user.image ? (
-          <Image src={user.image} alt={user.name ?? t("common.user")} width={80} height={80} />
-        ) : (
-          <span className={styles.avatar_fallback}>
-            {(user.name || user.email || "U")[0].toUpperCase()}
-          </span>
-        )}
+      <div className={`button-card-shadow ${styles.card_sign_out}`}>
+        <button
+          type="button"
+          className={styles.sign_out_button}
+          onClick={handleSignOut}
+        >
+          {t("common.signOut")}
+        </button>
       </div>
-      {providerLabel && (
-        <p className={styles.card_footer}>
-          {providerLabel} {t("main.oauthCard.loggedInWith")}
-        </p>
-      )}
-      {linkedLabels && (
-        <p className={styles.card_footer}>
-          {t("main.oauthCard.linkedAccounts")}: {linkedLabels}
-        </p>
-      )}
-      <button
-        type="button"
-        className={styles.sign_out_button}
-        onClick={handleSignOut}
-      >
-        {t("common.signOut")}
-      </button>
     </div>
   ) : (
     <Link className={`button-card-shadow ${styles.card}`} href="/login">
-      <span className={styles.card_heading}>{t("common.login")}</span>
+      <h6>{t("main.oauthCard.oauth")}</h6>
       <div className={styles.link}>
         <ImageCardShadow figure="circle" />
         <Image
@@ -75,7 +62,7 @@ export const OauthCard = () => {
           height={80}
         />
       </div>
-      <p className={styles.card_footer}>{t("main.oauthCard.oauth")}</p>
+      <p>{t("common.login")}</p>
     </Link>
   );
 };

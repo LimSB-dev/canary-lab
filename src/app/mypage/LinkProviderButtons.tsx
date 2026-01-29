@@ -47,7 +47,7 @@ export function LinkProviderButtons({
 
   return (
     <div className={s.link_section}>
-      <h2 className={s.link_title}>{t("mypage.linkSectionTitle")}</h2>
+      <h6 className={s.link_title}>{t("mypage.linkSectionTitle")}</h6>
       <p className={s.link_desc}>{t("mypage.linkSectionDesc")}</p>
       <div className={s.link_buttons}>
         {unlinked.map((provider) => (

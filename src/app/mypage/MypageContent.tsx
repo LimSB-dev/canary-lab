@@ -29,7 +29,7 @@ export function MypageContent({ session }: MypageContentProps) {
         <GoToMainLink className={styles.go_to_main} />
       </nav>
       <section className={styles.section}>
-        <h1 className={styles.title}>{t("mypage.title")}</h1>
+        <h6 className={styles.title}>{t("mypage.title")}</h6>
         <div className={styles.profile}>
           <AvatarChange
             currentUserEmail={email ?? ""}

@@ -15,7 +15,7 @@
 
 .go_to_main {
   font-size: var(--p);
-  color: var(--link-color, inherit);
+  color: var(--link-color);
   text-decoration: none;
 
   &:hover {
@@ -30,7 +30,7 @@
 }
 
 .title {
-  font-size: var(--h4);
+  font-size: var(--h6);
   margin-bottom: 24px;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .link_title {
-  font-size: var(--h5, 1rem);
+  font-size: var(--h6);
   margin: 0 0 8px 0;
 }
 

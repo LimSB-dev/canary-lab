@@ -9,6 +9,7 @@ import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import { useTranslation } from "@/hooks/useTranslation";
+import GenerateMarkdownFromPrompt from "@/components/posts/GenerateMarkdownFromPrompt";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -35,6 +36,7 @@ export default function CreatePage() {
           onChange={(e) => dispatch(setTitle(e.target.value))}
           value={title}
         />
+        <GenerateMarkdownFromPrompt />
       </div>
       <MarkdownEditor
         className={styles.editor}

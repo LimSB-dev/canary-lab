@@ -51,17 +51,29 @@ export async function generatePostThumbnail(
     `Create a single, clean blog post thumbnail image. Title: ${post.title}. Content summary: ${summary}. Style: modern, minimal, suitable for a tech blog. No text in the image.`;
   const finalPrompt = prompt.slice(0, PROMPT_MAX_LENGTH);
 
-  const openai = new OpenAI({ apiKey });
-  const response = await openai.images.generate({
-    model: "dall-e-3",
-    prompt: finalPrompt,
-    n: 1,
-    size: "1024x1024",
-    quality: "standard",
-    response_format: "url",
-  });
+  let imageUrl: string;
+  try {
+    const openai = new OpenAI({ apiKey });
+    const response = await openai.images.generate({
+      model: "dall-e-3",
+      prompt: finalPrompt,
+      n: 1,
+      size: "1024x1024",
+      quality: "standard",
+      response_format: "url",
+    });
+    imageUrl = response.data?.[0]?.url ?? "";
+  } catch (err: unknown) {
+    const status = err && typeof err === "object" && "status" in err ? (err as { status: number }).status : null;
+    const msg = err instanceof Error ? err.message : String(err ?? "");
+    const isQuotaOr429 = status === 429 || /quota|billing|exceeded/i.test(msg);
+    throw new Error(
+      isQuotaOr429
+        ? "OpenAI 사용 한도를 초과했거나 결제 정보가 없습니다. 이미지 API는 유료입니다. Billing(https://platform.openai.com/account/billing)에서 확인해 주세요."
+        : msg || "이미지 생성에 실패했습니다."
+    );
+  }
 
-  const imageUrl = response.data[0]?.url;
   if (!imageUrl) {
     throw new Error("이미지 생성에 실패했습니다.");
   }

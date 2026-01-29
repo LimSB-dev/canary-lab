@@ -39,7 +39,7 @@
 .dialog {
   margin: auto;
   padding: 0;
-  max-width: 480px;
+  max-width: 520px;
   width: 100%;
   border: none;
   border-radius: var(--border-radius);
@@ -80,7 +80,7 @@
 .textarea {
   display: block;
   width: 100%;
-  min-height: 100px;
+  min-height: 120px;
   padding: var(--padding-sm);
   font-size: var(--p);
   font-family: inherit;

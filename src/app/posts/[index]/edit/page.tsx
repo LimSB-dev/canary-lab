@@ -16,6 +16,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/constants";
 import { generatePostThumbnail } from "@/app/api/posts/generateThumbnail";
+import GenerateMarkdownFromPrompt from "@/components/posts/GenerateMarkdownFromPrompt";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -69,6 +70,7 @@ export default function PostEditPage() {
           onChange={(e) => dispatch(setTitle(e.target.value))}
           value={title}
         />
+        <GenerateMarkdownFromPrompt />
         {post && (
           <button
             type="button"

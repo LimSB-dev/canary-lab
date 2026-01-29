@@ -13,20 +13,34 @@ const LoginPageForm = async () => {
       <UserProfile user={user} />
     </div>
   ) : (
-    <form
-      className={styles.form}
-      // React 타입(구버전) 환경에서 server action 타입에러 회피
-      action={
-        (async () => {
-          "use server";
-          await signIn("github");
-        }) as any
-      }
-    >
-      <button className={styles.button} type="submit">
-        <OauthLoginButton provider="github" theme="light" type="default" />
-      </button>
-    </form>
+    <div className={styles.form}>
+      <form
+        className={styles.button_wrapper}
+        action={
+          (async () => {
+            "use server";
+            await signIn("github");
+          }) as any
+        }
+      >
+        <button className={styles.button} type="submit">
+          <OauthLoginButton provider="github" theme="light" type="default" />
+        </button>
+      </form>
+      <form
+        className={styles.button_wrapper}
+        action={
+          (async () => {
+            "use server";
+            await signIn("google");
+          }) as any
+        }
+      >
+        <button className={styles.button} type="submit">
+          <OauthLoginButton provider="google" theme="light" type="default" />
+        </button>
+      </form>
+    </div>
   );
 };
 

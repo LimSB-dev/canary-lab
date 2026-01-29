@@ -12,7 +12,6 @@ import {
 import { useAppSelector } from "@/hooks/reduxHook";
 import { intersection, isEmpty } from "lodash";
 import { TagChip } from "@/components/posts/postTagSelectContainer/tagChip";
-import { useTranslation } from "@/hooks/useTranslation";
 
 interface IProps {
   post: IPost;
@@ -42,7 +41,7 @@ export const PostListItem = ({ post, tags }: IProps) => {
   }
 
   return (
-    <li className={`button-card-shadow ${styles.post_list_item}`}>
+    <li className={styles.post_list_item}>
       <Link
         href={`/posts/${post.index}`}
         className={styles.post_list_link}
@@ -53,36 +52,38 @@ export const PostListItem = ({ post, tags }: IProps) => {
             <Image
               src={post.thumbnailUrl}
               alt=""
-              width={80}
-              height={56}
+              width={320}
+              height={180}
               className={styles.thumbnail}
               unoptimized={post.thumbnailUrl.includes("blob.vercel-storage.com")}
             />
           </div>
         )}
-        <div className={styles.item_content}>
-          <div className={styles.item_header}>
-            <p>{post.title}</p>
-            <div className={styles.icon_container}>
-              <FontAwesomeIcon
-                icon={
-                  Array.isArray(post.likes) && user.id && post.likes.includes(user.id)
-                    ? solidHeart
-                    : regularHeart
-                }
-              />
-              {Array.isArray(post.likes) ? post.likes.length : 0}
-              <FontAwesomeIcon icon={faEye} />
-              {post.views}
-            </div>
-          </div>
+        <div className={styles.item_body}>
+          <h3 className={styles.item_title}>{post.title}</h3>
+          <ul className={styles.tag_list}>
+            {postTags.map((t) => (
+              <TagChip key={t.id} tag={t} type="card" />
+            ))}
+          </ul>
           <div className={styles.item_footer}>
-            <ul>
-              {postTags.map((tag) => {
-                return <TagChip key={tag.id} tag={tag} type={"card"} />;
-              })}
-            </ul>
-            <caption>{formattedDate}</caption>
+            <span className={styles.item_date}>{formattedDate}</span>
+            <div className={styles.item_icons}>
+              <span>
+                <FontAwesomeIcon
+                  icon={
+                    Array.isArray(post.likes) && user.id && post.likes.includes(user.id)
+                      ? solidHeart
+                      : regularHeart
+                  }
+                />
+                {Array.isArray(post.likes) ? post.likes.length : 0}
+              </span>
+              <span>
+                <FontAwesomeIcon icon={faEye} />
+                {post.views}
+              </span>
+            </div>
           </div>
         </div>
       </Link>
@@ -90,11 +91,14 @@ export const PostListItem = ({ post, tags }: IProps) => {
   );
 };
 
-export const SkeletonPostListItem = () => {
-  const { t } = useTranslation();
-  return (
-    <li className={`button-card-shadow ${styles.post_list_item}`}>
-      <p className={styles.post_list_link}>{t("common.loading")}</p>
-    </li>
-  );
-};
+export const SkeletonPostListItem = () => (
+  <li className={styles.post_list_item}>
+    <div className={styles.post_list_link}>
+      <div className={styles.thumbnail_wrap} aria-hidden />
+      <div className={styles.item_body}>
+        <div className={styles.skeleton_title} />
+        <div className={styles.skeleton_meta} />
+      </div>
+    </div>
+  </li>
+);

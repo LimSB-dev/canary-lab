@@ -54,7 +54,7 @@ export const PostTagSelectContainer = () => {
               onClick={() => setIsModalOpen(true)}
               aria-label="태그 관리"
             >
-              관리
+              {t("posts.manageTags")}
             </button>
           )}
         </div>

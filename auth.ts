@@ -10,7 +10,10 @@ import { ensureAccountsTable } from "./src/utils/ensureAccountsTable";
 import { mergeUserIntoUser } from "./src/utils/mergeUserIntoUser";
 import { cookies } from "next/headers";
 
-const FIVE_MINUTES = 5 * 60;
+/** 세션 만료: 30일 (Auth.js 기본값, 사용성·보안 균형) */
+const SESSION_MAX_AGE = 30 * 24 * 60 * 60;
+/** 세션 갱신 주기: 24시간마다 활동 시 만료일 연장 (sliding window) */
+const SESSION_UPDATE_AGE = 24 * 60 * 60;
 
 /** 마이페이지에서 '연동 추가' 시 현재 계정에 새 제공자만 연결하기 위한 쿠키 키 */
 const ACCOUNT_LINK_EMAIL_COOKIE = "canary_account_link_email";
@@ -23,7 +26,8 @@ export const {
 } = NextAuth({
   ...authConfig,
   session: {
-    maxAge: FIVE_MINUTES,
+    maxAge: SESSION_MAX_AGE,
+    updateAge: SESSION_UPDATE_AGE,
   },
   providers: [GitHub, Apple, Google, Naver, Kakao],
   callbacks: {

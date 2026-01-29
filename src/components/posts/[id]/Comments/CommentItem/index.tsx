@@ -69,6 +69,7 @@ export const CommentItem = ({
                 width={32}
                 height={32}
                 className={styles.avatar_image}
+                unoptimized
               />
             ) : (
               <div className={styles.avatar_placeholder}>

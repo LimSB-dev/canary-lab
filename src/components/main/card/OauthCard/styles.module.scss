@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 
-.action_link {
+.card_heading {
   font-size: var(--p);
   color: var(--link-color, inherit);
   text-decoration: none;
@@ -31,6 +31,23 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+/* 로그아웃 시 카드 전체가 링크일 때, 카드 호버 시 상단 텍스트 밑줄 */
+a.card:hover .card_heading {
+  text-decoration: underline;
+}
+
+.card_footer {
+  font-size: var(--caption);
+  margin: 0;
+  color: var(--text-secondary, inherit);
+}
+
+.avatar_fallback {
+  font-size: 2rem;
+  color: inherit;
+  line-height: 1;
 }
 
 .sign_out_button {

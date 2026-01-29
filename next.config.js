@@ -18,6 +18,13 @@ const nextConfig = {
       "lh5.googleusercontent.com",
       "lh6.googleusercontent.com",
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+        pathname: "/**",
+      },
+    ],
   },
   env: {},
   reactStrictMode: true,

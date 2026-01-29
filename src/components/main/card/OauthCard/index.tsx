@@ -21,17 +21,40 @@ export const OauthCard = () => {
     }
   };
 
-  const isLoggedIn = user.name && user.email && user.image;
+  const isLoggedIn = user.name && user.email;
+  const providerLabel = user.currentProvider
+    ? t(`main.providers.${user.currentProvider}`)
+    : null;
+  const linkedLabels =
+    user.providers?.length > 0
+      ? user.providers.map((p) => t(`main.providers.${p}`)).join(", ")
+      : null;
 
   return isLoggedIn ? (
     <div className={`button-card-shadow ${styles.card}`}>
-      <Link href="/mypage" className={styles.action_link}>
+      <Link href="/mypage" className={styles.card_heading}>
         {t("main.oauthCard.myPage")}
       </Link>
       <div className={styles.link}>
         <ImageCardShadow figure="circle" />
-        <Image src={user.image} alt={user.name} width={80} height={80} />
+        {user.image ? (
+          <Image src={user.image} alt={user.name ?? t("common.user")} width={80} height={80} />
+        ) : (
+          <span className={styles.avatar_fallback}>
+            {(user.name || user.email || "U")[0].toUpperCase()}
+          </span>
+        )}
       </div>
+      {providerLabel && (
+        <p className={styles.card_footer}>
+          {providerLabel} {t("main.oauthCard.loggedInWith")}
+        </p>
+      )}
+      {linkedLabels && (
+        <p className={styles.card_footer}>
+          {t("main.oauthCard.linkedAccounts")}: {linkedLabels}
+        </p>
+      )}
       <button
         type="button"
         className={styles.sign_out_button}
@@ -42,7 +65,7 @@ export const OauthCard = () => {
     </div>
   ) : (
     <Link className={`button-card-shadow ${styles.card}`} href="/login">
-      <h6>{t("main.oauthCard.oauth")}</h6>
+      <span className={styles.card_heading}>{t("common.login")}</span>
       <div className={styles.link}>
         <ImageCardShadow figure="circle" />
         <Image
@@ -52,7 +75,7 @@ export const OauthCard = () => {
           height={80}
         />
       </div>
-      <p>{t("common.login")}</p>
+      <p className={styles.card_footer}>{t("main.oauthCard.oauth")}</p>
     </Link>
   );
 };

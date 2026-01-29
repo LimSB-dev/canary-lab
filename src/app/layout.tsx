@@ -3,7 +3,9 @@ import { META_DATA } from "@/constants/metadata";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/reset.css";
+import { auth } from "@/auth";
 import { Providers } from "@/store/providers";
+import { SessionToRedux } from "@/components/common/SessionToRedux";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
@@ -28,11 +30,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -50,6 +53,7 @@ export default function RootLayout({
         <GoogleAnalytics />
 
         <Providers>
+          <SessionToRedux session={session} />
           {children}
           <FloatingScrollToTop />
           <MainFooter />

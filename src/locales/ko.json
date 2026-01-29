@@ -35,7 +35,16 @@
       "login": "로그인",
       "oauth": "OAuth",
       "nextJsAlt": "Next.js",
-      "myPage": "마이페이지"
+      "myPage": "마이페이지",
+      "loggedInWith": "로그인됨",
+      "linkedAccounts": "연동 계정"
+    },
+    "providers": {
+      "github": "GitHub",
+      "google": "Google",
+      "apple": "Apple",
+      "naver": "네이버",
+      "kakao": "카카오"
     },
     "figmaCard": {
       "design": "디자인"
@@ -116,6 +125,24 @@
   "login": {
     "uploadAvatar": "아바타 업로드",
     "confirmSignOut": "정말 로그아웃 하시겠습니까?"
+  },
+  "mypage": {
+    "title": "마이페이지",
+    "goToMain": "메인으로",
+    "name": "이름",
+    "email": "이메일",
+    "currentLogin": "현재 로그인",
+    "linkedAccounts": "연동 계정",
+    "linkSectionTitle": "연동 추가",
+    "linkSectionDesc": "다른 로그인 방식을 연동하면 동일 이메일로 로그인할 수 있습니다.",
+    "linkAdd": "연동 추가",
+    "avatar": {
+      "change": "이미지 변경",
+      "chooseFile": "이미지 파일 선택",
+      "alt": "프로필 이미지",
+      "invalidType": "이미지 파일만 선택해 주세요.",
+      "uploadError": "이미지 업로드에 실패했습니다."
+    }
   },
   "notFound": {
     "title": "404 페이지를 찾을 수 없습니다."

@@ -35,7 +35,16 @@
       "login": "Login",
       "oauth": "OAuth",
       "nextJsAlt": "Next.js",
-      "myPage": "My Page"
+      "myPage": "My Page",
+      "loggedInWith": "Logged in",
+      "linkedAccounts": "Linked accounts"
+    },
+    "providers": {
+      "github": "GitHub",
+      "google": "Google",
+      "apple": "Apple",
+      "naver": "Naver",
+      "kakao": "Kakao"
     },
     "figmaCard": {
       "design": "Design"
@@ -116,6 +125,24 @@
   "login": {
     "uploadAvatar": "Upload Your Avatar",
     "confirmSignOut": "Are you sure you want to sign out?"
+  },
+  "mypage": {
+    "title": "My Page",
+    "goToMain": "Go to Main",
+    "name": "Name",
+    "email": "Email",
+    "currentLogin": "Current login",
+    "linkedAccounts": "Linked accounts",
+    "linkSectionTitle": "Add account link",
+    "linkSectionDesc": "Link another sign-in method with the same email to use it for login.",
+    "linkAdd": "Add link",
+    "avatar": {
+      "change": "Change image",
+      "chooseFile": "Choose image file",
+      "alt": "Profile image",
+      "invalidType": "Please select an image file only.",
+      "uploadError": "Failed to upload image."
+    }
   },
   "notFound": {
     "title": "404 Not Found"

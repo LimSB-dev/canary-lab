@@ -8,9 +8,9 @@ const LoginPageForm = async () => {
   let session = await auth();
   let user = session?.user;
 
-  return user ? (
+  return user && session ? (
     <div className={styles.user_profile_container}>
-      <UserProfile user={user} />
+      <UserProfile user={user} session={session} />
     </div>
   ) : (
     <div className={styles.form}>

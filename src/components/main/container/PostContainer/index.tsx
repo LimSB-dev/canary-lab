@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { isEmpty } from "lodash";
 import styles from "./styles.module.scss";
 
@@ -14,6 +14,7 @@ import {
 } from "@/components/main/card";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useDevice } from "@/hooks/useDevice";
+import { useRecentPosts } from "@/hooks/useRecentPosts";
 
 /** 캐러셀 이동 시 기존 데이터 유지 + 새 슬롯에만 스켈레톤 1개 (stale-while-revalidate) */
 const RecentPostSection = ({
@@ -199,9 +200,6 @@ const DesktopPostContainer = ({
 export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
   const offset = useAppSelector((state) => state.post.offset) ?? 0;
   const deviceType = useDevice();
-  const [recentPosts, setRecentPosts] = useState<IPost[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const fetchedForOffsetRef = useRef<number | null>(null);
 
   const size = useMemo(() => {
     switch (deviceType) {
@@ -219,42 +217,15 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
     }
   }, [deviceType]);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
+  const {
+    recentPosts,
+    isPending,
+    isFetching,
+    isPlaceholderData,
+    fetchedForOffset,
+  } = useRecentPosts(size, offset);
 
-    async function fetchPosts() {
-      try {
-        setIsLoading(true);
-
-        const response = await fetch(
-          `/api/posts/recent?size=${size}&offset=${offset}`,
-          { signal }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch posts");
-        }
-
-        const posts = await response.json();
-        setRecentPosts(posts);
-        fetchedForOffsetRef.current = offset;
-      } catch (error) {
-        if (error instanceof Error) {
-          console.log("Request aborted:", error.message);
-        } else {
-          console.error("Fetch error:", error);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchPosts();
-
-    return () => controller.abort();
-  }, [size, offset]);
-
-  const fetchedForOffset = fetchedForOffsetRef.current;
+  const isLoading = isPending || (isFetching && isPlaceholderData);
 
   switch (deviceType) {
     case "mobile":

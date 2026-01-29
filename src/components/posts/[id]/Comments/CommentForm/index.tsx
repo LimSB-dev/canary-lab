@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useAppSelector } from "@/hooks/reduxHook";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface CommentFormProps {
   onSubmit: (content: string) => void;
@@ -11,6 +12,7 @@ interface CommentFormProps {
 }
 
 export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => {
+  const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,7 +50,7 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
   if (!isAuthenticated) {
     return (
       <div className={styles.login_prompt}>
-        <p>댓글을 작성하려면 로그인이 필요합니다.</p>
+        <p>{t("posts.commentLoginPrompt")}</p>
       </div>
     );
   }
@@ -60,7 +62,7 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
           {user.image ? (
             <Image
               src={user.image}
-              alt={user.name || "User"}
+              alt={user.name || t("common.user")}
               width={40}
               height={40}
               className={styles.avatar_image}
@@ -75,7 +77,7 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
           <textarea
             ref={textareaRef}
             className={styles.comment_textarea}
-            placeholder="댓글을 입력하세요..."
+            placeholder={t("posts.commentPlaceholder")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={3}
@@ -87,7 +89,7 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
               className={styles.submit_button}
               disabled={!content.trim() || isSubmitting}
             >
-              {isSubmitting ? "작성 중..." : "댓글 작성"}
+              {isSubmitting ? t("posts.commentSubmitting") : t("posts.commentSubmit")}
             </button>
           </div>
         </div>

@@ -5,8 +5,10 @@ import { useAppSelector } from "@/hooks/reduxHook";
 import { getTags, postTag, putTag, deleteTag } from "@/app/api/tags";
 import { TagChip } from "../postTagSelectContainer/tagChip";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const TagManager = () => {
+  const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [tags, setTags] = useState<ITag[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +36,7 @@ export const TagManager = () => {
 
   const handleCreate = async () => {
     if (!formData.name.trim()) {
-      alert("태그 이름을 입력해주세요.");
+      alert(t("posts.enterTagName"));
       return;
     }
 
@@ -47,14 +49,14 @@ export const TagManager = () => {
       alert(
         error instanceof Error
           ? error.message
-          : "태그 생성 중 오류가 발생했습니다."
+          : t("posts.errorCreateTag")
       );
     }
   };
 
   const handleUpdate = async (id: string) => {
     if (!formData.name.trim()) {
-      alert("태그 이름을 입력해주세요.");
+      alert(t("posts.enterTagName"));
       return;
     }
 
@@ -71,13 +73,13 @@ export const TagManager = () => {
       alert(
         error instanceof Error
           ? error.message
-          : "태그 수정 중 오류가 발생했습니다."
+          : t("posts.errorEditTag")
       );
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("정말 이 태그를 삭제하시겠습니까?")) {
+    if (!confirm(t("posts.confirmDeleteTag"))) {
       return;
     }
 
@@ -88,7 +90,7 @@ export const TagManager = () => {
       alert(
         error instanceof Error
           ? error.message
-          : "태그 삭제 중 오류가 발생했습니다."
+          : t("posts.errorDeleteTag")
       );
     }
   };
@@ -116,16 +118,16 @@ export const TagManager = () => {
   }
 
   if (isLoading) {
-    return <div className={styles.loading}>태그를 불러오는 중...</div>;
+    return <div className={styles.loading}>{t("posts.loadingTags")}</div>;
   }
 
   return (
     <div className={styles.tag_manager}>
       <div className={styles.header}>
-        <h2>태그 관리</h2>
+        <h2>{t("posts.tagManagement")}</h2>
         {!isCreating && (
           <button className={styles.create_button} onClick={startCreate}>
-            + 태그 추가
+            + {t("posts.addTag")}
           </button>
         )}
       </div>
@@ -134,7 +136,7 @@ export const TagManager = () => {
         <div className={styles.form}>
           <input
             type="text"
-            placeholder="태그 이름"
+            placeholder={t("posts.tagNamePlaceholder")}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className={styles.input}
@@ -149,10 +151,10 @@ export const TagManager = () => {
           />
           <div className={styles.form_actions}>
             <button className={styles.save_button} onClick={handleCreate}>
-              생성
+              {t("common.save")}
             </button>
             <button className={styles.cancel_button} onClick={cancel}>
-              취소
+              {t("common.cancel")}
             </button>
           </div>
         </div>
@@ -184,10 +186,10 @@ export const TagManager = () => {
                     className={styles.save_button}
                     onClick={() => handleUpdate(tag.id)}
                   >
-                    저장
+                    {t("common.save")}
                   </button>
                   <button className={styles.cancel_button} onClick={cancel}>
-                    취소
+                    {t("common.cancel")}
                   </button>
                 </div>
               </div>
@@ -199,13 +201,13 @@ export const TagManager = () => {
                     className={styles.edit_button}
                     onClick={() => startEdit(tag)}
                   >
-                    수정
+                    {t("common.edit")}
                   </button>
                   <button
                     className={styles.delete_button}
                     onClick={() => handleDelete(tag.id)}
                   >
-                    삭제
+                    {t("common.delete")}
                   </button>
                 </div>
               </>

@@ -7,13 +7,15 @@ import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { signOut } from "@/store/modules/user";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const OauthCard = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
 
   const handleSignOut = () => {
-    if (confirm("정말 로그아웃 하시겠습니까?")) {
+    if (confirm(t("login.confirmSignOut"))) {
       dispatch(signOut());
     }
   };
@@ -31,21 +33,21 @@ export const OauthCard = () => {
 
         <Image src={user.image} alt={user.name} width={80} height={80} />
       </div>
-      <button className={styles.sign_out_button}>Sign Out</button>
+      <button className={styles.sign_out_button}>{t("common.signOut")}</button>
     </form>
   ) : (
     <Link className={`button-card-shadow ${styles.card}`} href={"login"}>
-      <h6>Oauth</h6>
+      <h6>{t("main.oauthCard.oauth")}</h6>
       <button className={styles.link} type="submit">
         <ImageCardShadow figure="circle" />
         <Image
           src="/assets/tech/nextjs.svg"
-          alt="Next.js"
+          alt={t("main.oauthCard.nextJsAlt")}
           width={80}
           height={80}
         />
       </button>
-      <p>Login</p>
+      <p>{t("common.login")}</p>
     </Link>
   );
 };

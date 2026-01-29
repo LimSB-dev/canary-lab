@@ -6,6 +6,7 @@ import { getComments, postComment, putComment, deleteComment } from "@/app/api/c
 import { CommentItem } from "./CommentItem";
 import { CommentForm } from "./CommentForm";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface CommentsProps {
   postIndex: number;
@@ -14,6 +15,7 @@ interface CommentsProps {
 const COMMENTS_PER_PAGE = 5;
 
 export const Comments = ({ postIndex }: CommentsProps) => {
+  const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [comments, setComments] = useState<IComment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -52,7 +54,7 @@ export const Comments = ({ postIndex }: CommentsProps) => {
         setError(
           err instanceof Error
             ? err.message
-            : "댓글을 불러오는 중 오류가 발생했습니다."
+            : t("posts.errorFetchComments")
         );
       } finally {
         setIsLoading(false);
@@ -100,7 +102,7 @@ export const Comments = ({ postIndex }: CommentsProps) => {
       // 최신 댓글이 맨 위에 오도록 맨 앞에 추가
       setComments((prev) => [newComment, ...prev]);
     } catch (err) {
-      alert(err instanceof Error ? err.message : "댓글 작성에 실패했습니다.");
+      alert(err instanceof Error ? err.message : t("posts.errorPostComment"));
     }
   };
 
@@ -116,12 +118,12 @@ export const Comments = ({ postIndex }: CommentsProps) => {
         )
       );
     } catch (err) {
-      alert(err instanceof Error ? err.message : "댓글 수정에 실패했습니다.");
+      alert(err instanceof Error ? err.message : t("posts.errorEditComment"));
     }
   };
 
   const handleDelete = async (commentId: string) => {
-    if (!confirm("정말 이 댓글을 삭제하시겠습니까?")) {
+    if (!confirm(t("posts.confirmDeleteComment"))) {
       return;
     }
 
@@ -129,18 +131,18 @@ export const Comments = ({ postIndex }: CommentsProps) => {
       await deleteComment(commentId);
       setComments((prev) => prev.filter((comment) => comment.id !== commentId));
     } catch (err) {
-      alert(err instanceof Error ? err.message : "댓글 삭제에 실패했습니다.");
+      alert(err instanceof Error ? err.message : t("posts.errorDeleteComment"));
     }
   };
 
   return (
     <section className={styles.comments_section}>
       <h2 className={styles.comments_title}>
-        {comments.length > 0 ? `${comments.length}개의 댓글` : "댓글"}
+        {comments.length > 0 ? t("posts.commentsCount").replace("{{count}}", String(comments.length)) : t("posts.comments")}
       </h2>
 
       {isLoading ? (
-        <div className={styles.loading}>댓글을 불러오는 중...</div>
+        <div className={styles.loading}>{t("posts.loadingComments")}</div>
       ) : error ? (
         <div className={styles.error}>{error}</div>
       ) : (
@@ -149,7 +151,7 @@ export const Comments = ({ postIndex }: CommentsProps) => {
           <div className={styles.comments_list}>
             {comments.length === 0 ? (
               <div className={styles.empty_state}>
-                아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!
+                {t("posts.noCommentsYet")}
               </div>
             ) : (
               <>
@@ -164,7 +166,7 @@ export const Comments = ({ postIndex }: CommentsProps) => {
                 ))}
                 {hasMore && (
                   <div ref={observerTarget} className={styles.loading_more}>
-                    {isLoadingMore && "댓글을 불러오는 중..."}
+                    {isLoadingMore && t("posts.loadingComments")}
                   </div>
                 )}
               </>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { getTags, postTag, putTag, deleteTag } from "@/app/api/tags";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface TagManagerModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const TagManagerModal = ({
   onClose,
   onTagsUpdated,
 }: TagManagerModalProps) => {
+  const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [tags, setTags] = useState<ITag[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +47,7 @@ export const TagManagerModal = ({
 
   const handleCreate = async () => {
     if (!formData.name.trim()) {
-      alert("태그 이름을 입력해주세요.");
+      alert(t("posts.enterTagName"));
       return;
     }
 
@@ -59,14 +61,14 @@ export const TagManagerModal = ({
       alert(
         error instanceof Error
           ? error.message
-          : "태그 생성 중 오류가 발생했습니다."
+          : t("posts.errorCreateTag")
       );
     }
   };
 
   const handleUpdate = async (id: string) => {
     if (!formData.name.trim()) {
-      alert("태그 이름을 입력해주세요.");
+      alert(t("posts.enterTagName"));
       return;
     }
 
@@ -84,13 +86,13 @@ export const TagManagerModal = ({
       alert(
         error instanceof Error
           ? error.message
-          : "태그 수정 중 오류가 발생했습니다."
+          : t("posts.errorEditTag")
       );
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("정말 이 태그를 삭제하시겠습니까?")) {
+    if (!confirm(t("posts.confirmDeleteTag"))) {
       return;
     }
 
@@ -102,7 +104,7 @@ export const TagManagerModal = ({
       alert(
         error instanceof Error
           ? error.message
-          : "태그 삭제 중 오류가 발생했습니다."
+          : t("posts.errorDeleteTag")
       );
     }
   };
@@ -132,7 +134,7 @@ export const TagManagerModal = ({
       <div className={styles.overlay} onClick={onClose} />
       <div className={styles.modal}>
         <div className={styles.header}>
-          <h2>태그 관리</h2>
+          <h2>{t("posts.tagManagement")}</h2>
           <button className={styles.close_button} onClick={onClose}>
             ×
           </button>
@@ -141,15 +143,15 @@ export const TagManagerModal = ({
         <div className={styles.content}>
           {!isAdmin ? (
             <div className={styles.no_access}>
-              관리자만 태그를 관리할 수 있습니다.
+              {t("posts.adminOnlyTagManage")}
             </div>
           ) : isLoading ? (
-            <div className={styles.loading}>태그를 불러오는 중...</div>
+            <div className={styles.loading}>{t("posts.loadingTags")}</div>
           ) : (
             <>
               {!isCreating && (
                 <button className={styles.create_button} onClick={startCreate}>
-                  + 태그 추가
+                  + {t("posts.addTag")}
                 </button>
               )}
 
@@ -157,7 +159,7 @@ export const TagManagerModal = ({
                 <div className={styles.form}>
                   <input
                     type="text"
-                    placeholder="태그 이름"
+                    placeholder={t("posts.tagNamePlaceholder")}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -177,10 +179,10 @@ export const TagManagerModal = ({
                       className={styles.save_button}
                       onClick={handleCreate}
                     >
-                      생성
+                      {t("common.save")}
                     </button>
                     <button className={styles.cancel_button} onClick={cancel}>
-                      취소
+                      {t("common.cancel")}
                     </button>
                   </div>
                 </div>
@@ -188,7 +190,7 @@ export const TagManagerModal = ({
 
               <div className={styles.tags_list}>
                 {tags.length === 0 ? (
-                  <div className={styles.empty}>태그가 없습니다.</div>
+                  <div className={styles.empty}>{t("posts.noTags")}</div>
                 ) : (
                   tags.map((tag) => (
                     <div key={tag.id} className={styles.tag_item}>
@@ -225,13 +227,13 @@ export const TagManagerModal = ({
                               className={styles.save_button}
                               onClick={() => handleUpdate(tag.id)}
                             >
-                              저장
+                              {t("common.save")}
                             </button>
                             <button
                               className={styles.cancel_button}
                               onClick={cancel}
                             >
-                              취소
+                              {t("common.cancel")}
                             </button>
                           </div>
                           </div>
@@ -249,13 +251,13 @@ export const TagManagerModal = ({
                               className={styles.edit_button}
                               onClick={() => startEdit(tag)}
                             >
-                              수정
+                              {t("common.edit")}
                             </button>
                             <button
                               className={styles.delete_button}
                               onClick={() => handleDelete(tag.id)}
                             >
-                              삭제
+                              {t("common.delete")}
                             </button>
                           </div>
                         </>

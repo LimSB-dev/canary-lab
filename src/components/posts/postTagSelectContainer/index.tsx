@@ -6,8 +6,10 @@ import { TagChip } from "./tagChip";
 import { getTags } from "@/app/api/tags";
 import { TagManagerModal } from "../TagManagerModal";
 import { useAppSelector } from "@/hooks/reduxHook";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const PostTagSelectContainer = () => {
+  const { t } = useTranslation();
   const [tags, setTags] = useState<ITag[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +35,7 @@ export const PostTagSelectContainer = () => {
   return (
     <>
       <div id="tag-container" className={styles.post_list_header}>
-        <h1>POSTS</h1>
+        <h1>{t("posts.title").toUpperCase()}</h1>
         <div className={styles.tag_section}>
           <ul className={styles.tag_container}>
             {isLoading
@@ -67,9 +69,10 @@ export const PostTagSelectContainer = () => {
 };
 
 export const SkeletonPostTagSelectContainer = () => {
+  const { t } = useTranslation();
   return (
     <div id="tag-container" className={styles.post_list_header}>
-      <h1>POST</h1>
+      <h1>{t("posts.navPost").toUpperCase()}</h1>
       <ul className={styles.tag_container}>
         {Array(10)
           .fill(0)

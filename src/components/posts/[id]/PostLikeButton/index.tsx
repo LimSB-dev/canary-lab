@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface PostLikeButtonProps {
   post: IPost;
@@ -14,6 +15,7 @@ interface PostLikeButtonProps {
 }
 
 export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
+  const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [isPending, startTransition] = useTransition();
   
@@ -41,7 +43,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
 
   const handleLike = async () => {
     if (!user.id || !user.email) {
-      alert("로그인이 필요합니다.");
+      alert(t("common.loginRequired"));
       return;
     }
 
@@ -58,7 +60,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
           alert(
             error instanceof Error
               ? error.message
-              : "좋아요 처리 중 오류가 발생했습니다."
+              : t("posts.errorLike")
           );
         }
       })();
@@ -74,7 +76,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
       className={styles.like_button}
       onClick={handleLike}
       disabled={isPending}
-      aria-label={isLiked ? "좋아요 취소" : "좋아요"}
+      aria-label={isLiked ? t("posts.unlike") : t("posts.like")}
     >
       <FontAwesomeIcon
         icon={isLiked ? solidHeart : regularHeart}

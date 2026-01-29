@@ -3,13 +3,15 @@
 import { type PutBlobResult } from "@vercel/blob";
 import { upload } from "@vercel/blob/client";
 import { useState, useRef } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AvatarUploadPage() {
+  const { t } = useTranslation();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   return (
     <>
-      <h1>Upload Your Avatar</h1>
+      <h1>{t("login.uploadAvatar")}</h1>
 
       <form
         onSubmit={async (event) => {
@@ -30,7 +32,7 @@ export default function AvatarUploadPage() {
         }}
       >
         <input name="file" ref={inputFileRef} type="file" required />
-        <button type="submit">Upload</button>
+        <button type="submit">{t("common.upload")}</button>
       </form>
       {blob && (
         <div>

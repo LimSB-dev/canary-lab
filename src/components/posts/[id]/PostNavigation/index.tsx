@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface PostNavigationProps {
   previousPost?: IPost;
@@ -11,6 +14,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({
   previousPost,
   nextPost,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.post_navigation}>
       {previousPost ? (
@@ -21,7 +25,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({
           {previousPost.title}
         </Link>
       ) : (
-        <span className={styles.disabled_nav_link}>이전 게시글 없음</span>
+        <span className={styles.disabled_nav_link}>{t("posts.noPrevPost")}</span>
       )}
       {nextPost ? (
         <Link
@@ -31,7 +35,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({
           {nextPost.title}
         </Link>
       ) : (
-        <span className={styles.disabled_nav_link}>다음 게시글 없음</span>
+        <span className={styles.disabled_nav_link}>{t("posts.noNextPost")}</span>
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
 import { useImageUpload } from "@/hooks/useImageUpload";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -15,6 +16,7 @@ const MarkdownEditor = dynamic(
 );
 
 export default function CreatePage() {
+  const { t } = useTranslation();
   const device = useDevice();
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.theme.theme);
@@ -29,7 +31,7 @@ export default function CreatePage() {
           className={styles.title_input}
           type="text"
           id="title"
-          placeholder="제목을 입력하세요."
+          placeholder={t("posts.titlePlaceholder")}
           onChange={(e) => dispatch(setTitle(e.target.value))}
           value={title}
         />

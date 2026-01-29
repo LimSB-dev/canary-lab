@@ -5,10 +5,12 @@ import styles from "./styles.module.scss";
 import { PostListItem, SkeletonPostListItem } from "@/components/posts/postListItem";
 import { getTags } from "@/app/api/tags";
 import { useAppSelector } from "@/hooks/reduxHook";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PAGE_SIZE = 20;
 
 export default function PostsList() {
+  const { t } = useTranslation();
   const selectedTagIds = useAppSelector((state) => state.tag.selectedTagIds);
   const selectedKey = useMemo(
     () => selectedTagIds.slice().sort().join(","),
@@ -88,8 +90,8 @@ export default function PostsList() {
   }, [hasMore, isLoading, isLoadingMore, page, selectedKey, selectedTagIds]);
 
   const emptyText = selectedTagIds.length
-    ? "선택한 태그의 게시물이 없습니다."
-    : "게시물이 없습니다.";
+    ? t("posts.noPostsForTag")
+    : t("posts.noPosts");
 
   if (isLoading) {
     return <SkeletonPostsList count={PAGE_SIZE} />;
@@ -107,7 +109,7 @@ export default function PostsList() {
         ))}
       </ul>
       <div ref={observerTarget} className={styles.loading_more}>
-        {isLoadingMore && "불러오는 중..."}
+        {isLoadingMore && t("posts.loadingMore")}
       </div>
     </>
   );

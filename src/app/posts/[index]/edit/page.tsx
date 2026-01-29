@@ -12,6 +12,7 @@ import { setMarkdownValue, setTitle } from "@/store/modules/post";
 import AuthorizationComponents from "@/components/common/authorizationComponents";
 import { getPost } from "@/app/api/posts";
 import { useImageUpload } from "@/hooks/useImageUpload";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -19,6 +20,7 @@ const MarkdownEditor = dynamic(
 );
 
 export default function PostEditPage() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const device = useDevice();
   const pathname = usePathname();
@@ -51,7 +53,7 @@ export default function PostEditPage() {
           className={styles.title_input}
           type="text"
           id="title"
-          placeholder="제목을 입력하세요."
+          placeholder={t("posts.titlePlaceholder")}
           onChange={(e) => dispatch(setTitle(e.target.value))}
           value={title}
         />

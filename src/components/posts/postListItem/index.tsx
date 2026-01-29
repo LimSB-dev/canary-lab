@@ -11,6 +11,7 @@ import {
 import { useAppSelector } from "@/hooks/reduxHook";
 import { intersection, isEmpty } from "lodash";
 import { TagChip } from "@/components/posts/postTagSelectContainer/tagChip";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface IProps {
   post: IPost;
@@ -75,9 +76,10 @@ export const PostListItem = ({ post, tags }: IProps) => {
 };
 
 export const SkeletonPostListItem = () => {
+  const { t } = useTranslation();
   return (
     <li className={`button-card-shadow ${styles.post_list_item}`}>
-      <p className={styles.post_list_link}>Loading...</p>
+      <p className={styles.post_list_link}>{t("common.loading")}</p>
     </li>
   );
 };

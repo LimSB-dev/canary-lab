@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
@@ -47,28 +48,42 @@ export const PostListItem = ({ post, tags }: IProps) => {
         className={styles.post_list_link}
         passHref
       >
-        <div className={styles.item_header}>
-          <p>{post.title}</p>
-          <div className={styles.icon_container}>
-            <FontAwesomeIcon
-              icon={
-                Array.isArray(post.likes) && user.id && post.likes.includes(user.id)
-                  ? solidHeart
-                  : regularHeart
-              }
+        {post.thumbnailUrl && (
+          <div className={styles.thumbnail_wrap}>
+            <Image
+              src={post.thumbnailUrl}
+              alt=""
+              width={80}
+              height={56}
+              className={styles.thumbnail}
+              unoptimized={post.thumbnailUrl.includes("blob.vercel-storage.com")}
             />
-            {Array.isArray(post.likes) ? post.likes.length : 0}
-            <FontAwesomeIcon icon={faEye} />
-            {post.views}
           </div>
-        </div>
-        <div className={styles.item_footer}>
-          <ul>
-            {postTags.map((tag) => {
-              return <TagChip key={tag.id} tag={tag} type={"card"} />;
-            })}
-          </ul>
-          <caption>{formattedDate}</caption>
+        )}
+        <div className={styles.item_content}>
+          <div className={styles.item_header}>
+            <p>{post.title}</p>
+            <div className={styles.icon_container}>
+              <FontAwesomeIcon
+                icon={
+                  Array.isArray(post.likes) && user.id && post.likes.includes(user.id)
+                    ? solidHeart
+                    : regularHeart
+                }
+              />
+              {Array.isArray(post.likes) ? post.likes.length : 0}
+              <FontAwesomeIcon icon={faEye} />
+              {post.views}
+            </div>
+          </div>
+          <div className={styles.item_footer}>
+            <ul>
+              {postTags.map((tag) => {
+                return <TagChip key={tag.id} tag={tag} type={"card"} />;
+              })}
+            </ul>
+            <caption>{formattedDate}</caption>
+          </div>
         </div>
       </Link>
     </li>

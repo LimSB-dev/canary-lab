@@ -3,6 +3,7 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 import camelcaseKeys from "camelcase-keys";
+import { ensurePostsThumbnailColumn } from "@/utils/ensurePostsThumbnailColumn";
 
 /**
  * 게시물의 index를 이용하여 게시물을 가져옵니다.
@@ -13,6 +14,7 @@ export async function getPost(index: number): Promise<IPost> {
   noStore();
 
   try {
+    await ensurePostsThumbnailColumn();
     const { rows } = await sql`
       SELECT * FROM posts 
       WHERE index = ${index} AND status = 'published'

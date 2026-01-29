@@ -60,3 +60,28 @@
     transform: scale(1);
   }
 }
+
+/* 비로그인 시 로그인 유도 링크 */
+.login_to_like_link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: var(--caption);
+  transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+
+  &:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    opacity: 0.9;
+  }
+}
+
+.login_to_like_text {
+  margin-left: 2px;
+}

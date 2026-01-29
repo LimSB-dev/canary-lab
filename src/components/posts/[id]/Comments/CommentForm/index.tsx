@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useAppSelector } from "@/hooks/reduxHook";
 import styles from "./styles.module.scss";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -51,6 +52,9 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
     return (
       <div className={styles.login_prompt}>
         <p>{t("posts.commentLoginPrompt")}</p>
+        <Link href="/login" className={styles.login_prompt_link}>
+          {t("common.goToLogin")}
+        </Link>
       </div>
     );
   }

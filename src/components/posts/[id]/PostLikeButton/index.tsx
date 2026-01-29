@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { togglePostLike } from "@/app/api/posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,8 +44,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
 
   const handleLike = async () => {
     if (!user.id || !user.email) {
-      alert(t("common.loginRequired"));
-      return;
+      return; // 비로그인 시 아래 Link로 리다이렉트 유도
     }
 
     startTransition(() => {
@@ -68,7 +68,13 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
   };
 
   if (!user.id || !user.email) {
-    return null; // 로그인하지 않은 사용자에게는 버튼을 표시하지 않음
+    return (
+      <Link href="/login" className={styles.login_to_like_link}>
+        <FontAwesomeIcon icon={regularHeart} className={styles.heart_icon} />
+        <span className={styles.like_count}>{likeCount}</span>
+        <span className={styles.login_to_like_text}>{t("posts.loginToLike")}</span>
+      </Link>
+    );
   }
 
   return (

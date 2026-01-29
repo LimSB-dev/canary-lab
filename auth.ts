@@ -7,6 +7,8 @@ import Kakao from "next-auth/providers/kakao";
 import { authConfig } from "./auth.config";
 import { sql } from "@vercel/postgres";
 
+const FIVE_MINUTES = 5 * 60;
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -14,6 +16,9 @@ export const {
   signOut,
 } = NextAuth({
   ...authConfig,
+  session: {
+    maxAge: FIVE_MINUTES,
+  },
   providers: [GitHub, Apple, Google, Naver, Kakao],
   callbacks: {
     async signIn({ user }) {

@@ -105,6 +105,7 @@
     "like": "좋아요",
     "unlike": "좋아요 취소",
     "loginToLike": "로그인하고 좋아요 누르기",
+    "likeAvailableWhenLogin": "좋아요는 로그인 시 가능합니다.",
     "errorLike": "좋아요 처리 중 오류가 발생했습니다.",
     "errorFetchPosts": "게시글을 불러오지 못했습니다.",
     "loadingText": "로딩 중...",

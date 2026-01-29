@@ -63,6 +63,8 @@ html[data-theme="light"] {
   --primary-color: #fff555;
   --primary-color-light: #fff777;
   --primary-color-dark: #fff333;
+  /* 흰 배경에서도 읽기 쉬운 링크/강조 색 (노랑 대신) */
+  --link-color: #b8860b;
   --secondary-color: #888888;
   --info-color: #007bff;
   --error-color: #ef4545;
@@ -84,6 +86,7 @@ html[data-theme="dark"] {
   --primary-color: #fff500;
   --primary-color-light: #fff700;
   --primary-color-dark: #fff300;
+  --link-color: var(--primary-color);
   --secondary-color: #888888;
   --info-color: #007bff;
   --error-color: #ee4444;

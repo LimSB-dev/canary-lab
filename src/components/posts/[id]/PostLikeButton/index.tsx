@@ -41,6 +41,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
     user.id ? likesArray.includes(user.id) : false
   );
   const [likeCount, setLikeCount] = useState(likesArray.length);
+  const [isLikeModalOpen, setIsLikeModalOpen] = useState(false);
 
   const handleLike = async () => {
     if (!user.id || !user.email) {
@@ -69,11 +70,30 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
 
   if (!user.id || !user.email) {
     return (
-      <Link href="/login" className={styles.login_to_like_link}>
-        <FontAwesomeIcon icon={regularHeart} className={styles.heart_icon} />
-        <span className={styles.like_count}>{likeCount}</span>
-        <span className={styles.login_to_like_text}>{t("posts.loginToLike")}</span>
-      </Link>
+      <>
+        <button
+          type="button"
+          className={styles.like_trigger}
+          onClick={() => setIsLikeModalOpen(true)}
+          aria-label={t("posts.like")}
+        >
+          <FontAwesomeIcon icon={regularHeart} className={styles.heart_icon} />
+          <span className={styles.like_count}>{likeCount}</span>
+        </button>
+        {isLikeModalOpen && (
+          <div className={styles.like_modal_overlay} onClick={() => setIsLikeModalOpen(false)}>
+            <div className={styles.like_modal} onClick={(e) => e.stopPropagation()}>
+              <p className={styles.like_modal_message}>{t("posts.likeAvailableWhenLogin")}</p>
+              <Link href="/login" className={styles.like_modal_link} onClick={() => setIsLikeModalOpen(false)}>
+                {t("common.goToLogin")}
+              </Link>
+              <button type="button" className={styles.like_modal_close} onClick={() => setIsLikeModalOpen(false)}>
+                {t("common.close")}
+              </button>
+            </div>
+          </div>
+        )}
+      </>
     );
   }
 

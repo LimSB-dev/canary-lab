@@ -105,6 +105,7 @@
     "like": "Like",
     "unlike": "Unlike",
     "loginToLike": "Log in to like",
+    "likeAvailableWhenLogin": "Likes are available when you log in.",
     "errorLike": "An error occurred while processing like.",
     "errorFetchPosts": "Failed to load posts.",
     "loadingText": "Loading...",

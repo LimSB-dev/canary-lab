@@ -61,27 +61,74 @@
   }
 }
 
-/* 비로그인 시 로그인 유도 링크 */
-.login_to_like_link {
+/* 비로그인 시: 클릭 시 모달 */
+.like_trigger {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 0;
   background: transparent;
-  border: 1px solid var(--secondary-color);
-  border-radius: 6px;
-  color: var(--secondary-color);
-  text-decoration: none;
-  font-size: var(--caption);
-  transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: opacity 0.15s ease-in-out;
 
   &:hover {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-    opacity: 0.9;
+    opacity: 0.7;
   }
 }
 
-.login_to_like_text {
-  margin-left: 2px;
+.like_modal_overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-index-modal);
+}
+
+.like_modal {
+  background: var(--card-background-color);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.like_modal_message {
+  margin: 0;
+  font-size: var(--p);
+  color: var(--text-color);
+  text-align: center;
+}
+
+.like_modal_link {
+  color: var(--link-color);
+  text-decoration: underline;
+  font-size: var(--p);
+  font-weight: 500;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+
+.like_modal_close {
+  padding: 6px 14px;
+  font-size: var(--caption);
+  color: var(--text-color);
+  background: transparent;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }

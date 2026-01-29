@@ -51,10 +51,12 @@ export const CommentForm = ({ onSubmit, isAuthenticated }: CommentFormProps) => 
   if (!isAuthenticated) {
     return (
       <div className={styles.login_prompt}>
-        <p>{t("posts.commentLoginPrompt")}</p>
-        <Link href="/login" className={styles.login_prompt_link}>
-          {t("common.goToLogin")}
-        </Link>
+        <p>
+          {t("posts.commentLoginPrompt")}{" "}
+          <Link href="/login" className={styles.login_prompt_hyperlink}>
+            {t("common.goToLogin")}
+          </Link>
+        </p>
       </div>
     );
   }

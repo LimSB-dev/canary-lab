@@ -18,6 +18,15 @@ interface IProps {
   tags: ITag[];
 }
 
+const isVercelBlobUrl = (url: string): boolean => {
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname === "blob.vercel-storage.com";
+  } catch {
+    return false;
+  }
+};
+
 export const PostListItem = ({ post, tags }: IProps) => {
   const user = useAppSelector((state) => state.user);
   const tag = useAppSelector((state) => state.tag);
@@ -55,7 +64,7 @@ export const PostListItem = ({ post, tags }: IProps) => {
               width={320}
               height={180}
               className={styles.thumbnail}
-              unoptimized={post.thumbnailUrl.includes("blob.vercel-storage.com")}
+              unoptimized={isVercelBlobUrl(post.thumbnailUrl)}
             />
           </div>
         )}

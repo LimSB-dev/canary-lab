@@ -1,11 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./styles.module.scss";
 import { META_DATA } from "@/constants/metadata";
 import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const FigmaCard = () => {
+  const { t } = useTranslation();
   return (
     <Link
       className={`button-card-shadow ${styles.card}`}
@@ -24,7 +28,7 @@ export const FigmaCard = () => {
           height={48}
         />
       </div>
-      <p>Design</p>
+      <p>{t("main.figmaCard.design")}</p>
     </Link>
   );
 };

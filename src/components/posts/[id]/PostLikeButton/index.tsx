@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { togglePostLike } from "@/app/api/posts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface PostLikeButtonProps {
   post: IPost;
@@ -14,6 +16,7 @@ interface PostLikeButtonProps {
 }
 
 export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
+  const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [isPending, startTransition] = useTransition();
   
@@ -38,11 +41,11 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
     user.id ? likesArray.includes(user.id) : false
   );
   const [likeCount, setLikeCount] = useState(likesArray.length);
+  const [isLikeModalOpen, setIsLikeModalOpen] = useState(false);
 
   const handleLike = async () => {
     if (!user.id || !user.email) {
-      alert("로그인이 필요합니다.");
-      return;
+      return; // 비로그인 시 아래 Link로 리다이렉트 유도
     }
 
     startTransition(() => {
@@ -58,7 +61,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
           alert(
             error instanceof Error
               ? error.message
-              : "좋아요 처리 중 오류가 발생했습니다."
+              : t("posts.errorLike")
           );
         }
       })();
@@ -66,7 +69,32 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
   };
 
   if (!user.id || !user.email) {
-    return null; // 로그인하지 않은 사용자에게는 버튼을 표시하지 않음
+    return (
+      <>
+        <button
+          type="button"
+          className={styles.like_trigger}
+          onClick={() => setIsLikeModalOpen(true)}
+          aria-label={t("posts.like")}
+        >
+          <FontAwesomeIcon icon={regularHeart} className={styles.heart_icon} />
+          <span className={styles.like_count}>{likeCount}</span>
+        </button>
+        {isLikeModalOpen && (
+          <div className={styles.like_modal_overlay} onClick={() => setIsLikeModalOpen(false)}>
+            <div className={styles.like_modal} onClick={(e) => e.stopPropagation()}>
+              <p className={styles.like_modal_message}>{t("posts.likeAvailableWhenLogin")}</p>
+              <Link href="/login" className={styles.like_modal_link} onClick={() => setIsLikeModalOpen(false)}>
+                {t("common.goToLogin")}
+              </Link>
+              <button type="button" className={styles.like_modal_close} onClick={() => setIsLikeModalOpen(false)}>
+                {t("common.close")}
+              </button>
+            </div>
+          </div>
+        )}
+      </>
+    );
   }
 
   return (
@@ -74,7 +102,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
       className={styles.like_button}
       onClick={handleLike}
       disabled={isPending}
-      aria-label={isLiked ? "좋아요 취소" : "좋아요"}
+      aria-label={isLiked ? t("posts.unlike") : t("posts.like")}
     >
       <FontAwesomeIcon
         icon={isLiked ? solidHeart : regularHeart}

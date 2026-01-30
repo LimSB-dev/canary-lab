@@ -7,6 +7,10 @@ export interface ModalSlice {
   email: string | null;
   image: string | null;
   userType: "normal" | "admin";
+  /** 연동된 로그인 방법 (예: github, google) */
+  providers: string[];
+  /** 현재 로그인에 사용한 제공자 */
+  currentProvider: string | null;
 }
 
 const initialState: ModalSlice = {
@@ -15,6 +19,8 @@ const initialState: ModalSlice = {
   email: null,
   image: null,
   userType: "normal",
+  providers: [],
+  currentProvider: null,
 };
 
 const userSlice = createSlice({
@@ -34,6 +40,8 @@ const userSlice = createSlice({
       state.email = null;
       state.image = null;
       state.userType = "normal";
+      state.providers = [];
+      state.currentProvider = null;
     },
   },
 });

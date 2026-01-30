@@ -1,3 +1,8 @@
+"use client";
+
+import { useTranslation } from "@/hooks/useTranslation";
+
 export const SkeletonCard = () => {
-  return <div className={`card-shadow`}>index</div>;
+  const { t } = useTranslation();
+  return <div className={`card-shadow`}>{t("main.skeletonCard.index")}</div>;
 };

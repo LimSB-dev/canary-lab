@@ -120,47 +120,6 @@
   color: var(--text-color);
   line-height: 1.6;
   word-wrap: break-word;
-
-  // Markdown 스타일링
-  :global {
-    p {
-      margin: 0 0 8px 0;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    code {
-      background: rgba(255, 215, 0, 0.1);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background: rgba(0, 0, 0, 0.05);
-      padding: 12px;
-      border-radius: 6px;
-      overflow-x: auto;
-
-      html[data-theme="dark"] & {
-        background: rgba(0, 0, 0, 0.2);
-      }
-
-      html[data-theme="light"] &,
-      :root & {
-        background: rgba(0, 0, 0, 0.05);
-      }
-    }
-
-    a {
-      color: var(--primary-color);
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
 }
 
 .edit_form {

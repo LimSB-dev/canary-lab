@@ -1,0 +1,181 @@
+{
+  "common": {
+    "search": "Search",
+    "login": "Login",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "reset": "Reset",
+    "home": "Home",
+    "signOut": "Sign Out",
+    "upload": "Upload",
+    "user": "User",
+    "leftArrow": "Previous",
+    "rightArrow": "Next",
+    "loginRequired": "Login required.",
+    "goToLogin": "Go to login",
+    "logoAlt": "Logo"
+  },
+  "main": {
+    "languageCard": {
+      "title": "Multilingual Support",
+      "selectLanguage": "Select language",
+      "currentLanguage": "Current language",
+      "altLanguages": "Languages"
+    },
+    "searchCard": {
+      "placeholder": "Search"
+    },
+    "oauthCard": {
+      "login": "Login",
+      "oauth": "OAuth",
+      "nextJsAlt": "Next.js",
+      "myPage": "My Page",
+      "loggedInWith": "Logged in",
+      "linkedAccounts": "Linked accounts"
+    },
+    "providers": {
+      "github": "GitHub",
+      "google": "Google",
+      "apple": "Apple",
+      "naver": "Naver",
+      "kakao": "Kakao"
+    },
+    "figmaCard": {
+      "design": "Design"
+    },
+    "recentCard": {
+      "recent": "Recent",
+      "posts": "Posts",
+      "more": "more"
+    },
+    "weatherCard": {
+      "findingLocation": "Finding location",
+      "measuringTemperature": "Measuring Temperature"
+    },
+    "skeletonCard": {
+      "index": "index"
+    },
+    "musicCard": {
+      "youtubeTitle": "YouTube video player"
+    },
+    "rateCard": {
+      "solvedAcAlt": "solved.ac"
+    },
+    "profileCard": {
+      "alt": "profile"
+    },
+    "nameCard": {
+      "name": "Seongbin Lim"
+    }
+  },
+  "posts": {
+    "title": "Posts",
+    "navPost": "Post",
+    "create": "Create",
+    "tagManagement": "Tag management",
+    "manageTags": "Manage",
+    "tagNamePlaceholder": "Tag name",
+    "loadingTags": "Loading tags...",
+    "noTags": "No tags.",
+    "addTag": "Add tag",
+    "adminOnlyTagManage": "Only admins can manage tags.",
+    "enterTagName": "Please enter a tag name.",
+    "confirmDeleteTag": "Are you sure you want to delete this tag?",
+    "errorCreateTag": "An error occurred while creating the tag.",
+    "errorEditTag": "An error occurred while updating the tag.",
+    "errorDeleteTag": "An error occurred while deleting the tag.",
+    "noPosts": "No posts.",
+    "noPostsForTag": "No posts for the selected tag.",
+    "loadingMore": "Loading...",
+    "pleaseWait": "Please wait a moment.",
+    "nowLoading": "Now Loading...",
+    "generateThumbnail": "Generate thumbnail",
+    "generateThumbnailLoading": "Generating thumbnail...",
+    "generateThumbnailSuccess": "Thumbnail generated.",
+    "generateThumbnailError": "Failed to generate thumbnail.",
+    "generateThumbnailModalTitle": "Generate thumbnail",
+    "generateThumbnailPromptHint": "AI will create a thumbnail based on the post. Enter the mood or style you want below, or leave blank to auto-generate from title and content.",
+    "generateThumbnailPromptLabel": "Prompt (optional)",
+    "generateThumbnailPromptPlaceholder": "e.g. Minimal illustration, warm tone, code/developer vibe",
+    "generateThumbnailSubmit": "Generate",
+    "generateMarkdownFromPrompt": "Write from prompt",
+    "generateMarkdownModalTitle": "Generate body with AI",
+    "generateMarkdownPromptHint": "Enter a topic or summary and AI will generate the post body in Markdown format.",
+    "generateMarkdownPromptLabel": "Prompt",
+    "generateMarkdownPromptPlaceholder": "e.g. Introduction to React Hooks, REST API design principles",
+    "generateMarkdownSubmit": "Generate",
+    "generateMarkdownLoading": "Generating...",
+    "generateMarkdownSuccess": "Body generated. You can edit it in the editor.",
+    "generateMarkdownError": "Failed to generate body.",
+    "titlePlaceholder": "Enter title",
+    "commentPlaceholder": "Write a comment...",
+    "commentLoginPrompt": "Please log in to write a comment.",
+    "commentSubmit": "Post comment",
+    "commentSubmitting": "Posting...",
+    "editedLabel": "(edited)",
+    "editComment": "Edit comment",
+    "deleteComment": "Delete comment",
+    "confirmDeleteComment": "Are you sure you want to delete this comment?",
+    "comments": "Comments",
+    "commentsCount": "{{count}} comments",
+    "errorFetchComments": "An error occurred while loading comments.",
+    "errorPostComment": "Failed to post comment.",
+    "errorEditComment": "Failed to update comment.",
+    "errorDeleteComment": "Failed to delete comment.",
+    "loadingComments": "Loading comments...",
+    "noCommentsYet": "No comments yet. Be the first to comment!",
+    "like": "Like",
+    "unlike": "Unlike",
+    "loginToLike": "Log in to like",
+    "likeAvailableWhenLogin": "Likes are available when you log in.",
+    "errorLike": "An error occurred while processing like.",
+    "errorFetchPosts": "Failed to load posts.",
+    "loadingText": "Loading...",
+    "noPrevPost": "No previous post",
+    "noNextPost": "No next post"
+  },
+  "login": {
+    "uploadAvatar": "Upload Your Avatar",
+    "confirmSignOut": "Are you sure you want to sign out?"
+  },
+  "mypage": {
+    "title": "My Page",
+    "goToMain": "Go to Main",
+    "name": "Name",
+    "email": "Email",
+    "currentLogin": "Current login",
+    "linkedAccounts": "Linked accounts",
+    "linkSectionTitle": "Add account link",
+    "linkSectionDesc": "Link another sign-in method with the same email to use it for login.",
+    "linkAdd": "Add link",
+    "avatar": {
+      "change": "Change image",
+      "chooseFile": "Choose image file",
+      "alt": "Profile image",
+      "invalidType": "Please select an image file only.",
+      "uploadError": "Failed to upload image."
+    }
+  },
+  "notFound": {
+    "title": "404 Not Found"
+  },
+  "languageNames": {
+    "ko": "Korean",
+    "en": "English",
+    "ja": "Japanese",
+    "zh": "Chinese",
+    "cn": "Chinese",
+    "de": "German",
+    "es": "Spanish",
+    "fr": "French",
+    "it": "Italian",
+    "pt": "Portuguese",
+    "ru": "Russian"
+  }
+}

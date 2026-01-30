@@ -5,6 +5,7 @@ import Image from "next/image";
 import { formatRelativeTime } from "@/utils/formatDate";
 import dynamic from "next/dynamic";
 import styles from "./styles.module.scss";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // PostContent와 동일한 마크다운 프리뷰 사용
 const MarkdownPreview = dynamic(
@@ -25,6 +26,7 @@ export const CommentItem = ({
   onEdit,
   onDelete,
 }: CommentItemProps) => {
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,10 +65,11 @@ export const CommentItem = ({
             {comment.userImage ? (
               <Image
                 src={comment.userImage}
-                alt={comment.userName || "User"}
+                alt={comment.userName || t("common.user")}
                 width={32}
                 height={32}
                 className={styles.avatar_image}
+                unoptimized
               />
             ) : (
               <div className={styles.avatar_placeholder}>
@@ -80,7 +83,7 @@ export const CommentItem = ({
             </strong>
             <span className={styles.comment_meta}>
               {formatRelativeTime(createdAt)}
-              {isEdited && " (수정됨)"}
+              {isEdited && ` ${t("posts.editedLabel")}`}
             </span>
           </div>
         </div>
@@ -89,16 +92,16 @@ export const CommentItem = ({
             <button
               className={styles.action_button}
               onClick={() => setIsEditing(true)}
-              aria-label="댓글 수정"
+              aria-label={t("posts.editComment")}
             >
-              수정
+              {t("common.edit")}
             </button>
             <button
               className={`${styles.action_button} ${styles.delete_button}`}
               onClick={() => onDelete(comment.id)}
-              aria-label="댓글 삭제"
+              aria-label={t("posts.deleteComment")}
             >
-              삭제
+              {t("common.delete")}
             </button>
           </div>
         )}
@@ -120,14 +123,14 @@ export const CommentItem = ({
                 onClick={handleCancel}
                 disabled={isSubmitting}
               >
-                취소
+                {t("common.cancel")}
               </button>
               <button
                 className={styles.save_button}
                 onClick={handleEdit}
                 disabled={!editContent.trim() || isSubmitting}
               >
-                {isSubmitting ? "저장 중..." : "저장"}
+                {isSubmitting ? t("common.loading") : t("common.save")}
               </button>
             </div>
           </div>

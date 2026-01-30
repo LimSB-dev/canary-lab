@@ -10,6 +10,7 @@ import location from "./location";
 import post from "./post";
 import user from "./user";
 import tag from "./tag";
+import language from "./language";
 
 const rootReducer = combineReducers({
   theme,
@@ -20,7 +21,7 @@ const rootReducer = combineReducers({
   post,
   user,
   tag,
-  // Add your reducers here
+  language,
 });
 
 const persistConfig = {
@@ -35,6 +36,7 @@ const persistConfig = {
     "post",
     "user",
     "tag",
+    "language",
   ],
 };
 

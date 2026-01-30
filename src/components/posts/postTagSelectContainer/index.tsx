@@ -1,50 +1,37 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./styles.module.scss";
 import { TagChip } from "./tagChip";
-import { getTags } from "@/app/api/tags";
 import { TagManagerModal } from "../TagManagerModal";
 import { useAppSelector } from "@/hooks/reduxHook";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useTags } from "@/hooks/useTags";
 
 export const PostTagSelectContainer = () => {
-  const [tags, setTags] = useState<ITag[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useAppSelector((state) => state.user);
+  console.log(user);
   const isAdmin = user.userType === "admin";
 
-  const loadTags = async () => {
-    try {
-      setIsLoading(true);
-      const fetchedTags = await getTags();
-      setTags(fetchedTags);
-    } catch (error) {
-      console.error("Failed to load tags:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadTags();
-  }, []);
+  const { data: tags = [], isPending: isLoading, refetch: refetchTags } = useTags();
 
   return (
     <>
       <div id="tag-container" className={styles.post_list_header}>
-        <h1>POSTS</h1>
+        <h1>{t("posts.title").toUpperCase()}</h1>
         <div className={styles.tag_section}>
           <ul className={styles.tag_container}>
             {isLoading
               ? Array(5)
                   .fill(0)
-                  .map((_, index) => (
-                    <li key={index} className={styles.chip_skeleton} />
+                  .map((_, i) => (
+                    <li key={i} className={styles.chip_skeleton} />
                   ))
-              : tags.map((tag) => {
-                  return <TagChip key={tag.id} tag={tag} type={"header"} />;
-                })}
+              : tags.map((tag) => (
+                  <TagChip key={tag.id} tag={tag} type={"header"} />
+                ))}
           </ul>
           {isAdmin && (
             <button
@@ -52,7 +39,7 @@ export const PostTagSelectContainer = () => {
               onClick={() => setIsModalOpen(true)}
               aria-label="태그 관리"
             >
-              관리
+              {t("posts.manageTags")}
             </button>
           )}
         </div>
@@ -60,16 +47,17 @@ export const PostTagSelectContainer = () => {
       <TagManagerModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onTagsUpdated={loadTags}
+        onTagsUpdated={refetchTags}
       />
     </>
   );
 };
 
 export const SkeletonPostTagSelectContainer = () => {
+  const { t } = useTranslation();
   return (
     <div id="tag-container" className={styles.post_list_header}>
-      <h1>POST</h1>
+      <h1>{t("posts.navPost").toUpperCase()}</h1>
       <ul className={styles.tag_container}>
         {Array(10)
           .fill(0)

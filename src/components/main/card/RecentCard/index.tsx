@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const RecentCard = () => {
+  const { t } = useTranslation();
   return (
     <Link
       id="recent-posts-card"
@@ -12,12 +16,12 @@ export const RecentCard = () => {
       passHref
     >
       <h6>
-        Recent
+        {t("main.recentCard.recent")}
         <br />
-        Posts
+        {t("main.recentCard.posts")}
       </h6>
       <p className={styles.link}>
-        <p>more</p>
+        <p>{t("main.recentCard.more")}</p>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
       </p>
     </Link>

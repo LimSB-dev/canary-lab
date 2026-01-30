@@ -149,4 +149,15 @@
   padding: 24px 0;
   text-align: center;
   color: var(--secondary-color);
+  font-size: var(--p);
+}
+
+.login_prompt_hyperlink {
+  color: var(--link-color);
+  text-decoration: underline;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration-thickness: 2px;
+  }
 }

@@ -11,6 +11,38 @@
   overflow: hidden;
 }
 
+.card_container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.card_oauth {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--card-padding);
+  width: calc(var(--card-width) * 1 + var(--gap) * 0);
+  height: calc(var(--card-height) * 2 + var(--gap) * 1);
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.card_sign_out {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--card-padding);
+  width: calc(var(--card-width) * 1 + var(--gap) * 0);
+  height: calc(var(--card-height) * 1 + var(--gap) * 0);
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
 .link {
   position: relative;
   display: flex;
@@ -23,6 +55,28 @@
   overflow: hidden;
 }
 
+.card_heading {
+  font-size: var(--p);
+  color: var(--link-color, inherit);
+}
+
+/* 로그아웃 시 카드 전체가 링크일 때, 카드 호버 시 상단 텍스트 밑줄 */
+a.card:hover .card_heading {
+  text-decoration: underline;
+}
+
+.card_footer {
+  font-size: var(--caption);
+  margin: 0;
+  color: var(--text-secondary, inherit);
+}
+
+.avatar_fallback {
+  font-size: 2rem;
+  color: inherit;
+  line-height: 1;
+}
+
 .sign_out_button {
   all: unset;
   background: none;
@@ -31,7 +85,7 @@
   margin: 0;
   font: inherit;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   color: inherit;
-  font-size: 1rem;
+  font-size: var(--p);
 }

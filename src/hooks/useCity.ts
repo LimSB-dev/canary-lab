@@ -1,71 +1,80 @@
+"use client";
+
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useAppDispatch, useAppSelector } from "./reduxHook";
+import { queryKeys } from "@/constants/queryKey";
 import { setCity } from "@/store/modules/location";
 
+type Coords = { latitude: number; longitude: number } | null;
+
+async function fetchCityName(coords: Coords): Promise<string | null> {
+  if (!coords) return null;
+  const response = await fetch(
+    `https://api.opencagedata.com/geocode/v1/json?q=${coords.latitude}+${coords.longitude}&key=${process.env.NEXT_PUBLIC_OPENCAGE_API_KEY}`
+  );
+  if (!response.ok) throw new Error("City not found");
+  const data = await response.json();
+  if (data?.results?.length > 0) {
+    return data.results[0].components.city ?? null;
+  }
+  return null;
+}
+
 /**
- * @description find the current city and set it to the redux store
+ * @description find the current city and set it to the redux store (useQuery)
  * @returns {object} { loading, error }
  */
 export const useCity = () => {
   const dispatch = useAppDispatch();
   const dt = useAppSelector((state) => state.weather.weatherData?.dt);
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
-
-  const fetchCity = async (latitude: number, longitude: number) => {
-    try {
-      const response = await fetch(
-        `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${process.env.NEXT_PUBLIC_OPENCAGE_API_KEY}`
-      );
-
-      if (!response.ok) {
-        throw new Error("City not found");
-      }
-
-      const data = await response.json();
-
-      if (data && data.results && data.results.length > 0) {
-        const city = data.results[0].components.city;
-        dispatch(setCity(city));
-      }
-    } catch (error: any) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onGeoOk = (position: GeolocationPosition) => {
-    const { latitude, longitude } = position.coords;
-    fetchCity(latitude, longitude);
-  };
-
-  const onGeoError = (error: GeolocationPositionError) => {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        setError("Please allow location access.");
-        break;
-      case error.POSITION_UNAVAILABLE:
-        setError("Location information is not available.");
-        break;
-      case error.TIMEOUT:
-        setError("Please try again later.");
-        break;
-      default:
-        setError("Please submit this error.");
-        break;
-    }
-  };
+  const [coords, setCoords] = useState<Coords>(null);
+  const [geoError, setGeoError] = useState<string>("");
 
   useEffect(() => {
     if (!dt) return;
-
-    navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
-    setLoading(false);
+    navigator.geolocation.getCurrentPosition(
+      (position) =>
+        setCoords({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }),
+      (error: GeolocationPositionError) => {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            setGeoError("Please allow location access.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            setGeoError("Location information is not available.");
+            break;
+          case error.TIMEOUT:
+            setGeoError("Please try again later.");
+            break;
+          default:
+            setGeoError("Please submit this error.");
+        }
+      }
+    );
   }, [dt]);
 
-  return { loading, error };
+  const { data: city, isPending, error } = useQuery({
+    queryKey:
+      coords != null
+        ? queryKeys.city(coords.latitude, coords.longitude)
+        : ["city", null, null],
+    queryFn: () => fetchCityName(coords),
+    enabled: !!coords,
+    staleTime: 1000 * 60 * 60,
+  });
+
+  useEffect(() => {
+    if (city) dispatch(setCity(city));
+  }, [city, dispatch]);
+
+  return {
+    loading: isPending,
+    error: geoError || (error instanceof Error ? error.message : ""),
+  };
 };
 
 export default useCity;

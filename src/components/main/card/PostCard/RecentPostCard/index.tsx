@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,25 +22,53 @@ const RecentPostCard = ({ post }: IProps) => {
     day: "numeric",
     timeZone: "UTC",
   });
+
+  let isVercelBlobHost = false;
+  if (post.thumbnailUrl) {
+    try {
+      const url = new URL(post.thumbnailUrl);
+      const hostname = url.hostname;
+      isVercelBlobHost =
+        hostname === "blob.vercel-storage.com" ||
+        hostname.endsWith(".blob.vercel-storage.com");
+    } catch {
+      isVercelBlobHost = false;
+    }
+  }
+
   return (
     <Link
       className={`button-card-shadow ${styles.card_resent}`}
       href={`/posts/${post.index}`}
       passHref
     >
-      <h6>{post.title}</h6>
-      <div className={styles.item_footer}>
-        <caption>{formattedDate}</caption>
-        <div className={styles.icon_container}>
-          <div>
-            <FontAwesomeIcon
-              icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
-            />
-            {post.likes.length}
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faEye} />
-            {post.views}
+      {post.thumbnailUrl && (
+        <div className={styles.thumbnail_wrap}>
+          <Image
+            src={post.thumbnailUrl}
+            alt=""
+            width={320}
+            height={180}
+            className={styles.thumbnail}
+            unoptimized={isVercelBlobHost}
+          />
+        </div>
+      )}
+      <div className={styles.card_body}>
+        <h6>{post.title}</h6>
+        <div className={styles.item_footer}>
+          <caption>{formattedDate}</caption>
+          <div className={styles.icon_container}>
+            <div>
+              <FontAwesomeIcon
+                icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
+              />
+              {post.likes.length}
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faEye} />
+              {post.views}
+            </div>
           </div>
         </div>
       </div>

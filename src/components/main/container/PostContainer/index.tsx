@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { isEmpty } from "lodash";
 import styles from "./styles.module.scss";
 
@@ -14,29 +14,63 @@ import {
 } from "@/components/main/card";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useDevice } from "@/hooks/useDevice";
+import { useRecentPosts } from "@/hooks/useRecentPosts";
 
+/** 캐러셀 이동 시 기존 데이터 유지 + 새 슬롯에만 스켈레톤 1개 (stale-while-revalidate) */
 const RecentPostSection = ({
   recentPosts,
   size,
   isLoading,
+  offset,
+  fetchedForOffset,
 }: {
   recentPosts: IPost[];
   size: number;
   isLoading: boolean;
+  offset: number;
+  fetchedForOffset: number | null;
 }) => {
+  const hasStaleData =
+    isLoading && recentPosts.length > 0 && fetchedForOffset !== null && offset !== fetchedForOffset;
+
+  if (hasStaleData) {
+    const movedRight = offset > fetchedForOffset;
+    const staleSlice = movedRight
+      ? recentPosts.slice(1, size)
+      : recentPosts.slice(0, size - 1);
+    const skeletonKey = movedRight ? "skeleton-right" : "skeleton-left";
+    return (
+      <>
+        {!movedRight && <SkeletonPostCard key={skeletonKey} />}
+        {staleSlice.map((post) => (
+          <RecentPostCard key={post.id} post={post} />
+        ))}
+        {movedRight && <SkeletonPostCard key={skeletonKey} />}
+      </>
+    );
+  }
+
   if (isLoading) {
-    return Array.from({ length: size }, (_, index) => (
-      <SkeletonPostCard key={index} />
-    ));
+    return (
+      <>
+        {Array.from({ length: size }, (_, index) => (
+          <SkeletonPostCard key={`skeleton-${index}`} />
+        ))}
+      </>
+    );
   }
 
   if (isEmpty(recentPosts)) {
     return <div>최근 게시글이 없습니다.</div>;
   }
 
-  return recentPosts
-    .slice(0, size)
-    .map((post) => <RecentPostCard key={post.id} post={post} />);
+  return (
+    <>
+      {recentPosts.slice(0, size).map((post) => (
+        <RecentPostCard key={post.id} post={post} />
+      ))}
+    </>
+  );
 };
 
 const MobilePostContainer = ({
@@ -44,11 +78,15 @@ const MobilePostContainer = ({
   recentPosts,
   size,
   isLoading,
+  offset,
+  fetchedForOffset,
 }: {
   popularPosts: IPost[];
   recentPosts: IPost[];
   size: number;
   isLoading: boolean;
+  offset: number;
+  fetchedForOffset: number | null;
 }) => {
   return (
     <div className={styles.post_controller}>
@@ -63,6 +101,8 @@ const MobilePostContainer = ({
           recentPosts={recentPosts}
           size={size}
           isLoading={isLoading}
+          offset={offset}
+          fetchedForOffset={fetchedForOffset}
         />
       </section>
     </div>
@@ -73,10 +113,14 @@ const TabletPostContainer = ({
   recentPosts,
   size,
   isLoading,
+  offset,
+  fetchedForOffset,
 }: {
   recentPosts: IPost[];
   size: number;
   isLoading: boolean;
+  offset: number;
+  fetchedForOffset: number | null;
 }) => {
   return (
     <section className={styles.post_section}>
@@ -84,6 +128,8 @@ const TabletPostContainer = ({
         recentPosts={recentPosts}
         size={size}
         isLoading={isLoading}
+        offset={offset}
+        fetchedForOffset={fetchedForOffset}
       />
     </section>
   );
@@ -93,10 +139,14 @@ const LaptopPostContainer = ({
   recentPosts,
   size,
   isLoading,
+  offset,
+  fetchedForOffset,
 }: {
   recentPosts: IPost[];
   size: number;
   isLoading: boolean;
+  offset: number;
+  fetchedForOffset: number | null;
 }) => {
   return (
     <section className={styles.post_section}>
@@ -109,6 +159,8 @@ const LaptopPostContainer = ({
         recentPosts={recentPosts}
         size={size}
         isLoading={isLoading}
+        offset={offset}
+        fetchedForOffset={fetchedForOffset}
       />
     </section>
   );
@@ -118,10 +170,14 @@ const DesktopPostContainer = ({
   recentPosts,
   size,
   isLoading,
+  offset,
+  fetchedForOffset,
 }: {
   recentPosts: IPost[];
   size: number;
   isLoading: boolean;
+  offset: number;
+  fetchedForOffset: number | null;
 }) => {
   return (
     <section className={styles.post_section}>
@@ -134,6 +190,8 @@ const DesktopPostContainer = ({
         recentPosts={recentPosts}
         size={size}
         isLoading={isLoading}
+        offset={offset}
+        fetchedForOffset={fetchedForOffset}
       />
     </section>
   );
@@ -142,8 +200,7 @@ const DesktopPostContainer = ({
 export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
   const offset = useAppSelector((state) => state.post.offset) ?? 0;
   const deviceType = useDevice();
-  const [recentPosts, setRecentPosts] = useState<IPost[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const size = useMemo(() => {
     switch (deviceType) {
       case "min":
@@ -160,39 +217,15 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
     }
   }, [deviceType]);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
+  const {
+    recentPosts,
+    isPending,
+    isFetching,
+    isPlaceholderData,
+    fetchedForOffset,
+  } = useRecentPosts(size, offset);
 
-    async function fetchPosts() {
-      try {
-        setIsLoading(true);
-
-        const response = await fetch(
-          `/api/posts/recent?size=${size}&offset=${offset}`,
-          { signal }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch posts");
-        }
-
-        const posts = await response.json();
-        setRecentPosts(posts);
-
-        setIsLoading(false);
-      } catch (error) {
-        if (error instanceof Error) {
-          console.log("Request aborted:", error.message);
-        } else {
-          console.error("Fetch error:", error);
-        }
-      }
-    }
-    fetchPosts();
-
-    return () => controller.abort();
-  }, [size, offset]);
+  const isLoading = isPending || (isFetching && isPlaceholderData);
 
   switch (deviceType) {
     case "mobile":
@@ -202,6 +235,8 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
           recentPosts={recentPosts}
           size={size}
           isLoading={isLoading}
+          offset={offset}
+          fetchedForOffset={fetchedForOffset}
         />
       );
     case "tablet":
@@ -210,6 +245,8 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
           recentPosts={recentPosts}
           size={size}
           isLoading={isLoading}
+          offset={offset}
+          fetchedForOffset={fetchedForOffset}
         />
       );
     case "laptop":
@@ -218,6 +255,8 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
           recentPosts={recentPosts}
           size={size}
           isLoading={isLoading}
+          offset={offset}
+          fetchedForOffset={fetchedForOffset}
         />
       );
     case "desktop":
@@ -226,6 +265,8 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
           recentPosts={recentPosts}
           size={size}
           isLoading={isLoading}
+          offset={offset}
+          fetchedForOffset={fetchedForOffset}
         />
       );
     default:

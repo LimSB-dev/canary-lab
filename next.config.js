@@ -9,28 +9,23 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = {
   images: {
-    domains: [
-      "mazassumnida.wtf",
-      "openweathermap.org",
-      "avatars.githubusercontent.com",
-      "lh3.googleusercontent.com",
-      "lh4.googleusercontent.com",
-      "lh5.googleusercontent.com",
-      "lh6.googleusercontent.com",
-    ],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "*.public.blob.vercel-storage.com",
         pathname: "/**",
       },
+      { protocol: "https", hostname: "mazassumnida.wtf" },
+      { protocol: "https", hostname: "openweathermap.org" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "lh4.googleusercontent.com" },
+      { protocol: "https", hostname: "lh5.googleusercontent.com" },
+      { protocol: "https", hostname: "lh6.googleusercontent.com" },
     ],
   },
-  env: {},
+
   reactStrictMode: true,
-  "fontawesome-svg-core": {
-    license: "free",
-  },
 };
 
 module.exports = withPWA(nextConfig);

@@ -8,6 +8,8 @@ const withPWA = require("next-pwa")({
 });
 
 const nextConfig = {
+  webpack: config => config,
+
   images: {
     domains: [
       "mazassumnida.wtf",

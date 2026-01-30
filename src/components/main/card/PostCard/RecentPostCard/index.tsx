@@ -22,6 +22,20 @@ const RecentPostCard = ({ post }: IProps) => {
     day: "numeric",
     timeZone: "UTC",
   });
+
+  let isVercelBlobHost = false;
+  if (post.thumbnailUrl) {
+    try {
+      const url = new URL(post.thumbnailUrl);
+      const hostname = url.hostname;
+      isVercelBlobHost =
+        hostname === "blob.vercel-storage.com" ||
+        hostname.endsWith(".blob.vercel-storage.com");
+    } catch {
+      isVercelBlobHost = false;
+    }
+  }
+
   return (
     <Link
       className={`button-card-shadow ${styles.card_resent}`}
@@ -36,7 +50,7 @@ const RecentPostCard = ({ post }: IProps) => {
             width={320}
             height={180}
             className={styles.thumbnail}
-            unoptimized={post.thumbnailUrl.includes("blob.vercel-storage.com")}
+            unoptimized={isVercelBlobHost}
           />
         </div>
       )}

@@ -1,7 +1,7 @@
 import { META_DATA } from "@/constants/metadata";
 import styles from "./page.module.scss";
 import { Metadata } from "next";
-import { PostsList, SkeletonPostsList } from "@/components/posts/postsList";
+import PostsList, { SkeletonPostsList } from "@/components/posts/postsList";
 import { Suspense } from "react";
 import {
   PostTagSelectContainer,
@@ -19,9 +19,7 @@ export default function PostsPage() {
       <Suspense fallback={<SkeletonPostTagSelectContainer />}>
         <PostTagSelectContainer />
       </Suspense>
-      <Suspense fallback={<SkeletonPostsList />}>
-        <PostsList />
-      </Suspense>
+      <PostsList />
     </section>
   );
 }

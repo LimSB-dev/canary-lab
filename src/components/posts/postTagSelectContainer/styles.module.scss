@@ -7,13 +7,71 @@
   align-items: center;
 }
 
+.tag_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+}
+
 .tag_container {
   display: flex;
   gap: var(--gap);
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .chip {
   border-radius: 40px;
   background: #000000;
   padding: 4px 8px;
+}
+
+.chip_skeleton {
+  width: 60px;
+  height: 24px;
+  border-radius: 40px;
+  background: var(--card-background-color);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.manage_button {
+  padding: 4px 12px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  color: var(--secondary-color);
+  font-size: var(--caption);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+
+  html[data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  html[data-theme="light"] &,
+  :root & {
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  &:hover {
+    color: var(--text-color);
+    border-color: var(--primary-color);
+    opacity: 0.8;
+  }
 }

@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { SearchList, SkeletonSearchList } from "./SearchList";
 import { getSearchedPost } from "@/app/api/posts";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const SearchCard = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [searchResponse, setSearchResponse] = useState<IPost[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState(search);
@@ -42,7 +44,7 @@ export const SearchCard = () => {
           id="search"
           type="text"
           name="search"
-          placeholder="Search"
+          placeholder={t("main.searchCard.placeholder")}
           className={styles.search_input}
           value={search}
           onChange={(e) => {

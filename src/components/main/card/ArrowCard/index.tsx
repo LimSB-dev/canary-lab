@@ -1,11 +1,15 @@
+"use client";
+
 import styles from "./styles.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch } from "@/hooks/reduxHook";
 import { setOffset } from "@/store/modules/post";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const ArrowCard = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const handleArrow = (type: "prev" | "next") => {
@@ -20,7 +24,7 @@ export const ArrowCard = () => {
   return (
     <article id="arrow-card" className={`button-card-shadow ${styles.card}`}>
       <button
-        aria-label="left-arrow"
+        aria-label={t("common.leftArrow")}
         id="arrow-left"
         type="button"
         className={styles.arrow}
@@ -29,7 +33,7 @@ export const ArrowCard = () => {
         <FontAwesomeIcon icon={faAngleLeft} size="xl" />
       </button>
       <button
-        aria-label="right-arrow"
+        aria-label={t("common.rightArrow")}
         id="arrow-right"
         type="button"
         className={styles.arrow}

@@ -10,8 +10,10 @@ import { DefaultLogo } from "@/components/common/logo";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import { setResetPost } from "@/store/modules/post";
 import { deletePost, postPost, putPost } from "@/app/api/posts";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PostsHeader = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const { title, markdownValue } = useAppSelector((state) => state.post);
@@ -53,8 +55,8 @@ const PostsHeader = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <DefaultLogo size="small" withText />
-        {isPosts && isAdmin && <Link href="/posts/create">CREATE</Link>}
-        {!isPosts && <Link href="/posts">POST</Link>}
+        {isPosts && isAdmin && <Link href="/posts/create">{t("posts.create").toUpperCase()}</Link>}
+        {!isPosts && <Link href="/posts">{t("posts.navPost").toUpperCase()}</Link>}
       </nav>
 
       {isAdmin && !isPosts && (
@@ -71,16 +73,16 @@ const PostsHeader = () => {
                 }
                 disabled={loading}
               >
-                {isEdit ? "save" : "create"}
+                {isEdit ? t("common.save") : t("common.create")}
               </button>
               <Link
                 href={isEdit ? `/posts/${index}` : "/posts"}
-                className={`button-card-shadow ${styles.edit_button} ${
+                className={`${styles.cancel_button} ${
                   loading && styles.loading
                 }`}
                 onClick={() => handleButton("cancel")}
               >
-                cancel
+                {t("common.cancel")}
               </Link>
             </>
           ) : (
@@ -91,7 +93,7 @@ const PostsHeader = () => {
                   loading && styles.loading
                 }`}
               >
-                edit
+                {t("common.edit")}
               </Link>
               <button
                 type="button"
@@ -101,7 +103,7 @@ const PostsHeader = () => {
                 onClick={() => handleButton("delete")}
                 disabled={loading}
               >
-                delete
+                {t("common.delete")}
               </button>
             </>
           )}

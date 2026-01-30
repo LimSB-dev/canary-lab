@@ -4,12 +4,13 @@ import { TypeAnimation } from "react-type-animation";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User } from "next-auth";
+import { Session } from "next-auth";
 import Image from "next/image";
 import { useAppDispatch } from "@/hooks/reduxHook";
 import { signIn } from "@/store/modules/user";
 import { getUser } from "@/app/api/users";
 
-const UserProfile = ({ user }: { user: User }) => {
+const UserProfile = ({ user, session }: { user: User; session: Session }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const welcomeText = `${user.name}님 환영합니다.`;
@@ -25,11 +26,18 @@ const UserProfile = ({ user }: { user: User }) => {
       try {
         if (user?.email) {
           const userData = await getUser(user.email);
-          dispatch(signIn(userData));
-
-          setTimeout(() => {
-            router.push("/");
-          }, welcomeText.length * 100);
+          if (userData) {
+            dispatch(
+              signIn({
+                ...userData,
+                providers: session.user?.providers ?? [],
+                currentProvider: session.user?.currentProvider ?? null,
+              })
+            );
+            setTimeout(() => {
+              router.push("/");
+            }, welcomeText.length * 100);
+          }
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -37,7 +45,7 @@ const UserProfile = ({ user }: { user: User }) => {
     };
 
     fetchData();
-  }, [user, router, welcomeText, dispatch]);
+  }, [user, session, router, welcomeText, dispatch]);
 
   return (
     <>

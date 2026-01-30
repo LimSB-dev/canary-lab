@@ -4,6 +4,7 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import camelcaseKeys from "camelcase-keys";
+import { auth } from "@/auth";
 
 /**
  * 게시물을 생성합니다.
@@ -19,41 +20,42 @@ export async function postPost({
 }) {
   noStore();
 
+  // 인증 체크
+  const session = await auth();
+  if (!session?.user) {
+    throw new Error("Unauthorized: 로그인이 필요합니다.");
+  }
+
+  // 입력 검증
+  if (!title || !title.trim()) {
+    throw new Error("제목을 입력해주세요.");
+  }
+  if (!markdownValue || !markdownValue.trim()) {
+    throw new Error("내용을 입력해주세요.");
+  }
+
   try {
-    await sql`
-      CREATE TABLE IF NOT EXISTS posts (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        index SERIAL,
-        title TEXT NOT NULL,
-        content TEXT NOT NULL,
-        tags TEXT[] DEFAULT '{}',
-        comments UUID[] DEFAULT '{}',
-        created_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        deleted_at DATE DEFAULT NULL,
-        status TEXT NOT NULL DEFAULT 'published',
-        likes INT DEFAULT 0,
-        views INT DEFAULT 0
-      )
+    const { rows } = await sql`
+      INSERT INTO posts (title, content)
+      VALUES (${title.trim()}, ${markdownValue.trim()})
+      RETURNING index
     `;
 
-    await sql.query(
-      `
-      INSERT INTO posts (title, content)
-      VALUES ($1, $2)
-    `,
-      [title, markdownValue]
-    );
+    if (!rows[0]?.index) {
+      throw new Error("게시물 생성에 실패했습니다.");
+    }
 
-    const { rows } =
-      await sql`SELECT index FROM posts ORDER BY index DESC LIMIT 1`;
-
-    revalidatePath(`/posts/${rows[0].index}`);
-    redirect(`/posts/${rows[0].index}`);
-
-    return camelcaseKeys(rows[0], { deep: true }) as IPost;
+    const postIndex = rows[0].index;
+    revalidatePath(`/posts/${postIndex}`);
+    revalidatePath("/posts");
+    revalidatePath("/");
+    redirect(`/posts/${postIndex}`);
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch recent posts data.");
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "게시물 생성 중 오류가 발생했습니다."
+    );
   }
 }

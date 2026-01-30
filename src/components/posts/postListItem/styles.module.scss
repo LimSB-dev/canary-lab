@@ -1,33 +1,125 @@
 .post_list_item {
   width: 100%;
-  min-height: 40px;
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .post_list_link {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
-  height: 100px;
-  padding: var(--padding-sm) var(--padding-sm);
+  height: 100%;
+  min-height: 0;
+}
 
-  .icon_container {
-    display: flex;
-    justify-content: flex-end;
+.thumbnail_wrap {
+  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--surface-color);
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex: 1;
+  min-width: 0;
+  padding: var(--padding-sm);
+}
+
+.item_title {
+  margin: 0;
+  font-size: var(--h6);
+  font-weight: 600;
+  color: var(--text-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.item_meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.tag_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-height: 24px;
+}
+
+.item_date {
+  font-size: var(--caption);
+  color: var(--text-color-muted);
+  flex-shrink: 0;
+}
+
+.item_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item_icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--caption);
+  color: var(--text-color-muted);
+
+  span {
+    display: inline-flex;
     align-items: center;
     gap: 4px;
-
-    font-size: var(--caption);
   }
+}
 
-  .item_header,
-  .item_footer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
+.skeleton_title {
+  height: 1.25em;
+  border-radius: 4px;
+  background: var(--surface-color);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton_meta {
+  height: 0.875em;
+  width: 60%;
+  border-radius: 4px;
+  background: var(--surface-color);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 interface IOauthLoginButton {
-  provider: "github";
+  provider: "github" | "google";
   theme: "light" | "dark";
   type: "default";
 }

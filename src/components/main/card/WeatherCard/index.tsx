@@ -13,8 +13,10 @@ import {
   faThermometer,
 } from "@fortawesome/free-solid-svg-icons";
 import { setDataReceivingTime } from "@/store/modules/weather";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const WeatherCard = () => {
+  const { t } = useTranslation();
   const { loading: cityLoading, error: cityError } = useCity();
   const { loading: weatherLoading, error: weatherError } = useWeather();
 
@@ -71,7 +73,7 @@ export const WeatherCard = () => {
         {(weatherLoading && cityLoading) || !city ? (
           <div className={styles.flex_row}>
             <FontAwesomeIcon icon={faSpinner} spin size="lg" />
-            <h6>Finding location</h6>
+            <h6>{t("main.weatherCard.findingLocation")}</h6>
           </div>
         ) : (
           <div className={styles.flex_row}>
@@ -113,7 +115,7 @@ export const WeatherCard = () => {
       ) : (
         <>
           <FontAwesomeIcon icon={faSpinner} spin size="2xl" />
-          <p>Measuring Temperature</p>
+          <p>{t("main.weatherCard.measuringTemperature")}</p>
         </>
       )}
     </article>

@@ -1,0 +1,181 @@
+{
+  "common": {
+    "search": "검색",
+    "login": "로그인",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "수정",
+    "create": "생성",
+    "close": "닫기",
+    "confirm": "확인",
+    "loading": "로딩 중...",
+    "reset": "초기화",
+    "home": "홈",
+    "signOut": "로그아웃",
+    "upload": "업로드",
+    "user": "사용자",
+    "leftArrow": "이전",
+    "rightArrow": "다음",
+    "loginRequired": "로그인이 필요합니다.",
+    "goToLogin": "로그인하기",
+    "logoAlt": "로고"
+  },
+  "main": {
+    "languageCard": {
+      "title": "다국어 지원",
+      "selectLanguage": "언어 선택",
+      "currentLanguage": "현재 언어",
+      "altLanguages": "언어"
+    },
+    "searchCard": {
+      "placeholder": "검색"
+    },
+    "oauthCard": {
+      "login": "로그인",
+      "oauth": "OAuth",
+      "nextJsAlt": "Next.js",
+      "myPage": "마이페이지",
+      "loggedInWith": "로그인됨",
+      "linkedAccounts": "연동 계정"
+    },
+    "providers": {
+      "github": "GitHub",
+      "google": "Google",
+      "apple": "Apple",
+      "naver": "네이버",
+      "kakao": "카카오"
+    },
+    "figmaCard": {
+      "design": "디자인"
+    },
+    "recentCard": {
+      "recent": "최근",
+      "posts": "게시물",
+      "more": "더보기"
+    },
+    "weatherCard": {
+      "findingLocation": "위치 찾는 중",
+      "measuringTemperature": "온도 측정 중"
+    },
+    "skeletonCard": {
+      "index": "인덱스"
+    },
+    "musicCard": {
+      "youtubeTitle": "YouTube 동영상 플레이어"
+    },
+    "rateCard": {
+      "solvedAcAlt": "solved.ac"
+    },
+    "profileCard": {
+      "alt": "프로필"
+    },
+    "nameCard": {
+      "name": "임성빈"
+    }
+  },
+  "posts": {
+    "title": "게시물",
+    "navPost": "게시물",
+    "create": "작성",
+    "tagManagement": "태그 관리",
+    "manageTags": "관리",
+    "tagNamePlaceholder": "태그 이름",
+    "loadingTags": "태그를 불러오는 중...",
+    "noTags": "태그가 없습니다.",
+    "addTag": "태그 추가",
+    "adminOnlyTagManage": "관리자만 태그를 관리할 수 있습니다.",
+    "enterTagName": "태그 이름을 입력해주세요.",
+    "confirmDeleteTag": "정말 이 태그를 삭제하시겠습니까?",
+    "errorCreateTag": "태그 생성 중 오류가 발생했습니다.",
+    "errorEditTag": "태그 수정 중 오류가 발생했습니다.",
+    "errorDeleteTag": "태그 삭제 중 오류가 발생했습니다.",
+    "noPosts": "게시물이 없습니다.",
+    "noPostsForTag": "선택한 태그의 게시물이 없습니다.",
+    "loadingMore": "불러오는 중...",
+    "pleaseWait": "잠시만 기다려 주세요.",
+    "nowLoading": "불러오는 중...",
+    "generateThumbnail": "썸네일 생성",
+    "generateThumbnailLoading": "썸네일 생성 중...",
+    "generateThumbnailSuccess": "썸네일이 생성되었습니다.",
+    "generateThumbnailError": "썸네일 생성에 실패했습니다.",
+    "generateThumbnailModalTitle": "썸네일 생성",
+    "generateThumbnailPromptHint": "AI가 내용을 참고해 썸네일을 만듭니다. 아래에 원하는 느낌·스타일을 입력하면 반영됩니다. 비우면 제목·본문 기반으로 자동 생성됩니다.",
+    "generateThumbnailPromptLabel": "프롬프트 (선택)",
+    "generateThumbnailPromptPlaceholder": "예: 미니멀한 일러스트, 따뜻한 톤, 코드/개발 느낌 등",
+    "generateThumbnailSubmit": "생성",
+    "generateMarkdownFromPrompt": "프롬프트로 작성",
+    "generateMarkdownModalTitle": "AI로 본문 작성",
+    "generateMarkdownPromptHint": "원하는 주제나 요약을 입력하면 마크다운 형식의 게시글 본문을 자동으로 생성합니다.",
+    "generateMarkdownPromptLabel": "프롬프트",
+    "generateMarkdownPromptPlaceholder": "예: React Hooks 사용법 소개, REST API 설계 원칙 정리",
+    "generateMarkdownSubmit": "생성",
+    "generateMarkdownLoading": "생성 중...",
+    "generateMarkdownSuccess": "본문이 생성되었습니다. 에디터에서 수정할 수 있습니다.",
+    "generateMarkdownError": "본문 생성에 실패했습니다.",
+    "titlePlaceholder": "제목을 입력하세요.",
+    "commentPlaceholder": "댓글을 입력하세요...",
+    "commentLoginPrompt": "댓글을 작성하려면 로그인이 필요합니다.",
+    "commentSubmit": "댓글 작성",
+    "commentSubmitting": "작성 중...",
+    "editedLabel": "(수정됨)",
+    "editComment": "댓글 수정",
+    "deleteComment": "댓글 삭제",
+    "confirmDeleteComment": "정말 이 댓글을 삭제하시겠습니까?",
+    "comments": "댓글",
+    "commentsCount": "{{count}}개의 댓글",
+    "errorFetchComments": "댓글을 불러오는 중 오류가 발생했습니다.",
+    "errorPostComment": "댓글 작성에 실패했습니다.",
+    "errorEditComment": "댓글 수정에 실패했습니다.",
+    "errorDeleteComment": "댓글 삭제에 실패했습니다.",
+    "loadingComments": "댓글을 불러오는 중...",
+    "noCommentsYet": "아직 댓글이 없습니다. 첫 번째 댓글을 작성해보세요!",
+    "like": "좋아요",
+    "unlike": "좋아요 취소",
+    "loginToLike": "로그인하고 좋아요 누르기",
+    "likeAvailableWhenLogin": "좋아요는 로그인 시 가능합니다.",
+    "errorLike": "좋아요 처리 중 오류가 발생했습니다.",
+    "errorFetchPosts": "게시글을 불러오지 못했습니다.",
+    "loadingText": "로딩 중...",
+    "noPrevPost": "이전 게시글 없음",
+    "noNextPost": "다음 게시글 없음"
+  },
+  "login": {
+    "uploadAvatar": "아바타 업로드",
+    "confirmSignOut": "정말 로그아웃 하시겠습니까?"
+  },
+  "mypage": {
+    "title": "마이페이지",
+    "goToMain": "메인으로",
+    "name": "이름",
+    "email": "이메일",
+    "currentLogin": "현재 로그인",
+    "linkedAccounts": "연동 계정",
+    "linkSectionTitle": "연동 추가",
+    "linkSectionDesc": "다른 로그인 방식을 연동하면 동일 이메일로 로그인할 수 있습니다.",
+    "linkAdd": "연동 추가",
+    "avatar": {
+      "change": "이미지 변경",
+      "chooseFile": "이미지 파일 선택",
+      "alt": "프로필 이미지",
+      "invalidType": "이미지 파일만 선택해 주세요.",
+      "uploadError": "이미지 업로드에 실패했습니다."
+    }
+  },
+  "notFound": {
+    "title": "404 페이지를 찾을 수 없습니다."
+  },
+  "languageNames": {
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語",
+    "zh": "中文",
+    "cn": "中文",
+    "de": "Deutsch",
+    "es": "Español",
+    "fr": "Français",
+    "it": "Italiano",
+    "pt": "Português",
+    "ru": "Русский"
+  }
+}

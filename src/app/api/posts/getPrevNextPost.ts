@@ -17,8 +17,8 @@ export async function getPrevNextPost(index: number): Promise<{
 
   try {
     const [previousPost, nextPost] = await Promise.all([
-      sql`SELECT * FROM posts WHERE index < ${index} AND status = 'published'  ORDER BY index DESC LIMIT 1`,
-      sql`SELECT * FROM posts WHERE index > ${index} AND status = 'published'  ORDER BY index ASC LIMIT 1`,
+      sql`SELECT * FROM posts WHERE index < ${index} AND status = 'published' ORDER BY index DESC LIMIT 1`,
+      sql`SELECT * FROM posts WHERE index > ${index} AND status = 'published' ORDER BY index ASC LIMIT 1`,
     ]);
 
     return {
@@ -31,6 +31,6 @@ export async function getPrevNextPost(index: number): Promise<{
     };
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch adjacent post data.");
+    throw new Error("이전/다음 게시물을 불러오는 중 오류가 발생했습니다.");
   }
 }

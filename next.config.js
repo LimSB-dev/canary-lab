@@ -8,6 +8,7 @@ const withPWA = require("next-pwa")({
 });
 
 const nextConfig = {
+  turbopack: {},
   images: {
     remotePatterns: [
       {
@@ -22,6 +23,13 @@ const nextConfig = {
       { protocol: "https", hostname: "lh4.googleusercontent.com" },
       { protocol: "https", hostname: "lh5.googleusercontent.com" },
       { protocol: "https", hostname: "lh6.googleusercontent.com" },
+      { protocol: "https", hostname: "iad.microlink.io", pathname: "/**" },
+      { protocol: "https", hostname: "images.ctfassets.net", pathname: "/**" },
+      {
+        protocol: "https",
+        hostname: "opengraph.githubassets.com",
+        pathname: "/**",
+      },
     ],
   },
 

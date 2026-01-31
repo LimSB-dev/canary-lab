@@ -1,0 +1,59 @@
+/* 프로젝트 브레이크포인트 (constants/breakpoint, globals.css와 동일) */
+$bp-tablet: 804px;
+$bp-laptop: 1212px;
+$bp-desktop: 1620px;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  width: 100%;
+  padding-top: var(--gap);
+  margin-top: var(--gap);
+  box-sizing: border-box;
+
+  @media (min-width: $bp-tablet) {
+    gap: var(--gap-lg);
+    padding-top: var(--gap-lg);
+  }
+
+  @media (min-width: $bp-laptop) {
+    gap: var(--gap-lg);
+  }
+}
+
+.heading {
+  font-size: var(--h6);
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+
+  @media (min-width: $bp-tablet) {
+    font-size: var(--h5);
+  }
+}
+
+/* 래퍼: 브레이크포인트별 크기 (반응형) */
+.card_swap_wrap {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  height: 260px;
+
+  @media (min-width: $bp-tablet) {
+    max-width: 400px;
+    height: 320px;
+  }
+
+  @media (min-width: $bp-laptop) {
+    max-width: 480px;
+    height: 360px;
+  }
+
+  @media (min-width: $bp-desktop) {
+    max-width: 520px;
+    height: 380px;
+  }
+}

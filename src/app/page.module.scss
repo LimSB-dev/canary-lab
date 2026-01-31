@@ -9,6 +9,13 @@
   display: flex;
   gap: var(--gap);
   margin: auto;
+  padding-bottom: var(--padding-sm);
+}
+
+.article_full_width {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .flex_row {

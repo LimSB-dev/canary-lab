@@ -21,7 +21,7 @@ export const RecentCard = () => {
         {t("main.recentCard.posts")}
       </h6>
       <p className={styles.link}>
-        <p>{t("main.recentCard.more")}</p>
+        <span>{t("main.recentCard.more")}</span>
         <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
       </p>
     </Link>

@@ -18,7 +18,7 @@ const SkeletonPostCard = () => {
     <div className={`button-card-shadow ${styles.card_resent}`}>
       <h6>Loading...</h6>
       <div className={styles.item_footer}>
-        <caption>{formattedDate}</caption>
+        <span>{formattedDate}</span>
         <div className={styles.icon_container}>
           <div>
             <FontAwesomeIcon icon={faHeart} />0

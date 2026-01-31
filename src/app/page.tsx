@@ -6,12 +6,18 @@ import {
   HeaderContainer,
   InfoContainer,
   PostContainer,
+  ProjectsSection,
   SideContainer,
 } from "@/components/main/container";
 import { getPopularPosts } from "@/app/api/posts";
+import { getProjectPreviews } from "@/app/api/projects/getPreview";
+import { PROJECT_URLS } from "@/constants/projects";
 
 export default async function Home() {
-  const popularPosts = await getPopularPosts();
+  const [popularPosts, projectPreviews] = await Promise.all([
+    getPopularPosts(),
+    getProjectPreviews(PROJECT_URLS),
+  ]);
 
   return (
     <>
@@ -43,6 +49,9 @@ export default async function Home() {
             <PostContainer popularPosts={popularPosts} />
           </div>
           <SideContainer device="desktop" popularPosts={popularPosts} />
+        </article>
+        <article className={`${styles.article} ${styles.article_full_width}`}>
+          <ProjectsSection previews={projectPreviews} />
         </article>
       </main>
     </>

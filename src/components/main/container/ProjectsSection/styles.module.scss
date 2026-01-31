@@ -1,0 +1,82 @@
+/* 프로젝트 브레이크포인트 (constants/breakpoint, globals.css와 동일) */
+$bp-tablet: 804px;
+$bp-laptop: 1212px;
+$bp-desktop: 1620px;
+
+/* 모바일: 상단 가림 방지 + drop 여유, safe-area 반영 */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  width: 100%;
+  padding-top: calc(var(--gap-lg) + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px));
+  margin-top: var(--gap);
+  box-sizing: border-box;
+
+  /* 모바일: 상단 더 넉넉히 (가림 방지) + 하단 drop 여유 */
+  @media (max-width: ($bp-tablet - 1)) {
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(280px + env(safe-area-inset-bottom, 0px));
+    gap: var(--gap-lg);
+  }
+
+  @media (min-width: $bp-tablet) {
+    gap: var(--gap-lg);
+    padding-top: var(--gap-lg);
+    padding-bottom: 280px;
+  }
+
+  @media (min-width: $bp-laptop) {
+    gap: var(--gap-lg);
+    padding-bottom: 320px;
+  }
+
+  @media (min-width: $bp-desktop) {
+    padding-bottom: 340px;
+  }
+}
+
+.heading {
+  font-size: var(--h6);
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+
+  @media (min-width: $bp-tablet) {
+    font-size: var(--h5);
+  }
+}
+
+/* 래퍼: 모바일에서 위아래 여유 + drop 여유, 반응형 */
+.card_swap_wrap {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  min-height: 280px;
+  height: 340px;
+
+  @media (max-width: ($bp-tablet - 1)) {
+    min-height: 300px;
+    height: 360px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  @media (min-width: $bp-tablet) {
+    max-width: 400px;
+    height: 360px;
+  }
+
+  @media (min-width: $bp-laptop) {
+    max-width: 480px;
+    height: 400px;
+  }
+
+  @media (min-width: $bp-desktop) {
+    max-width: 520px;
+    height: 420px;
+  }
+}

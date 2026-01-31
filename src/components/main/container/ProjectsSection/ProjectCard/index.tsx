@@ -9,14 +9,25 @@ interface ProjectCardProps {
 export const ProjectCard = ({ preview }: ProjectCardProps) => {
   const { url, title, description, image } = preview;
 
+  const displayTitle = title ?? "제목 없음";
+
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
       className={styles.card}
-      aria-label={title ?? "프로젝트 링크"}
+      aria-label={displayTitle}
     >
+      <header className={styles.terminal_header}>
+        <ul className={styles.terminal_controls} aria-hidden>
+          <li className={`${styles.control} ${styles.close}`} />
+          <li className={`${styles.control} ${styles.minimize}`} />
+          <li className={`${styles.control} ${styles.maximize}`} />
+        </ul>
+        <p className={styles.terminal_title}>{displayTitle}</p>
+        <span className={styles.terminal_hint}>Open</span>
+      </header>
       <div className={styles.thumbnail_wrap}>
         {image ? (
           <Image
@@ -31,7 +42,6 @@ export const ProjectCard = ({ preview }: ProjectCardProps) => {
         )}
       </div>
       <div className={styles.body}>
-        <h3 className={styles.title}>{title ?? "제목 없음"}</h3>
         {description && <p className={styles.description}>{description}</p>}
       </div>
     </a>

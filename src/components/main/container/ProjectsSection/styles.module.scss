@@ -57,9 +57,11 @@ $screen-radius: 8px;
   overflow: hidden;
   border-radius: calc(#{$screen-radius} + #{$bezel});
 
-  /* 모니터 베젤·화면·그림자 — 테마별 컬러(globals.css) */
+  /* 모니터 베젤·화면·그림자 — 테마별 컬러(globals.css), 글래스 */
   border: $bezel solid var(--monitor-bezel-color);
   background: var(--monitor-screen-bg);
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
 
   @media (max-width: ($bp-tablet - 1)) {
     max-width: 400px;

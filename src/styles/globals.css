@@ -211,14 +211,31 @@ body {
   border: 1px solid var(--card-glass-border);
 }
 
-.card-shadow {
+/* 이미지가 선명해야 하는 카드용: 글래스 테두리·박스쉐도우만 적용, backdrop-filter 제거 (프로덕션 블러 방지) */
+.card-shadow-no-blur,
+.button-card-shadow-no-blur {
+  border: 1px solid var(--card-glass-border);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* 부모/형제 블러 영향 차단 (다국어 카드 등) */
+.card-no-blur {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  isolation: isolate;
+}
+
+.card-shadow,
+.card-shadow-no-blur {
   box-shadow:
     inset 0 1px 2px var(--card-shadow-color-up),
     inset 0 -1px 2px var(--card-shadow-color-down);
   transition: box-shadow 0.2s ease-in-out;
 }
 
-.button-card-shadow {
+.button-card-shadow,
+.button-card-shadow-no-blur {
   box-shadow:
     inset 0 1px 2px var(--card-shadow-color-up),
     inset 0 -1px 2px var(--card-shadow-color-down);
@@ -229,7 +246,9 @@ body {
 }
 
 .button-card-shadow:hover,
-.button-card-shadow:focus-within {
+.button-card-shadow:focus-within,
+.button-card-shadow-no-blur:hover,
+.button-card-shadow-no-blur:focus-within {
   transform: translateY(1px);
   box-shadow:
     inset 0 1px 2px var(--card-shadow-color-down),

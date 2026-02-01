@@ -3,38 +3,29 @@ $bp-tablet: 804px;
 $bp-laptop: 1212px;
 $bp-desktop: 1620px;
 
-/* 모바일: 상단 가림 방지 + drop 여유, safe-area 반영 */
+/* 모바일: 상단 가림 방지, 하단은 푸터로 가림 (내려가는 애니메이션은 푸터 뒤로) */
 .section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--gap);
   width: 100%;
-  padding-top: calc(var(--gap-lg) + env(safe-area-inset-top, 0px));
-  padding-bottom: calc(env(safe-area-inset-bottom, 0px));
+  max-width: 100%;
+
   margin-top: var(--gap);
   box-sizing: border-box;
 
-  /* 모바일: 상단 더 넉넉히 (가림 방지) + 하단 drop 여유 */
+  /* 모바일: 상단 더 넉넉히 (가림 방지), 하단은 푸터로 가림 */
   @media (max-width: ($bp-tablet - 1)) {
-    padding-top: calc(56px + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(280px + env(safe-area-inset-bottom, 0px));
     gap: var(--gap-lg);
   }
 
   @media (min-width: $bp-tablet) {
     gap: var(--gap-lg);
-    padding-top: var(--gap-lg);
-    padding-bottom: 280px;
   }
 
   @media (min-width: $bp-laptop) {
     gap: var(--gap-lg);
-    padding-bottom: 320px;
-  }
-
-  @media (min-width: $bp-desktop) {
-    padding-bottom: 340px;
   }
 }
 
@@ -49,34 +40,60 @@ $bp-desktop: 1620px;
   }
 }
 
-/* 래퍼: 모바일에서 위아래 여유 + drop 여유, 반응형 */
+/* 래퍼: 모니터 프레임 — 베젤·화면 경계·그림자, 카드는 화면 안에서만 보이고 아래로 사라짐 */
+$stack_headroom: 140px; /* CARD_SWAP_VERTICAL_DISTANCE * (카드 수 - 1) 여유 */
+$bezel: 6px;
+$screen-radius: 8px;
+
 .card_swap_wrap {
   position: relative;
+  padding: var(--padding-sm);
   width: 100%;
   margin: 0 auto;
   max-width: 100%;
   min-height: 280px;
-  height: 340px;
+  height: calc(340px + #{$stack_headroom} + #{$bezel} * 2);
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: calc(#{$screen-radius} + #{$bezel});
+
+  /* 모니터 베젤: 테두리 + 화면 안쪽 깊이감 + 바깥 그림자 */
+  border: $bezel solid #1a1a1a;
+  background: #0a0a0a;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 -18px 24px -6px rgba(0, 0, 0, 0.4),
+    0 20px 48px rgba(0, 0, 0, 0.35);
 
   @media (max-width: ($bp-tablet - 1)) {
     min-height: 300px;
-    height: 360px;
+    height: calc(360px + #{$stack_headroom} + #{$bezel} * 2);
     margin-top: 8px;
     margin-bottom: 8px;
   }
 
   @media (min-width: $bp-tablet) {
     max-width: 400px;
-    height: 360px;
+    height: calc(360px + #{$stack_headroom} + #{$bezel} * 2);
   }
 
   @media (min-width: $bp-laptop) {
     max-width: 480px;
-    height: 400px;
+    height: calc(400px + #{$stack_headroom} + #{$bezel} * 2);
   }
 
   @media (min-width: $bp-desktop) {
     max-width: 520px;
-    height: 420px;
+    height: calc(420px + #{$stack_headroom} + #{$bezel} * 2);
   }
+}
+
+/* 라이트 테마: 베젤·화면·그림자 톤 */
+:global(html[data-theme="light"]) .card_swap_wrap {
+  border-color: #252525;
+  background: #141414;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 -18px 24px -6px rgba(0, 0, 0, 0.12),
+    0 20px 48px rgba(0, 0, 0, 0.18);
 }

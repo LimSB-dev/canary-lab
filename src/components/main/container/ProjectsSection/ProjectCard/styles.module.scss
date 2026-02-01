@@ -6,7 +6,6 @@ $bp-tablet: 804px;
   flex-direction: column;
   padding: 0;
   background-color: #1a1a1a;
-  border-radius: 4px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
@@ -16,12 +15,6 @@ $bp-tablet: 804px;
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.55);
-    border-color: #444;
-  }
 
   @media (min-width: $bp-tablet) {
     border-radius: 6px;

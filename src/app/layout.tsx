@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
 import { MainFooter } from "@/components/common/footer";
 import { FloatingScrollToTop } from "@/components/common/topButton";
+import { ColorBendsBackground } from "@/components/common/background";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -54,9 +55,24 @@ export default async function RootLayout({
 
         <Providers>
           <SessionToRedux session={session} />
-          {children}
-          <FloatingScrollToTop />
-          <MainFooter />
+          {/* Color Bends: 라이트/다크 테마별 색상 - https://reactbits.dev/backgrounds/color-bends */}
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 0,
+              width: "100%",
+              height: "100%",
+              pointerEvents: "none",
+            }}
+          >
+            <ColorBendsBackground />
+          </div>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {children}
+            <FloatingScrollToTop />
+            <MainFooter />
+          </div>
         </Providers>
       </body>
     </html>

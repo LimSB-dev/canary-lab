@@ -27,7 +27,7 @@ export const LanguageCard = () => {
   };
 
   return (
-    <article className={`card-no-blur ${styles.card}`}>
+    <article className={styles.card}>
       <h5 className={styles.title}>{t("main.languageCard.title")}</h5>
       <ImageCardShadow canClick={false} />
       <Image

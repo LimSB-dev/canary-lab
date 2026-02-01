@@ -12,7 +12,7 @@ export const FigmaCard = () => {
   const { t } = useTranslation();
   return (
     <Link
-      className={`button-card-shadow-no-blur ${styles.card}`}
+      className={`button-card-shadow ${styles.card}`}
       href={META_DATA.FIGMA_URL}
       target="_blank"
       rel="noopener noreferrer"

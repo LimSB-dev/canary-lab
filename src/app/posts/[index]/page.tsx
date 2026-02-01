@@ -1,11 +1,13 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import styles from "./page.module.scss";
 import PostContent from "@/components/posts/[id]/PostContent";
-import { getPost, incrementPostViews, getPrevNextPost } from "@/app/api/posts";
+import { getPost, getPrevNextPost } from "@/app/api/posts";
 import PostNavigation from "@/components/posts/[id]/PostNavigation";
 import { Comments } from "@/components/posts/[id]/Comments";
 import { PostLikeButton } from "@/components/posts/[id]/PostLikeButton";
 import ThumbnailGenerateButton from "@/components/posts/[id]/ThumbnailGenerateButton";
+import { Suspense } from "react";
+import { IncrementPostView } from "@/components/posts/[id]/IncrementPostView";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -14,7 +16,7 @@ type Props = {
 
 export async function generateMetadata(
   { params }: Props,
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { index } = await params;
   const postIndex = Number(index);
@@ -51,21 +53,25 @@ export default async function PostDetailPage({ params }: Props) {
   }
 
   try {
-    await incrementPostViews(postIndex);
     const post = await getPost(postIndex);
     const { previousPost, nextPost } = await getPrevNextPost(postIndex);
 
     return (
-      <main id="main-page" role="main" className={styles.main}>
-        <h1 className={styles.title}>{post.title}</h1>
-        <PostContent post={post} />
-        <div className={styles.post_actions}>
-          <ThumbnailGenerateButton postIndex={postIndex} />
-          <PostLikeButton post={post} />
-        </div>
-        <PostNavigation previousPost={previousPost} nextPost={nextPost} />
-        <Comments postIndex={postIndex} />
-      </main>
+      <div className={styles.page_wrap}>
+        <main id="main-page" role="main" className={styles.main}>
+          <Suspense fallback={null}>
+            <IncrementPostView postIndex={postIndex} />
+          </Suspense>
+          <h1 className={styles.title}>{post.title}</h1>
+          <PostContent post={post} />
+          <div className={styles.post_actions}>
+            <ThumbnailGenerateButton postIndex={postIndex} />
+            <PostLikeButton post={post} />
+          </div>
+          <PostNavigation previousPost={previousPost} nextPost={nextPost} />
+          <Comments postIndex={postIndex} />
+        </main>
+      </div>
     );
   } catch (error) {
     console.error("Failed to load post:", error);

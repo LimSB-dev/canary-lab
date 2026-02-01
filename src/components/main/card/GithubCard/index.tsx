@@ -9,7 +9,7 @@ import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 export const GithubCard = () => {
   return (
     <Link
-      className={`button-card-shadow-no-blur ${styles.card}`}
+      className={`button-card-shadow ${styles.card}`}
       href="https://github.com/LimSB-dev"
       target="_blank"
       passHref

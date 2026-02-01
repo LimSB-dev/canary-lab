@@ -20,8 +20,8 @@
   padding: 8px 8px;
   gap: var(--gap);
   background-color: var(--search-input-bg);
-  backdrop-filter: blur(var(--card-backdrop-blur));
-  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border: 1px solid var(--card-glass-border);
   border-radius: calc(var(--border-radius) - var(--card-padding) / 2);
   overflow: hidden;

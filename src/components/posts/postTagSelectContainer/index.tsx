@@ -15,7 +15,11 @@ export const PostTagSelectContainer = () => {
   console.log(user);
   const isAdmin = user.userType === "admin";
 
-  const { data: tags = [], isPending: isLoading, refetch: refetchTags } = useTags();
+  const {
+    data: tags = [],
+    isPending: isLoading,
+    refetch: refetchTags,
+  } = useTags();
 
   return (
     <>
@@ -60,11 +64,9 @@ export const SkeletonPostTagSelectContainer = () => {
       <h1>{t("posts.navPost").toUpperCase()}</h1>
       <ul className={styles.tag_container}>
         {Array(10)
-          .fill(0)
-          .map((index) => (
-            <li key={index} className={styles.chip}>
-              {index}
-            </li>
+          .fill(null)
+          .map((_, i) => (
+            <li key={i} className={styles.chip} />
           ))}
       </ul>
     </div>

@@ -11,7 +11,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
 import { MainFooter } from "@/components/common/footer";
 import { FloatingScrollToTop } from "@/components/common/topButton";
-import { ColorBendsBackground } from "@/components/common/background";
+import {
+  ColorBendsBackground,
+  PostDetailSolidBackground,
+} from "@/components/common/background";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -69,6 +72,7 @@ export default async function RootLayout({
             <ColorBendsBackground />
           </div>
           <div style={{ position: "relative", zIndex: 1 }}>
+            <PostDetailSolidBackground />
             {children}
             <FloatingScrollToTop />
             <MainFooter />

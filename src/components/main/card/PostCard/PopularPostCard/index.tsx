@@ -50,7 +50,7 @@ const PopularPostCard = ({ popularPosts }: IProps) => {
     >
       <h6>{post.title}</h6>
       <div className={styles.item_footer}>
-        <caption>{formattedDate}</caption>
+        <span>{formattedDate}</span>
         <div className={styles.icon_container}>
           <FontAwesomeIcon icon={isLikedByUser ? solidHeart : regularHeart} />
           {post.likes.length}

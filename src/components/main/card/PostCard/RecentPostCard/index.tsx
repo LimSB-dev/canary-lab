@@ -57,7 +57,7 @@ const RecentPostCard = ({ post }: IProps) => {
       <div className={styles.card_body}>
         <h6>{post.title}</h6>
         <div className={styles.item_footer}>
-          <caption>{formattedDate}</caption>
+          <span>{formattedDate}</span>
           <div className={styles.icon_container}>
             <div>
               <FontAwesomeIcon

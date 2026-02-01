@@ -8,7 +8,6 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ preview }: ProjectCardProps) => {
   const { url, title, description, image } = preview;
-
   const displayTitle = title ?? "제목 없음";
 
   return (

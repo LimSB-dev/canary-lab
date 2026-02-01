@@ -3,12 +3,13 @@ $bp-tablet: 804px;
 $bp-laptop: 1212px;
 $bp-desktop: 1620px;
 
-/* 카드가 y += 500 으로 내려가는 애니메이션 고려, 항상 가운데 정렬 */
+/* 카드가 y += 500 으로 내려가는 애니메이션 고려. 하단 정렬 → 위쪽 여유로 스택 상단 노출, 아래만 잘림 */
 .card_swap_container {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  top: auto;
+  transform: translateX(-50%);
   transform-origin: center center;
   width: 100%;
   height: 100%;
@@ -20,19 +21,19 @@ $bp-desktop: 1620px;
   @media (min-width: $bp-tablet) {
     min-width: 300px;
     min-height: 280px;
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: translateX(-50%) scale(0.9);
   }
 
   @media (min-width: $bp-laptop) {
     min-width: 340px;
     min-height: 320px;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateX(-50%) scale(1);
   }
 
   @media (min-width: $bp-desktop) {
     min-width: 340px;
     min-height: 320px;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
   }
 }
 

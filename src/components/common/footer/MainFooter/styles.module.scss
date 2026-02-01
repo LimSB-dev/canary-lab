@@ -2,20 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1620px;
-  margin: auto;
-  padding: var(--padding-md) 0;
+  width: 100%;
+  max-width: 1620px;
+  margin: 0 auto;
+  padding: var(--padding-md) var(--padding-sm);
+  box-sizing: border-box;
+  background: var(--background-color);
+  position: relative;
+  z-index: 1;
 
   @media (max-width: 1620px) {
-    width: 1212px;
+    max-width: 1212px;
   }
 
   @media (max-width: 1212px) {
-    width: 804px;
+    max-width: 804px;
   }
 
   @media (max-width: 804px) {
-    width: 396px;
+    max-width: 100%;
   }
 }
 

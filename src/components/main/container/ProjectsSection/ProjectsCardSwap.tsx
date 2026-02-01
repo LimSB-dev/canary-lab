@@ -22,6 +22,7 @@ interface ProjectsCardSwapProps {
 export const ProjectsCardSwap = ({ previews }: ProjectsCardSwapProps) => {
   return (
     <div className={styles.card_swap_wrap}>
+      <h4>Project</h4>
       <CardSwap
         width={CARD_SWAP_CARD_WIDTH}
         height={CARD_SWAP_CARD_HEIGHT}

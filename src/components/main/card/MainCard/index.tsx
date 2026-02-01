@@ -42,7 +42,7 @@ const Dim = () => {
 const MobileMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
     <section
-      className={`card-shadow ${styles.card}`}
+      className={`card-shadow-no-blur ${styles.card}`}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -65,7 +65,7 @@ const MobileMainCard = ({ isHover, setIsHover }: ICardProps) => {
 const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
     <section
-      className={`card-shadow ${styles.card}`}
+      className={`card-shadow-no-blur ${styles.card}`}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -89,7 +89,7 @@ const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
 const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
     <section
-      className={`card-shadow ${styles.card}`}
+      className={`card-shadow-no-blur ${styles.card}`}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
@@ -113,7 +113,7 @@ const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
 const DesktopMainCard = ({ isHover, setIsHover }: ICardProps) => {
   return (
     <section
-      className={`card-shadow ${styles.card}`}
+      className={`card-shadow-no-blur ${styles.card}`}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >

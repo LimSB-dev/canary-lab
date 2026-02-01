@@ -27,7 +27,7 @@ export const LanguageCard = () => {
   };
 
   return (
-    <article className={styles.card}>
+    <article className={`card-no-blur ${styles.card}`}>
       <h5 className={styles.title}>{t("main.languageCard.title")}</h5>
       <ImageCardShadow canClick={false} />
       <Image
@@ -38,13 +38,23 @@ export const LanguageCard = () => {
         className={styles.image}
       />
       <div className={styles.language_section}>
-        <p className={styles.language_label}>{t("main.languageCard.selectLanguage")}</p>
-        <ul className={styles.language_list} role="listbox" aria-label={t("main.languageCard.selectLanguage")}>
+        <p className={styles.language_label}>
+          {t("main.languageCard.selectLanguage")}
+        </p>
+        <ul
+          className={styles.language_list}
+          role="listbox"
+          aria-label={t("main.languageCard.selectLanguage")}
+        >
           {supportedLocales.map((locale) => (
             <li key={locale}>
               <button
                 type="button"
-                className={currentLocale === locale ? styles.language_button_active : styles.language_button}
+                className={
+                  currentLocale === locale
+                    ? styles.language_button_active
+                    : styles.language_button
+                }
                 onClick={() => handleSelectLocale(locale)}
                 role="option"
                 aria-selected={currentLocale === locale}

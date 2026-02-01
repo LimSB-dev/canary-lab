@@ -17,11 +17,15 @@ export const RateCard = () => {
       href="https://solved.ac/clim03087"
       target="_blank"
       rel="noopener noreferrer"
-      className={`button-card-shadow ${styles.card}`}
+      className={`button-card-shadow-no-blur ${styles.card}`}
       passHref
     >
       <ImageCardShadow />
-      <img className={styles.img} src={svgFile} alt={t("main.rateCard.solvedAcAlt")} />
+      <img
+        className={styles.img}
+        src={svgFile}
+        alt={t("main.rateCard.solvedAcAlt")}
+      />
     </Link>
   );
 };

@@ -11,9 +11,7 @@ const compareTime = (time1: string, time2 = "00:00:00", diff = 3600000) => {
   }
 
   return (
-    new Date(`1970-01-01T${time1}`).getTime() -
-      new Date(`1970-01-01T${time2}`).getTime() >
-    diff
+    new Date(`1970-01-01T${time1}`).getTime() - new Date(`1970-01-01T${time2}`).getTime() > diff
   );
 };
 

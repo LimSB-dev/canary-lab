@@ -5,10 +5,7 @@ import Image from "next/image";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-import {
-  faEye,
-  faHeart as regularHeart,
-} from "@fortawesome/free-regular-svg-icons";
+import { faEye, faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { intersection, isEmpty } from "lodash";
 import { TagChip } from "@/components/posts/postTagSelectContainer/tagChip";
@@ -30,32 +27,22 @@ const isVercelBlobUrl = (url: string): boolean => {
 export const PostListItem = ({ post, tags }: IProps) => {
   const user = useAppSelector((state) => state.user);
   const tag = useAppSelector((state) => state.tag);
-  const formattedDate = new Date(post.createdAt as any).toLocaleDateString(
-    "ko-KR",
-    {
+  const formattedDate = new Date(post.createdAt as any).toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
     timeZone: "Asia/Seoul",
-    }
-  );
+  });
 
   const postTags = tags.filter((tag) => post.tags?.includes(tag.id));
 
-  if (
-    !isEmpty(tag.selectedTagIds) &&
-    isEmpty(intersection(post.tags, tag.selectedTagIds))
-  ) {
+  if (!isEmpty(tag.selectedTagIds) && isEmpty(intersection(post.tags, tag.selectedTagIds))) {
     return <></>;
   }
 
   return (
     <li className={styles.post_list_item}>
-      <Link
-        href={`/posts/${post.index}`}
-        className={styles.post_list_link}
-        passHref
-      >
+      <Link href={`/posts/${post.index}`} className={styles.post_list_link} passHref>
         {post.thumbnailUrl && (
           <div className={styles.thumbnail_wrap}>
             <Image

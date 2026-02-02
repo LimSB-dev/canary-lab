@@ -32,9 +32,7 @@ export default async function Home() {
                 <MainCard device="tablet" />
                 <div className={styles.flex_row}>
                   <SideContainer device="tablet" popularPosts={popularPosts} />
-                  <div
-                    className={`${styles.flex_column_reverse} ${styles.flex_row}`}
-                  >
+                  <div className={`${styles.flex_column_reverse} ${styles.flex_row}`}>
                     <InfoContainer />
                     <div className={styles.flex_column}>
                       <HeaderContainer />

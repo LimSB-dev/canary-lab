@@ -15,8 +15,7 @@ export function useTags(options?: { enabled?: boolean }) {
 
 export function useTagMutations() {
   const queryClient = useQueryClient();
-  const invalidate = () =>
-    queryClient.invalidateQueries({ queryKey: queryKeys.tags });
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: queryKeys.tags });
 
   const createTag = useMutation({
     mutationFn: (params: { name: string; color: string }) =>
@@ -35,4 +34,3 @@ export function useTagMutations() {
 
   return { createTag, updateTag, removeTag };
 }
-

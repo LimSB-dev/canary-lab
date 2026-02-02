@@ -5,9 +5,7 @@ import { useRef, useEffect } from "react";
 import { queryKeys } from "@/constants/queryKey";
 
 async function fetchRecentPosts(size: number, offset: number): Promise<IPost[]> {
-  const response = await fetch(
-    `/api/posts/recent?size=${size}&offset=${offset}`
-  );
+  const response = await fetch(`/api/posts/recent?size=${size}&offset=${offset}`);
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
   }
@@ -22,12 +20,7 @@ async function fetchRecentPosts(size: number, offset: number): Promise<IPost[]> 
 export function useRecentPosts(size: number, offset: number) {
   const lastFetchedOffsetRef = useRef<number | null>(null);
 
-  const {
-    data,
-    isPending,
-    isFetching,
-    isPlaceholderData,
-  } = useQuery({
+  const { data, isPending, isFetching, isPlaceholderData } = useQuery({
     queryKey: queryKeys.posts.recent(size, offset),
     queryFn: () => fetchRecentPosts(size, offset),
     placeholderData: (prev) => prev,

@@ -49,9 +49,7 @@ export default function ThumbnailGenerateButton({ postIndex }: IProps) {
       setIsOpen(false);
       alert(t("posts.generateThumbnailSuccess"));
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : t("posts.generateThumbnailError")
-      );
+      setError(err instanceof Error ? err.message : t("posts.generateThumbnailError"));
     } finally {
       setLoading(false);
     }
@@ -121,11 +119,7 @@ export default function ThumbnailGenerateButton({ postIndex }: IProps) {
                 >
                   {t("common.cancel")}
                 </button>
-                <button
-                  type="submit"
-                  className={styles.submit}
-                  disabled={loading}
-                >
+                <button type="submit" className={styles.submit} disabled={loading}>
                   {loading
                     ? t("posts.generateThumbnailLoading")
                     : t("posts.generateThumbnailSubmit")}

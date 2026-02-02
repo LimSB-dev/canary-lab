@@ -20,12 +20,7 @@ interface CommentItemProps {
   onDelete: (commentId: string) => void;
 }
 
-export const CommentItem = ({
-  comment,
-  currentUserEmail,
-  onEdit,
-  onDelete,
-}: CommentItemProps) => {
+export const CommentItem = ({ comment, currentUserEmail, onEdit, onDelete }: CommentItemProps) => {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
@@ -78,9 +73,7 @@ export const CommentItem = ({
             )}
           </div>
           <div className={styles.author_info}>
-            <strong className={styles.author_name}>
-              {comment.userName || comment.userEmail}
-            </strong>
+            <strong className={styles.author_name}>{comment.userName || comment.userEmail}</strong>
             <span className={styles.comment_meta}>
               {formatRelativeTime(createdAt)}
               {isEdited && ` ${t("posts.editedLabel")}`}

@@ -6,12 +6,7 @@ import { CommentItem } from "./CommentItem";
 import { CommentForm } from "./CommentForm";
 import styles from "./styles.module.scss";
 import { useTranslation } from "@/hooks/useTranslation";
-import {
-  useComments,
-  usePostComment,
-  usePutComment,
-  useDeleteComment,
-} from "@/hooks/useComments";
+import { useComments, usePostComment, usePutComment, useDeleteComment } from "@/hooks/useComments";
 
 interface CommentsProps {
   postIndex: number;
@@ -101,9 +96,7 @@ export const Comments = ({ postIndex }: CommentsProps) => {
           <CommentForm onSubmit={handleSubmit} isAuthenticated={!!user.email} />
           <div className={styles.comments_list}>
             {comments.length === 0 ? (
-              <div className={styles.empty_state}>
-                {t("posts.noCommentsYet")}
-              </div>
+              <div className={styles.empty_state}>{t("posts.noCommentsYet")}</div>
             ) : (
               <>
                 {comments.map((comment) => (

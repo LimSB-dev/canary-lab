@@ -17,10 +17,7 @@ const imageCommand: ICommand = {
     if (!state || !view) return;
 
     const main = view.state.selection.main;
-    const txt = view.state.sliceDoc(
-      view.state.selection.main.from,
-      view.state.selection.main.to
-    );
+    const txt = view.state.sliceDoc(view.state.selection.main.from, view.state.selection.main.to);
     view.dispatch({
       changes: {
         from: main.from,

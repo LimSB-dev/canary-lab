@@ -30,8 +30,7 @@ const snackbarSlice = createSlice({
 });
 
 // action creators
-export const { openSnackBarSuccess, closeSnackBarSuccess } =
-  snackbarSlice.actions;
+export const { openSnackBarSuccess, closeSnackBarSuccess } = snackbarSlice.actions;
 export const selectSnackbar = (state: RootState) => state.snackbar;
 // reducer
 export default snackbarSlice.reducer;

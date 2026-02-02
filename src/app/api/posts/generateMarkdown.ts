@@ -9,9 +9,7 @@ const PROMPT_MAX_LENGTH = 2000;
  * 사용자가 입력한 프롬프트를 바탕으로 AI가 블로그 게시글용 마크다운 본문을 생성합니다.
  * OPENAI_API_KEY 환경 변수 필요. (채팅 API는 무료 크레딧으로 사용 가능한 경우 있음)
  */
-export async function generateMarkdownFromPrompt(
-  userPrompt: string
-): Promise<string> {
+export async function generateMarkdownFromPrompt(userPrompt: string): Promise<string> {
   const session = await auth();
   if (!session?.user) {
     throw new Error("Unauthorized: 로그인이 필요합니다.");
@@ -54,7 +52,8 @@ export async function generateMarkdownFromPrompt(
 
     return content;
   } catch (err: unknown) {
-    const status = err && typeof err === "object" && "status" in err ? (err as { status: number }).status : null;
+    const status =
+      err && typeof err === "object" && "status" in err ? (err as { status: number }).status : null;
     const msg = err instanceof Error ? err.message : String(err ?? "");
     const isQuotaOr429 = status === 429 || /quota|billing|exceeded/i.test(msg);
 

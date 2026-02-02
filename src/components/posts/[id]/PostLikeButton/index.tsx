@@ -19,7 +19,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
   const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [isPending, startTransition] = useTransition();
-  
+
   // likes가 배열인지 확인하고 파싱
   const parseLikes = (likes: any): string[] => {
     if (Array.isArray(likes)) {
@@ -37,9 +37,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
   };
 
   const likesArray = parseLikes(post.likes);
-  const [isLiked, setIsLiked] = useState(
-    user.id ? likesArray.includes(user.id) : false
-  );
+  const [isLiked, setIsLiked] = useState(user.id ? likesArray.includes(user.id) : false);
   const [likeCount, setLikeCount] = useState(likesArray.length);
   const [isLikeModalOpen, setIsLikeModalOpen] = useState(false);
 
@@ -58,11 +56,7 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
           onLikeToggle?.(newIsLiked, newCount);
         } catch (error) {
           console.error("Failed to toggle like:", error);
-          alert(
-            error instanceof Error
-              ? error.message
-              : t("posts.errorLike")
-          );
+          alert(error instanceof Error ? error.message : t("posts.errorLike"));
         }
       })();
     });
@@ -84,10 +78,18 @@ export const PostLikeButton = ({ post, onLikeToggle }: PostLikeButtonProps) => {
           <div className={styles.like_modal_overlay} onClick={() => setIsLikeModalOpen(false)}>
             <div className={styles.like_modal} onClick={(e) => e.stopPropagation()}>
               <p className={styles.like_modal_message}>{t("posts.likeAvailableWhenLogin")}</p>
-              <Link href="/login" className={styles.like_modal_link} onClick={() => setIsLikeModalOpen(false)}>
+              <Link
+                href="/login"
+                className={styles.like_modal_link}
+                onClick={() => setIsLikeModalOpen(false)}
+              >
                 {t("common.goToLogin")}
               </Link>
-              <button type="button" className={styles.like_modal_close} onClick={() => setIsLikeModalOpen(false)}>
+              <button
+                type="button"
+                className={styles.like_modal_close}
+                onClick={() => setIsLikeModalOpen(false)}
+              >
                 {t("common.close")}
               </button>
             </div>

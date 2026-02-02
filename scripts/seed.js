@@ -71,8 +71,7 @@ async function seedPosts(client) {
     // Insert data into the "posts" table
     const insertedPosts = await Promise.all(
       posts.map(async (post) => {
-        const { title, content, tags, createdAt, updatedAt, likes, views } =
-          post;
+        const { title, content, tags, createdAt, updatedAt, likes, views } = post;
 
         return client.query(
           `
@@ -142,8 +141,5 @@ main()
     console.log("Seed completed successfully");
   })
   .catch((err) => {
-    console.error(
-      "An error occurred while attempting to seed the database:",
-      err
-    );
+    console.error("An error occurred while attempting to seed the database:", err);
   });

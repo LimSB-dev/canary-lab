@@ -26,12 +26,7 @@ interface ICardProps {
 
 const Description = ({ isHover }: IDescription) => {
   if (isHover) {
-    return (
-      <TypeAnimation
-        className={styles.description}
-        sequence={MAIN_CARD_SEQUENCE}
-      />
-    );
+    return <TypeAnimation className={styles.description} sequence={MAIN_CARD_SEQUENCE} />;
   }
 };
 
@@ -50,9 +45,7 @@ const MobileMainCard = ({ isHover, setIsHover }: ICardProps) => {
       <Description isHover={isHover} />
       <Dim />
       <Image
-        className={`${styles.image} ${
-          isHover ? styles.zoomIn : styles.zoomOut
-        }`}
+        className={`${styles.image} ${isHover ? styles.zoomIn : styles.zoomOut}`}
         src="/assets/images/canary.svg"
         alt="Canary"
         fill
@@ -74,9 +67,7 @@ const TabletMainCard = ({ isHover, setIsHover }: ICardProps) => {
       <ImageCardShadow />
       <Dim />
       <Image
-        className={`${styles.image} ${
-          isHover ? styles.zoomIn : styles.zoomOut
-        }`}
+        className={`${styles.image} ${isHover ? styles.zoomIn : styles.zoomOut}`}
         src="/assets/images/canary.svg"
         alt="Canary"
         fill
@@ -98,9 +89,7 @@ const LaptopMainCard = ({ isHover, setIsHover }: ICardProps) => {
       <ImageCardShadow />
       <Dim />
       <Image
-        className={`${styles.image} ${
-          isHover ? styles.zoomIn : styles.zoomOut
-        }`}
+        className={`${styles.image} ${isHover ? styles.zoomIn : styles.zoomOut}`}
         src="/assets/images/canary.svg"
         alt="Canary"
         fill
@@ -122,9 +111,7 @@ const DesktopMainCard = ({ isHover, setIsHover }: ICardProps) => {
       <ImageCardShadow />
       <Dim />
       <Image
-        className={`${styles.image} ${
-          isHover ? styles.zoomIn : styles.zoomOut
-        }`}
+        className={`${styles.image} ${isHover ? styles.zoomIn : styles.zoomOut}`}
         src="/assets/images/canary.svg"
         alt="Canary"
         fill

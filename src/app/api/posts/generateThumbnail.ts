@@ -64,7 +64,8 @@ export async function generatePostThumbnail(
     });
     imageUrl = response.data?.[0]?.url ?? "";
   } catch (err: unknown) {
-    const status = err && typeof err === "object" && "status" in err ? (err as { status: number }).status : null;
+    const status =
+      err && typeof err === "object" && "status" in err ? (err as { status: number }).status : null;
     const msg = err instanceof Error ? err.message : String(err ?? "");
     const isQuotaOr429 = status === 429 || /quota|billing|exceeded/i.test(msg);
     throw new Error(

@@ -20,7 +20,4 @@ export const TOOLBARS: (Commands | ICommand)[] = [
   // imageCommand,
 ];
 
-export const TOOLBARS_MODE: (Commands | ICommand)[] = [
-  scrollCommand,
-  "preview",
-];
+export const TOOLBARS_MODE: (Commands | ICommand)[] = [scrollCommand, "preview"];

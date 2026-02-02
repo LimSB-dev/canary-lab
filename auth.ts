@@ -9,6 +9,7 @@ import { sql } from "@vercel/postgres";
 import { ensureAccountsTable } from "./src/utils/ensureAccountsTable";
 import { mergeUserIntoUser } from "./src/utils/mergeUserIntoUser";
 import { ensureUsersUserTypeColumn } from "./src/utils/ensureUsersUserTypeColumn";
+import { ensureUsersLocaleColumn } from "./src/utils/ensureUsersLocaleColumn";
 import { cookies } from "next/headers";
 
 /** 세션 만료: 30일 (Auth.js 기본값, 사용성·보안 균형) */
@@ -181,6 +182,8 @@ export const {
         const userName = session.user.name || "Unknown";
         const userImage = session.user.image || null;
 
+        await ensureUsersUserTypeColumn();
+        await ensureUsersLocaleColumn();
         await sql`
           INSERT INTO users (email, name, image, last_login, login_count)
           VALUES (${userEmail}, ${userName}, ${userImage}, CURRENT_TIMESTAMP, 1)
@@ -189,10 +192,8 @@ export const {
             last_login = CURRENT_TIMESTAMP,
             login_count = users.login_count + 1
         `;
-
-        await ensureUsersUserTypeColumn();
         const { rows: userRows } = await sql`
-          SELECT id, image, user_type FROM users WHERE email = ${userEmail}
+          SELECT id, image, user_type, locale FROM users WHERE email = ${userEmail}
         `;
         const userId = userRows?.[0]?.id;
         if (userRows?.[0]?.image != null) {
@@ -201,6 +202,10 @@ export const {
         const userType = userRows?.[0]?.user_type;
         if (userType === "admin" || userType === "normal") {
           session.user.userType = userType;
+        }
+        const userLocale = userRows?.[0]?.locale;
+        if (userLocale === "ko" || userLocale === "en") {
+          session.user.locale = userLocale;
         }
         if (userId) {
           session.user.id = userId;

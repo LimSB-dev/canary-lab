@@ -22,11 +22,7 @@ export const SearchList = ({
         ) : (
           searchResponse.map((post) => (
             <li key={post.id} className={styles.search_list_item}>
-              <Link
-                href={`posts/${post.index}`}
-                className={styles.search_list_link}
-                passHref
-              >
+              <Link href={`posts/${post.index}`} className={styles.search_list_link} passHref>
                 {post.title}
               </Link>
             </li>

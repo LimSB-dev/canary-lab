@@ -97,10 +97,6 @@ export async function togglePostLike(postIndex: number): Promise<boolean> {
     return isNowLiked;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "좋아요 처리 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "좋아요 처리 중 오류가 발생했습니다.");
   }
 }

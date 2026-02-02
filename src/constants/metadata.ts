@@ -9,10 +9,8 @@ const APP_DESCRIPTION = {
   CREATE: "Create a new post",
 };
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "";
-const GOOGLE_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";
-const NAVER_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "";
+const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "";
+const NAVER_SITE_VERIFICATION = process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "";
 const FIGMA_URL =
   "https://www.figma.com/file/2VdpF0IhNz4CTdi7JEaGzH/canary-lab?type=design&node-id=3-280&mode=design&t=aeKriIe49JtQarGx-0";
 

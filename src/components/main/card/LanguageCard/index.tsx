@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import styles from "./styles.module.scss";
 import { ImageCardShadow } from "@/components/main/card/ImageCardShadow";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -15,6 +16,7 @@ export const LanguageCard = () => {
   const dispatch = useAppDispatch();
   const currentLocale = useAppSelector(selectLocale);
   const supportedLocales = getSupportedLocales();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -22,8 +24,19 @@ export const LanguageCard = () => {
     }
   }, [currentLocale]);
 
-  const handleSelectLocale = (locale: Locale) => {
+  const handleSelectLocale = async (locale: Locale) => {
     dispatch(setLocale(locale));
+    if (status === "authenticated" && session?.user?.email) {
+      try {
+        await fetch("/api/users/locale", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ locale }),
+        });
+      } catch {
+        // 저장 실패 시 Redux는 이미 반영됨
+      }
+    }
   };
 
   return (
@@ -38,9 +51,7 @@ export const LanguageCard = () => {
         className={styles.image}
       />
       <div className={styles.language_section}>
-        <p className={styles.language_label}>
-          {t("main.languageCard.selectLanguage")}
-        </p>
+        <p className={styles.language_label}>{t("main.languageCard.selectLanguage")}</p>
         <ul
           className={styles.language_list}
           role="listbox"
@@ -51,9 +62,7 @@ export const LanguageCard = () => {
               <button
                 type="button"
                 className={
-                  currentLocale === locale
-                    ? styles.language_button_active
-                    : styles.language_button
+                  currentLocale === locale ? styles.language_button_active : styles.language_button
                 }
                 onClick={() => handleSelectLocale(locale)}
                 role="option"

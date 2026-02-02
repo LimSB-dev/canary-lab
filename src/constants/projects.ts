@@ -5,6 +5,6 @@
  */
 export const PROJECT_URLS: string[] = [
   "https://v0-etf-analysis-agent.vercel.app/",
-  "https://v0-etf-analysis-agent.vercel.app/",
-  "https://v0-etf-analysis-agent.vercel.app/",
+  "https://cart-heavy-30100236.figma.site/",
+  "https://v0-rule-breaker.vercel.app/",
 ];

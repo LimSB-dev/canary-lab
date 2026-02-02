@@ -12,11 +12,7 @@ interface TagManagerModalProps {
   onTagsUpdated?: () => void;
 }
 
-export const TagManagerModal = ({
-  isOpen,
-  onClose,
-  onTagsUpdated,
-}: TagManagerModalProps) => {
+export const TagManagerModal = ({ isOpen, onClose, onTagsUpdated }: TagManagerModalProps) => {
   const { t } = useTranslation();
   const user = useAppSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState<string | null>(null);
@@ -47,9 +43,7 @@ export const TagManagerModal = ({
       setIsCreating(false);
       onSuccess();
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : t("posts.errorCreateTag")
-      );
+      alert(error instanceof Error ? error.message : t("posts.errorCreateTag"));
     }
   };
 
@@ -68,9 +62,7 @@ export const TagManagerModal = ({
       setIsEditing(null);
       onSuccess();
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : t("posts.errorEditTag")
-      );
+      alert(error instanceof Error ? error.message : t("posts.errorEditTag"));
     }
   };
 
@@ -80,9 +72,7 @@ export const TagManagerModal = ({
       await removeTag.mutateAsync(id);
       onSuccess();
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : t("posts.errorDeleteTag")
-      );
+      alert(error instanceof Error ? error.message : t("posts.errorDeleteTag"));
     }
   };
 
@@ -119,9 +109,7 @@ export const TagManagerModal = ({
 
         <div className={styles.content}>
           {!isAdmin ? (
-            <div className={styles.no_access}>
-              {t("posts.adminOnlyTagManage")}
-            </div>
+            <div className={styles.no_access}>{t("posts.adminOnlyTagManage")}</div>
           ) : isLoading ? (
             <div className={styles.loading}>{t("posts.loadingTags")}</div>
           ) : (
@@ -138,24 +126,17 @@ export const TagManagerModal = ({
                     type="text"
                     placeholder={t("posts.tagNamePlaceholder")}
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={styles.input}
                   />
                   <input
                     type="color"
                     value={formData.color}
-                    onChange={(e) =>
-                      setFormData({ ...formData, color: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, color: e.target.value })}
                     className={styles.color_input}
                   />
                   <div className={styles.form_actions}>
-                    <button
-                      className={styles.save_button}
-                      onClick={handleCreate}
-                    >
+                    <button className={styles.save_button} onClick={handleCreate}>
                       {t("common.save")}
                     </button>
                     <button className={styles.cancel_button} onClick={cancel}>
@@ -173,61 +154,47 @@ export const TagManagerModal = ({
                     <div key={tag.id} className={styles.tag_item}>
                       {isEditing === tag.id ? (
                         <>
-                          <span
-                            className={styles.tag_preview}
-                            style={{ color: formData.color }}
-                          >
+                          <span className={styles.tag_preview} style={{ color: formData.color }}>
                             {formData.name?.trim() ? formData.name : tag.name}
                           </span>
                           <div className={`${styles.form} ${styles.form_inline}`}>
-                          <input
-                            type="text"
-                            value={formData.name}
-                            onChange={(e) =>
-                              setFormData({ ...formData, name: e.target.value })
-                            }
-                            className={styles.input}
-                          />
-                          <input
-                            type="color"
-                            value={formData.color}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                color: e.target.value,
-                              })
-                            }
-                            className={styles.color_input}
-                          />
-                          <div className={styles.form_actions}>
-                            <button
-                              className={styles.save_button}
-                              onClick={() => handleUpdate(tag.id)}
-                            >
-                              {t("common.save")}
-                            </button>
-                            <button
-                              className={styles.cancel_button}
-                              onClick={cancel}
-                            >
-                              {t("common.cancel")}
-                            </button>
-                          </div>
+                            <input
+                              type="text"
+                              value={formData.name}
+                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                              className={styles.input}
+                            />
+                            <input
+                              type="color"
+                              value={formData.color}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  color: e.target.value,
+                                })
+                              }
+                              className={styles.color_input}
+                            />
+                            <div className={styles.form_actions}>
+                              <button
+                                className={styles.save_button}
+                                onClick={() => handleUpdate(tag.id)}
+                              >
+                                {t("common.save")}
+                              </button>
+                              <button className={styles.cancel_button} onClick={cancel}>
+                                {t("common.cancel")}
+                              </button>
+                            </div>
                           </div>
                         </>
                       ) : (
                         <>
-                          <span
-                            className={styles.tag_preview}
-                            style={{ color: tag.color }}
-                          >
+                          <span className={styles.tag_preview} style={{ color: tag.color }}>
                             {tag.name}
                           </span>
                           <div className={styles.actions}>
-                            <button
-                              className={styles.edit_button}
-                              onClick={() => startEdit(tag)}
-                            >
+                            <button className={styles.edit_button} onClick={() => startEdit(tag)}>
                               {t("common.edit")}
                             </button>
                             <button

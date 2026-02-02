@@ -68,7 +68,9 @@
   background: rgba(255, 255, 255, 0.15);
   color: var(--white);
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 
   &:hover {
     background: rgba(255, 255, 255, 0.25);

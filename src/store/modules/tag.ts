@@ -53,8 +53,7 @@ const tagSlice = createSlice({
 });
 
 // action creators
-export const { setSelectedTagIds, resetSelectedTagIds, setTag, resetTag } =
-  tagSlice.actions;
+export const { setSelectedTagIds, resetSelectedTagIds, setTag, resetTag } = tagSlice.actions;
 export const selectPost = (state: RootState) => state.tag;
 // reducer
 export default tagSlice.reducer;

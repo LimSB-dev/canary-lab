@@ -10,28 +10,19 @@ interface PostNavigationProps {
   nextPost?: IPost;
 }
 
-const PostNavigation: React.FC<PostNavigationProps> = ({
-  previousPost,
-  nextPost,
-}) => {
+const PostNavigation: React.FC<PostNavigationProps> = ({ previousPost, nextPost }) => {
   const { t } = useTranslation();
   return (
     <div className={styles.post_navigation}>
       {previousPost ? (
-        <Link
-          href={`/posts/${previousPost.index}`}
-          className={`${styles.nav_link} prev`}
-        >
+        <Link href={`/posts/${previousPost.index}`} className={`${styles.nav_link} prev`}>
           {previousPost.title}
         </Link>
       ) : (
         <span className={styles.disabled_nav_link}>{t("posts.noPrevPost")}</span>
       )}
       {nextPost ? (
-        <Link
-          href={`/posts/${nextPost.index}`}
-          className={`${styles.nav_link} next`}
-        >
+        <Link href={`/posts/${nextPost.index}`} className={`${styles.nav_link} next`}>
           {nextPost.title}
         </Link>
       ) : (

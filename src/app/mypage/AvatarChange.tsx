@@ -12,11 +12,7 @@ interface AvatarChangeProps {
   styles: Record<string, string>;
 }
 
-export function AvatarChange({
-  currentUserEmail,
-  currentImage,
-  styles: s,
-}: AvatarChangeProps) {
+export function AvatarChange({ currentUserEmail, currentImage, styles: s }: AvatarChangeProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -76,7 +72,11 @@ export function AvatarChange({
           {uploading ? t("common.loading") : t("mypage.avatar.change")}
         </button>
       </form>
-      {error && <p className={s.avatar_error} role="alert">{error}</p>}
+      {error && (
+        <p className={s.avatar_error} role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

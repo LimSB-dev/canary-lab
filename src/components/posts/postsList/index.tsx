@@ -17,13 +17,8 @@ export default function PostsList() {
   const { data: tagsData } = useTags();
   const tags = tagsData ?? [];
 
-  const {
-    data,
-    isPending,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = usePostsList(selectedTagIds);
+  const { data, isPending, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    usePostsList(selectedTagIds);
 
   const posts = data?.pages.flat() ?? [];
 
@@ -42,9 +37,7 @@ export default function PostsList() {
     return () => observer.disconnect();
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const emptyText = selectedTagIds.length
-    ? t("posts.noPostsForTag")
-    : t("posts.noPosts");
+  const emptyText = selectedTagIds.length ? t("posts.noPostsForTag") : t("posts.noPosts");
 
   if (isPending) {
     return <SkeletonPostsList count={POSTS_LIST_PAGE_SIZE} />;

@@ -31,9 +31,7 @@ export const TagManager = () => {
       setFormData({ name: "", color: "#000000" });
       setIsCreating(false);
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : t("posts.errorCreateTag")
-      );
+      alert(error instanceof Error ? error.message : t("posts.errorCreateTag"));
     }
   };
 
@@ -51,9 +49,7 @@ export const TagManager = () => {
       setFormData({ name: "", color: "#000000" });
       setIsEditing(null);
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : t("posts.errorEditTag")
-      );
+      alert(error instanceof Error ? error.message : t("posts.errorEditTag"));
     }
   };
 
@@ -62,9 +58,7 @@ export const TagManager = () => {
     try {
       await removeTag.mutateAsync(id);
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : t("posts.errorDeleteTag")
-      );
+      alert(error instanceof Error ? error.message : t("posts.errorDeleteTag"));
     }
   };
 
@@ -117,9 +111,7 @@ export const TagManager = () => {
           <input
             type="color"
             value={formData.color}
-            onChange={(e) =>
-              setFormData({ ...formData, color: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, color: e.target.value })}
             className={styles.color_input}
           />
           <div className={styles.form_actions}>
@@ -141,24 +133,17 @@ export const TagManager = () => {
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className={styles.input}
                 />
                 <input
                   type="color"
                   value={formData.color}
-                  onChange={(e) =>
-                    setFormData({ ...formData, color: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, color: e.target.value })}
                   className={styles.color_input}
                 />
                 <div className={styles.form_actions}>
-                  <button
-                    className={styles.save_button}
-                    onClick={() => handleUpdate(tag.id)}
-                  >
+                  <button className={styles.save_button} onClick={() => handleUpdate(tag.id)}>
                     {t("common.save")}
                   </button>
                   <button className={styles.cancel_button} onClick={cancel}>
@@ -170,16 +155,10 @@ export const TagManager = () => {
               <>
                 <TagChip tag={tag} type="header" />
                 <div className={styles.actions}>
-                  <button
-                    className={styles.edit_button}
-                    onClick={() => startEdit(tag)}
-                  >
+                  <button className={styles.edit_button} onClick={() => startEdit(tag)}>
                     {t("common.edit")}
                   </button>
-                  <button
-                    className={styles.delete_button}
-                    onClick={() => handleDelete(tag.id)}
-                  >
+                  <button className={styles.delete_button} onClick={() => handleDelete(tag.id)}>
                     {t("common.delete")}
                   </button>
                 </div>

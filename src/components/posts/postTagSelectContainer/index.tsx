@@ -12,14 +12,9 @@ export const PostTagSelectContainer = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useAppSelector((state) => state.user);
-  console.log(user);
   const isAdmin = user.userType === "admin";
 
-  const {
-    data: tags = [],
-    isPending: isLoading,
-    refetch: refetchTags,
-  } = useTags();
+  const { data: tags = [], isPending: isLoading, refetch: refetchTags } = useTags();
 
   return (
     <>
@@ -30,12 +25,8 @@ export const PostTagSelectContainer = () => {
             {isLoading
               ? Array(5)
                   .fill(0)
-                  .map((_, i) => (
-                    <li key={i} className={styles.chip_skeleton} />
-                  ))
-              : tags.map((tag) => (
-                  <TagChip key={tag.id} tag={tag} type={"header"} />
-                ))}
+                  .map((_, i) => <li key={i} className={styles.chip_skeleton} />)
+              : tags.map((tag) => <TagChip key={tag.id} tag={tag} type={"header"} />)}
           </ul>
           {isAdmin && (
             <button

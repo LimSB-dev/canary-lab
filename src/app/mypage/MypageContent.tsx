@@ -15,13 +15,10 @@ export function MypageContent({ session }: MypageContentProps) {
   const { t } = useTranslation();
   const { name, email, image, providers, currentProvider } = session.user;
 
-  const currentLabel = currentProvider
-    ? t(`main.providers.${currentProvider}`)
+  const currentLabel = currentProvider ? t(`main.providers.${currentProvider}`) : null;
+  const linkedList = providers?.length
+    ? providers.map((p) => t(`main.providers.${p}`)).join(", ")
     : null;
-  const linkedList =
-    providers?.length
-      ? providers.map((p) => t(`main.providers.${p}`)).join(", ")
-      : null;
 
   return (
     <main className={styles.main}>

@@ -1,0 +1,24 @@
+# dependencies & build
+node_modules
+.next
+out
+build
+.vercel
+
+# generated / lock
+package-lock.json
+*.tsbuildinfo
+next-env.d.ts
+
+# assets
+public/workbox-*.js
+public/sw.js
+
+# docs / agents
+.agents
+*.md
+!README.md
+
+# misc
+.DS_Store
+coverage

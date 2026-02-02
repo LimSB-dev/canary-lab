@@ -30,7 +30,7 @@
 
 .liked {
   color: var(--error-color);
-  
+
   .like_button:active & {
     animation: heartBeat 0.3s ease-in-out;
   }

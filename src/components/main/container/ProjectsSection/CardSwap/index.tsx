@@ -53,7 +53,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       className={`${styles.card} ${customClass ?? ""} ${className ?? ""}`.trim()}
       {...rest}
     />
-  ),
+  )
 );
 Card.displayName = "Card";
 
@@ -64,12 +64,7 @@ interface Slot {
   zIndex: number;
 }
 
-const makeSlot = (
-  i: number,
-  distX: number,
-  distY: number,
-  total: number,
-): Slot => ({
+const makeSlot = (i: number, distX: number, distY: number, total: number): Slot => ({
   x: i * distX,
   y: -i * distY,
   z: -i * distX * 1.5,
@@ -129,10 +124,8 @@ export const CardSwap: React.FC<CardSwapProps> = ({
   const config = useMemo(
     () =>
       animationConfig ??
-      (easing === "elastic"
-        ? DEFAULT_ANIMATION.elastic
-        : DEFAULT_ANIMATION.linear),
-    [animationConfig, easing],
+      (easing === "elastic" ? DEFAULT_ANIMATION.elastic : DEFAULT_ANIMATION.linear),
+    [animationConfig, easing]
   );
   const intervalMs =
     animationConfig && "intervalMs" in animationConfig
@@ -142,13 +135,10 @@ export const CardSwap: React.FC<CardSwapProps> = ({
           ? DEFAULT_ANIMATION_WITH_INTERVAL.elastic.intervalMs
           : DEFAULT_ANIMATION_WITH_INTERVAL.linear.intervalMs));
 
-  const childArr = useMemo(
-    () => Children.toArray(children) as ReactElement[],
-    [children],
-  );
+  const childArr = useMemo(() => Children.toArray(children) as ReactElement[], [children]);
   const refs = useMemo<RefObject<HTMLDivElement>[]>(
     () => childArr.map(() => React.createRef<HTMLDivElement>()),
-    [childArr],
+    [childArr]
   );
 
   const order = useRef(Array.from({ length: childArr.length }, (_, i) => i));
@@ -159,11 +149,7 @@ export const CardSwap: React.FC<CardSwapProps> = ({
   useEffect(() => {
     const total = refs.length;
     refs.forEach((r, i) =>
-      placeNow(
-        r.current!,
-        makeSlot(i, cardDistance, verticalDistance, total),
-        skewAmount,
-      ),
+      placeNow(r.current!, makeSlot(i, cardDistance, verticalDistance, total), skewAmount)
     );
 
     const swap = () => {
@@ -194,23 +180,18 @@ export const CardSwap: React.FC<CardSwapProps> = ({
             duration: config.durMove,
             ease: config.ease,
           },
-          `promote+=${i * 0.15}`,
+          `promote+=${i * 0.15}`
         );
       });
 
-      const backSlot = makeSlot(
-        refs.length - 1,
-        cardDistance,
-        verticalDistance,
-        refs.length,
-      );
+      const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
       tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
       tl.call(
         () => {
           gsap.set(elFront, { zIndex: backSlot.zIndex });
         },
         undefined,
-        "return",
+        "return"
       );
       tl.to(
         elFront,
@@ -221,7 +202,7 @@ export const CardSwap: React.FC<CardSwapProps> = ({
           duration: config.durReturn,
           ease: config.ease,
         },
-        "return",
+        "return"
       );
 
       tl.call(() => {
@@ -251,16 +232,7 @@ export const CardSwap: React.FC<CardSwapProps> = ({
       };
     }
     return () => clearInterval(intervalRef.current);
-  }, [
-    cardDistance,
-    verticalDistance,
-    intervalMs,
-    pauseOnHover,
-    skewAmount,
-    easing,
-    config,
-    refs,
-  ]);
+  }, [cardDistance, verticalDistance, intervalMs, pauseOnHover, skewAmount, easing, config, refs]);
 
   const rendered = childArr.map((child, i) =>
     isValidElement(child)
@@ -281,15 +253,11 @@ export const CardSwap: React.FC<CardSwapProps> = ({
             onCardClick?.(i);
           },
         } as CardProps & React.RefAttributes<HTMLDivElement>)
-      : child,
+      : child
   );
 
   return (
-    <div
-      ref={containerRef}
-      className={styles.card_swap_container}
-      style={{ width, height }}
-    >
+    <div ref={containerRef} className={styles.card_swap_container} style={{ width, height }}>
       {rendered}
     </div>
   );

@@ -4,10 +4,4 @@ import { PostContainer } from "@/components/main/container/PostContainer";
 import { ProjectsSection } from "@/components/main/container/ProjectsSection";
 import { SideContainer } from "@/components/main/container/SideContainer";
 
-export {
-  HeaderContainer,
-  InfoContainer,
-  PostContainer,
-  ProjectsSection,
-  SideContainer,
-};
+export { HeaderContainer, InfoContainer, PostContainer, ProjectsSection, SideContainer };

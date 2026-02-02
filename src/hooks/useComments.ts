@@ -1,23 +1,11 @@
 "use client";
 
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-import {
-  getComments,
-  postComment,
-  putComment,
-  deleteComment,
-} from "@/app/api/comments";
+import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getComments, postComment, putComment, deleteComment } from "@/app/api/comments";
 import { queryKeys } from "@/constants/queryKey";
 import { COMMENTS_PER_PAGE } from "@/constants/pagination";
 
-async function fetchCommentsPage(
-  postIndex: number,
-  pageParam: number
-): Promise<IComment[]> {
+async function fetchCommentsPage(postIndex: number, pageParam: number): Promise<IComment[]> {
   const offset = pageParam * COMMENTS_PER_PAGE;
   return getComments(postIndex, COMMENTS_PER_PAGE, offset);
 }

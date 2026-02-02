@@ -11,13 +11,7 @@ import { auth } from "@/auth";
  * @param title 게시물 제목
  * @param markdownValue 게시물 내용
  */
-export async function postPost({
-  title,
-  markdownValue,
-}: {
-  title: string;
-  markdownValue: string;
-}) {
+export async function postPost({ title, markdownValue }: { title: string; markdownValue: string }) {
   noStore();
 
   // 인증 체크
@@ -52,10 +46,6 @@ export async function postPost({
     redirect(`/posts/${postIndex}`);
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "게시물 생성 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "게시물 생성 중 오류가 발생했습니다.");
   }
 }

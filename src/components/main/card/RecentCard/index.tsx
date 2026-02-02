@@ -9,12 +9,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 export const RecentCard = () => {
   const { t } = useTranslation();
   return (
-    <Link
-      id="recent-posts-card"
-      className={`card-shadow ${styles.card}`}
-      href="/posts"
-      passHref
-    >
+    <Link id="recent-posts-card" className={`card-shadow ${styles.card}`} href="/posts" passHref>
       <h6>
         {t("main.recentCard.recent")}
         <br />

@@ -17,14 +17,7 @@ const scrollCommand: ICommand = {
         transition: "stroke 0.2s ease-in-out",
       }}
     >
-      <rect
-        x="0.75"
-        y="0.75"
-        width="8.5"
-        height="14.5"
-        rx="4.25"
-        strokeWidth="1.5"
-      />
+      <rect x="0.75" y="0.75" width="8.5" height="14.5" rx="4.25" strokeWidth="1.5" />
       <circle cx="5" cy="5" r="1.25" strokeWidth="1.5" />
     </svg>
   ),

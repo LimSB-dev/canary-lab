@@ -50,14 +50,8 @@ const postSlice = createSlice({
 });
 
 // action creators
-export const {
-  setTitle,
-  setMarkdownValue,
-  setStatus,
-  setResetPost,
-  setOffset,
-  setResetFlag,
-} = postSlice.actions;
+export const { setTitle, setMarkdownValue, setStatus, setResetPost, setOffset, setResetFlag } =
+  postSlice.actions;
 export const selectPost = (state: RootState) => state.post;
 // reducer
 export default postSlice.reducer;

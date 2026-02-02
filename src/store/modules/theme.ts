@@ -35,8 +35,7 @@ const themeSlice = createSlice({
 });
 
 // action creators
-export const { setThemeWhenToggleClick, setThemeWhenSystemChange } =
-  themeSlice.actions;
+export const { setThemeWhenToggleClick, setThemeWhenSystemChange } = themeSlice.actions;
 export const selectTheme = (state: RootState) => state.theme;
 // reducer
 export default themeSlice.reducer;

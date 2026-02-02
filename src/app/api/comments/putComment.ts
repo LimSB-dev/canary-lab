@@ -74,10 +74,6 @@ export async function putComment({
     }
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "댓글 수정 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "댓글 수정 중 오류가 발생했습니다.");
   }
 }

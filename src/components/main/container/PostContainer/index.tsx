@@ -35,9 +35,7 @@ const RecentPostSection = ({
 
   if (hasStaleData) {
     const movedRight = offset > fetchedForOffset;
-    const staleSlice = movedRight
-      ? recentPosts.slice(1, size)
-      : recentPosts.slice(0, size - 1);
+    const staleSlice = movedRight ? recentPosts.slice(1, size) : recentPosts.slice(0, size - 1);
     const skeletonKey = movedRight ? "skeleton-right" : "skeleton-left";
     return (
       <>
@@ -217,13 +215,8 @@ export const PostContainer = ({ popularPosts }: { popularPosts: IPost[] }) => {
     }
   }, [deviceType]);
 
-  const {
-    recentPosts,
-    isPending,
-    isFetching,
-    isPlaceholderData,
-    fetchedForOffset,
-  } = useRecentPosts(size, offset);
+  const { recentPosts, isPending, isFetching, isPlaceholderData, fetchedForOffset } =
+    useRecentPosts(size, offset);
 
   const isLoading = isPending || (isFetching && isPlaceholderData);
 

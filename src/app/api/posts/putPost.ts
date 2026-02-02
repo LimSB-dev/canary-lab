@@ -58,10 +58,6 @@ export async function putPost({
     redirect(`/posts/${index}`);
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "게시물 수정 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "게시물 수정 중 오류가 발생했습니다.");
   }
 }

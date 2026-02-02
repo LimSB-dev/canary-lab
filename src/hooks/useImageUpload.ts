@@ -29,9 +29,7 @@ export function useImageUpload() {
         .map((file) => file.name);
 
       if (!isEmpty(overSizeFiles)) {
-        alert(
-          `10MB 이하의 파일만 업로드 가능합니다.\n${overSizeFiles.join(", ")}`
-        );
+        alert(`10MB 이하의 파일만 업로드 가능합니다.\n${overSizeFiles.join(", ")}`);
         return;
       }
 

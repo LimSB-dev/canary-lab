@@ -4,10 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/constants/queryKey";
 import { POSTS_LIST_PAGE_SIZE } from "@/constants/pagination";
 
-async function fetchPostsList(
-  pageParam: number,
-  tagIds: string[]
-): Promise<IPost[]> {
+async function fetchPostsList(pageParam: number, tagIds: string[]): Promise<IPost[]> {
   const offset = pageParam * POSTS_LIST_PAGE_SIZE;
   const qs = new URLSearchParams();
   qs.set("limit", String(POSTS_LIST_PAGE_SIZE));

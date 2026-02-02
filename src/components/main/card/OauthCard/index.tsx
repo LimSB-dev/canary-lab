@@ -26,9 +26,7 @@ export const OauthCard = () => {
   return isLoggedIn ? (
     <div className={styles.card_container}>
       <Link href="/mypage" className={`button-card-shadow ${styles.card_oauth}`}>
-        <p>
-          {t("main.oauthCard.myPage")}
-        </p>
+        <p>{t("main.oauthCard.myPage")}</p>
         <div className={styles.link}>
           <ImageCardShadow figure="circle" />
           {user.image ? (
@@ -41,11 +39,7 @@ export const OauthCard = () => {
         </div>
       </Link>
       <div className={`button-card-shadow ${styles.card_sign_out}`}>
-        <button
-          type="button"
-          className={styles.sign_out_button}
-          onClick={handleSignOut}
-        >
+        <button type="button" className={styles.sign_out_button} onClick={handleSignOut}>
           {t("common.signOut")}
         </button>
       </div>

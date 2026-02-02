@@ -14,7 +14,6 @@ export async function deleteComment(commentId: string): Promise<void> {
 
   // 인증 체크
   const session = await auth();
-  console.log("session", session);
   if (!session?.user) {
     throw new Error("Unauthorized: 로그인이 필요합니다.");
   }
@@ -63,10 +62,6 @@ export async function deleteComment(commentId: string): Promise<void> {
     }
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "댓글 삭제 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "댓글 삭제 중 오류가 발생했습니다.");
   }
 }

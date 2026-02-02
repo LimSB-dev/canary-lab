@@ -6,15 +6,13 @@ import "@/styles/reset.css";
 import { auth } from "@/auth";
 import { Providers } from "@/store/providers";
 import { SessionToRedux } from "@/components/common/SessionToRedux";
+import { SessionProviderWrapper } from "@/components/common/SessionProviderWrapper";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@/components/common/google";
 import { MainFooter } from "@/components/common/footer";
 import { FloatingScrollToTop } from "@/components/common/topButton";
-import {
-  ColorBendsBackground,
-  PostDetailSolidBackground,
-} from "@/components/common/background";
+import { ColorBendsBackground, PostDetailSolidBackground } from "@/components/common/background";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -34,11 +32,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   return (
     <html lang="en">
@@ -57,26 +51,28 @@ export default async function RootLayout({
         <GoogleAnalytics />
 
         <Providers>
-          <SessionToRedux session={session} />
-          {/* Color Bends: 라이트/다크 테마별 색상 - https://reactbits.dev/backgrounds/color-bends */}
-          <div
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 0,
-              width: "100%",
-              height: "100%",
-              pointerEvents: "none",
-            }}
-          >
-            <ColorBendsBackground />
-          </div>
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <PostDetailSolidBackground />
-            {children}
-            <FloatingScrollToTop />
-            <MainFooter />
-          </div>
+          <SessionProviderWrapper session={session}>
+            <SessionToRedux session={session} />
+            {/* Color Bends: 라이트/다크 테마별 색상 - https://reactbits.dev/backgrounds/color-bends */}
+            <div
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+              }}
+            >
+              <ColorBendsBackground />
+            </div>
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <PostDetailSolidBackground />
+              {children}
+              <FloatingScrollToTop />
+              <MainFooter />
+            </div>
+          </SessionProviderWrapper>
         </Providers>
       </body>
     </html>

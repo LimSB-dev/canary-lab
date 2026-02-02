@@ -7,11 +7,7 @@ import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHook";
 import convertUnixTime from "@/utils/convertUnixTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLocationArrow,
-  faSpinner,
-  faThermometer,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationArrow, faSpinner, faThermometer } from "@fortawesome/free-solid-svg-icons";
 import { setDataReceivingTime } from "@/store/modules/weather";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -25,12 +21,8 @@ export const WeatherCard = () => {
   const city = useAppSelector((state) => state.location.city);
   const weatherData = useAppSelector((state) => state.weather.weatherData);
 
-  const sunrise = convertUnixTime(weatherData?.sys.sunrise)
-    .split(":")
-    .map(Number);
-  const sunset = convertUnixTime(weatherData?.sys.sunset)
-    .split(":")
-    .map(Number);
+  const sunrise = convertUnixTime(weatherData?.sys.sunrise).split(":").map(Number);
+  const sunset = convertUnixTime(weatherData?.sys.sunset).split(":").map(Number);
 
   const date = new Date();
   const hour = date.getHours();
@@ -78,10 +70,7 @@ export const WeatherCard = () => {
         ) : (
           <div className={styles.flex_row}>
             <h4>{city}</h4>
-            <FontAwesomeIcon
-              className={styles.location_icon}
-              icon={faLocationArrow}
-            />
+            <FontAwesomeIcon className={styles.location_icon} icon={faLocationArrow} />
           </div>
         )}
         {weatherLoading || (

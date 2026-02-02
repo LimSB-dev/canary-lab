@@ -14,6 +14,8 @@ declare module "next-auth" {
       providers?: string[];
       /** 현재 로그인에 사용한 제공자 */
       currentProvider?: string;
+      /** 저장된 언어 (ko | en) */
+      locale?: string;
     };
   }
 }

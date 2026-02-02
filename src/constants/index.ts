@@ -19,8 +19,4 @@ export { queryKeys } from "./queryKey";
 export { POSTS_LIST_PAGE_SIZE, COMMENTS_PER_PAGE } from "./pagination";
 
 export { TOOLBARS, TOOLBARS_MODE } from "./editor/toolbars";
-export {
-  NOT_FOUND_SEQUENCE,
-  ERROR_SEQUENCE,
-  MAIN_CARD_SEQUENCE,
-} from "./sequence/sequence";
+export { NOT_FOUND_SEQUENCE, ERROR_SEQUENCE, MAIN_CARD_SEQUENCE } from "./sequence/sequence";

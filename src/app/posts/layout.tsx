@@ -1,10 +1,6 @@
 import PostsHeader from "@/components/common/header/PostsHeader";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <PostsHeader />

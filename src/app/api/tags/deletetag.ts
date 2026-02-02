@@ -40,10 +40,6 @@ export async function deleteTag(id: string) {
     revalidatePath("/posts");
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "태그 삭제 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "태그 삭제 중 오류가 발생했습니다.");
   }
 }

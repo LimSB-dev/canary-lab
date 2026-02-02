@@ -1,11 +1,5 @@
 import styles from "./styles.module.scss";
-import {
-  GithubCard,
-  NameCard,
-  ProfileCard,
-  RateCard,
-  RoleCard,
-} from "@/components/main/card";
+import { GithubCard, NameCard, ProfileCard, RateCard, RoleCard } from "@/components/main/card";
 
 export const InfoContainer = () => {
   return (

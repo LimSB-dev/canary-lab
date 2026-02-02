@@ -31,10 +31,6 @@ export async function GET(request: Request) {
     return NextResponse.json(camelcaseKeys(rows, { deep: true }));
   } catch (error) {
     console.error("Database Error:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch posts data." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch posts data." }, { status: 500 });
   }
 }
-

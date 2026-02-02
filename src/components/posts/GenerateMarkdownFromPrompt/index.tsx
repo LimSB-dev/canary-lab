@@ -37,9 +37,7 @@ export default function GenerateMarkdownFromPrompt() {
       setIsOpen(false);
       alert(t("posts.generateMarkdownSuccess"));
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : t("posts.generateMarkdownError")
-      );
+      setError(err instanceof Error ? err.message : t("posts.generateMarkdownError"));
     } finally {
       setLoading(false);
     }
@@ -113,9 +111,7 @@ export default function GenerateMarkdownFromPrompt() {
                   className={styles.submit}
                   disabled={loading || !prompt.trim()}
                 >
-                  {loading
-                    ? t("posts.generateMarkdownLoading")
-                    : t("posts.generateMarkdownSubmit")}
+                  {loading ? t("posts.generateMarkdownLoading") : t("posts.generateMarkdownSubmit")}
                 </button>
               </div>
             </form>

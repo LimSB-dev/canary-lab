@@ -9,13 +9,7 @@ import { auth } from "@/auth";
  * @param name 태그 이름
  * @param color 태그 색상
  */
-export async function postTag({
-  name,
-  color,
-}: {
-  name: string;
-  color: string;
-}) {
+export async function postTag({ name, color }: { name: string; color: string }) {
   noStore();
 
   // 인증 체크
@@ -48,10 +42,6 @@ export async function postTag({
     return rows[0];
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "태그 생성 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "태그 생성 중 오류가 발생했습니다.");
   }
 }

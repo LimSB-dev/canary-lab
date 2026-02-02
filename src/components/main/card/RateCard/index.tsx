@@ -9,8 +9,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 export const RateCard = () => {
   const { t } = useTranslation();
-  const svgFile =
-    "https://mazassumnida.wtf/api/v2/generate_badge?boj=clim03087";
+  const svgFile = "https://mazassumnida.wtf/api/v2/generate_badge?boj=clim03087";
 
   return (
     <Link
@@ -21,11 +20,7 @@ export const RateCard = () => {
       passHref
     >
       <ImageCardShadow />
-      <img
-        className={styles.img}
-        src={svgFile}
-        alt={t("main.rateCard.solvedAcAlt")}
-      />
+      <img className={styles.img} src={svgFile} alt={t("main.rateCard.solvedAcAlt")} />
     </Link>
   );
 };

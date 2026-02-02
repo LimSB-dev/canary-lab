@@ -3,10 +3,7 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEye,
-  faHeart as regularHeart,
-} from "@fortawesome/free-regular-svg-icons";
+import { faEye, faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { isEmpty } from "lodash";
@@ -28,11 +25,7 @@ const PopularPostCard = ({ popularPosts }: IProps) => {
 
   if (isEmpty(popularPosts)) {
     return (
-      <Link
-        className={`button-card-shadow ${styles.card_popular}`}
-        href={"/create"}
-        passHref
-      >
+      <Link className={`button-card-shadow ${styles.card_popular}`} href={"/create"} passHref>
         <h6>게시물이 없습니다.</h6>
       </Link>
     );

@@ -21,12 +21,7 @@ export const FigmaCard = () => {
       <h6>Figma</h6>
       <div className={styles.link}>
         <ImageCardShadow figure="circle" />
-        <Image
-          src="/assets/tech/figma.svg"
-          alt="Figma"
-          width={32}
-          height={48}
-        />
+        <Image src="/assets/tech/figma.svg" alt="Figma" width={32} height={48} />
       </div>
       <p>{t("main.figmaCard.design")}</p>
     </Link>

@@ -30,8 +30,7 @@ export const useWeather = () => {
   const formattedTime = convertUnixTime(dt);
   const [coords, setCoords] = useState<Coords>(null);
 
-  const shouldRefetch =
-    !dt || compareTime(new Date().toTimeString().split(" ")[0], formattedTime);
+  const shouldRefetch = !dt || compareTime(new Date().toTimeString().split(" ")[0], formattedTime);
 
   useEffect(() => {
     if (!shouldRefetch) return;
@@ -65,8 +64,7 @@ export const useWeather = () => {
     }
   }, [data, dispatch]);
 
-  const loading =
-    (shouldRefetch && !coords) || (!!coords && isPending);
+  const loading = (shouldRefetch && !coords) || (!!coords && isPending);
 
   return {
     loading,

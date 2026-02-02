@@ -7,9 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default async function LoginPage() {
-  return (
-    <main className={styles.main}>
-      {await LoginPageForm()}
-    </main>
-  );
+  return <main className={styles.main}>{await LoginPageForm()}</main>;
 }

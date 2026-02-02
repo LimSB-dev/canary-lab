@@ -10,15 +10,7 @@ import { auth } from "@/auth";
  * @param name 태그 이름
  * @param color 태그 색상
  */
-export async function putTag({
-  id,
-  name,
-  color,
-}: {
-  id: string;
-  name: string;
-  color: string;
-}) {
+export async function putTag({ id, name, color }: { id: string; name: string; color: string }) {
   noStore();
 
   // 인증 체크
@@ -57,10 +49,6 @@ export async function putTag({
     revalidatePath("/posts");
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : "태그 수정 중 오류가 발생했습니다."
-    );
+    throw new Error(error instanceof Error ? error.message : "태그 수정 중 오류가 발생했습니다.");
   }
 }

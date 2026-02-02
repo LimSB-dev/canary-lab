@@ -4,11 +4,7 @@ import { DefaultTerminal } from "@/components/common/terminal";
 import styles from "./not-found.module.scss";
 import { ERROR_SEQUENCE } from "@/constants/sequence/sequence";
 
-export default function Error({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+export default function Error({ error }: { error: Error & { digest?: string } }) {
   return (
     <main className={styles.main}>
       <DefaultTerminal

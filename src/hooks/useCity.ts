@@ -57,11 +57,13 @@ export const useCity = () => {
     );
   }, [dt]);
 
-  const { data: city, isPending, error } = useQuery({
+  const {
+    data: city,
+    isPending,
+    error,
+  } = useQuery({
     queryKey:
-      coords != null
-        ? queryKeys.city(coords.latitude, coords.longitude)
-        : ["city", null, null],
+      coords != null ? queryKeys.city(coords.latitude, coords.longitude) : ["city", null, null],
     queryFn: () => fetchCityName(coords),
     enabled: !!coords,
     staleTime: 1000 * 60 * 60,

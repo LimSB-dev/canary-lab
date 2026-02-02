@@ -54,11 +54,7 @@ export async function getProjectPreview(url: string): Promise<ProjectPreview | n
 }
 
 /** 여러 URL의 미리보기를 한 번에 조회 (서버 전용) */
-export async function getProjectPreviews(
-  urls: string[]
-): Promise<ProjectPreview[]> {
+export async function getProjectPreviews(urls: string[]): Promise<ProjectPreview[]> {
   const results = await Promise.all(urls.map((url) => getProjectPreview(url)));
-  return results.filter(
-    (p): p is ProjectPreview => p !== null
-  );
+  return results.filter((p): p is ProjectPreview => p !== null);
 }

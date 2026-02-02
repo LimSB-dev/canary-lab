@@ -28,9 +28,7 @@ export async function getPost(index: number): Promise<IPost> {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(
-      error instanceof Error
-        ? error.message
-        : "게시물을 불러오는 중 오류가 발생했습니다."
+      error instanceof Error ? error.message : "게시물을 불러오는 중 오류가 발생했습니다."
     );
   }
 }

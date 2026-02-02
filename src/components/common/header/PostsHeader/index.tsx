@@ -26,9 +26,7 @@ const PostsHeader = () => {
   const isEdit = pathname.endsWith("/edit");
   const index = Number(pathname.split("/")[2]);
 
-  const handleButton = async (
-    type: "create" | "edit" | "delete" | "cancel"
-  ) => {
+  const handleButton = async (type: "create" | "edit" | "delete" | "cancel") => {
     try {
       setLoading(true);
       switch (type) {
@@ -65,21 +63,15 @@ const PostsHeader = () => {
             <>
               <button
                 type="button"
-                className={`card-shadow ${styles.submit_button} ${
-                  loading && styles.loading
-                }`}
-                onClick={() =>
-                  isEdit ? handleButton("edit") : handleButton("create")
-                }
+                className={`card-shadow ${styles.submit_button} ${loading && styles.loading}`}
+                onClick={() => (isEdit ? handleButton("edit") : handleButton("create"))}
                 disabled={loading}
               >
                 {isEdit ? t("common.save") : t("common.create")}
               </button>
               <Link
                 href={isEdit ? `/posts/${index}` : "/posts"}
-                className={`${styles.cancel_button} ${
-                  loading && styles.loading
-                }`}
+                className={`${styles.cancel_button} ${loading && styles.loading}`}
                 onClick={() => handleButton("cancel")}
               >
                 {t("common.cancel")}
@@ -89,9 +81,7 @@ const PostsHeader = () => {
             <>
               <Link
                 href={`/posts/${index}/edit`}
-                className={`button-card-shadow ${styles.edit_button} ${
-                  loading && styles.loading
-                }`}
+                className={`button-card-shadow ${styles.edit_button} ${loading && styles.loading}`}
               >
                 {t("common.edit")}
               </Link>

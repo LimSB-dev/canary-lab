@@ -25,4 +25,5 @@ Canary Lab is a technology blog where we explore the latest trends, share insigh
 - OAuth login: GitHub, Google (optional).
 
 ## Environment Variables (OAuth)- **GitHub**: `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`
+
 - **Google**: `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` (Google Cloud Console에서 OAuth 2.0 클라이언트 ID 생성 후 설정)

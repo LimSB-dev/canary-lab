@@ -4,10 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEye,
-  faHeart as regularHeart,
-} from "@fortawesome/free-regular-svg-icons";
+import { faEye, faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "@/hooks/reduxHook";
 interface IProps {
@@ -29,8 +26,7 @@ const RecentPostCard = ({ post }: IProps) => {
       const url = new URL(post.thumbnailUrl);
       const hostname = url.hostname;
       isVercelBlobHost =
-        hostname === "blob.vercel-storage.com" ||
-        hostname.endsWith(".blob.vercel-storage.com");
+        hostname === "blob.vercel-storage.com" || hostname.endsWith(".blob.vercel-storage.com");
     } catch {
       isVercelBlobHost = false;
     }
@@ -60,9 +56,7 @@ const RecentPostCard = ({ post }: IProps) => {
           <span>{formattedDate}</span>
           <div className={styles.icon_container}>
             <div>
-              <FontAwesomeIcon
-                icon={post.likes.includes(user.id) ? solidHeart : regularHeart}
-              />
+              <FontAwesomeIcon icon={post.likes.includes(user.id) ? solidHeart : regularHeart} />
               {post.likes.length}
             </div>
             <div>

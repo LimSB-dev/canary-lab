@@ -54,11 +54,7 @@ export const SearchCard = () => {
           autoComplete="off"
         />
         {search.length > 0 && (
-          <FontAwesomeIcon
-            icon={faClose}
-            cursor={"pointer"}
-            onClick={() => setSearch("")}
-          />
+          <FontAwesomeIcon icon={faClose} cursor={"pointer"} onClick={() => setSearch("")} />
         )}
       </div>
 

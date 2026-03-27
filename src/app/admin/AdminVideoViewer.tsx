@@ -43,14 +43,14 @@ export function AdminVideoViewer({ initialVideoUrl }: AdminVideoViewerProps) {
     <section className={styles.container}>
       <h1 className={styles.title}>Admin Video Viewer</h1>
       <p className={styles.description}>
-        `ytory.mov` Blob URL을 입력하거나 `NEXT_PUBLIC_YTORY_MOV_URL` 환경변수를 설정해 확인할 수 있습니다.
+        Blob URL을 입력하거나 `NEXT_PUBLIC_ADMIN_VIDEO_URL` 환경변수를 설정해 확인할 수 있습니다.
       </p>
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           className={styles.input}
           type="url"
-          placeholder="https://.../ytory.mov"
+          placeholder="https://.../video.mov"
           value={inputUrl}
           onChange={(event) => setInputUrl(event.target.value)}
         />

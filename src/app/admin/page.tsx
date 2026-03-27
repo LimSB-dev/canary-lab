@@ -7,8 +7,7 @@ export const metadata: Metadata = {
   title: "Admin",
 };
 
-const DEFAULT_YTORY_MOV_URL =
-  "https://ax0nw7sdddyydzms.public.blob.vercel-storage.com/ytory.mov";
+const DEFAULT_ADMIN_VIDEO_URL = "";
 
 export default async function AdminPage() {
   const session = await auth();
@@ -24,7 +23,7 @@ export default async function AdminPage() {
   return (
     <main>
       <AdminVideoViewer
-        initialVideoUrl={process.env.NEXT_PUBLIC_YTORY_MOV_URL ?? DEFAULT_YTORY_MOV_URL}
+        initialVideoUrl={process.env.NEXT_PUBLIC_ADMIN_VIDEO_URL ?? DEFAULT_ADMIN_VIDEO_URL}
       />
     </main>
   );

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import styles from "./styles.module.scss";
 
@@ -15,6 +15,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 const PostsHeader = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const user = useAppSelector((state) => state.user);
   const { title, markdownValue } = useAppSelector((state) => state.post);
   const [loading, setLoading] = useState(false);
@@ -31,15 +32,24 @@ const PostsHeader = () => {
       setLoading(true);
       switch (type) {
         case "create":
-          await postPost({ title, markdownValue });
+          {
+            const result = await postPost({ title, markdownValue });
+            router.push(`/posts/${result.index}`);
+          }
           break;
         case "edit":
-          await putPost({ index, title, markdownValue });
+          {
+            const result = await putPost({ index, title, markdownValue });
+            router.push(`/posts/${result.index}`);
+          }
           break;
         case "delete":
           await deletePost(index);
+          router.push("/posts");
           break;
-        case "delete":
+        case "cancel":
+          router.push(isEdit ? `/posts/${index}` : "/posts");
+          break;
         default:
           break;
       }

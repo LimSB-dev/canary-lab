@@ -7,18 +7,18 @@ import ColorBends from "./ColorBends";
 
 /** 라이트 모드: 흰 배경에 어울리는 부드러운 톤 */
 const LIGHT_COLORS = [
-  "#ffe169", // 초록
-  "#edc531", // 노랑
-  "#c9a227", // 노랑
-  "#b69121", // 빨강
+  "#fff9db",
+  "#fff3bf",
+  "#ffec99",
+  "#ffe8a3",
 ];
 
 /** 다크 모드: 어두운 배경에 어울리는 밝은 톤 */
 const DARK_COLORS = [
-  "#fff555", // primary
-  "#fff777", // primary-light
-  "#b8860b", // 골드 악센트
-  "#f4e409", // primary-dark
+  "#1a1a1a",
+  "#202020",
+  "#2a240f",
+  "#3a320f",
 ];
 
 export default function ColorBendsBackground() {
@@ -43,15 +43,15 @@ export default function ColorBendsBackground() {
   return (
     <ColorBends
       colors={colors}
-      rotation={45}
-      speed={0.2}
+      rotation={30}
+      speed={0.08}
       transparent
-      scale={1}
-      frequency={1}
-      warpStrength={1}
-      mouseInfluence={1}
-      parallax={0.5}
-      noise={0.1}
+      scale={1.4}
+      frequency={0.6}
+      warpStrength={0.55}
+      mouseInfluence={0.2}
+      parallax={0.08}
+      noise={0.02}
     />
   );
 }

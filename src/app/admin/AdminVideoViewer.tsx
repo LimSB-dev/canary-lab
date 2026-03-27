@@ -11,9 +11,28 @@ export function AdminVideoViewer({ initialVideoUrl }: AdminVideoViewerProps) {
   const [inputUrl, setInputUrl] = useState(initialVideoUrl);
   const [videoUrl, setVideoUrl] = useState(initialVideoUrl);
 
+  const sanitizeVideoUrl = (rawUrl: string): string => {
+    const trimmed = rawUrl.trim();
+    if (!trimmed) {
+      return "";
+    }
+    try {
+      const parsed = new URL(trimmed, typeof window !== "undefined" ? window.location.origin : undefined);
+      const allowedProtocols = new Set(["http:", "https:", "blob:"]);
+      if (!allowedProtocols.has(parsed.protocol)) {
+        return "";
+      }
+      return parsed.toString();
+    } catch {
+      return "";
+    }
+  };
+
+  const safeVideoUrl = useMemo(() => sanitizeVideoUrl(videoUrl), [videoUrl]);
+
   const canRenderVideo = useMemo(() => {
-    return videoUrl.trim().length > 0;
-  }, [videoUrl]);
+    return safeVideoUrl.length > 0;
+  }, [safeVideoUrl]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,8 +61,8 @@ export function AdminVideoViewer({ initialVideoUrl }: AdminVideoViewerProps) {
 
       {canRenderVideo ? (
         <div className={styles.videoWrapper}>
-          <video className={styles.video} controls preload="metadata" src={videoUrl} />
-          <a className={styles.link} href={videoUrl} target="_blank" rel="noreferrer">
+          <video className={styles.video} controls preload="metadata" src={safeVideoUrl} />
+          <a className={styles.link} href={safeVideoUrl} target="_blank" rel="noreferrer">
             새 탭에서 열기
           </a>
         </div>

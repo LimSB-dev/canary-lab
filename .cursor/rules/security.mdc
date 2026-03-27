@@ -1,0 +1,29 @@
+---
+alwaysApply: true
+---
+
+# Security · Secrets · Environment Variables
+
+## Secrets are server-only
+
+- **API keys / DB URLs / signing keys** and similar secrets must **not** be exposed in the client bundle. Use them only in Server Components, Route Handlers, or server-only modules.
+- **`NEXT_PUBLIC_` prefix**: only use it when the value is intended to be public to the browser. Never attach it to sensitive information.
+
+## Environment variables
+
+- Manage environment-specific values via **environment variables**, and do not commit actual values to the repository.
+- Document only the required key names in `.env.example` (leave values blank).
+
+## API · input
+
+- Route Handlers and server actions should verify **authentication/authorization** as needed (make the public/private policy explicit in code).
+- Do not insert user input into HTML directly. Apply appropriate escaping/sanitization where XSS is a concern.
+- When redirecting to an external URL, avoid **open redirects** (use an allowlist, etc.).
+
+## Dependencies
+
+- Regularly check for **vulnerabilities** (`yarn audit`, etc.) and address critical issues first.
+
+## Summary
+
+Keep secrets server-only, use `NEXT_PUBLIC_` only for values safe to expose, and make API auth + input validation a habit.

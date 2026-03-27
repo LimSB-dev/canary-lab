@@ -1,0 +1,32 @@
+---
+alwaysApply: true
+---
+
+# Next.js App Router · Data Boundaries
+
+## Server vs Client
+
+- **Default to Server Components**: perform data fetching, DB access, and secret token access only on the **server**. Put `"use client"` at the top of a file only when it is truly necessary.
+- **When `use client` is needed**: browser APIs, React client hooks like `useState`/`useEffect`, subscriptions, animations, and other client-only behaviors.
+- **Minimize boundaries**: keep the client tree **thin**, and leave heavy data processing in server components.
+
+## Data · Caching
+
+- When using `fetch`, explicitly state the **caching intent** (`cache`, `next: { revalidate }`, `no-store`, etc.). Do not rely only on defaults.
+- Separate policies for **frequently changing data** vs **mostly-static data**. If uncertain, document the reason with a comment.
+
+## Routing · UI boundaries
+
+- **Loading**: use `loading.tsx` at the segment level to handle skeletons/spinners consistently (only when needed).
+- **Errors**: handle recoverable errors in `error.tsx` and provide users with a **meaningful message** and a retry path.
+- **Layout**: keep shared shell/navigation in `layout.tsx` and avoid duplicating it per page.
+
+## Recommended file placement
+
+- Route segments: `app/<segment>/page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`.
+- Reusable UI: `components/` (together with the componentization rules).
+- Pure logic / helpers: `lib/`.
+
+## Summary
+
+Do what you can on the server, and keep the client focused on **interaction and rendering**.

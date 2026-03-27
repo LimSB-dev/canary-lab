@@ -30,6 +30,16 @@ const nextConfig = {
         hostname: "opengraph.githubassets.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "etf-analysis-agent.vercel.app",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "v0-rule-breaker.vercel.app",
+        pathname: "/**",
+      },
     ],
   },
 

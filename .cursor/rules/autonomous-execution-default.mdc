@@ -1,0 +1,26 @@
+---
+description: Execute requested work by default without confirmation back-and-forth
+alwaysApply: true
+---
+
+# Autonomous Execution Default
+
+When the user gives an implementation request, execute it end-to-end without asking for routine confirmation.
+
+## Default Behavior
+
+- Treat direct requests as approval to proceed.
+- Run needed edits, commands, validation, and follow-up fixes in one flow.
+- Prefer action over proposal when requirements are already clear.
+
+## When Questions Are Still Allowed
+
+- Ask only if a true blocker exists (missing credentials, missing external access, destructive risk, or conflicting requirements).
+- If multiple valid options exist, pick a reasonable default and proceed; report what was chosen.
+- Do not ask "Should I continue?" after partial progress unless user safety or data loss is involved.
+
+## Progress and Reporting
+
+- Provide short progress updates while working.
+- At completion, report outcomes, remaining risks, and concrete next steps.
+- If some work cannot be completed, state exactly what is blocked and continue with all unblocked tasks.

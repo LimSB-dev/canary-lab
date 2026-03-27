@@ -1,9 +1,6 @@
 import NextAuth from "next-auth";
-import Apple from "next-auth/providers/apple";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
-import Naver from "next-auth/providers/naver";
-import Kakao from "next-auth/providers/kakao";
 import { authConfig } from "./auth.config";
 import { sql } from "@vercel/postgres";
 import { ensureAccountsTable } from "./src/utils/ensureAccountsTable";
@@ -19,6 +16,7 @@ const SESSION_UPDATE_AGE = 24 * 60 * 60;
 
 /** 마이페이지에서 '연동 추가' 시 현재 계정에 새 제공자만 연결하기 위한 쿠키 키 */
 const ACCOUNT_LINK_EMAIL_COOKIE = "canary_account_link_email";
+const ALLOWED_OAUTH_PROVIDERS = new Set(["github", "google"]);
 
 export const {
   handlers: { GET, POST },
@@ -31,12 +29,15 @@ export const {
     maxAge: SESSION_MAX_AGE,
     updateAge: SESSION_UPDATE_AGE,
   },
-  providers: [GitHub, Apple, Google, Naver, Kakao],
+  providers: [GitHub, Google],
   callbacks: {
     async signIn({ user, account }) {
       try {
         if (!account?.provider || account.providerAccountId == null) {
           return true;
+        }
+        if (!ALLOWED_OAUTH_PROVIDERS.has(account.provider)) {
+          return false;
         }
         await ensureAccountsTable();
 

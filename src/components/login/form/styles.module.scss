@@ -32,3 +32,12 @@
   all: unset;
   cursor: pointer;
 }
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.tooltip_wrapper {
+  display: inline-block;
+}

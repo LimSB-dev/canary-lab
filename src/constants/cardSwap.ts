@@ -23,7 +23,7 @@ export const CARD_SWAP_SKEW_AMOUNT = 6;
 export const CARD_SWAP_EASING = "elastic" as const;
 
 /** 호버 시 애니메이션 일시정지 */
-export const CARD_SWAP_PAUSE_ON_HOVER = true;
+export const CARD_SWAP_PAUSE_ON_HOVER = false;
 
 /**
  * 래퍼 기본 참고값 (데스크톱).

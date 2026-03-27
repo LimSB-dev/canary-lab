@@ -2,7 +2,6 @@
 
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 
 /**
@@ -55,7 +54,7 @@ export async function putPost({
     revalidatePath(`/posts/${index}`);
     revalidatePath("/posts");
     revalidatePath("/");
-    redirect(`/posts/${index}`);
+    return { index };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(error instanceof Error ? error.message : "게시물 수정 중 오류가 발생했습니다.");

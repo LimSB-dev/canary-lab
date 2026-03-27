@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+# TypeScript · Naming · Style
+
+## Declarations
+
+- **Declare functions/components with `const`**.
+- **`if` statements must always use braces `{}`** (even for a single line).
+- **`ref`**: use only when necessary; prefer state/callbacks and declarative patterns when possible.
+
+## Type naming
+
+- For **`type` / `interface`** declarations, use `***Type` or `I***` naming style (keep it consistent across the project).
+- Component props types should follow the same rule (e.g., `ButtonPropsType` vs `IButtonProps`—pick one convention and stick to it).
+
+## Strings / identifiers
+
+- Avoid unnecessary abbreviations in variable/function/file names. Prefer complete words that clearly communicate intent.
+
+## Type quality
+
+- **Avoid `any`**: if unavoidable, narrow the scope and explain the reason with a comment.
+- Treat **external inputs** (API, forms, query) as boundaries: validate them or use explicit types.
+
+## `import`
+
+- **Import order**: external packages → internal absolute paths (`@/`) → relative paths, separated by blank lines (follow team formatter rules if configured).
+
+## Summary
+
+Prefer readable names, clear type boundaries, and minimal use of `const`-safe patterns, braces, and `ref`.

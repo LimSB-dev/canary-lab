@@ -36,6 +36,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Cursor / Agent artifacts (local-only)
-.cursor/
-.agents/

@@ -1,0 +1,47 @@
+---
+alwaysApply: true
+---
+
+# Internationalization (i18n)
+
+Manage user-visible strings **consistently per locale**. If you use an i18n library (e.g., next-intl, next-i18next), follow its conventions.
+
+## Domain / Terminology
+
+- **Terminology consistency**: use the same expressions (meaning and wording) across code, UI, and translation keys.
+- **Calculation / display logic**: keep formulas, units, and rounding rules in `lib/` (or a dedicated module) and call them from components.
+- **Number formatting**: format amounts, percentages, counts, etc. according to locale (decimal places, thousands separators, ...), and keep it aligned with i18n rules.
+
+```typescript
+// ✅ Keep domain logic in lib (or similar)
+export function computeSomething(input: InputType): ResultType { ... }
+
+// ❌ Avoid hardcoding business rules and formulas inside components
+```
+
+## Translation keys & strings
+
+- **Translation keys**: use a namespace pattern (e.g., `feature.action`, `common.save`) and make the key name self-explanatory.
+- **No direct strings**: render user-visible text only via translation functions/keys. (Exceptions: dev-only logs, etc.)
+- **Base language**: document the project's default locale in docs/settings, and fall back according to the team's policy for missing keys.
+- **Numbers / dates / currency**: use `Intl.NumberFormat`, `Intl.DateTimeFormat`, etc. for locale-specific formatting.
+
+```typescript
+// ✅ Use translation keys + formatting helpers
+t("feature.label")
+formatNumber(value, locale)
+
+// ❌ Hardcoded user-facing strings
+<div>Fixed Korean/English sentence</div>
+```
+
+## Web app structure (Next.js)
+
+- **Stack**: App Router, React, TypeScript (follow project setup).
+- **Structure**: routes in `app/`, reusable UI in `components/`, pure logic/utilities in `lib/`.
+- **Accessibility**: use proper labels (`aria-*`) for inputs/results, and consider keyboard/screen-reader usage.
+- **Responsive**: ensure the layout remains usable and correct across key viewports.
+
+---
+
+When adding new screens/features, check translation keys, formatting rules, and domain terminology together. If domain rules change, sync both `lib/` and translation resources.

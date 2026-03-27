@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+# Accessibility (Minimum Baseline)
+
+## Meaning / structure
+
+- **Heading levels**: use `h1`~`h6` in the correct order, and generally keep **one `h1` per page**.
+- **Landmarks**: separate major regions using `main`, `nav`, `header`, `footer`, etc.
+
+## Interactions
+
+- For clickable elements, prefer `button` or `a`. Avoid adding only `onClick` to a `div` (if unavoidable, use `role`, keyboard support, and focus handling).
+- For forms, connect every input to a `label` (`htmlFor`/`id` or `aria-label`, etc.).
+
+## Keyboard / focus
+
+- Keep **focus order** logical, and consider focus trapping when opening modals/dropdowns.
+- Add skip links (or similar mechanisms) when it improves usability.
+
+## Visual
+
+- Do not convey information by color alone (pair with icon/text/patterns).
+- Ensure sufficient contrast for body content and button text.
+
+## Tests
+
+- Using role/name-based queries in E2E and Jest (RTL) improves both accessibility and test stability.
+
+## Summary
+
+Use semantic HTML, proper labels/buttons/keyboard support, and do not rely on color alone for meaning.

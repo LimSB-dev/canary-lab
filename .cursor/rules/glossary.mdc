@@ -1,0 +1,271 @@
+---
+alwaysApply: true
+---
+
+---
+
+id: poe2_crafting_glossary
+type: domain_knowledge
+language: en
+tags: [poe2, crafting, essence, omen, currency]
+
+---
+
+# Path of Exile 2 Crafting Domain Glossary
+
+This document defines core crafting-related terminology used in [Path of Exile 2](chatgpt://generic-entity?number=0).  
+It is designed for AI systems to understand item modification mechanics, currency usage, and deterministic vs random crafting systems.
+
+---
+
+# 1. Core Concepts
+
+## Item
+
+An equippable object that can contain modifiers (mods).
+
+## Modifier (Mod)
+
+A property that alters an item's stats.
+
+- Prefix: Offensive or scaling modifiers
+- Suffix: Defensive or utility modifiers
+
+## Affix Pool
+
+The set of all possible modifiers that can roll on an item.
+
+## Tags
+
+Keywords that classify modifiers and items.
+
+Examples:
+
+- fire
+- cold
+- lightning
+- attack
+- spell
+- minion
+
+Tags are critical for determining crafting outcomes.
+
+---
+
+# 2. Crafting Systems Overview
+
+Crafting in POE2 consists of three main approaches:
+
+1. Random modification (Currency)
+2. Semi-deterministic forcing (Essence)
+3. Conditional manipulation (Omen)
+
+---
+
+# 3. Currency
+
+## Definition
+
+Currency items modify equipment with random outcomes.
+
+## Characteristics
+
+- Non-deterministic
+- Wide modifier pool
+- Used for rerolling or upgrading items
+
+## Examples
+
+- Chaos Orb → rerolls all modifiers
+- Exalted Orb → adds a modifier
+- Orb of Augmentation → adds a minor modifier
+
+## AI Interpretation
+
+Currency = exploration / randomness
+
+---
+
+# 4. Essence
+
+## Definition
+
+Essences are crafting items that guarantee a specific modifier.
+
+## Core Behavior
+
+- Overrides one modifier on the item
+- Forces a predetermined stat
+- Remaining modifiers are random
+
+## Structure
+
+- Each Essence corresponds to a specific stat
+- Comes in tiers (higher tier = stronger values)
+
+## Examples
+
+### Essence of Greed
+
+- Guarantees: Life modifier
+
+### Essence of Anger
+
+- Guarantees: Fire damage modifier
+
+### Essence of Wrath
+
+- Guarantees: Lightning damage modifier
+
+### Essence of Hatred
+
+- Guarantees: Cold damage modifier
+
+## AI Interpretation
+
+Essence = deterministic anchor in crafting
+
+---
+
+# 5. Omen
+
+## Definition
+
+Omens are conditional crafting enhancers that modify outcomes based on rules.
+
+## Core Behavior
+
+- Do not directly add stats
+- Modify how crafting behaves
+- Trigger under specific conditions
+
+## Examples (conceptual)
+
+- Prevent modifier removal
+- Improve upgrade success
+- Influence modifier outcomes
+
+## AI Interpretation
+
+Omen = rule modifier / meta-crafting layer
+
+---
+
+# 6. Deterministic vs Random Crafting
+
+## Deterministic
+
+Outcome is controlled or guaranteed.
+
+Examples:
+
+- Essence forcing a specific stat
+
+## Random
+
+Outcome is unpredictable.
+
+Examples:
+
+- Chaos Orb reroll
+
+## Hybrid
+
+Combination of both systems.
+
+Examples:
+
+- Essence (1 fixed mod + random rest)
+
+---
+
+# 7. Modifier Categories
+
+## Offensive Mods
+
+- Increased Damage
+- Added Elemental Damage
+- Attack Speed
+- Critical Strike Chance
+
+## Defensive Mods
+
+- Maximum Life
+- Resistances
+- Armour / Evasion
+
+## Utility Mods
+
+- Movement Speed
+- Attribute bonuses (STR, DEX, INT)
+
+---
+
+# 8. Build Synergy
+
+## Definition
+
+The relationship between modifiers and character builds.
+
+Examples:
+
+- Fire builds → prioritize fire tags
+- Minion builds → prioritize minion modifiers
+
+## AI Usage
+
+Used for recommendation systems:
+
+- Suggest crafting methods
+- Filter useful modifiers
+
+---
+
+# 9. Crafting Strategy Layers
+
+## Early Game
+
+- Focus on survivability (Life, Resistances)
+
+## Mid Game
+
+- Mix damage and defense
+
+## Late Game
+
+- Optimize scaling modifiers
+- Target specific builds
+
+---
+
+# 10. AI-Oriented Summary
+
+- Currency = random exploration
+- Essence = controlled modifier injection
+- Omen = rule-based crafting manipulation
+
+Crafting = balancing randomness and control
+
+---
+
+# 11. Relationships (Important)
+
+- Item → contains → Modifiers
+- Modifiers → belong to → Tags
+- Essence → guarantees → Modifier
+- Currency → rerolls → Modifiers
+- Omen → modifies → Crafting Rules
+
+---
+
+# 12. Key Insight
+
+Efficient crafting in POE2 is not purely random.
+
+It is:
+
+- Anchored by Essences
+- Adjusted by Omens
+- Expanded by Currency
+
+This layered system enables controlled randomness.

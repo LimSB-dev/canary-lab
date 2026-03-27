@@ -1,0 +1,32 @@
+---
+alwaysApply: true
+---
+
+# Performance (Next.js · React)
+
+## Images
+
+- **`next/image`**: specify `width`/`height` or `fill` plus `sizes` appropriately to prevent layout shifts.
+- **Size/format**: consider optimizing formats and sizes (compression, source sets, etc.).
+
+## Code splitting
+
+- For **large libraries**, use `dynamic()` or `import()` for **only the routes that need the feature** (defer loading).
+- Keep it **page/route scoped**; do not grow the client bundle unnecessarily.
+
+## Lists / rendering
+
+- For **very long lists**, consider virtualization. For short/simple lists, avoid premature optimization.
+
+## Data
+
+- Avoid unnecessary repeated client `fetch` calls. Handle data on the server when possible (aligned with App Router rules).
+- Match caching/revalidation policies to the `next-app-router` rules.
+
+## Measurement
+
+- When you see an issue, identify the cause with bundle analysis, Lighthouse, and Web Vitals. Do not optimize purely by guess.
+
+## Summary
+
+Be mindful of image sizes, bundle paths, and data routes, and improve based on measurements when needed.

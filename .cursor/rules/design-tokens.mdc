@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+# Design · Tokens (Tailwind)
+
+## Consistency
+
+- **Spacing / layout**: follow the `spacing` scale, and use arbitrary values (e.g., `[13px]`) only when design-wise necessary.
+- **Typography**: define type scale levels (title/body/caption, etc.) and match them with recurring patterns of `text-*` and `font-*`.
+
+## Colors
+
+- **Theme colors**: define semantic names in `globals.css` or the Tailwind theme (e.g., `primary`, `danger`, `muted`) and use them in components whenever possible.
+- **Dark mode**: switch via `dark:` variants or a single CSS-variable path to keep it consistent.
+
+## Components
+
+- **Buttons / inputs / cards** should live as shared components so you can reuse the same padding, radius, and border.
+
+## Responsive
+
+- Use a **mobile-first** approach with breakpoints (`sm:`, `md:`, ...) and verify the layout remains correct.
+
+## Status / validation messages (layout stability)
+
+- **Avoid layout shift** when optional copy appears or disappears (errors, hover-disabled hints echoed as inline status, staged-omen banners, etc.). Reserve a **fixed minimum height** for that region, or use a shared pattern such as `ReservedStatusRegion` (invisible placeholder with the **same text size classes** as visible content when empty).
+- **Match placeholder typography** to the visible message (`text-sm` vs `text-xs`, `leading-snug`, …) so the reserved block height stays consistent when content wraps to two lines.
+- Keep **`aria-live`** / `role="alert"` / `role="status"` on the real message when shown; placeholders should use `aria-hidden="true"` so assistive tech does not announce empty noise.
+
+## Summary
+
+Prefer scales and theme tokens over arbitrary values, and keep the UI consistent via shared components.

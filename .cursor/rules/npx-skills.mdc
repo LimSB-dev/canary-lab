@@ -1,0 +1,32 @@
+---
+alwaysApply: true
+---
+
+# Agent skills · Vercel Labs (Best Practices)
+
+This repository installs [Vercel Labs `agent-skills`](https://github.com/vercel-labs/agent-skills) via the **`skills`** CLI (see `package.json` scripts), and keeps the sources under **`.agents/skills/`**. Versions and sources are pinned with `skills-lock.json`.
+
+## What the agent should do
+
+- For **React / Next.js performance refactors and bundling** tasks, read **`.agents/skills/vercel-react-best-practices/SKILL.md`** before starting, and cite relevant `rules/*.md` files in the same folder when needed.
+- For **component API design / boolean prop proliferation / composition patterns**, read **`.agents/skills/vercel-composition-patterns/SKILL.md`**.
+- For **UI review / accessibility / web interface guidelines**, read **`.agents/skills/web-design-guidelines/SKILL.md`**.
+- For **Vercel deployment** tasks, read **`.agents/skills/deploy-to-vercel/SKILL.md`**.
+- For **Vercel CLI with access tokens** (non-interactive login), read **`.agents/skills/vercel-cli-with-tokens/SKILL.md`**.
+- For **React Native / Expo** tasks, read **`.agents/skills/vercel-react-native-skills/SKILL.md`** (this repo is web-first; mobile is reference-only).
+
+If there is a conflict with the repository's `.cursor/rules` (TypeScript style, performance, accessibility, etc.), prioritize the project rules and treat skills as **supporting references**.
+
+## CLI (local)
+
+- List: `yarn skills:list` (or `yarn run skills list`)
+- Search: `yarn run skills find [keyword]`
+- Re-install Vercel package (same skill set): `yarn skills:add:vercel`
+- Update: `yarn skills:update`
+- Restore from `skills-lock.json`: `yarn skills:restore`
+
+You can discover more skills at [https://skills.sh/](https://skills.sh/).
+
+## Summary
+
+Best practices live under **`.agents/skills/*/SKILL.md`** at the repository root. Read them first when starting work in that topic area.

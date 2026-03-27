@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+
+# Rule authoring language
+
+When creating or editing Cursor rules (files under `.cursor/rules/`, including `.mdc` files), **write the rule body in English**. Other rules may still require a specific language for user-facing outputs (for example, Korean PR titles on GitHub).

@@ -10,10 +10,23 @@
 }
 
 .nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
 .go_to_main {
+  font-size: var(--p);
+  color: var(--link-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.admin_link {
   font-size: var(--p);
   color: var(--link-color);
   text-decoration: none;

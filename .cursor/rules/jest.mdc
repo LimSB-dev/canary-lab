@@ -1,0 +1,31 @@
+---
+alwaysApply: true
+---
+
+# Unit / Integration Tests (Jest)
+
+**Most tests should be handled by Jest.** E2E is slow and makes debugging failures harder, so validate state logic, API mocks, component interactions, and error handling here.
+
+## What to cover here
+
+- **State management logic**: reducers, hooks, stores—ensure state changes as expected.
+- **API calling logic**: **mock** `fetch`/client wrappers and verify branches for success/failure responses.
+- **Component interactions**: user events (click/input) and the resulting DOM, callbacks, and UI output.
+- **Error handling**: API failure and validation failure should show the correct message and/or fallback UI.
+
+## Example scenarios
+
+- Clicking a "like" button changes state (counter updates, optimistic updates, etc.) as expected.
+- When the API returns 4xx/5xx, an error message is shown and retry/toast behavior follows the policy.
+- Form submission covers the full interaction: loading, disabled state, and reset after success.
+
+## Tools / placement
+
+- Use **React Testing Library** for React component tests (avoid selectors tightly coupled to implementation details).
+- Place test files under `__tests__/` or use `*.test.ts` / `*.test.tsx` following your repository conventions.
+- Standardize execution through `package.json` scripts (e.g., `yarn test`, `yarn test:watch`).
+
+## Separation of concerns with E2E
+
+- **Jest**: the main stage for detailed behavior, edge cases, and regression prevention.
+- **E2E**: minimal checks to ensure the deployed service remains alive for the key user journey. Detailed validations do not go into E2E.

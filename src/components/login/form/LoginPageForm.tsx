@@ -3,6 +3,7 @@ import OauthLoginButton from "@/components/login/oauthLoginButton/OauthLoginButt
 
 import styles from "./styles.module.scss";
 import UserProfile from "./userProfile";
+import ComingSoonOauthButtons from "./ComingSoonOauthButtons";
 
 const LoginPageForm = async () => {
   let session = await auth();
@@ -40,6 +41,7 @@ const LoginPageForm = async () => {
           <OauthLoginButton provider="google" theme="light" type="default" />
         </button>
       </form>
+      <ComingSoonOauthButtons />
     </div>
   );
 };

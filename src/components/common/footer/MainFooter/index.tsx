@@ -2,9 +2,10 @@ import { ThemeButton } from "@/components/common/theme";
 import styles from "./styles.module.scss";
 
 const MainFooter = () => {
+  const year = new Date().getFullYear();
   return (
     <footer className={styles.footer}>
-      <p>Copyright © 2024 All rights reserved</p>
+      <p>Copyright © {year} All rights reserved</p>
       <section className={styles.theme_section}>
         <ThemeButton buttonType="system" />
         <ThemeButton buttonType="light" />

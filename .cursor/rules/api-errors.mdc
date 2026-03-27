@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+# API · Error Response Rules
+
+## Goal
+
+Unify the success/failure response shapes so that the client, Jest mocks, and server implementations follow the **same contract**.
+
+## HTTP status codes
+
+- **2xx**: success. Use appropriately (`200` OK, `201` created, `204` no-body success, etc.).
+- **4xx**: client responsibility (invalid input, authentication/authorization missing). Differentiate by meaning (`400`, `401`, `403`, `404`, `422`, etc.).
+- **5xx**: server error. Do **not** leak detailed stack traces to users.
+
+## Response body (recommended pattern)
+
+- **Success**: either `{ "data": ... }` or an explicit, domain-appropriate field name. Keep it consistent.
+- **Failure**: follow **one** project-defined shape, e.g. `{ "error": { "code": "...", "message": "..." } }`. Keep `message` at a user-safe level (put internal debug details in logs).
+
+## Client handling
+
+- On `fetch` failure, branch on `response.ok` and parse the body. Ensure error messages/toasts match your i18n rules.
+- **Retry**: limit it to network issues and 5xx responses only; avoid infinite retries.
+
+## Alignment with tests
+
+- When mocking the API in Jest, match the **exact success/failure shapes** used by the real Route Handler.
+
+## Summary
+
+Respect the meaning of status codes, define success/failure JSON shapes in one place, and use them consistently.

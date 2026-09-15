@@ -2,8 +2,6 @@
 
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import camelcaseKeys from "camelcase-keys";
 import { auth } from "@/auth";
 
 /**
@@ -43,7 +41,7 @@ export async function postPost({ title, markdownValue }: { title: string; markdo
     revalidatePath(`/posts/${postIndex}`);
     revalidatePath("/posts");
     revalidatePath("/");
-    redirect(`/posts/${postIndex}`);
+    return { index: Number(postIndex) };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(error instanceof Error ? error.message : "게시물 생성 중 오류가 발생했습니다.");

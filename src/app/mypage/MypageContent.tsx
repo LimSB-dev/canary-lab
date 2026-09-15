@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useTranslation } from "@/hooks/useTranslation";
 import { LinkProviderButtons } from "./LinkProviderButtons";
 import { AvatarChange } from "./AvatarChange";
@@ -13,7 +14,8 @@ interface MypageContentProps {
 
 export function MypageContent({ session }: MypageContentProps) {
   const { t } = useTranslation();
-  const { name, email, image, providers, currentProvider } = session.user;
+  const { name, email, image, providers, currentProvider, userType } = session.user;
+  const isAdmin = userType === "admin";
 
   const currentLabel = currentProvider ? t(`main.providers.${currentProvider}`) : null;
   const linkedList = providers?.length
@@ -24,6 +26,11 @@ export function MypageContent({ session }: MypageContentProps) {
     <main className={styles.main}>
       <nav className={styles.nav}>
         <GoToMainLink className={styles.go_to_main} />
+        {isAdmin && (
+          <Link href="/admin" className={styles.admin_link}>
+            Admin
+          </Link>
+        )}
       </nav>
       <section className={styles.section}>
         <h6 className={styles.title}>{t("mypage.title")}</h6>

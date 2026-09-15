@@ -62,6 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 width: "100%",
                 height: "100%",
                 pointerEvents: "none",
+                opacity: 0.45,
               }}
             >
               <ColorBendsBackground />

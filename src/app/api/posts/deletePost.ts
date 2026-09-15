@@ -2,7 +2,6 @@
 
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 
 /**
@@ -37,7 +36,7 @@ export async function deletePost(index: number) {
     revalidatePath(`/posts/${index}`);
     revalidatePath("/posts");
     revalidatePath("/");
-    redirect("/posts");
+    return { ok: true as const };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error(error instanceof Error ? error.message : "게시물 삭제 중 오류가 발생했습니다.");
